@@ -1,0 +1,172 @@
+<template>
+	<view>
+		<view style="background:#f6f6f6; height: 100vh; ">
+			<view class="backgroun">
+
+				<view class="contentss">
+					<view class="text1">欢迎来到美丽共享联盟</view>
+
+					<view class="text2">为您提供优质服务</view>
+
+					<view class="text3">美丽共享联盟需要获得以下信息</view>
+
+					<view class="text4">您的公开信息 ( 昵称、头像等 )</view>
+
+					<button open-type="getUserInfo" class="user" @click="userinfor">微信授权登录</button>
+
+					<view class="text5">返回首页</view>
+
+					<view>
+						{{obs}}
+					</view>
+				</view>
+
+				<view class="posit">
+					<view class="imgs"></view>
+				</view>
+
+
+
+
+
+			</view>
+		</view>
+
+
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				obs:''
+			}
+		},
+		onLoad(){
+			this.global.utils.sethead('登录')
+		},
+		methods: {
+			userinfor(){
+				let that = this;
+				uni.login({
+				  provider: 'weixin',
+				  success: function (loginRes) {
+					uni.getUserInfo({
+						provider:'weixin',
+						success:(userinfor)=>{
+							console.log('用户信息')
+							console.log(userinfor)
+							that.obs = JSON.stringify(userinfor) 
+							
+							this.global.request.post({
+								url: 'api/ad/getAd',
+								data: {
+									userinfo:userinfor,
+									code:loginRes.code
+								},
+								isLoading: true,
+								success: (res) => {
+									console.log(res)
+								}
+							})	
+						}
+					})
+				  }
+				});
+			}
+			
+			
+			
+		
+		}
+	}
+</script>
+
+<style lang="scss">
+	.backgroun {
+		width: 100%;
+		height: 250px;
+		background: url(../../static/image/login/login.png) no-repeat center center;
+		background-size: cover;
+		position: relative;
+
+		.contentss {
+			position: fixed;
+			width: 94%;
+			height: 430px;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			border-radius: 20px;
+			margin: 120px auto 0;
+			background: #fff;
+			text-align: center;
+
+			// border: 0.5px solid #999;
+			.user {
+				margin-top: 20px;
+				width: 80%;
+				height: 35px;
+				border-radius: 18px;
+				background-image: linear-gradient(to right, $any-col, #f6b8b8);
+				font-size: 15px;
+				font-weight: 600;
+				line-height: 35px;
+				color: #FFFFFF;
+			}
+
+			.text1 {
+				font-size: 23px;
+				font-weight: 600;
+				color: $any-col;
+				margin-top: 95px;
+			}
+
+			.text2 {
+				font-size: $uni-font-size-base;
+				color: $any-col;
+				margin-top: 35px;
+			}
+
+			.text3 {
+				font-size: $uni-font-size-base;
+				color: $any-col;
+				margin-top: 15px;
+			}
+
+			.text4 {
+				font-size: $uni-font-size-sm;
+				color: #666;
+				margin-top: 13px;
+			}
+
+			.text5 {
+				font-size: $uni-font-size-base;
+
+				margin-top: 30px;
+			}
+		}
+
+		.posit {
+			position: absolute;
+			top: 30%;
+			left: 40%;
+			width: 90px;
+			height: 88px;
+			border-radius: 13px;
+			background-image: linear-gradient(#f6b8b8, #e82e2e);
+
+			.imgs {
+				margin: 3px auto;
+				width: 70px;
+				height: 75px;
+				background: url(../../static/image/login/logo.png) no-repeat center center;
+				background-size: cover;
+			}
+		}
+
+
+	}
+</style>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "美丽共享联盟",
+  "usingComponents": {
+    "uni-rate": "/components/uni-rate/uni-rate"
+  }
+}

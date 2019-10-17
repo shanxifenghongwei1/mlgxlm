@@ -1,0 +1,86 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "美丽共享联盟"
+			}
+		},
+		{
+			"path": "pages/classify/classify",
+			"style": {
+				"navigationBarTitleText": "分类"
+			}
+		},
+
+		{
+			"path": "pages/member/member",
+			"style": {
+				"navigationBarTitleText": "会员中心"
+			}
+		},
+		{
+			"path": "pages/street/street",
+			"style": {
+				"navigationBarTitleText": "店铺街"
+			}
+		},
+		{
+			"path": "pages/shopping/shopping",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		}
+	    ,{
+            "path" : "pages/login/login",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/search/search",
+            "style" : {}
+        }
+    ],
+	 "condition": { //模式配置，仅开发期间生效
+	        "list": [{
+	            "name": "登录", //模式名称
+	            "path": "pages/login/login" //启动页面，必选
+	        }]
+	    },
+	"globalStyle": {
+		"navigationBarTextStyle": "#fff",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#Fe0000",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#f73333",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/image/home.png",
+				"selectedIconPath": "static/image/home1.png"
+			
+			},
+			{
+				"pagePath": "pages/street/street",
+				"iconPath": "static/image/street.png",
+				"selectedIconPath": "static/image/street1.png"
+				
+			},
+			{
+				"pagePath": "pages/shopping/shopping",
+				"iconPath": "static/image/shopping.png",
+				"selectedIconPath": "static/image/shopping1.png"
+				
+			},
+			{
+				"pagePath": "pages/member/member",
+				"iconPath": "static/image/member.png",
+				"selectedIconPath": "static/image/member1.png"
+				
+			}
+		]
+	}
+}
