@@ -11,9 +11,9 @@
 					<input @input="searchtexts" maxlength="20" type="text" value="" confirm-type="search" @confirm="searchStart()"
 					 placeholder="请输入关键词搜索" v-model.trim="searchText" />
 				</template>
-				<image src="../../static/zy-search/search.svg" mode="aspectFit" @click="searchStart()" class="search-icon"></image>
+				<image src="../../static/image/zy-search/search.png" mode="aspectFit" @click="searchStart()" class="search-icon"></image>
 			</view>
-		</view>
+		</view> 
 
 		<template v-if="isBlock">
 			<view v-if="mydiv">
@@ -21,7 +21,7 @@
 					<view class="s-block" v-if="hList.length > 0">
 						<view class="header">
 							历史记录
-							<image src="../../static/zy-search/delete.svg" mode="aspectFit" @click="delhistory"></image>
+							<image src="../../static/image/zy-search/delete.png" mode="aspectFit" @click="delhistory"></image>
 						</view>
 						<view class="list">
 							<view v-for="(item,index) in hList" :key="index" @click="keywordsClick(item)">{{item}}</view>
@@ -36,7 +36,8 @@
 				</view>
 			</view>
 			<view v-else>
-				<shoplist></shoplist>
+				<view></view>
+				<shoplist myid="0" :shoplists="shoplists"></shoplist>
 				
 			</view>
 			
@@ -51,7 +52,7 @@
 				<view class="s-circle" v-if="hList.length > 0">
 					<view class="header">
 						<text class="iconfont icon-lishijilu"> <text class="font">历史记录</text></text>
-						<image src="../../static/zy-search/delete.svg" mode="aspectFit" @click="delhistory"></image>
+						<image src="../../static/image/zy-search/delete.png" mode="aspectFit" @click="delhistory"></image>
 					</view>
 					<view class="list">
 						<view v-for="(item,index) in hList" :key="index" @click="keywordsClick(item)">{{item}}</view>
@@ -67,7 +68,7 @@
 			</view>
 			</view>
 			<view v-else>
-				<shoplist></shoplist>
+				<shoplist myid='0' :shoplists="shoplists"></shoplist>
 				
 			</view>
 			
@@ -101,6 +102,7 @@
 		data() {
 			return {
 				searchText: '', //搜索关键词
+				shoplists:[],
 				mydiv: true,
 				hList: uni.getStorageSync('search_cache'), //历史记录
 				wantList: ['栏目1', '栏目2', '栏目3', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4'] //初始化推荐列表
@@ -125,6 +127,22 @@
 					});
 					return false;
 				} else {
+					console.log('shoplist go?')
+					this.shoplists = [{
+					prople: '2000',
+					image: '../../static/image/shop/shop-1.jpg',
+					shopname: '艾美世界家',
+					address: '山西大医院',
+					start: '3.5',
+					labels: '便签',
+					goodssprice: '998',
+					newgoodssprice: '398',
+					goodsname: '芳香精油乳腺疏通',
+					othergoods: '酒槽鼻修护套餐',
+					othergoodsprices: "100",
+				}]
+					
+					
 					uni.getStorage({
 						key: 'search_cache',
 						success(res) {
@@ -286,7 +304,7 @@
 				padding: 10upx;
 				position: absolute;
 				right: 40upx;
-				top: 24upx;
+				top: 36upx;
 			}
 		}
 

@@ -88,22 +88,22 @@
       margin-top: 95px;
 }
 .backgroun .contentss .text2 {
-      font-size: 12px;
+      font-size: 24rpx;
       color: #FE0000;
       margin-top: 35px;
 }
 .backgroun .contentss .text3 {
-      font-size: 12px;
+      font-size: 24rpx;
       color: #FE0000;
       margin-top: 15px;
 }
 .backgroun .contentss .text4 {
-      font-size: 10px;
+      font-size: 20rpx;
       color: #666;
       margin-top: 13px;
 }
 .backgroun .contentss .text5 {
-      font-size: 12px;
+      font-size: 24rpx;
       margin-top: 30px;
 }
 .backgroun .posit {

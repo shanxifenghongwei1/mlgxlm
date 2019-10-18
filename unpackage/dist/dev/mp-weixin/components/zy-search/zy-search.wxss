@@ -101,7 +101,7 @@
   padding: 10rpx;
   position: absolute;
   right: 40rpx;
-  top: 24rpx;
+  top: 36rpx;
 }
 .s-circle .list.data-v-d0f0598e {
   display: -webkit-box;

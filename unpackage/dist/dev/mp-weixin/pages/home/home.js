@@ -122,17 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 65));};var _default =
-
-
-
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 71));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 78));};var _default =
 
 
 
@@ -368,7 +358,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    shoplist: shoplist },
+    shoplist: shoplist,
+    searchAny: searchAny },
 
   data: function data() {
     return {
@@ -488,11 +479,29 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       // 高亮id
       ids: 1,
 
-      labels: '标签' };
+      labels: '标签',
+
+      shoplists: [{
+        prople: '2000',
+        image: '../../static/image/shop/shop-1.jpg',
+        shopname: '艾美世界家',
+        address: '山西大医院',
+        start: '3.5',
+        labels: '便签',
+        goodssprice: '998',
+        newgoodssprice: '398',
+        goodsname: '芳香精油乳腺疏通',
+        othergoods: '酒槽鼻修护套餐',
+        othergoodsprices: "100" }] };
+
+
 
 
   },
   methods: {
+    wearego: function wearego() {
+      console.log('gogogogo');
+    },
 
     onChange: function onChange(e) {
       console.log(1);
@@ -506,7 +515,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     init: function init() {
 
       this.global.request.post({
-        url: 'api/ad/getAd',
+        url: 'index',
         data: {},
         isLoading: true,
         load: '请求中...',

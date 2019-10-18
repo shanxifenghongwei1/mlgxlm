@@ -1,15 +1,9 @@
 <template>
 	<view class="">
+
 		<view class="conss">
 			<!-- 搜索框 -->
-			<navigator url="../home/search/search" class="sear">
-				<view class="sear-text">搜索您想要的</view>
-				<view class="sear-logo">
-					<view class="icon-fathre">
-						<view class="sear-icon iconfont icon-sousuo"></view>
-					</view>
-				</view>
-			</navigator>
+			<searchAny></searchAny>
 			<!-- 下面四个图标 -->
 			<view class="seduce">
 				<view class="list-one">
@@ -62,7 +56,7 @@
 		</view>
 
 		<!-- 中间的20个功能图标 -->
-				<view class="son-father">
+		<view class="son-father">
 			<view class="son">
 				<view class="butf">
 					<view v-for="(item , index) in sonicon" :key='index' class="list-one">
@@ -116,9 +110,8 @@
 				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 			</view>
 
-			<shoplist></shoplist>
-			<shoplist></shoplist>
-			<shoplist></shoplist>
+			<shoplist :shoplists='shoplists' :myid='ids'></shoplist>
+
 		</view>
 
 		<!-- 本周新店 -->
@@ -159,74 +152,70 @@
 			</view>
 
 
-<view class="father">
-			<view class="goodslist">
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
+			<view class="father">
+				<view class="goodslist">
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
+					<view class="goods-one">
+						<view class="goodsname">肩颈按摩</view>
+						<view class="goodsprice"> <text>98</text> RMB </view>
+
+						<view class="goodsimg"></view>
+					</view>
+
 				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-				
-				<view  class="goods-one">
-					<view class="goodsname">肩颈按摩</view>
-					<view class="goodsprice"> <text>98</text> RMB </view>
-					
-					<view class="goodsimg"></view>
-				</view>
-					
 			</view>
-</view>
 
 
 
@@ -239,12 +228,14 @@
 	</view>
 </template>
 
+
 <script>
-	
 	import shoplist from '@/components/shoplist/shoplist.vue'
+	import searchAny from '@/components/my-search/my-search.vue'
 	export default {
 		components: {
-			shoplist
+			shoplist,
+			searchAny
 		},
 		data() {
 			return {
@@ -364,11 +355,29 @@
 				// 高亮id
 				ids: 1,
 
-				labels: '标签'
+				labels: '标签',
+
+				shoplists: [{
+					prople: '2000',
+					image: '../../static/image/shop/shop-1.jpg',
+					shopname: '艾美世界家',
+					address: '山西大医院',
+					start: '3.5',
+					labels: '便签',
+					goodssprice: '998',
+					newgoodssprice: '398',
+					goodsname: '芳香精油乳腺疏通',
+					othergoods: '酒槽鼻修护套餐',
+					othergoodsprices: "100",
+				}]
 
 			}
+
 		},
 		methods: {
+			wearego() {
+				console.log('gogogogo')
+			},
 
 			onChange(e) {
 				console.log(1)
@@ -380,12 +389,12 @@
 			},
 
 			init() {
-				
+
 				this.global.request.post({
-					url: 'api/ad/getAd',
+					url: 'index',
 					data: {},
 					isLoading: true,
-					load:'请求中...',
+					load: '请求中...',
 					success: (res) => {
 						console.log(res)
 					}
@@ -406,79 +415,88 @@
 	.today {
 		width: 100%;
 		@extend .any-over;
+
 		.bac-imgs {
-			margin: 3px 0;
-			height: 37px;
+			margin: 6rpx 0;
+			height: 74rpx;
 			width: 100%;
 			background: #007AFF;
+
 			image {
 				width: 100%;
 			}
 		}
-		.father{
+
+		.father {
 			@extend .cons;
-			height: 300px;
-		.goodslist{
-			padding: 3% 0;
-			@extend .any-flex;
-			flex-wrap: wrap;
-			.goods-one{
-				width: 29%;
-				height: 46%;
-				padding-top:5px;
-				margin: 1.5%;
-				border-radius: 10px;
-				border:1px solid $any-zol;
-				.goodsname{
-					font-size: 17px;
-					text-align: center;
-					width: 100%;
-					@extend .font-weig;
-				}
-				.goodsprice{
-					font-size: $uni-font-size-base;
-					text-align: center;
-					width: 100%;
-					text{
-						color: $any-col;
-						font-size: $uni-font-size-lg;
+			height: 600rpx;
+
+			.goodslist {
+				padding: 3% 0;
+				@extend .any-flex;
+				flex-wrap: wrap;
+
+				.goods-one {
+					width: 29%;
+					height: 46%;
+					padding-top: 10rpx;
+					margin: 1.5%;
+					border-radius: 20rpx;
+					border: 2rpx solid $any-zol;
+
+					.goodsname {
+						font-size: 34rpx;
+						text-align: center;
+						width: 100%;
+						@extend .font-weig;
+					}
+
+					.goodsprice {
+						font-size: $uni-font-size-base;
+						text-align: center;
+						width: 100%;
+
+						text {
+							color: $any-col;
+							font-size: $uni-font-size-lg;
+						}
+					}
+
+					.goodsimg {
+						width: 100%;
+						height: 210rpx;
+						overflow: hidden;
+						background: url(../../static/image/other/goods.jpg) no-repeat center center;
+						background-size: cover;
+						border-bottom-right-radius: 20rpx;
+						border-bottom-left-radius: 20rpx;
 					}
 				}
-				.goodsimg{
-					width: 100%;
-					height: 105px;
-					overflow: hidden;
-					background: url(../../static/image/other/goods.jpg) no-repeat center center;
-					background-size: cover;
-					border-bottom-right-radius: 10px;
-					border-bottom-left-radius: 10px;
-				}
 			}
-		}
-		
+
 		}
 	}
 
 	.newshop {
 		@extend .cons;
-		height: 200px;
+		height: 400rpx;
 
 		.newshop-head {
 			width: 100%;
-			height: 30px;
+			height: 60rpx;
 
 			@extend .any-flex;
 			justify-content: space-between;
-			margin: 8px 0px;
+			margin: 16rpx 0rpx;
 
 			.icons {
 				@extend .any-flex;
 				font-size: $uni-font-size-base;
 
 				.iconsss {
-					height: 20px;
-					width: 4px;
-					margin-right: 5px;
+					height: 40rpx;
+					width: 8rpx;
+					margin-right: 10rpx;
 					background: $any-col;
 					font-size: $uni-font-size-lg;
 				}
@@ -486,21 +504,21 @@
 
 			.more {
 				font-size: $uni-font-size-base;
-				width: 30px;
-				height: 20px;
-				line-height: 20px;
+				width: 60rpx;
+				height: 40rpx;
+				line-height: 40rpx;
 				background: $any-col;
 				color: #fff;
 				text-align: center;
-				border-radius: 5px;
+				border-radius: 10rpx;
 			}
 		}
 
 		.shop-col {
 			@extend .any-flex;
 			width: 100%;
-			height: 150px;
-			border: 1px solid $any-col;
+			height: 300rpx;
+			border: 2rpx solid $any-col;
 
 			.shop-col-img {
 				width: 35%;
@@ -523,7 +541,7 @@
 					color: $any-col;
 
 					text {
-						margin-left: 8px;
+						margin-left: 16rpx;
 						color: #666;
 						font-size: $uni-font-size-sm;
 					}
@@ -533,24 +551,25 @@
 					font-size: $uni-font-size-base;
 					color: #999999;
 					position: relative;
-					border-bottom: 2px solid #999;
+					border-bottom: 4rpx solid #999;
 					width: 85%;
-					line-height: 20px;
+					line-height: 40rpx;
 				}
 
 				.shopnameng:after {
 					content: '';
 					background: #999;
-					height: 2px;
+					height: 4rpx;
 					width: 50%;
 					position: absolute;
-					bottom: 0px;
-					left: 1px;
+					bottom: 0rpx;
+					left: 2rpx;
 				}
 
 				.gooods {
-					margin: 2px 0;
+					margin: 4rpx 0;
 					font-size: $uni-font-size-lg;
+
 					text {
 						color: $any-col;
 					}
@@ -558,12 +577,12 @@
 
 				.buy {
 					position: absolute;
-					right: -4px;
-					bottom: 14px;
+					right: -8rpx;
+					bottom: 28rpx;
 					font-size: $uni-font-size-base;
-					padding: 2px 3px;
+					padding: 4rpx 6rpx;
 					background: $any-col;
-					width: 30px;
+					width: 60rpx;
 					color: #FFFFFF;
 					text-align: center;
 				}
@@ -577,18 +596,20 @@
 		@extend .any-over;
 
 		.bac-img {
-			margin: 10px 0;
-			height: 37px;
+			margin: 20rpx 0;
+			height: 74rpx;
 			width: 100%;
+
 			image {
 				width: 100%;
 			}
 		}
+
 		.shoplist {
 			width: 100%;
-			height: 40px;
-			border-top: 1px solid $any-zol;
-			border-bottom: 1px solid $any-zol;
+			height: 80rpx;
+			border-top: 2rpx solid $any-zol;
+			border-bottom: 2rpx solid $any-zol;
 			font-size: $uni-font-size-lg;
 			@extend .any-flex;
 			justify-content: space-between;
@@ -596,7 +617,7 @@
 			.list {
 				width: 20%;
 				text-align: center;
-				line-height: 40px;
+				line-height: 80rpx;
 			}
 
 			.active {
@@ -608,20 +629,20 @@
 				content: '';
 				display: block;
 				position: absolute;
-				top: 37px;
-				left: 15px;
-				width: 45px;
-				height: 4px;
+				top: 74rpx;
+				left: 10%;
+				width: 80%;
+				height: 8rpx;
 				background: $any-col;
 			}
 		}
 
-		
+
 	}
 
 	.banner {
 		width: 100%;
-		height: 170px;
+		height: 340rpx;
 
 		swiper {
 			width: 100%;
@@ -637,14 +658,14 @@
 	.son-father {
 		@extend .any-over;
 		@extend .cons;
-		padding-bottom: 10px;
+		padding-bottom: 20rpx;
 
 		.son {
-			margin-top: 46px;
+			margin-top: 92rpx;
 			width: 100%;
-			height: 280px;
-			border: 1px solid #d6d6d6;
-			box-shadow: 0px 0px 10px #bfbdbd;
+			height: 560rpx;
+			border: 2rpx solid #d6d6d6;
+			box-shadow: 0rpx 0rpx 20rpx #bfbdbd;
 
 			.butf,
 			.head,
@@ -653,7 +674,7 @@
 			.near {
 				width: 100%;
 				height: 23%;
-				margin-top: 5px;
+				margin-top: 10rpx;
 				@extend .any-flex;
 				justify-content: space-around;
 
@@ -676,7 +697,7 @@
 			}
 
 			.butf {
-				margin-top: 10px;
+				margin-top: 20rpx;
 			}
 		}
 	}
@@ -685,7 +706,7 @@
 		@extend .cons;
 		background-image: linear-gradient($any-col, #f7b2b2);
 		@extend .any-over;
-		height: 165px;
+		height: 330rpx;
 		position: relative;
 	}
 
@@ -693,28 +714,28 @@
 		@extend .cons;
 		position: absolute;
 		left: 0;
-		top: 18%;
+		top: 200rpx;
 
 		.significance {
 			width: 100%;
 			background: #FFFFFF;
-			height: 90px;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
-			margin-top: 15px;
+			height: 180rpx;
+			border-top-left-radius: 20rpx;
+			border-top-right-radius: 20rpx;
+			margin-top: 30rpx;
 			@extend .any-over;
 			@extend .any-flex;
 			justify-content: space-around;
 
 			.sign-one {
-				margin-top: 15px;
+				margin-top: 30rpx;
 				width: 20%;
 				height: 100%;
 
 				.icon {
-					margin: 5px auto;
-					width: 50px;
-					height: 50px;
+					margin: 5rpx auto;
+					width: 100rpx;
+					height: 100rpx;
 					background: url(../../static/image/homepage/butf.png) no-repeat;
 					background-size: cover;
 				}
@@ -756,10 +777,10 @@
 
 	.seduce {
 		width: 100%;
-		height: 60px;
+		height: 120rpx;
 		@extend .any-flex;
 		justify-content: space-around;
-		margin-top: 5px;
+		margin-top: 10rpx;
 
 		.list-one {
 			height: 100%;
@@ -769,8 +790,8 @@
 
 			.icon {
 				text-align: center;
-				font-size: 30px;
-				margin: 3px auto 1px;
+				font-size: 60rpx;
+				margin: 6rpx auto 2rpx;
 			}
 
 			.text {
@@ -782,30 +803,31 @@
 
 	.sear {
 		width: 100%;
-		height: 30px;
-		// border: 1px solid $any-col;
-		border-radius: 25px;
+		height: 60rpx;
+		// border: 1rpx solid $any-col;
+		border-radius: 50rpx;
 		background: $any-zol;
-		margin-top: 10px;
+		margin-top: 20rpx;
 		@extend .any-flex;
 		justify-content: space-between;
+		
 
 		.sear-text {
 			font-size: $uni-font-size-base;
-			line-height: 30px;
-			margin-left: 15px;
+			line-height: 60rpx;
+			margin-left: 30rpx;
 			color: #d0d0d0;
 		}
 
 		.sear-logo {
 			.icon-fathre {
-				width: 10px;
-				height: 10px;
-				border-radius: 5px;
+				width: 20rpx;
+				height: 20rpx;
+				border-radius: 10rpx;
 				background: $any-col;
 			}
 
-			margin-right: 15px;
+			margin-right: 30rpx;
 
 			.sear-icon {
 				color: #000000;

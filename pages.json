@@ -39,6 +39,10 @@
             "path" : "pages/home/search/search",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home/hairdressing/hairdressing",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{
