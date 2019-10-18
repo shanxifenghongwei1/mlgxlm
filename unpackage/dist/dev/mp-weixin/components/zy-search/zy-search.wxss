@@ -1,22 +1,30 @@
+.fathers.data-v-d0f0598e {
+  width: 100%;
+  height: 150rpx;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#FE0000), to(#f49797));
+  background-image: -o-linear-gradient(#FE0000, #f49797);
+  background-image: linear-gradient(#FE0000, #f49797);
+  overflow: hidden;
+}
+.father-borde.data-v-d0f0598e {
+  margin: 10rpx auto;
+  width: 94%;
+  height: 50%;
+  border: 1px solid #f9c9c9;
+  -webkit-box-shadow: 0 0 10px #f07676;
+          box-shadow: 0 0 10px #f07676;
+  border-radius: 10px;
+}
 .search.data-v-d0f0598e {
-  width: 640rpx;
+  width: 700rpx;
   margin: 30rpx auto 0;
   position: relative;
 }
 .search input.data-v-d0f0598e {
   background-color: #F7F7F7;
-  padding: 10rpx 74rpx;
+  padding: 8rpx 34rpx;
   font-size: 28rpx;
   border-radius: 50rpx;
-}
-.search .voice-icon.data-v-d0f0598e {
-  width: 36rpx;
-  height: 36rpx;
-  padding: 16rpx 20rpx 16rpx 0;
-  position: absolute;
-  left: 16rpx;
-  top: 4rpx;
-  z-index: 10;
 }
 .search .search-icon.data-v-d0f0598e {
   width: 36rpx;
@@ -77,6 +85,16 @@
   border-bottom: 2rpx solid #F9F9F9;
   position: relative;
 }
+.s-circle .header text.data-v-d0f0598e {
+  font-size: 50rpx;
+  color: #FE0000;
+}
+.s-circle .header .font.data-v-d0f0598e {
+  margin-left: 15rpx;
+  color: #333333;
+  font-weight: 600;
+  font-size: 35rpx;
+}
 .s-circle .header image.data-v-d0f0598e {
   width: 36rpx;
   height: 36rpx;
@@ -99,8 +117,8 @@
   padding: 8rpx 30rpx;
   margin: 20rpx 30rpx 0 0;
   font-size: 28rpx;
-  color: #8A8A8A;
-  background-color: #F7F7F7;
+  color: #fff;
+  background-color: #ed4d4d;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-align: center;
@@ -142,8 +160,17 @@
   margin-top: 30rpx;
 }
 .wanted-circle .header.data-v-d0f0598e {
-  font-size: 32rpx;
+  font-size: 35rpx;
+  font-weight: 600;
   padding: 30rpx;
+}
+.wanted-circle .header .font.data-v-d0f0598e {
+  line-height: 55rpx;
+}
+.wanted-circle .header .icon-col.data-v-d0f0598e {
+  color: #FE0000;
+  font-size: 55rpx;
+  margin-right: 15rpx;
 }
 .wanted-circle .list.data-v-d0f0598e {
   display: -webkit-box;
@@ -157,10 +184,10 @@
 }
 .wanted-circle .list view.data-v-d0f0598e {
   padding: 8rpx 30rpx;
-  margin: 20rpx 30rpx 0 0;
+  margin: 20rpx 20rpx 0 0;
   font-size: 28rpx;
-  color: #8A8A8A;
-  background-color: #F7F7F7;
+  color: #FFFFFF;
+  background-color: #ed4d4d;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-align: center;

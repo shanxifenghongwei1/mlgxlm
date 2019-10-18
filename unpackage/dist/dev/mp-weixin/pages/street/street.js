@@ -120,7 +120,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniRate = function uniRate() {return __webpack_require__.e(/*! import() | components/uni-rate/uni-rate */ "components/uni-rate/uni-rate").then(__webpack_require__.bind(null, /*! @/components/uni-rate/uni-rate.vue */ 65));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniRate = function uniRate() {return __webpack_require__.e(/*! import() | components/uni-rate/uni-rate */ "components/uni-rate/uni-rate").then(__webpack_require__.bind(null, /*! @/components/uni-rate/uni-rate.vue */ 72));};var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 65));};var _default =
+
 
 
 
@@ -133,7 +134,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    uniRate: uniRate },
+    uniRate: uniRate,
+    shoplist: shoplist },
 
   data: function data() {
     return {};

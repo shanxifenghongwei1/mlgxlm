@@ -122,37 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniRate = function uniRate() {return __webpack_require__.e(/*! import() | components/uni-rate/uni-rate */ "components/uni-rate/uni-rate").then(__webpack_require__.bind(null, /*! @/components/uni-rate/uni-rate.vue */ 65));};var _default =
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 65));};var _default =
 
 
 
@@ -398,8 +368,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-
-    uniRate: uniRate },
+    shoplist: shoplist },
 
   data: function data() {
     return {
@@ -500,24 +469,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       // 循环列表
       headlist: [{
-        id: 0,
+        id: 1,
         name: '拼团' },
       {
-        id: 1,
+        id: 2,
         name: '优惠' },
       {
-        id: 2,
+        id: 3,
         name: '销量' },
       {
-        id: 3,
+        id: 4,
         name: '限时抢' },
       {
-        id: 4,
+        id: 5,
         name: '免费送' }],
 
 
       // 高亮id
-      ids: 0,
+      ids: 1,
 
       labels: '标签' };
 

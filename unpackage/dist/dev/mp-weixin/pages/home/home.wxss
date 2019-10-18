@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.any-flex, .today .father .goodslist, .newshop .newshop-head, .newshop .newshop-head .icons, .newshop .shop-col, .choiceness .shoplist, .choiceness .shop-father .shop, .son-father .son .butf, .son-father .son .head, .son-father .son .quester, .son-father .son .flode, .son-father .son .near, .significance-father .significance, .seduce, .sear {
+.any-flex, .today .father .goodslist, .newshop .newshop-head, .newshop .newshop-head .icons, .newshop .shop-col, .choiceness .shoplist, .son-father .son .butf, .son-father .son .head, .son-father .son .quester, .son-father .son .flode, .son-father .son .near, .significance-father .significance, .seduce, .sear {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -38,7 +38,7 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.cons, .today .father, .newshop, .choiceness .shop-father, .son-father, .conss, .significance-father {
+.cons, .today .father, .newshop, .son-father, .conss, .significance-father {
   width: 94%;
   padding: 0 3%;
 }
@@ -235,88 +235,6 @@
       width: 45px;
       height: 4px;
       background: #FE0000;
-}
-.choiceness .shop-father .shop {
-    margin-top: 10px;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-    border: 1px solid #f0f0f0;
-    border-bottom: 2px solid #FE0000;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-}
-.choiceness .shop-father .shop .shop-img {
-      width: 20%;
-      height: 80%;
-}
-.choiceness .shop-father .shop .shop-img image {
-        width: 100%;
-        height: 100%;
-}
-.choiceness .shop-father .shop .shop-message {
-      width: 72%;
-      height: 96%;
-      padding: 2% 3% 2% 5%;
-      position: relative;
-}
-.choiceness .shop-father .shop .shop-message .gobuy {
-        padding: 3px 5px;
-        background: #FE0000;
-        color: #FFFFFF;
-        position: absolute;
-        top: 23px;
-        right: 22px;
-        font-size: 10px;
-        border-radius: 10px;
-}
-.choiceness .shop-father .shop .shop-message .havepeople {
-        position: absolute;
-        top: 99px;
-        right: 21px;
-        font-size: 12px;
-}
-.choiceness .shop-father .shop .shop-message .havepeople text {
-          color: #FE0000;
-}
-.choiceness .shop-father .shop .shop-message .shop-name {
-        color: #FE0000;
-        font-size: 15px;
-}
-.choiceness .shop-father .shop .shop-message .shop-name .addres {
-          font-size: 10px;
-          margin-left: 8px;
-          color: #666;
-}
-.choiceness .shop-father .shop .shop-message .label .tex {
-        padding: 2px;
-        font-size: 10px;
-        color: #7f7f7f;
-        border: 1px solid #7f7f7f;
-}
-.choiceness .shop-father .shop .shop-message .goods-price {
-        font-size: 10px;
-}
-.choiceness .shop-father .shop .shop-message .goods-price text {
-          margin: 0 5px;
-          color: #FE0000;
-          font-size: 15px;
-}
-.choiceness .shop-father .shop .shop-message .goodsname {
-        font-size: 12px;
-}
-.choiceness .shop-father .shop .shop-message .goodsname text {
-          color: #FE0000;
-          margin-right: 8px;
-}
-.choiceness .shop-father .shop .shop-message .propergoods {
-        font-size: 12px;
-}
-.choiceness .shop-father .shop .shop-message .propergoods text {
-          color: #FE0000;
-          margin-right: 8px;
 }
 .banner {
   width: 100%;

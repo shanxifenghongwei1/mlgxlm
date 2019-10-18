@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="conss">
 			<!-- 搜索框 -->
-			<navigator url="../login/login" class="sear">
+			<navigator url="../home/search/search" class="sear">
 				<view class="sear-text">搜索您想要的</view>
 				<view class="sear-logo">
 					<view class="icon-fathre">
@@ -115,43 +115,10 @@
 			<view class='shoplist'>
 				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 			</view>
-			<view class="shop-father">
-				<view class="shop">
-					<view class="shop-img">
-						<image src="../../static/image/shop/shop-1.jpg" mode="widthFix"></image>
-					</view>
-					<view class="shop-message">
 
-						<view class="shop-name">
-							<text>艾美世界家</text>
-							<text class="addres">山西大医院</text>
-						</view>
-						<view class="shop-start">
-							<uni-rate :disabled='false' margin='2' size="10" max='5' value="3.5" color="#7f7f7f" @change='onChange'
-							 active-color="#ffb540" />
-						</view>
-
-						<view class="label">
-							<text :class="labels == '' ? '': 'tex' ">{{labels == "" ? "": labels }}</text>
-						</view>
-
-						<view class="goods-price">
-							原价 <text>998</text> 平台价 <text>398</text>
-
-						</view>
-						<view class="goodsname"> <text class="iconfont icon-xiangmu"></text> 芳香精油乳腺疏通</view>
-						<view class="propergoods"> <text class="iconfont icon-tuan"> </text> <text class="mon">99元</text> 酒槽鼻修护套餐 </view>
-
-						<text class="gobuy"> 去平团 </text>
-						<view class="havepeople"> 已拼 <text>200</text> 位 </view>
-
-
-					</view>
-
-
-				</view>
-
-			</view>
+			<shoplist></shoplist>
+			<shoplist></shoplist>
+			<shoplist></shoplist>
 		</view>
 
 		<!-- 本周新店 -->
@@ -261,6 +228,8 @@
 			</view>
 </view>
 
+
+
 		</view>
 
 
@@ -271,11 +240,11 @@
 </template>
 
 <script>
-	import uniRate from '@/components/uni-rate/uni-rate.vue'
+	
+	import shoplist from '@/components/shoplist/shoplist.vue'
 	export default {
 		components: {
-			
-			uniRate
+			shoplist
 		},
 		data() {
 			return {
@@ -376,24 +345,24 @@
 
 				// 循环列表
 				headlist: [{
-					id: 0,
+					id: 1,
 					name: '拼团'
 				}, {
-					id: 1,
+					id: 2,
 					name: '优惠'
 				}, {
-					id: 2,
+					id: 3,
 					name: '销量'
 				}, {
-					id: 3,
+					id: 4,
 					name: '限时抢'
 				}, {
-					id: 4,
+					id: 5,
 					name: '免费送'
 				}],
 
 				// 高亮id
-				ids: 0,
+				ids: 1,
 
 				labels: '标签'
 
@@ -611,12 +580,10 @@
 			margin: 10px 0;
 			height: 37px;
 			width: 100%;
-
 			image {
 				width: 100%;
 			}
 		}
-
 		.shoplist {
 			width: 100%;
 			height: 40px;
@@ -649,111 +616,7 @@
 			}
 		}
 
-		.shop-father {
-			@extend .cons;
-
-			.shop {
-				margin-top: 10px;
-				width: 100%;
-				height: 120px;
-				border-radius: 10px;
-				border: 1px solid $any-zol;
-				border-bottom: 2px solid $any-col;
-				@extend .any-flex;
-				align-items: flex-start;
-
-				.shop-img {
-					width: 20%;
-					height: 80%;
-
-					image {
-
-						width: 100%;
-						height: 100%;
-					}
-				}
-
-				.shop-message {
-					width: 72%;
-					height: 96%;
-					padding: 2% 3% 2% 5%;
-					position: relative;
-
-					.gobuy {
-						padding: 3px 5px;
-						background: $any-col;
-						color: #FFFFFF;
-						position: absolute;
-						top: 23px;
-						right: 22px;
-						font-size: $uni-font-size-sm;
-						border-radius: 10px;
-					}
-
-					.havepeople {
-						position: absolute;
-						top: 99px;
-						right: 21px;
-						font-size: $uni-font-size-base;
-
-						text {
-
-							color: $any-col;
-						}
-					}
-
-					.shop-name {
-						color: $any-col;
-						font-size: $uni-font-size-lg;
-
-						.addres {
-							font-size: $uni-font-size-sm;
-							margin-left: 8px;
-							color: #666;
-						}
-					}
-
-					.label {
-						.tex {
-							padding: 2px;
-							font-size: 10px;
-							color: #7f7f7f;
-							border: 1px solid #7f7f7f;
-						}
-					}
-
-					.goods-price {
-						font-size: $uni-font-size-sm;
-
-						text {
-							margin: 0 5px;
-							color: $any-col;
-							font-size: $uni-font-size-lg;
-						}
-					}
-
-					.goodsname {
-						font-size: $uni-font-size-base;
-
-						text {
-							color: $any-col;
-							margin-right: 8px;
-						}
-					}
-
-					.propergoods {
-						font-size: $uni-font-size-base;
-
-						text {
-							color: $any-col;
-							margin-right: 8px;
-						}
-
-						.mon {}
-					}
-				}
-			}
-		}
+		
 	}
 
 	.banner {
