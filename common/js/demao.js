@@ -1,7 +1,7 @@
 module.exports={
 
 	domain:{
-		request:"https://mt.mlgxlm.com/",
+		request:"https://www.baidu.com/",
 		
 	}
 }

@@ -22,6 +22,11 @@
 			}
 		},
 		methods: {
+			init(){
+				
+			}
+		},
+		onLoad(){
 			
 		}
 	}

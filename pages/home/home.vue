@@ -30,20 +30,21 @@
 		</view>
 		<!-- 主要功能 -->
 		<view class="significance-father">
+			
 			<view class="significance">
-				<view class="sign-one">
+				<view @click="runHairdressing(1)" data-bs='asdxs' class="sign-one">
 					<view class="icon"></view>
 					<view class="text font-weig">美容美发</view>
 				</view>
-				<view class="sign-one">
+				<view @click="runHairdressing(2)" class="sign-one">
 					<view class="icon-1"></view>
 					<view class="text font-weig">身体护理</view>
 				</view>
-				<view class="sign-one">
+				<view @click="runHairdressing(3)" class="sign-one">
 					<view class="icon-2"></view>
 					<view class="text font-weig">问题皮肤</view>
 				</view>
-				<view class="sign-one">
+				<view @click="runHairdressing(4)" class="sign-one">
 					<view class="icon-3"></view>
 					<view class="text font-weig">瑜伽健身</view>
 				</view>
@@ -335,28 +336,10 @@
 				colors: '#e01818',
 
 				// 循环列表
-				headlist: [{
-					id: 1,
-					name: '拼团'
-				}, {
-					id: 2,
-					name: '优惠'
-				}, {
-					id: 3,
-					name: '销量'
-				}, {
-					id: 4,
-					name: '限时抢'
-				}, {
-					id: 5,
-					name: '免费送'
-				}],
-
+				headlist: [{id: 1,name: '拼团'}, {id: 2,name: '优惠'}, {id: 3,name: '销量'}, {id: 4,name: '限时抢'}, {id: 5,name: '免费送'}],
 				// 高亮id
 				ids: 1,
-
 				labels: '标签',
-
 				shoplists: [{
 					prople: '2000',
 					image: '../../static/image/shop/shop-1.jpg',
@@ -375,24 +358,31 @@
 
 		},
 		methods: {
+			// 组件事件实例
 			wearego() {
 				console.log('gogogogo')
 			},
-
-			onChange(e) {
-				console.log(1)
-				console.log('rate发生改变:' + JSON.stringify(e))
+			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
+			runHairdressing(e){
+				uni.navigateTo({
+					url:"/pages/home/hairdressing/hairdressing?runid="+e					
+				})
 			},
+
 			// 高亮id
 			exchanges(id) {
 				this.ids = id
 			},
 
 			init() {
-
+				console.log('this.global')
+				console.log(this.global)
 				this.global.request.post({
-					url: 'index',
-					data: {},
+					url: '',
+					data: {
+						wd:'123',
+						ie:'UTF-8'
+					},
 					isLoading: true,
 					load: '请求中...',
 					success: (res) => {
@@ -401,7 +391,7 @@
 				})
 			}
 		},
-
+ 
 		onLoad(Option) {
 			this.init()
 			console.log(this.global)

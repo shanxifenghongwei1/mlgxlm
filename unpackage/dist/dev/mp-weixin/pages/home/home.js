@@ -122,7 +122,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 71));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 78));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 72));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 79));};var _default =
+
 
 
 
@@ -459,28 +460,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       colors: '#e01818',
 
       // 循环列表
-      headlist: [{
-        id: 1,
-        name: '拼团' },
-      {
-        id: 2,
-        name: '优惠' },
-      {
-        id: 3,
-        name: '销量' },
-      {
-        id: 4,
-        name: '限时抢' },
-      {
-        id: 5,
-        name: '免费送' }],
-
-
+      headlist: [{ id: 1, name: '拼团' }, { id: 2, name: '优惠' }, { id: 3, name: '销量' }, { id: 4, name: '限时抢' }, { id: 5, name: '免费送' }],
       // 高亮id
       ids: 1,
-
       labels: '标签',
-
       shoplists: [{
         prople: '2000',
         image: '../../static/image/shop/shop-1.jpg',
@@ -499,24 +482,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
+    // 组件事件实例
     wearego: function wearego() {
       console.log('gogogogo');
     },
+    // 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
+    runHairdressing: function runHairdressing(e) {
+      uni.navigateTo({
+        url: "/pages/home/hairdressing/hairdressing?runid=" + e });
 
-    onChange: function onChange(e) {
-      console.log(1);
-      console.log('rate发生改变:' + JSON.stringify(e));
     },
+
     // 高亮id
     exchanges: function exchanges(id) {
       this.ids = id;
     },
 
     init: function init() {
-
+      console.log('this.global');
+      console.log(this.global);
       this.global.request.post({
-        url: 'index',
-        data: {},
+        url: '',
+        data: {
+          wd: '123',
+          ie: 'UTF-8' },
+
         isLoading: true,
         load: '请求中...',
         success: function success(res) {
@@ -531,6 +521,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     console.log(this.global);
     this.global.utils.sethead('美丽共享联盟');
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

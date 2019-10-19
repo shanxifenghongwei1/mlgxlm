@@ -28,9 +28,10 @@
 		"miniprogram": {
 			"list": [
 				{
-					"name": "登录",
+					"name": "美容美发",
+					"query": "runid=1",
 					"id": 0,
-					"pathName": "pages/login/login"
+					"pathName": "pages/home/hairdressing/hairdressing"
 				}
 			]
 		}

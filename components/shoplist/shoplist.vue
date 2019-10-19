@@ -1,6 +1,5 @@
 <template>
 	<view>
-
 		<view v-for="(item,index) in shoplists" :key='index' class="shop-father">
 			<view class="shop">
 				<view class="shop-img">
@@ -15,7 +14,6 @@
 						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.start" color="#7f7f7f" @change='onChange'
 						 active-color="#ffb540" />
 					</view>
-
 					<view v-if="myid != 4">
 						<view v-if='myid != 4' class="label">
 							<text class="tex">{{ item.labels }}</text>
@@ -39,16 +37,17 @@
 							￥ 199.9	
 							<text class="noscripe">￥ 330 </text>
 						</view>
-						
-
 					</view>
-
+					
 					<text v-if="myid == 1" class="gobuy">去拼团 </text>
 					<text v-if="myid == 2 || myid == 3 || myid == 5" class="gobuy">进店 </text>
 					<text v-if="myid == 4" class="gobuy" @click="go">马上抢 </text>
 					<text v-if="myid == 1" class="gobuy">去拼团 </text>
-
+					<text v-if="myid == 6" class="gobuy">更多团购 </text>
+					<view v-if="myid == 6" class="havepeople"> 已售 <text>{{item.prople}}</text> 位 </view>
 					<view v-if="myid == 1" class="havepeople"> 已拼 <text>{{item.prople}}</text> 位 </view>
+					
+					
 				</view>
 			</view>
 
@@ -67,17 +66,17 @@
 		},
 		props:{
 			myid: {
-			  type: Number,
+			  type: Number, //控制页面样式 1 拼团 2优惠 3销量 4限时抢 5免费送 6 正常商铺列表
 			  default: 1
 			},
 			shoplists:{
-				type:Array,
+				type:Array, //商品数据列表
 				default:[]
 			}
 		},
 		data() {
 			return {
-				
+
 			};
 		},
 		onLoad(options){
@@ -97,7 +96,6 @@
 <style lang="scss">
 	.shop-father {
 		@extend .cons;
-
 		.shop {
 			margin-top: 20rpx;
 			width: 100%;
@@ -107,13 +105,10 @@
 			border-bottom: 4rpx solid $any-col;
 			@extend .any-flex;
 			align-items: flex-start;
-
 			.shop-img {
 				width: 20%;
 				height: 80%;
-
 				image {
-
 					width: 100%;
 					height: 100%;
 				}
