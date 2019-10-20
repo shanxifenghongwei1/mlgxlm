@@ -1,0 +1,98 @@
+.head-con{
+	@extend .cons;
+	@extend .any-over;
+	.device{
+		margin-top: 20rpx;
+		@extend .any-flex;
+		flex-wrap: wrap;
+		// justify-content: center;
+		.device-son{
+			width:20%;
+			height: 128rpx;
+			margin: 10rpx 0;
+			image{
+				width: 128rpx;
+				height: 128rpx;
+			}
+		}
+	}
+	.newshop-head {
+		width: 100%;
+		height: 60rpx;
+	
+		@extend .any-flex;
+		justify-content: space-between;
+		margin: 16rpx 0rpx;
+	
+		.icons {
+			@extend .any-flex;
+			font-size: $uni-font-size-base;
+	
+			.iconsss {
+				height: 40rpx;
+				width: 8rpx;
+				margin-right: 10rpx;
+				background: $any-col;
+				font-size: $uni-font-size-lg;
+			}
+		}
+	
+		.more {
+			font-size: $uni-font-size-base;
+			width: 60rpx;
+			height: 40rpx;
+			line-height: 40rpx;
+			background: $any-col;
+			color: #fff;
+			text-align: center;
+			border-radius: 10rpx;
+		}
+	}
+}
+
+.banner {
+		width: 100%;
+		height: 340rpx;
+
+		swiper {
+			width: 100%;
+			height: 100%;
+
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+}
+
+.shoplist {
+			width: 100%;
+			height: 80rpx;
+			border-top: 2rpx solid $any-zol;
+			border-bottom: 2rpx solid $any-zol;
+			font-size: $uni-font-size-lg;
+			@extend .any-flex;
+			justify-content: space-between;
+
+			.list {
+				width: 20%;
+				text-align: center;
+				line-height: 80rpx;
+			}
+
+			.active {
+				color: $any-col;
+				position: relative;
+			}
+
+			.active:after {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 74rpx;
+				left: 10%;
+				width: 80%;
+				height: 8rpx;
+				background: $any-col;
+			}
+		}

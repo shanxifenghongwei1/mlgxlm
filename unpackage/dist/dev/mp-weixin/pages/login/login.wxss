@@ -24,6 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+/******段落省略号，默认两行******/
 .any-flex {
   display: -webkit-box;
   display: -webkit-flex;
@@ -39,6 +40,7 @@
           align-items: center;
 }
 .cons {
+  overflow: hidden;
   width: 94%;
   padding: 0 3%;
 }

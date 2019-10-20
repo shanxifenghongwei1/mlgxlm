@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "search-any": "/components/my-search/my-search"
+  }
+}

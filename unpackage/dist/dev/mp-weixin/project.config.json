@@ -28,10 +28,10 @@
 		"miniprogram": {
 			"list": [
 				{
-					"name": "美容美发",
+					"name": "抗谁除皱",
 					"query": "runid=1",
 					"id": 0,
-					"pathName": "pages/home/hairdressing/hairdressing"
+					"pathName": "pages/home/menu-details/menu-details"
 				}
 			]
 		}

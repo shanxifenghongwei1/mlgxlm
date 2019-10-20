@@ -7,7 +7,8 @@
     "pages/shopping/shopping",
     "pages/login/login",
     "pages/home/search/search",
-    "pages/home/hairdressing/hairdressing"
+    "pages/home/hairdressing/hairdressing",
+    "pages/home/menu-details/menu-details"
   ],
   "subPackages": [],
   "window": {
@@ -45,5 +46,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap6.json"
+  "sitemapLocation": "sitemap85.json"
 }

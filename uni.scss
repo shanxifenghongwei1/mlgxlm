@@ -71,7 +71,17 @@ $uni-font-size-subtitle:36upx;
 $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30upx;
 
-
+/******段落省略号，默认两行******/
+@mixin multi-row-apostrophe($number: 2) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $number;
+	-webkit-box-orient: vertical;
+	
+	// autoprefixer: off ;
+	autoprefixer: on ;
+}
 // flex 布局通用
 .any-flex{
 	display: flex;
@@ -80,6 +90,7 @@ $uni-font-size-paragraph:30upx;
 }
 // 窗口左右间距布局
 .cons{
+	overflow: hidden;
 	width: 94%;
 	padding: 0 3%;
 }

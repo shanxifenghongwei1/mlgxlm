@@ -24,6 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+/******段落省略号，默认两行******/
 .any-flex, .today .father .goodslist, .newshop .newshop-head, .newshop .newshop-head .icons, .newshop .shop-col, .choiceness .shoplist, .son-father .son .butf, .son-father .son .head, .son-father .son .quester, .son-father .son .flode, .son-father .son .near, .significance-father .significance, .seduce, .sear {
   display: -webkit-box;
   display: -webkit-flex;
@@ -39,6 +40,7 @@
           align-items: center;
 }
 .cons, .today .father, .newshop, .son-father, .conss, .significance-father {
+  overflow: hidden;
   width: 94%;
   padding: 0 3%;
 }
