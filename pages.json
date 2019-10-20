@@ -47,11 +47,15 @@
             "path" : "pages/home/menu-details/menu-details",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home/shop-detial/shop-detial",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{
 	            "name": "抗谁除皱", //模式名称
-	            "path": "pages/home/menu-details/menu-details" ,//启动页面，必选
+	            "path": "pages/home/shop-detial/shop-detial" ,//启动页面，必选
 				"query": "runid=1" //启动参数，在页面的onLoad函数里面得到。
 	        }]
 	    },

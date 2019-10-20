@@ -125,7 +125,7 @@ adadadsaad
 <style lang="scss">
 	.two-head{
 		@extend .any-flex;
-		justify-content:center;
+		justify-content:space-around;
 	}
 	
 	.cons{

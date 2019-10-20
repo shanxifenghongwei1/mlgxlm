@@ -8,7 +8,8 @@
     "pages/login/login",
     "pages/home/search/search",
     "pages/home/hairdressing/hairdressing",
-    "pages/home/menu-details/menu-details"
+    "pages/home/menu-details/menu-details",
+    "pages/home/shop-detial/shop-detial"
   ],
   "subPackages": [],
   "window": {
@@ -46,5 +47,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap85.json"
+  "sitemapLocation": "sitemap36.json"
 }

@@ -51,10 +51,9 @@
   font-weight: 600;
 }
 .two-head {
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
 }
 .cons {
   margin-top: 20rpx;

@@ -25,7 +25,7 @@
 					<view class="icon iconfont icon-hezuo"></view>
 					<view class="text font-weig">置换</view>
 				</view>
-
+ 
 			</view>
 		</view>
 		<!-- 主要功能 -->
