@@ -85,7 +85,7 @@
     border-radius: 10rpx; }
 .banner {
   width: 100%;
-  height: 340rpx; }
+  height: 200rpx; }
 .banner swiper {
     width: 100%;
     height: 100%; }

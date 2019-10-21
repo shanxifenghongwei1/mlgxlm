@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 /******段落省略号，默认两行******/
-.any-flex {
+.any-flex, .shop-some-message .serve-message {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -48,12 +48,86 @@
   font-weight: 600; }
 .banner {
   width: 100%;
-  height: 500rpx;
-  background: #007AFF; }
+  height: 400rpx;
+  background: #007AFF;
+  position: relative; }
 .banner swiper {
     width: 100%;
     height: 100%; }
 .banner swiper image {
       width: 100%;
       height: 100%; }
+.pos {
+  position: relative; }
+.shop-some-message {
+  position: absolute;
+  width: 94%;
+  top: 28%;
+  margin: 0 3%;
+  background: #4CD964; }
+.shop-some-message .head-run {
+    position: absolute;
+    top: -15%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #007AFF;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 60rpx; }
+.shop-some-message .shop-name {
+    margin-top: 80rpx;
+    margin-bottom: 20rpx;
+    width: 100%;
+    color: #FE0000;
+    font-size: 30rpx;
+    font-weight: 600;
+    text-align: center; }
+.shop-some-message .shop-start {
+    width: 124rpx;
+    margin: 0 auto; }
+.shop-some-message .some-message {
+    text-align: center;
+    font-size: 24rpx;
+    margin: 10rpx; }
+.shop-some-message .shop-obj {
+    width: 500rpx;
+    height: 100rpx;
+    background: #ffbbbb;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 15rpx;
+    border-radius: 10rpx; }
+.shop-some-message .shop-obj .obj {
+      overflow: hidden;
+      margin-top: 10rpx;
+      font-size: 30rpx;
+      color: #FFFFFF; }
+.shop-some-message .shop-obj .obj text {
+        margin: 10rpx 20rpx;
+        color: #666; }
+.shop-some-message .serve {
+    font-size: 30rpx;
+    font-weight: 600;
+    margin: 10rpx 10rpx 10rpx 40rpx; }
+.shop-some-message .serve-message {
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+.shop-some-message .serve-message view {
+      width: 30%;
+      text-align: center;
+      font-size: 30rpx;
+      margin: 5rpx; }
+.shop-some-message .serve-message view .icon {
+        font-size: 24rpx;
+        color: #FE0000;
+        margin-right: 10rpx; }
+.shop-some-message .address {
+    margin-left: 10rpx 10rpx 20rpx 32rpx;
+    font-size: 24rpx;
+    color: #FE0000; }
+.shop-some-message .address text {
+      color: #23D6FF;
+      margin-right: 10rpx; }
 
