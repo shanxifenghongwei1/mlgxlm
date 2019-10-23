@@ -21,15 +21,17 @@
 	}
 	
 	.shop-some-message {
-		position: absolute;
+		position: relative;
 		width: 94%;
 		top: 28%;
 		margin: 0 3%;
-		background: #4CD964;
+		background: #ffffff;
+		box-shadow:#cccccc 0px 0px 10rpx;
+		border-radius: 20rpx;
 	
 		.head-run {
 			position: absolute;
-			top: -15%;
+			top: -60rpx;
 			left: 0;
 			right: 0;
 			margin: 0 auto;
@@ -37,10 +39,11 @@
 			width: 120rpx;
 			height: 120rpx;
 			border-radius: 60rpx;
+			clear: both;
 		}
 	
 		.shop-name {
-			margin-top: 80rpx;
+			// margin-top: 80rpx;
 			margin-bottom: 20rpx;
 			width: 100%;
 			color: $any-col;
@@ -106,13 +109,14 @@
 			
 		}
 		.address{
-			margin-left:10rpx 10rpx 20rpx 32rpx;
+			margin:10rpx 10rpx 20rpx 32rpx;
 			font-size: $uni-font-size-base;
 			color: $any-col;
 			text{
 				color:#23D6FF;
 				margin-right: 10rpx;
 			}
+			padding-bottom: 20rpx;
 		}
 	
 	}

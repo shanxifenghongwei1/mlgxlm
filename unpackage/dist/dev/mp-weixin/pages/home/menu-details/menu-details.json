@@ -1,5 +1,8 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "search-any": "/components/my-search/my-search"
+    "search-any": "/components/my-search/my-search",
+    "shoplist": "/components/shoplist/shoplist",
+    "loadmore": "/components/uni-load-more/uni-load-more"
   }
 }

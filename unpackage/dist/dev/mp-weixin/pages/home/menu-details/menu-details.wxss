@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 /******段落省略号，默认两行******/
-.any-flex, .two-head, .cons .message-head .newshop-head, .cons .message-head .newshop-head .icons {
+.any-flex, .con-box .con-box-head, .con-box .con-box-head .icons, .con-box .con-box-bottom, .two-head, .two-head-box .case-tit, .two-head-box .picture, .two-head-box .case-info {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -49,60 +49,6 @@
 }
 .font-weig {
   font-weight: 600;
-}
-.two-head {
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-}
-.cons {
-  margin-top: 20rpx;
-  border: 2rpx solid #f0f0f0;
-}
-.cons .message-head {
-    height: 240rpx;
-}
-.cons .message-head .newshop-head {
-      width: 100%;
-      height: 60rpx;
-      -webkit-box-pack: justify;
-      -webkit-justify-content: space-between;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
-      margin: 16rpx 0rpx;
-}
-.cons .message-head .newshop-head .icons {
-        font-size: 24rpx;
-}
-.cons .message-head .newshop-head .icons .iconsss {
-          height: 40rpx;
-          width: 8rpx;
-          margin-right: 10rpx;
-          background: #FE0000;
-          font-size: 30rpx;
-}
-.cons .message-head .newshop-head .more {
-        font-size: 24rpx;
-        width: 60rpx;
-        height: 40rpx;
-        line-height: 40rpx;
-        background: #FE0000;
-        color: #fff;
-        text-align: center;
-        border-radius: 10rpx;
-}
-.cons .message-head .some-text {
-      width: 100%;
-      height: 120rpx;
-      font-size: 30rpx;
-      overflow: hidden;
-      -o-text-overflow: ellipsis;
-         text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      autoprefixer: on;
-      overflow: hidden;
 }
 .newbox {
   margin-top: 20rpx;
@@ -172,5 +118,143 @@
 .banner swiper image {
       width: 100%;
       height: 100%;
+}
+.con-box {
+  margin-top: 20rpx;
+  width: 100%;
+  padding: 16rpx 3%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: #cccccc 0px 0px 10rpx;
+          box-shadow: #cccccc 0px 0px 10rpx;
+}
+.con-box .con-box-head {
+    width: 100%;
+    height: 60rpx;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 16rpx;
+}
+.con-box .con-box-head .icons {
+      font-size: 24rpx;
+}
+.con-box .con-box-head .icons .iconsss {
+        height: 40rpx;
+        width: 8rpx;
+        margin-right: 10rpx;
+        background: #FE0000;
+        font-size: 30rpx;
+}
+.con-box .con-box-head .icons .icons-tit {
+        font-size: 30rpx;
+}
+.con-box .con-box-head .more {
+      font-size: 24rpx;
+      width: 60rpx;
+      height: 40rpx;
+      line-height: 40rpx;
+      background: #FE0000;
+      color: #fff;
+      text-align: center;
+      border-radius: 10rpx;
+}
+.con-box .con-box-text {
+    width: 100%;
+    max-height: 120rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    autoprefixer: on;
+    overflow: hidden;
+}
+.con-box .con-box-bottom {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+}
+.con-box .con-box-bottom .font1 {
+      font-size: 24rpx;
+}
+.con-box .con-box-bottom .font2 {
+      font-size: 20rpx;
+      padding: 0 8rpx;
+}
+.two-head {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-shadow: #cccccc 0px 0px 10rpx;
+          box-shadow: #cccccc 0px 0px 10rpx;
+  margin-top: 20rpx;
+  height: 75rpx;
+}
+.two-head .two-head-con {
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 75rpx;
+    padding: 0 15rpx;
+}
+.two-head .two-head-con.active {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #FE0000;
+    border-bottom: 10rpx solid #FE0000;
+}
+.two-head-box {
+  width: 100%;
+  padding: 24rpx 3%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.two-head-box .case-tit {
+    font-size: 24rpx;
+}
+.two-head-box .case-tit-name {
+    margin-left: 10rpx;
+}
+.two-head-box .picture {
+    padding: 23rpx 0;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+.two-head-box .picture-box {
+    width: 345rpx;
+    height: 274rpx;
+    position: relative;
+}
+.two-head-box .picture-box image {
+    width: 345rpx;
+    height: 274rpx;
+    background: yellow;
+}
+.two-head-box .picture-time {
+    display: inline-block;
+    background: #FE0000;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 24rpx;
+    padding: 7rpx;
+}
+.two-head-box .case-info image {
+    width: 25rpx;
+    height: 35rpx;
+}
+.two-head-box .info-age, .two-head-box .info-state {
+    font-size: 24rpx;
+    border: 2rpx solid #FE0000;
+    margin-left: 15rpx;
+    padding: 0rpx 5rpx;
 }
 

@@ -1,3 +1,5 @@
+<!-- 搜索页面 -->
+
 <template>
 	<view>
 			<zy-search :is-focus="false" :is-block="false" :show-want="true"></zy-search>

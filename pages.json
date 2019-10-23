@@ -45,7 +45,9 @@
         }
         ,{
             "path" : "pages/home/menu-details/menu-details",
-            "style" : {}
+            "style" : {
+				"enablePullDownRefresh": true//就是这个
+			}
         }
         ,{
             "path" : "pages/home/shop-detial/shop-detial",

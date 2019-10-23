@@ -1,3 +1,5 @@
+<!-- 详情页 -->
+
 <template>
 	<view>
 		<view class="cons">
@@ -23,48 +25,98 @@
 			</swiper>
 		</view>
 
-		<view class="cons">
-			<view class="message-head">
-				<view class="newshop-head">
-					<view class="icons">
-						<view class="iconsss"></view>
-						<view>本周新店</view>
-					</view>
-					<view class="more">更多</view>
+		<view class="con-box">
+			<view class="con-box-head">
+				<view class="icons">
+					<view class="iconsss"></view>
+					<view class="icons-tit">本周新店</view>
 				</view>
-
-				<view class="some-text">
-					这应该是汉子什么的，你乱写会出事的；
-					我试试能写几行湿哒哒所大所大所大大大大
-					撒大大萨达是扣扣扣扣扣
-					大搜拍大师的卡牌看到怕斯柯达牌看得开跑酷跑酷
-					大破大立店铺塑料大棚熟练地拍了拍斗罗大陆普林斯顿伦理片
-					撒大大是电动OK
-					大实打实大大扣款我我都控电控房
-					adadadsaad
+				<view class="more">更多</view>
+			</view>
+			<view class="con-box-text">
+				这应该是汉子什么的，你乱写会出事的；
+				我试试能写几行湿哒哒所大所大所大大大大
+				撒大大萨达是扣扣扣扣扣
+				大搜拍大师的卡牌看到怕斯柯达牌看得开跑酷跑酷
+				大破大立店铺塑料大棚熟练地拍了拍斗罗大陆普林斯顿伦理片
+				撒大大是电动OK
+				大实打实大大扣款我我都控电控房
+				adadadsaad
+			</view>
+			<view class="con-box-bottom">
+				<view class="font1">仪器</view>
+				<view class="font2">
+					|
 				</view>
-
-
+				<view class="font1">两年以上</view>
+				<view class="font2">
+					|
+				</view>
+				<view class="font1">20000-40000元</view>
 			</view>
 		</view>
 
-<view class="two-head ">
-	
-	<view class=""> 美容院 </view>
-	<view class=""> 案例 </view>
-</view>
-
+		<view class="two-head">
+			<view class="two-head-con" :class="cateid?'':'active'"  @click="cate(0)"> 美容院 </view>
+			<view class="two-head-con" :class="cateid?'active':''" @click="cate(1)"> 案例 </view>
+		</view>
+		<view  v-if="!cateid">
+			<shoplist :shoplists='shoplists' :myid='shopid'></shoplist>
+		</view>
+		<view class="two-head-box" v-else>
+			<view class="case-tit">
+				【热玛吉】
+				<view class="case-tit-name">
+					冯宏伟的123456
+				</view>
+			</view>
+			<view class="case-con">
+				<view class="case-con-box" v-for="(item,index) in caseList">
+					<!-- 图片展示 -->
+					<view class="picture">
+						<view class="picture-box">
+							<image :src="item.prepic" mode=""></image>
+							<view class="picture-time">
+								体验前
+							</view>
+						</view>
+						<view class="picture-box">
+							<image :src="item.pic" mode=""></image>
+							<view class="picture-time">
+								体验后35天
+							</view>
+						</view>
+					</view>
+					<!-- 年纪信息 -->
+					<view class="case-info">
+						<image src="../../../static/image/other/bookmark.png" mode=""></image>
+						<view class="info-age">
+							{{item.age}}
+						</view>
+						<view class="info-state">
+							{{item.state}}
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<loadmore :status="more"></loadmore>
 	</view>
 </template>
 
 <script>
 	import searchAny from '@/components/my-search/my-search.vue';
+	import shoplist from '@/components/shoplist/shoplist.vue';
+	import loadmore from "@/components/uni-load-more/uni-load-more.vue";
 	export default {
 		components: {
-			searchAny
+			searchAny,
+			shoplist,
+			loadmore
 		},
 		data() {
 			return {
+				more:"more",
 				// 菜单列表
 				menulist: [{
 						id: '1',
@@ -103,7 +155,38 @@
 					'../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg',
 					'../../../static/image/banner/4.jpg'
 				],
-
+				cateid:0,
+				
+				//店铺列表 
+				shoplists: [{
+					prople: '2000',
+					image: '../../static/image/shop/shop-1.jpg',
+					shopname: '艾美世界家',
+					address: '山西大医院',
+					start: '3.5',
+					labels: '便签',
+					goodssprice: '998',
+					newgoodssprice: '398',
+					goodsname: '芳香精油乳腺疏通',
+					othergoods: '酒槽鼻修护套餐',
+					othergoodsprices: "100",
+				}],
+				shopid:6,
+				
+				caseList:[{
+					pic:"/static/image/shop/shop-1.jpg",
+					prepic:"/static/image/shop/shop-1.jpg",
+					age:"23",
+					state:"面部松弛"
+				},{
+					pic:"/static/image/shop/shop-1.jpg",
+					prepic:"/static/image/shop/shop-1.jpg",
+					age:"23",
+					state:"面部松弛"
+				}],
+				
+				
+				
 			};
 		},
 		methods: {
@@ -116,68 +199,19 @@
 
 			menushow() {
 				this.menue == true ? this.menue = false : this.menue = true;
+			},
+			cate(e){
+				this.cateid = e;
 			}
+		},
+		onReachBottom(){
+			console.log("下拉了")
+			this.more = "loading"
 		}
 	}
 </script>
 
 <style lang="scss">
-	.two-head{
-		@extend .any-flex;
-		justify-content:space-around;
-	}
-	
-	.cons{
-		margin-top:20rpx;
-		border:2rpx solid $any-zol;
-		.message-head {
-			height:240rpx;
-			.newshop-head {
-				width: 100%;
-				height: 60rpx;
-		
-				@extend .any-flex;
-				justify-content: space-between;
-				margin: 16rpx 0rpx;
-		
-				.icons {
-					@extend .any-flex;
-					font-size: $uni-font-size-base;
-		
-					.iconsss {
-						height: 40rpx;
-						width: 8rpx;
-						margin-right: 10rpx;
-						background: $any-col;
-						font-size: $uni-font-size-lg;
-					}
-				}
-		
-				.more {
-					font-size: $uni-font-size-base;
-					width: 60rpx;
-					height: 40rpx;
-					line-height: 40rpx;
-					background: $any-col;
-					color: #fff;
-					text-align: center;
-					border-radius: 10rpx;
-				}
-			}
-			.some-text{
-				width: 100%;
-				height: 120rpx;
-				// margin-bottom:20rpx;
-				font-size: $uni-font-size-lg;
-				@include multi-row-apostrophe(3);
-				overflow:hidden;
-			}
-		}
-	}
-	
-
-
-
 	.newbox {
 		margin-top: 20rpx;
 		overflow: hidden;
@@ -259,4 +293,139 @@
 			}
 		}
 	}
+
+	.con-box {
+		margin-top: 20rpx;
+		width: 100%;
+		padding: 16rpx 3%;
+		box-sizing: border-box;
+		box-shadow:#cccccc 0px 0px 10rpx;
+		.con-box-head {
+			width: 100%;
+			height: 60rpx;
+
+			@extend .any-flex;
+			justify-content: space-between;
+			margin-bottom: 16rpx;
+
+			.icons {
+				@extend .any-flex;
+				font-size: $uni-font-size-base;
+
+				.iconsss {
+					height: 40rpx;
+					width: 8rpx;
+					margin-right: 10rpx;
+					background: $any-col;
+					font-size: $uni-font-size-lg;
+				}
+				.icons-tit{
+					font-size: $uni-font-size-lg;
+				}
+			}
+
+			.more {
+				font-size: $uni-font-size-base;
+				width: 60rpx;
+				height: 40rpx;
+				line-height: 40rpx;
+				background: $any-col;
+				color: #fff;
+				text-align: center;
+				border-radius: 10rpx;
+			}
+		}
+
+		.con-box-text {
+			width: 100%;
+			max-height: 120rpx;
+			font-size: $uni-font-size-lg;
+			@include multi-row-apostrophe(3);
+			overflow: hidden;
+		}
+		.con-box-bottom{
+			@extend .any-flex;
+			align-items: center;
+			font-size: $uni-font-size-base;
+			margin-top: 10rpx;
+			.font1{
+				font-size: $uni-font-size-base;
+			}
+			.font2{
+				font-size: $uni-font-size-sm;
+				padding: 0 8rpx;
+			}
+		}
+	}
+	
+	.two-head {
+		@extend .any-flex;
+		justify-content: space-around;
+		box-shadow:#cccccc 0px 0px 10rpx;
+		margin-top: 20rpx;
+		height: 75rpx;
+		.two-head-con{
+			font-size:$uni-font-size-lg;
+			font-weight: bold;
+			line-height: 75rpx;
+			padding: 0 15rpx;
+		}
+		.two-head-con.active{
+			font-size:$uni-font-size-lg;
+			font-weight: bold;
+			color: $any-col;
+			border-bottom: 10rpx solid $any-col;
+		}
+	}
+	.two-head-box{
+		width: 100%;
+		padding: 24rpx 3%;
+		box-sizing: border-box;
+		.case-tit{
+			@extend .any-flex;
+			font-size: $uni-font-size-base;
+		}
+		.case-tit-name{
+			margin-left:10rpx;
+		}
+		.picture{
+			padding: 23rpx 0;
+			@extend .any-flex;
+			justify-content: space-between;
+		}
+		.picture-box{
+			width: 345rpx;
+			height: 274rpx;
+			position: relative;
+		}
+		.picture-box image{
+			width: 345rpx;
+			height: 274rpx;
+			background: yellow;
+		}
+		.picture-time{
+			display:inline-block;
+			background: $any-col;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			font-size: $uni-font-size-base;
+			padding: 7rpx;
+		}
+		.case-info{
+			@extend .any-flex;
+		}
+		.case-info image{
+			width:25rpx;
+			height: 35rpx;
+		}
+		.info-age,.info-state{
+			font-size: $uni-font-size-base;
+			border: 2rpx solid $any-col;
+			margin-left: 15rpx;
+			padding: 0rpx 5rpx;
+		}
+	}
+
+	
 </style>

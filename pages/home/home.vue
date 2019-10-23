@@ -1,3 +1,5 @@
+<!-- 首页 -->
+
 <template>
 	<view class="">
 
@@ -341,6 +343,7 @@
 				ids: 1,
 				labels: '标签',
 				shoplists: [{
+					id:12,
 					prople: '2000',
 					image: '../../static/image/shop/shop-1.jpg',
 					shopname: '艾美世界家',

@@ -1,3 +1,5 @@
+<!-- 主要功能内容页面 -->
+
 <template>
 	<view>
 		<view class="head-con">
@@ -5,7 +7,7 @@
 			<!-- 大标题 -->
 			<view class="device">
 				<view v-for="(item,index) in gnlist" :key='index' class="device-son">
-					<image :src="item.picture" mode="widthFix"></image>
+					<image :src="item.picture" mode="widthFix" @click="menuDetail()"></image>
 				</view>
 			</view>
 			<view class="newshop-head">
@@ -99,13 +101,18 @@
 			exchanges(id) {
 				this.ids = id
 			},
+			menuDetail() {
+				uni.navigateTo({
+					url:"/pages/home/menu-details/menu-details"
+				})
+			}
+			
 		},
 		onLoad(options) {
 			console.log(options)
 			if(options == 1){
 				this.global.utils.sethead('美容美发')
 			}
-			
 		}
 	}
 </script>
