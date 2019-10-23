@@ -378,7 +378,7 @@
 				console.log('this.global')
 				console.log(this.global)
 				this.global.request.post({
-					url: '',
+					url: 'ad/admin',
 					data: {
 						wd:'123',
 						ie:'UTF-8'

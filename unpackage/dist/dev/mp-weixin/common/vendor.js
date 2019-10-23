@@ -1624,6 +1624,14 @@ function normalizeComponent (
                                                                                                                                                                        * ajaxJson.complete  始终会执行的方法   可不填
                                                                                                                                                                        * ajaxJson.globalJudge 返回状态判断  true：请求处判断逻辑
                                                                                                                                                                        */
+
+var a = function a(data) {
+
+  data: {
+
+  }
+
+};
 var requestPost = function requestPost(ajaxJson) {
 
   if (ajaxJson.isLoading) {//为ture 显示loading
@@ -8655,7 +8663,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟" }, "pages/classify/classify": { "navigationBarTitleText": "分类" }, "pages/member/member": { "navigationBarTitleText": "会员中心" }, "pages/street/street": { "navigationBarTitleText": "店铺街" }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车" }, "pages/login/login": {}, "pages/home/search/search": {}, "pages/home/hairdressing/hairdressing": {}, "pages/home/menu-details/menu-details": {}, "pages/home/shop-detial/shop-detial": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟", "usingComponents": { "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/classify/classify": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/member/member": { "navigationBarTitleText": "会员中心", "usingComponents": {} }, "pages/street/street": { "navigationBarTitleText": "店铺街", "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/login/login": { "usingComponents": {} }, "pages/home/search/search": { "usingComponents": { "zy-search": "/components/zy-search/zy-search" } }, "pages/home/hairdressing/hairdressing": { "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist" } }, "pages/home/menu-details/menu-details": { "usingComponents": { "search-any": "/components/my-search/my-search" } }, "pages/home/shop-detial/shop-detial": { "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate" } } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 

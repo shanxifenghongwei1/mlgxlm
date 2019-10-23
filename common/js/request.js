@@ -9,6 +9,14 @@ import demao from './demao.js'
  * ajaxJson.complete  始终会执行的方法   可不填
  * ajaxJson.globalJudge 返回状态判断  true：请求处判断逻辑
  */
+
+let a = data=>{
+	
+	data:{
+		
+	}
+	
+}
 let requestPost = ajaxJson => {
 	
 	if (ajaxJson.isLoading) { //为ture 显示loading
