@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7233,7 +7233,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7254,14 +7254,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7337,7 +7337,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8663,7 +8663,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟", "usingComponents": { "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/classify/classify": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/member/member": { "navigationBarTitleText": "会员中心", "usingComponents": {} }, "pages/street/street": { "navigationBarTitleText": "店铺街", "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/login/login": { "usingComponents": {} }, "pages/home/search/search": { "usingComponents": { "zy-search": "/components/zy-search/zy-search" } }, "pages/home/hairdressing/hairdressing": { "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist" } }, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true, "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist", "loadmore": "/components/uni-load-more/uni-load-more" } }, "pages/home/shop-detial/shop-detial": { "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate" } } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟" }, "pages/classify/classify": { "navigationBarTitleText": "分类" }, "pages/member/member": { "navigationBarTitleText": "会员中心" }, "pages/street/street": { "navigationBarTitleText": "店铺街" }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车" }, "pages/login/login": {}, "pages/home/search/search": {}, "pages/home/hairdressing/hairdressing": {}, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true }, "pages/home/shop-detial/shop-detial": {}, "pages/home/goods-detail/goods-detail": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 
@@ -8694,6 +8694,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /*!*************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/shop-detial/shop-detial.scss ***!
   \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 95:
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/goods-detail/goods-detail.scss ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

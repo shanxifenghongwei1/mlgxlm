@@ -1,0 +1,88 @@
+.goods-title{
+	@extend .any-flex;
+	width: 100%;
+	height: 130rpx;
+	background: #ff5d5d;
+	justify-content: space-between;
+	padding: 0 3%;
+	box-sizing: border-box;
+	.goods-info{
+		width: 400rpx;
+		height: 100%;
+		@extend .any-flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		color: #ffffff;
+		.goods-name{
+			font-size: $uni-font-size-lg;
+			padding: 4rpx 0;
+		}
+		.goods-add{
+			font-size: $uni-font-size-base;
+			padding: 4rpx 0;
+		}
+	}
+	.goods-num{
+		width: 150rpx;
+		height: 100%;
+		text-align: right;
+		line-height: 130rpx;
+		color: #000000;
+		font-size: $uni-font-size-base;
+	}
+}
+
+.goods-price{
+	@extend .any-flex;
+	justify-content: center;
+	align-items: flex-end;
+	padding: 15rpx;
+	.NewPrice{
+		font-size: $uni-font-size-lg;
+		color: $any-col;
+		font-weight: bold;
+	}
+	.OldPrice{
+		font-size: $uni-font-size-base;
+		color: #7e7e7e;
+		text-decoration: line-through;
+		margin-left: 12rpx;
+	}
+	.manJian{
+		font-size: 16rpx;
+		border: 1rpx solid $any-col;
+		color: $any-col;
+		margin-left: 12rpx;
+		padding: 0 3rpx;
+		box-sizing: border-box;
+	}
+}
+
+.goods-team{
+	width: 100%;
+	height: 300rpx;
+	background: pink;
+	padding: 20rpx 3%;
+	box-shadow: $any-zol 0px 0px 10rpx;
+	box-sizing: border-box;
+	.title{
+		font-size: $uni-font-size-base;
+		font-weight: bold;
+	}
+	.team-list{
+		margin-top: 20rpx;
+		.list-li{
+			width: 100%;
+			height: 92rpx;
+			border-bottom: 2rpx solid #b4b4b4;
+			box-sizing: border-box;
+			.u-team{
+				font-size: $uni-font-size-base;
+			}
+			.u-team{
+				
+			}
+		}
+	}
+}

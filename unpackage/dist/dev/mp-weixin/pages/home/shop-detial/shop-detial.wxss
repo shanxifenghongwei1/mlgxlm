@@ -162,7 +162,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 /******段落省略号，默认两行******/
-.any-flex, .coupon, .coupon .coupon-left, .coupon .coupon-num {
+.any-flex, .coupon, .coupon .coupon-left, .coupon .coupon-num, .shop-card .shop-card-tit {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -208,8 +208,8 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #FE0000;
-  -webkit-box-shadow: #cccccc 0px 0px 10rpx;
-          box-shadow: #cccccc 0px 0px 10rpx;
+  -webkit-box-shadow: #f0f0f0 0px 0px 10rpx;
+          box-shadow: #f0f0f0 0px 0px 10rpx;
 }
 .coupon .coupon-left {
     -webkit-box-align: center;
@@ -243,12 +243,72 @@
 }
 .shop-card {
   width: 100%;
-  height: 315rpx;
-  -webkit-box-shadow: #cccccc 0px 0px 10rpx;
-          box-shadow: #cccccc 0px 0px 10rpx;
+  -webkit-box-shadow: #f0f0f0 0px 0px 10rpx;
+          box-shadow: #f0f0f0 0px 0px 10rpx;
   padding: 22rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  background: #ffffff;
+  margin-top: 20rpx;
+}
+.shop-card .shop-card-tit image {
+    width: 34rpx;
+    height: 29rpx;
+}
+.shop-card .shop-card-tit view {
+    font-size: 30rpx;
+    font-weight: bold;
+    margin-left: 10rpx;
+}
+.shop-card .shop-card-con image {
+    display: inline-block;
+    margin-top: 20rpx;
+    width: 340rpx;
+    height: 210rpx;
+}
+.shop-card .shop-card-con image:nth-child(2n) {
+    margin-left: 25rpx;
+}
+.jingxuan .bac-img {
+  margin: 20rpx 0;
+  height: 74rpx;
+  width: 100%;
+}
+.jingxuan .bac-img image {
+    width: 100%;
+}
+.case-succ {
+  width: 100%;
+  padding: 20rpx 3% 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: #f0f0f0 0px 0px 10rpx;
+          box-shadow: #f0f0f0 0px 0px 10rpx;
+  margin-top: 30rpx;
+}
+.evaluate {
+  width: 100%;
+  padding: 20rpx 0 25rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: #f0f0f0 0px 0px 10rpx;
+          box-shadow: #f0f0f0 0px 0px 10rpx;
+  margin-top: 40rpx;
+}
+.evaluate-top {
+  width: 100%;
+  padding: 0 3%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.evaluate-li {
+  width: 100%;
+  height: 160rpx;
   background: pink;
+  border-top: 2rpx solid #cdcdcd;
+}
+.shop-bottom {
+  width: 100%;
+  height: 100rpx;
 }
 

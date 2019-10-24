@@ -53,6 +53,10 @@
             "path" : "pages/home/shop-detial/shop-detial",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home/goods-detail/goods-detail",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

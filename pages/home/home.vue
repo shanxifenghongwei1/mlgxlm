@@ -151,7 +151,7 @@
 		<!-- 今日推荐 -->
 		<view class="today">
 			<view class="bac-img">
-				<image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image>
+				<!-- <image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image> -->
 			</view>
 
 
@@ -219,9 +219,6 @@
 
 				</view>
 			</view>
-
-
-
 		</view>
 
 
@@ -422,7 +419,6 @@
 
 		.father {
 			@extend .cons;
-			height: 600rpx;
 
 			.goodslist {
 				padding: 3% 0;
