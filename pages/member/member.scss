@@ -1,0 +1,244 @@
+.member-portrait{
+		width: 90%;
+		margin: 2% auto;
+		overflow: hidden;
+		@extend .any-flex;
+		align-items: center;
+		justify-content: space-between;
+		
+		.member-portrait-image{
+			width: 140rpx;
+			height: 140rpx;
+			float: left;
+			border-radius: 50%;
+			image{
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+		}
+		.member-information{
+			width: 45%;
+			@extend .any-flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding-left: 30rpx;
+			box-sizing: border-box;
+			.hs{
+				width: 100%;
+				font-size: $uni-font-size-lg;
+				color: #000;
+				font-weight: 600;
+				padding: 5rpx 0 10rpx;
+			}
+			.member-VIP{
+				display: inline-block;
+				padding: 2rpx 15rpx;
+				border-radius: 15rpx;
+				background: $any-col;
+				color: #fff;
+				font-size: $uni-font-size-base;
+				margin-bottom: 10rpx;
+			}
+		}
+		.member-icon{
+			flex-grow: 1;
+			@extend .any-flex;
+			flex-direction: column;
+			align-items: flex-end;
+			.menber-edit{
+				overflow: hidden;
+				width: 100%;
+			}
+			.memder-icon-edit{
+				float: right;
+				color: $any-col;
+				font-size: 40rpx;
+				margin-right: 10%;
+				margin-top: 10rpx;
+			}
+		}
+		.menber-Signin{
+			border: 2rpx $any-col solid;
+			font-size: 24rpx;
+			border-radius: 100rpx;
+			color: $any-col;
+			@extend .any-flex;
+			margin-top: 15rpx;
+			padding: 5rpx 10rpx;
+			image{
+				margin: 2%;
+				width: 28rpx;
+				height: 28rpx;
+			}
+			image:nth-child(1){
+				margin-left: 10%;
+			}
+			image:nth-child(3){
+				margin-top: 3.5%;
+				width: 21rpx;
+				height: 25rpx;
+			}
+			.menber-Signin-text{
+				width: 80rpx;
+				font-size: $uni-font-size-base;
+				margin-left: 3%;
+				font-weight: 600;
+			}
+		}
+	}
+	.member-assets{
+		width: 94%;
+		margin: 3% auto;
+		overflow: hidden;
+		border-radius: 15rpx;
+		border: 1px solid #d6d6d6;
+		-webkit-box-shadow: 0px 0px 10px #bfbdbd;
+		box-shadow: 0px 0px 10px #bfbdbd;
+		.member-assets-money{
+			width: 70%;
+			float: left;
+			margin: 3%;
+			border-right: #cccccc 4rpx solid;
+			.member-assets-number{
+				width: 33.33%;
+				float: left;
+				.member-assets-h6{					
+					font-size: $uni-font-size-base;
+					font-weight: 500;
+					text-align: center;
+					line-height: 40rpx;
+				}
+				.member-assets-content{
+					color: rgba(0,0,0, .6);
+					font-size: $uni-font-size-base;
+					text-align: center;
+					margin-top: 8%;
+				}
+			}
+		}
+		.member-assets-money-fe{
+			float: left;
+			width: 20%;
+			margin-top: 2%;
+			.member-assets-fe-icon{
+				font-size: 60rpx;
+				text-align: center;
+				color: $any-col;
+			}
+			.member-assets-fe-content{
+				font-size: $uni-font-size-base;
+				color: $any-col;
+				text-align: center;
+			}
+		}
+	}
+	.banner{
+		width: 94%;
+		height: 260rpx;
+		margin: 2% auto;
+		border: 1rpx solid #d6d6d6;
+		-webkit-box-shadow: 0px 0px 10rpx #bfbdbd;
+		box-shadow: 0px 0px 10rpx #bfbdbd;
+		swiper {
+			width: 100%;
+			height: 100%;
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+	.member-order{
+		.member-order-top{
+			border-bottom: #CCCCCC 2rpx solid;
+			overflow: hidden;
+			.member-order-my{
+				float: left;
+				font-size: 33rpx;
+				color: $any-col;
+				font-weight: 600;
+				line-height: 70rpx;
+				margin-left: 5%;
+			}
+			.member-order-left{
+				float: right;
+				font-size: 34rpx;
+				color: $any-col;
+				margin-right: 5%;
+				font-weight: 600;
+				line-height: 70rpx;
+			}
+		}
+		.member-order-content{
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			.member-order-content-w20{
+				width: 20%;
+				height: 100%;
+				margin: 3% 0;
+				.member-order-content1{
+					text-align: center;
+					font-size: 60rpx;
+					line-height: 90rpx;
+				}
+				.member-order-text{
+					text-align: center;
+					font-size: 28rpx;
+					line-height: 50rpx;
+				}
+			}
+		}
+		.member-tool-content1{
+			width: 90%;
+			margin: auto;
+			.member-tool-content-w25{
+				width: 25%;
+				height: 100%;
+				margin: 3% 0;
+				float: left;
+				.member-tool-content1{
+					text-align: center;
+					font-size: 70rpx;
+					line-height: 80rpx;
+				}
+				.member-tool-text{
+					text-align: center;
+					font-size: 28rpx;
+					line-height: 50rpx;
+				}
+			}
+		}
+	}
+	.member-bottom-in{
+		.member-bottom-within{
+			width: 92%;
+			margin: auto;
+			.member-bottom-within-w1{
+				width: 100%;
+				overflow: hidden;
+				margin: 2% 0;
+				.member-bottom-icon{
+					font-size: 38rpx;
+					color: $any-col;
+					float: left;
+					line-height: 60rpx;
+					font-weight: 600;
+				}
+				.member-bottom-text{
+					float: left;
+					line-height: 60rpx;
+					font-size: 28rpx;
+					margin-left: 2%;
+					color: #585858;
+				}
+				.member-bottom-left{
+					float: right;
+					line-height: 60rpx;
+					font-size: 32rpx;
+					font-weight: 600;
+				}
+			}
+		}
+	}

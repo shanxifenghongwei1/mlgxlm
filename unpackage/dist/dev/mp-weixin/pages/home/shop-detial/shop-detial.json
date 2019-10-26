@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "uni-rate": "/components/uni-rate/uni-rate",
+    "cate-more": "/components/mine/cate-more",
+    "goods": "/components/mine/goods",
+    "case-succ": "/components/mine/case-success",
+    "top-title": "/components/mine/top-title",
+    "evaluate": "/components/mine/evaluate"
+  }
+}

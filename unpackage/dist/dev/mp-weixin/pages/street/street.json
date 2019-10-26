@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "店铺街",
+  "usingComponents": {
+    "uni-rate": "/components/uni-rate/uni-rate",
+    "shoplist": "/components/shoplist/shoplist",
+    "search-any": "/components/my-search/my-search"
+  }
+}

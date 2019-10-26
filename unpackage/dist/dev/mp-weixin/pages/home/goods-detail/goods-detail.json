@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "my-swiper": "/components/mine/my-swiper",
+    "evaluate": "/components/mine/evaluate",
+    "top-tit": "/components/mine/top-title",
+    "uni-rate": "/components/uni-rate/uni-rate",
+    "goods-list": "/components/mine/goods",
+    "goods-nav": "/components/uni-goods-nav/uni-goods-nav"
+  }
+}
