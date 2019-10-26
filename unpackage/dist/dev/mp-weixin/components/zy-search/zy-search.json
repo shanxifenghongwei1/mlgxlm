@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "shoplist": "/components/shoplist/shoplist"
-  },
-  "component": true
-}

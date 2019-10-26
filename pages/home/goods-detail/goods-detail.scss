@@ -1,3 +1,26 @@
+@keyframes tea_arrow {
+    0%{transform: rotate(180deg);}
+    25%{transform: rotate(135deg);}
+    50%{transform: rotate(90deg);}
+    75%{transform: rotate(45deg);}
+    100%{transform: rotate(0deg);}
+}
+@keyframes tea_arrow1 {
+    0%{transform: rotateZ(0deg);}
+    25%{transform: rotateZ(45deg);}
+    50%{transform: rotateZ(90deg);}
+    75%{transform: rotateZ(135deg);}
+    100%{transform: rotateZ(180deg);}
+}
+.c{
+	width: 100rpx;
+	height: 100rpx;
+	background: red;
+}
+.tea_arrowDown{animation: tea_arrow 0.3s linear;transform-origin:center center;transform: rotate(0deg);}
+.tea_arrowUp{animation: tea_arrow1 0.3s linear;transform-origin:center center;transform: rotate(180deg);}
+
+
 .goods-title{
 	@extend .any-flex;
 	width: 100%;
@@ -61,8 +84,7 @@
 
 .goods-team{
 	width: 100%;
-	height: 300rpx;
-	background: pink;
+	background: #ffffff;
 	padding: 20rpx 3%;
 	box-shadow: $any-zol 0px 0px 10rpx;
 	box-sizing: border-box;
@@ -77,12 +99,165 @@
 			height: 92rpx;
 			border-bottom: 2rpx solid #b4b4b4;
 			box-sizing: border-box;
+			@extend .any-flex;
+			justify-content: space-between;
+			align-items: center;
 			.u-team{
+				width: 400rpx;
+				font-size: $uni-font-size-base;
+				@extend .any-flex;
+				align-items: center;
+			}
+			.u-team image{
+				width: 69rpx;
+				height: 69rpx;
+				border-radius: 50%;
+				margin-right: 30rpx;
+			}
+			.u-team view{
+				width: 260rpx;
+				height: 100%;
+			}
+			.u-info{
+				font-size: $uni-font-size-sm;
+				@extend .any-flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-end;
+			}
+			.u-btn{
+				padding: 3rpx 5rpx;
+				color: #ffffff;
+				background: $any-col;
+				border-radius: 10rpx;
 				font-size: $uni-font-size-base;
 			}
-			.u-team{
-				
-			}
+		}
+		.list-li:last-child{
+			border: none;
 		}
 	}
+}
+
+.eval{
+	width: 100%;
+	padding: 15rpx 0 20rpx;
+	margin-top: 20rpx;
+	box-sizing: border-box;
+	box-shadow: $any-zol 0px 0px 10rpx;
+	.eval-tit{
+		width: 100%;
+		padding: 0 3%;
+		box-sizing: border-box;
+		margin-bottom: 10rpx;
+	}
+}
+
+.goShop{
+	width: 100%;
+	padding: 0 3%;
+	background: #ffffff;
+	@extend .any-flex;			
+	justify-content: space-between;			
+	align-items: center;
+	box-sizing: border-box;
+	.goShop-pic{
+		width: 90rpx;
+		height: 90rpx;
+		background: yellow;
+	}
+	.goShop-name{
+		width: 450rpx;
+		height: 90rpx;
+		padding: 0 20rpx;
+		@extend .any-flex;
+		flex-direction: column;
+		justify-content: center;			
+		align-items: flex-start;
+		font-size: $uni-font-size-base;
+		box-sizing: border-box;
+	}
+	.goShop-where{
+		flex-grow: 1;
+		height: 90rpx;
+		background: #ffffff;
+		.box{
+			display: inline-block;
+			padding: 3rpx 10rpx;
+			border-radius: 20rpx;
+			background: $any-col;
+			font-size: $uni-font-size-base;
+			float: right;
+			margin-top: 20rpx;
+			color: #ffffff;
+		}
+	}
+}
+
+.content{
+	width: 100%;
+	padding: 15rpx 3% 20rpx;
+	margin-top: 20rpx;
+	box-sizing: border-box;
+	box-shadow: $any-zol 0px 0px 10rpx;
+	.shop-detail{
+		width: 100%;
+		margin-top: 10rpx;
+	}
+	.shop-detail-title{
+		font-size: $uni-font-size-base;
+		color: #5e5752;
+		// padding: 0 10rpx;
+		box-sizing: border-box;
+		margin-bottom: 15rpx;
+	}
+	image{
+		width: 100%;
+	}
+	.shop-pic-detail{
+		width: 100%;
+		margin-top: 10rpx;
+	}
+	.pic-image{
+		width: 100%;
+		height: 300rpx;
+		overflow: hidden;
+	}
+	.pic-image-lg{
+		width: 100%;
+	}
+	.lg-state{
+		width: 100%;
+		@extend .any-flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20rpx;
+	}
+	.lg-state view{
+		font-size: $uni-font-size-base;
+	}
+	.lg-state image{
+		width: 14rpx;
+		margin-left: 15rpx;
+	}
+}
+
+.bac-img {
+			margin: 20rpx 0;
+			height: 74rpx;
+			width: 100%;
+
+			image {
+				width: 100%;
+			}
+		}
+.emit{
+	width: 100%;
+	height: 150rpx;
+}	
+.topay{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
 }

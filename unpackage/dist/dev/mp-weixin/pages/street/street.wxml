@@ -1,1 +1,0 @@
-<view>店铺街<search-any vue-id="1" bind:__l="__l"></search-any><uni-rate vue-id="2" disabled="false" margin="2" size="50" max="5" value="3.4" color="#7f7f7f" active-color="#ffb540" bind:__l="__l"></uni-rate></view>

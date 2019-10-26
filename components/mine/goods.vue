@@ -118,7 +118,7 @@
 			</view>
 		</view>
 		
-		<view class="look-more">
+		<view class="look-more" v-if="more">
 			查看更多60个商品
 		</view>
 	</view>
@@ -135,6 +135,10 @@
 			titCon:{
 				type:Object, //商品数据列表
 				default:{}
+			},
+			more:{
+				type:Boolean, //商品数据列表
+				default:true
 			}
 		},
 		methods:{

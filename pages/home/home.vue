@@ -8,20 +8,20 @@
 			<searchAny></searchAny>
 			<!-- 下面四个图标 -->
 			<view class="seduce">
-				<view class="list-one">
+				<navigator class="list-one" url="/pages/home/coupon/coupon">
 					<view class="icon iconfont icon-icon_coupon"></view>
 					<view class="text font-weig">优惠券</view>
-				</view>
-
-				<view class="list-one">
+				</navigator>
+				
+				<navigator class="list-one" url="/pages/home/flashSale/flashSale">
 					<view class="icon iconfont icon-pintuan"></view>
 					<view class="text font-weig">拼团</view>
-				</view>
+				</navigator>
 
-				<view class="list-one">
+				<navigator class="list-one" url="/pages/home/flashSale/flashSale">
 					<view class="icon iconfont icon-shijian"></view>
 					<view class="text font-weig">限时抢</view>
-				</view>
+				</navigator>
 
 				<view class="list-one">
 					<view class="icon iconfont icon-hezuo"></view>
@@ -390,6 +390,9 @@
 					}
 				})
 			}
+			
+			//页面跳转
+			
 		},
  
 		onLoad(Option) {

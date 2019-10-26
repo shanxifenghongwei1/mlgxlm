@@ -1,6 +1,6 @@
 <template>
 	<view class="banner">
-		<swiper :autoplay="true" :indicator-dots="true" :interval="2000" :duration="1000">
+		<swiper :autoplay="true" :indicator-dots="true" :interval="2000" :duration="1000" indicator-active-color="#FE0000">
 			<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
 				<view class="swiper-item">
 					<image :src="item" mode="widthFix"></image>

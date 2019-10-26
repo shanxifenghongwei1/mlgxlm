@@ -77,7 +77,7 @@
 		<!-- 精选商品 -->
 		<view class="jingxuan">
 			<view class="bac-img">
-				<image src="/static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image>
+				<image src="/static/image/other/shoping-jingxuan.png" mode="widthFix" class="bac-imgs"></image>
 			</view>
 			<view class="" style="margin-top: 40rpx;">
 				<cateMore :menulist="menuList" @cateid="getCateId" ></cateMore>

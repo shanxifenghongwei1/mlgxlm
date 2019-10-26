@@ -57,6 +57,18 @@
             "path" : "pages/home/goods-detail/goods-detail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home/coupon/coupon",
+            "style" : {
+				"navigationBarTitleText": "优惠券"
+			}
+        }
+        ,{
+            "path" : "pages/home/flashSale/flashSale",
+            "style": {
+            	"navigationBarTitleText": "限时抢"
+            }
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{
