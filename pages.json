@@ -69,6 +69,10 @@
             	"navigationBarTitleText": "限时抢"
             }
         }
+        ,{
+            "path" : "pages/member/include/include",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

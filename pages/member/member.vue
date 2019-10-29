@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 头部 -->
-		<view class="member-portrait">
+		<view class="member-portrait" v-if="login">
 			<view class="member-portrait-image">
 				<image src="../../static/image/shop/shop-1.jpg" mode=""></image>
 			</view>
@@ -19,21 +19,26 @@
 					<image src="/static/image/other/icon-right-red.png" mode=""></image>
 				</view>
 			</view>
-			
 		</view>
+		<view class="member-portrait" v-else>
+			<navigator class="hs" url="/pages/login/login">
+				去登录
+			</navigator>
+		</view>
+
 		<!-- 资产 -->
 		<view class="member-assets">
 			<view class="member-assets-money">
 				<view class="member-assets-number">
-					<view class="member-assets-h6">15.00</view>
-					<view class="member-assets-content">余额</view>
+					<view class="member-assets-h6">0.00</view>
+					<view class="member-assets-content">分享币</view>
 				</view>
 				<view class="member-assets-number">
-					<view class="member-assets-h6">15</view>
+					<view class="member-assets-h6">0</view>
 					<view class="member-assets-content">积分</view>
 				</view>
 				<view class="member-assets-number">
-					<view class="member-assets-h6">15.00</view>
+					<view class="member-assets-h6">0</view>
 					<view class="member-assets-content">优惠卷</view>
 				</view>
 			</view>
@@ -175,8 +180,12 @@
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
 	export default {
 		data() {
-			components: {uniList,uniListItem}
+			components: {
+				uniList,
+				uniListItem
+			}
 			return {
+				login:!0,
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
 					'../../static/image/banner/4.jpg'
@@ -184,10 +193,13 @@
 			}
 		},
 		methods: {
-			
+
 		},
-		onLoad(){
+		onLoad() {
 			this.global.utils.sethead("个人中心")
+		},
+		onShow(){
+			this.login=this.global.status.state.login;
 		}
 	}
 </script>

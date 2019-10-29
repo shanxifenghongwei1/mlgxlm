@@ -1,7 +1,9 @@
 module.exports={
 
 	domain:{
-		request:"https://www.baidu.com/",
-		
+		//数据请求地址
+		request:"http://mt.mlgxlm.com/",
+		//图片地址
+		picUrl:"http://mt.mlgxlm.com/"
 	}
 }

@@ -1,7 +1,26 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			console.log('App Launch');
+			uni.checkSession({
+				success:(res)=>{
+					//1:登录  0：未登录
+					if(res.errMsg!=="checkSession:ok"){
+						this.global.status.state.login=0;
+					}else{
+						this.global.status.state.login=1;
+					}
+					console.log(this.global.status.state.login)
+				},
+				fail:(res)=>{
+					if(res.errMsg!=="checkSession:ok"){
+						this.global.status.state.login=0;
+					}else{
+						this.global.status.state.login=1;
+					}
+					console.log(this.global.status.state.login)
+				}
+			})
 		},
 		onShow: function() {
 			console.log('App Show')

@@ -81,12 +81,6 @@
     padding-left: 30rpx;
     -webkit-box-sizing: border-box;
             box-sizing: border-box; }
-.member-portrait .member-information .hs {
-      width: 100%;
-      font-size: 30rpx;
-      color: #000;
-      font-weight: 600;
-      padding: 5rpx 0 10rpx; }
 .member-portrait .member-information .member-VIP {
       display: inline-block;
       padding: 2rpx 15rpx;
@@ -140,6 +134,12 @@
       font-size: 24rpx;
       margin-left: 3%;
       font-weight: 600; }
+.member-portrait .hs {
+    width: 100%;
+    font-size: 30rpx;
+    color: #000;
+    font-weight: 600;
+    padding: 5rpx 0 10rpx; }
 .member-assets {
   width: 94%;
   margin: 3% auto;

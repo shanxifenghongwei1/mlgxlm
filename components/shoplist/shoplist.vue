@@ -1,32 +1,32 @@
 <template>
 	<view>
-		<view v-for="(item,index) in shoplists" :key='index' class="shop-father" @click="toDetail(item.id)">
+		<view v-for="(item,index) in shoplists" :key='index' class="shop-father" @click="toDetail(item.goods_id)">
 			<view class="shop">
 				<view class="shop-img">
-					<image :src="item.image" mode="widthFix"></image>
+					<image :src="picUrl+item.picture" mode="widthFix"></image>
 				</view>
 				<view class="shop-message">
 					<view class="shop-name">
-						<text>{{item.shopname}}</text>
-						<text class="addres">{{item.address}}</text>
+						<text class="shop-name-left">{{item.shop_name}}</text>
+						<text class="addres">{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text>
 					</view>
 					<view class="shop-start">
-						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.start" color="#7f7f7f" @change='onChange'
+						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.shop_score" color="#7f7f7f" @change='onChange'
 						 active-color="#ffb540" />
 					</view>
 					<view v-if="myid != 4">
 						<view v-if='myid != 4' class="label">
-							<text class="tex">{{ item.labels }}</text>
+							<text class="tex">{{ item.shop_label}}</text>
 						</view>
 						<view class="goods-price">
-							原价 <text>{{item.goodssprice}}</text> 平台价 <text>{{item.newgoodssprice}}</text>
+							原价 <text>{{item.price}}</text> 平台价 <text>{{item.market_price}}</text>
 						</view>
-						<view class="goodsname"> <text class="iconfont icon-xiangmu"></text> {{item.goodsname}}</view>
-						<view class="propergoods"> <text class="iconfont icon-tuan"> </text> <text class="mon">{{item.othergoodsprices}}元</text>
-							{{item.othergoods}} </view>
+						<view class="goodsname" > <text class="iconfont icon-xiangmu"></text> {{item.goods_name}}</view>
+						<view class="propergoods"> <text class="iconfont icon-tuan"> </text> <text class="mon">{{item.promotion_price}}元</text>
+							{{item.introduction}} </view>
 					</view>
 					<view v-else>
-						<view class="goodsname"> <text class="iconfont icon-xiangmu"></text> {{item.goodsname}}</view>
+						<view class="goodsname"> <text class="iconfont icon-xiangmu"></text> {{item.goods_name}}</view>
 						<view class="any-flex">
 							<view class="progres">
 								<cmd-progress stroke-width='8' stroke-color='#FE0000' :percent="30"></cmd-progress>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+	import demo from "@/common/js/demao.js"
 	import uniRate from '@/components/uni-rate/uni-rate.vue'
 	import cmdProgress from "@/components/cmd-progress/cmd-progress.vue"
 	export default {
@@ -76,7 +77,8 @@
 		},
 		data() {
 			return {
-
+				dataUrl:"",
+				picUrl:"",
 			};
 		},
 		onLoad(options){
@@ -95,6 +97,9 @@
 					url:"/pages/home/shop-detial/shop-detial?id="+e
 				})
 			}
+		},
+		created(){
+			this.picUrl=demo.domain.picUrl;
 		}
 	}
 </script>
@@ -175,7 +180,13 @@
 				.shop-name {
 					color: $any-col;
 					font-size: $uni-font-size-lg;
-
+					@extend .any-flex;
+					align-items: flex-end;
+					.shop-name-left{
+						max-width: 40%;
+						height: 40rpx;
+						@include multi-row-apostrophe(1);
+					}
 					.addres {
 						font-size: $uni-font-size-sm;
 						margin-left: 2rpx;
@@ -203,6 +214,10 @@
 				}
 
 				.goodsname {
+					width: 70%;
+					height: 35rpx;
+					@include multi-row-apostrophe(1);
+					overflow: hidden;
 					font-size: $uni-font-size-base;
 
 					text {

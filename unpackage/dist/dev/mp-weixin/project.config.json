@@ -12,6 +12,8 @@
 	"libVersion": "2.7.0",
 	"appid": "wxf97b8045146a0176",
 	"projectname": "美丽共享联盟",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,8 +31,11 @@
 			"current": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -40,15 +45,8 @@
 				},
 				{
 					"id": -1,
-					"name": "限时抢",
-					"pathName": "pages/home/flashSale/flashSale",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "个人中心",
-					"pathName": "pages/member/member",
+					"name": "pages/member/include/include",
+					"pathName": "pages/member/include/include",
 					"scene": null
 				}
 			]

@@ -44,7 +44,7 @@
 			}
 		},
 		onLoad(){
-			this.global.utils.sethead('登录')
+			// this.global.utils.sethead("登录")
 		},
 		methods: {
 			userinfor(){
@@ -55,19 +55,22 @@
 					uni.getUserInfo({
 						provider:'weixin',
 						success:(userinfor)=>{
-							console.log('用户信息')
-							console.log(userinfor)
 							that.obs = JSON.stringify(userinfor) 
-							
-							this.global.request.post({
-								url: 'api/ad/getAd',
+							uni.setStorageSync("userinfo",userinfor)
+							that.global.request.post({
+								url: 'weChat',
+								method:"GET",
 								data: {
 									userinfo:userinfor,
 									code:loginRes.code
 								},
 								isLoading: true,
 								success: (res) => {
-									console.log(res)
+									that.global.status.state.login=1;
+									uni.setStorageSync("session",res);
+									uni.navigateBack({
+										delta:1
+									})
 								}
 							})	
 						}

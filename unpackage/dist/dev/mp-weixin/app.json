@@ -12,7 +12,8 @@
     "pages/home/shop-detial/shop-detial",
     "pages/home/goods-detail/goods-detail",
     "pages/home/coupon/coupon",
-    "pages/home/flashSale/flashSale"
+    "pages/home/flashSale/flashSale",
+    "pages/member/include/include"
   ],
   "subPackages": [],
   "window": {
@@ -49,5 +50,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap30.json"
 }

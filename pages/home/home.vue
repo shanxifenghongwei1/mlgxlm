@@ -34,22 +34,12 @@
 		<view class="significance-father">
 			
 			<view class="significance">
-				<view @click="runHairdressing(1)" data-bs='asdxs' class="sign-one">
-					<view class="icon"></view>
-					<view class="text font-weig">美容美发</view>
+				<view @click="runHairdressing(1)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type" :key='index'>
+			<!-- 		<view class="icon" :style="background: url("+item.t_img) no-repeat center;"></view> -->
+					<image class="icon" :src="picUrl+item.t_img" mode=""></image>
+					<view class="text font-weig">{{item.t_name}}</view>
 				</view>
-				<view @click="runHairdressing(2)" class="sign-one">
-					<view class="icon-1"></view>
-					<view class="text font-weig">身体护理</view>
-				</view>
-				<view @click="runHairdressing(3)" class="sign-one">
-					<view class="icon-2"></view>
-					<view class="text font-weig">问题皮肤</view>
-				</view>
-				<view @click="runHairdressing(4)" class="sign-one">
-					<view class="icon-3"></view>
-					<view class="text font-weig">瑜伽健身</view>
-				</view>
+				
 				<view class="sign-one">
 					<view class="icon-4"></view>
 					<view class="text font-weig">附近店铺</view>
@@ -62,27 +52,27 @@
 		<view class="son-father">
 			<view class="son">
 				<view class="butf">
-					<view v-for="(item , index) in sonicon" :key='index' class="list-one">
-						<image mode="aspectFit" :src="item.icon" class="icon"></image>
-						<view class="text">{{item.text}}</view>
+					<view v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
+						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
 				<view class="head">
-					<view v-for="(item , index) in bodycare" :key='index' class="list-one">
-						<image mode="aspectFit" :src="item.icon" class="icon"></image>
-						<view class="text">{{item.text}}</view>
+					<view v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
+						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
-				<view class="quester">
-					<view v-for="(item , index) in skin" :key='index' class="list-one">
-						<image mode="aspectFit" :src="item.icon" class="icon"></image>
-						<view class="text">{{item.text}}</view>
+				<view class="head">
+					<view v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
+						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
-				<view class="flode">
-					<view v-for="(item , index) in yoga" :key='index' class="list-one">
-						<image mode="aspectFit" :src="item.icon" class="icon"></image>
-						<view class="text">{{item.text}}</view>
+				<view class="head">
+					<view v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
+						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+						<view class="text">{{item.t_name}}</view>
 					</view>
 					<view class="list-one">
 						<image mode="aspectFit" src="../../static/image/homepage/quanbu.jpg" class="icon"></image>
@@ -113,7 +103,7 @@
 				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 			</view>
 
-			<shoplist :shoplists='shoplists' :myid='ids'></shoplist>
+			<shoplist :shoplists='indexData.goodsInfo' :myid='ids'></shoplist>
 
 		</view>
 
@@ -230,6 +220,7 @@
 
 
 <script>
+	import demo from "@/common/js/demao.js"
 	import shoplist from '@/components/shoplist/shoplist.vue'
 	import searchAny from '@/components/my-search/my-search.vue'
 	export default {
@@ -239,93 +230,14 @@
 		},
 		data() {
 			return {
+				indexData:{},
+				
+				dataUrl:"",
+				picUrl:"",
 				// 搜索栏样式
 				iconType: ['search'],
-				// 美容美发
-				sonicon: [{
-						icon: '../../static/image/homepage/mianbuhuli.jpg',
-						text: '面部护理'
-					},
-					{
-						icon: '../../static/image/homepage/kangsuichuzhou.jpg',
-						text: '抗衰除皱'
-					},
-					{
-						icon: '../../static/image/homepage/shuxinghuanfu.jpg',
-						text: '塑形换肤'
-					},
-					{
-						icon: '../../static/image/homepage/jianfei.jpg',
-						text: '美发美甲'
-					},
-					{
-						icon: '../../static/image/homepage/shenduqingjie.jpg',
-						text: '深度清洁'
-					},
-				],
-				// 身体护理
-				bodycare: [{
-						icon: '../../static/image/homepage/simibaoyang.jpg',
-						text: '私密保养'
-					},
-					{
-						icon: '../../static/image/homepage/tuomao.jpg',
-						text: '冰点脱毛'
-					},
-					{
-						icon: '../../static/image/homepage/baguan.jpg',
-						text: '刮痧拔罐'
-					},
-					{
-						icon: '../../static/image/homepage/meifameijia.jpg',
-						text: '减肥健胸'
-					},
-					{
-						icon: '../../static/image/homepage/anmo.jpg',
-						text: '肩颈护理'
-					},
-				],
-				// 问题皮肤
-				skin: [{
-						icon: '../../static/image/homepage/qudou.jpg',
-						text: '祛斑祛痘'
-					},
-					{
-						icon: '../../static/image/homepage/maokong.jpg',
-						text: '毛孔粗大'
-					},
-					{
-						icon: '../../static/image/homepage/mingganjifu.jpg',
-						text: '敏感肌肤'
-					},
-					{
-						icon: '../../static/image/homepage/jifuanchen.jpg',
-						text: '肌肤暗沉'
-					},
-					{
-						icon: '../../static/image/homepage/heitou.jpg',
-						text: '黑头'
-					},
-				],
-				// 美容瑜伽
-				yoga: [{
-						icon: '../../static/image/homepage/meirongyujia.jpg',
-						text: '美容瑜伽'
-					},
-					{
-						icon: '../../static/image/homepage/qiantiyujia.jpg',
-						text: '纤体瑜伽'
-					},
-					{
-						icon: '../../static/image/homepage/kangfuyujia.jpg',
-						text: '康复瑜伽'
-					},
-					{
-						icon: '../../static/image/homepage/jianshengyujia.jpg',
-						text: '肌肤暗沉'
-					},
-
-				],
+				
+				
 				// banner图
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
@@ -336,10 +248,25 @@
 
 				// 循环列表
 				headlist: [{id: 1,name: '拼团'}, {id: 2,name: '优惠'}, {id: 3,name: '销量'}, {id: 4,name: '限时抢'}, {id: 5,name: '免费送'}],
+				
+				
 				// 高亮id
 				ids: 1,
 				labels: '标签',
 				shoplists: [{
+					id:12,
+					prople: '2000',
+					image: '../../static/image/shop/shop-1.jpg',
+					shopname: '艾美世界家',
+					address: '山西大医院',
+					start: '3.5',
+					labels: '便签',
+					goodssprice: '998',
+					newgoodssprice: '398',
+					goodsname: '芳香精油乳腺疏通',
+					othergoods: '酒槽鼻修护套餐',
+					othergoodsprices: "100",
+				},{
 					id:12,
 					prople: '2000',
 					image: '../../static/image/shop/shop-1.jpg',
@@ -371,7 +298,8 @@
 
 			// 高亮id
 			exchanges(id) {
-				this.ids = id
+				this.ids = id;
+				this.findData(id);
 			},
 
 			init() {
@@ -389,6 +317,29 @@
 						console.log(res)
 					}
 				})
+			},
+			findData:function(e){
+				let data={};
+				e?data.promotion_type=e:data={};
+				console.log(data)
+				//首页页面
+				uni.request({
+					url: demo.domain.request + "index",
+					data: data,
+					method: "GET" ,
+					dataType: "json",
+					header: {
+						"Content-Type": 'application/x-www-form-urlencoded', // 默认值
+						'X-TOKEN-PETMALL': '' ,
+					},
+					success: (result) => {
+						console.log(result.data.data);
+						this.indexData=result.data.data
+					},
+					complete: (res) => {
+				
+					}
+				})
 			}
 			
 			//页面跳转
@@ -398,7 +349,9 @@
 		onLoad(Option) {
 			this.init()
 			console.log(this.global)
-			this.global.utils.sethead('美丽共享联盟')
+			this.global.utils.sethead('美丽共享联盟');
+			this.picUrl=demo.domain.picUrl;
+			this.findData();
 		}
 
 	}
@@ -723,30 +676,30 @@
 				margin-top: 30rpx;
 				width: 20%;
 				height: 100%;
+				@extend .any-flex;
+				flex-direction: column;
+				align-items: center;
 
 				.icon {
 					margin: 5rpx auto;
 					width: 100rpx;
 					height: 100rpx;
-					background: url(../../static/image/homepage/butf.png) no-repeat;
 					background-size: cover;
 				}
 
 				.icon-1 {
 					@extend .icon;
-					background: url(../../static/image/homepage/head.png) no-repeat center;
+
 					background-size: cover;
 				}
 
 				.icon-2 {
 					@extend .icon;
-					background: url(../../static/image/homepage/quester.png) no-repeat center;
 					background-size: cover;
 				}
 
 				.icon-3 {
 					@extend .icon;
-					background: url(../../static/image/homepage/flode.png) no-repeat center;
 					background-size: cover;
 				}
 

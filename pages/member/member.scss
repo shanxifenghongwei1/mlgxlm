@@ -24,13 +24,7 @@
 			align-items: flex-start;
 			padding-left: 30rpx;
 			box-sizing: border-box;
-			.hs{
-				width: 100%;
-				font-size: $uni-font-size-lg;
-				color: #000;
-				font-weight: 600;
-				padding: 5rpx 0 10rpx;
-			}
+			
 			.member-VIP{
 				display: inline-block;
 				padding: 2rpx 15rpx;
@@ -85,6 +79,13 @@
 				margin-left: 3%;
 				font-weight: 600;
 			}
+		}
+		.hs{
+			width: 100%;
+			font-size: $uni-font-size-lg;
+			color: #000;
+			font-weight: 600;
+			padding: 5rpx 0 10rpx;
 		}
 	}
 	.member-assets{

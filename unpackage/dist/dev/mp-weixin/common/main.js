@@ -13,6 +13,7 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 9));
 
 var _request = _interopRequireDefault(__webpack_require__(/*! ./common/js/request */ 15));
 var _utils = _interopRequireDefault(__webpack_require__(/*! ./common/js/utils */ 17));
+var _status = _interopRequireDefault(__webpack_require__(/*! ./common/js/status */ 294));
 
 __webpack_require__(/*! ./common/css/font.css */ 18);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 _vue.default.config.productionTip = false;
@@ -20,13 +21,15 @@ _vue.default.config.productionTip = false;
 
 _vue.default.prototype.global = {
   request: _request.default,
-  utils: _utils.default };
+  utils: _utils.default,
+  status: _status.default };
 
 
 _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({},
 _App.default));
 
+console.log(app);
 createApp(app).$mount();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
@@ -100,10 +103,29 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
-  onLaunch: function onLaunch() {
+  onLaunch: function onLaunch() {var _this = this;
     console.log('App Launch');
+    uni.checkSession({
+      success: function success(res) {
+        //1:登录  0：未登录
+        if (res.errMsg !== "checkSession:ok") {
+          _this.global.status.state.login = 0;
+        } else {
+          _this.global.status.state.login = 1;
+        }
+        console.log(_this.global.status.state.login);
+      },
+      fail: function fail(res) {
+        if (res.errMsg !== "checkSession:ok") {
+          _this.global.status.state.login = 0;
+        } else {
+          _this.global.status.state.login = 1;
+        }
+        console.log(_this.global.status.state.login);
+      } });
+
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -111,6 +133,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   onHide: function onHide() {
     console.log('App Hide');
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 12 */

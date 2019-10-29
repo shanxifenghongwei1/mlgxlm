@@ -9,6 +9,7 @@ let c = data =>{
 	console.log(data)
 }
 
+
 module.exports = {
 	sethead,c
 }

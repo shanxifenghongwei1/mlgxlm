@@ -10,13 +10,7 @@ import demao from './demao.js'
  * ajaxJson.globalJudge 返回状态判断  true：请求处判断逻辑
  */
 
-let a = data=>{
-	
-	data:{
-		
-	}
-	
-}
+
 let requestPost = ajaxJson => {
 	
 	if (ajaxJson.isLoading) { //为ture 显示loading
@@ -38,7 +32,7 @@ let requestPost = ajaxJson => {
 	uni.request({
 		url: demao.domain.request + ajaxJson.url,
 		data: ajaxJson.data,
-		method: "POST",
+		method: ajaxJson.method == undefined ? "POST" : ajaxJson.method ,
 		dataType: "json",
 		header: {
 			"Content-Type": 'application/x-www-form-urlencoded', // 默认值
@@ -49,9 +43,7 @@ let requestPost = ajaxJson => {
 			// if (ajaxJson.globalJudge == true) { //在请求调用处，处理所有逻辑
 			// 	ajaxJson.success(result.data);
 			// }
-			
-
-			if (result.data.code == 1) { //请求成功
+			if (result.data.code == 0) { //请求成功
 				if (typeof ajaxJson.success === "function") {
 					ajaxJson.success(result.data.data);
 				} else {

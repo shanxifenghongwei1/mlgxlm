@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var shoplist = function shoplist() {return __webpack_require__.e(/*! import() | components/shoplist/shoplist */ "components/shoplist/shoplist").then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 119));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 126));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -344,186 +344,239 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-{
-  components: {
-    shoplist: shoplist,
-    searchAny: searchAny },
-
-  data: function data() {
-    return {
-      // 搜索栏样式
-      iconType: ['search'],
-      // 美容美发
-      sonicon: [{
-        icon: '../../static/image/homepage/mianbuhuli.jpg',
-        text: '面部护理' },
-
-      {
-        icon: '../../static/image/homepage/kangsuichuzhou.jpg',
-        text: '抗衰除皱' },
-
-      {
-        icon: '../../static/image/homepage/shuxinghuanfu.jpg',
-        text: '塑形换肤' },
-
-      {
-        icon: '../../static/image/homepage/jianfei.jpg',
-        text: '美发美甲' },
-
-      {
-        icon: '../../static/image/homepage/shenduqingjie.jpg',
-        text: '深度清洁' }],
-
-
-      // 身体护理
-      bodycare: [{
-        icon: '../../static/image/homepage/simibaoyang.jpg',
-        text: '私密保养' },
-
-      {
-        icon: '../../static/image/homepage/tuomao.jpg',
-        text: '冰点脱毛' },
-
-      {
-        icon: '../../static/image/homepage/baguan.jpg',
-        text: '刮痧拔罐' },
-
-      {
-        icon: '../../static/image/homepage/meifameijia.jpg',
-        text: '减肥健胸' },
-
-      {
-        icon: '../../static/image/homepage/anmo.jpg',
-        text: '肩颈护理' }],
-
-
-      // 问题皮肤
-      skin: [{
-        icon: '../../static/image/homepage/qudou.jpg',
-        text: '祛斑祛痘' },
-
-      {
-        icon: '../../static/image/homepage/maokong.jpg',
-        text: '毛孔粗大' },
-
-      {
-        icon: '../../static/image/homepage/mingganjifu.jpg',
-        text: '敏感肌肤' },
-
-      {
-        icon: '../../static/image/homepage/jifuanchen.jpg',
-        text: '肌肤暗沉' },
-
-      {
-        icon: '../../static/image/homepage/heitou.jpg',
-        text: '黑头' }],
-
-
-      // 美容瑜伽
-      yoga: [{
-        icon: '../../static/image/homepage/meirongyujia.jpg',
-        text: '美容瑜伽' },
-
-      {
-        icon: '../../static/image/homepage/qiantiyujia.jpg',
-        text: '纤体瑜伽' },
-
-      {
-        icon: '../../static/image/homepage/kangfuyujia.jpg',
-        text: '康复瑜伽' },
-
-      {
-        icon: '../../static/image/homepage/jianshengyujia.jpg',
-        text: '肌肤暗沉' }],
-
-
-
-      // banner图
-      bannerlist: [
-      '../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
-      '../../static/image/banner/4.jpg'],
-
-      // 指示点颜色
-      colors: '#e01818',
-
-      // 循环列表
-      headlist: [{ id: 1, name: '拼团' }, { id: 2, name: '优惠' }, { id: 3, name: '销量' }, { id: 4, name: '限时抢' }, { id: 5, name: '免费送' }],
-      // 高亮id
-      ids: 1,
-      labels: '标签',
-      shoplists: [{
-        id: 12,
-        prople: '2000',
-        image: '../../static/image/shop/shop-1.jpg',
-        shopname: '艾美世界家',
-        address: '山西大医院',
-        start: '3.5',
-        labels: '便签',
-        goodssprice: '998',
-        newgoodssprice: '398',
-        goodsname: '芳香精油乳腺疏通',
-        othergoods: '酒槽鼻修护套餐',
-        othergoodsprices: "100" }] };
-
-
-
-
-  },
-  methods: {
-    // 组件事件实例
-    wearego: function wearego() {
-      console.log('gogogogo');
-    },
-    // 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
-    runHairdressing: function runHairdressing(e) {
-      uni.navigateTo({
-        url: "/pages/home/hairdressing/hairdressing?runid=" + e });
-
-    },
-
-    // 高亮id
-    exchanges: function exchanges(id) {
-      this.ids = id;
-    },
-
-    init: function init() {
-      console.log('this.global');
-      console.log(this.global);
-      this.global.request.post({
-        url: 'ad/admin',
-        data: {
-          wd: '123',
-          ie: 'UTF-8' },
-
-        isLoading: true,
-        load: '请求中...',
-        success: function success(res) {
-          console.log(res);
-        } });
-
-    }
-
-    //页面跳转
-  },
-
-
-  onLoad: function onLoad(Option) {
-    this.init();
-    console.log(this.global);
-    this.global.utils.sethead('美丽共享联盟');
-  } };exports.default = _default;
+var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 135));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 142));};var _default = { components: { shoplist: shoplist, searchAny: searchAny }, data: function data() {return { indexData: {}, dataUrl: "", picUrl: "", // 搜索栏样式
+      iconType: ['search'], // banner图
+      bannerlist: ['../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg', '../../static/image/banner/4.jpg'], // 指示点颜色
+      colors: '#e01818', // 循环列表
+      headlist: [{ id: 1, name: '拼团' }, { id: 2, name: '优惠' }, { id: 3, name: '销量' }, { id: 4, name: '限时抢' }, { id: 5, name: '免费送' }], // 高亮id
+      ids: 1, labels: '标签', shoplists: [{ id: 12, prople: '2000', image: '../../static/image/shop/shop-1.jpg', shopname: '艾美世界家', address: '山西大医院', start: '3.5', labels: '便签', goodssprice: '998', newgoodssprice: '398', goodsname: '芳香精油乳腺疏通', othergoods: '酒槽鼻修护套餐', othergoodsprices: "100" }, { id: 12, prople: '2000', image: '../../static/image/shop/shop-1.jpg', shopname: '艾美世界家', address: '山西大医院', start: '3.5', labels: '便签', goodssprice: '998', newgoodssprice: '398', goodsname: '芳香精油乳腺疏通', othergoods: '酒槽鼻修护套餐', othergoodsprices: "100" }] };}, methods: { // 组件事件实例
+    wearego: function wearego() {console.log('gogogogo');}, // 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
+    runHairdressing: function runHairdressing(e) {uni.navigateTo({ url: "/pages/home/hairdressing/hairdressing?runid=" + e });}, // 高亮id
+    exchanges: function exchanges(id) {this.ids = id;this.findData(id);}, init: function init() {console.log('this.global');console.log(this.global);this.global.request.post({ url: 'ad/admin', data: { wd: '123', ie: 'UTF-8' }, isLoading: true, load: '请求中...', success: function success(res) {console.log(res);} });}, findData: function findData(e) {var _this = this;var data = {};e ? data.promotion_type = e : data = {};console.log(data); //首页页面
+      uni.request({ url: _demao.default.domain.request + "index", data: data, method: "GET", dataType: "json", header: { "Content-Type": 'application/x-www-form-urlencoded', // 默认值
+          'X-TOKEN-PETMALL': '' }, success: function success(result) {console.log(result.data.data);_this.indexData = result.data.data;}, complete: function complete(res) {} });} //页面跳转
+  }, onLoad: function onLoad(Option) {this.init();console.log(this.global);this.global.utils.sethead('美丽共享联盟');this.picUrl = _demao.default.domain.picUrl;this.findData();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -1,0 +1,239 @@
+<template>
+	<view class="page">
+		<view class="include-top">
+			<view class="list">
+				<view class="title">
+					商户名称
+				</view>
+				<view class="must">
+					*
+				</view>
+				<input type="text" value="" placeholder="商户名称" v-model="store.name" />
+			</view>
+			<view class="list">
+				<view class="title">
+					主营项目
+				</view>
+				<view class="must">
+					*
+				</view>
+				<view class="select-con" >
+					<picker @change="bindPickerChange" :value="index" :range="array">
+						<view class="uni-input">{{catetext}}</view>
+					</picker>                                        
+				</view>
+			</view>
+			<view class="list">
+				<view class="title">
+					简单介绍
+				</view>
+				<view class="must">
+
+				</view>
+				<textarea value="" placeholder="简单介绍下商户" v-model="store.intro"/>
+			</view>
+		</view>
+		
+		
+		
+		
+		<view class="include-bottom">
+			<view class="list">
+				<view class="title">
+					联系人
+				</view>
+				<view class="must">
+					*
+				</view>
+				<input type="text" value="" placeholder="您的称呼" v-model="store.person" />
+			</view>
+			<view class="list">
+				<view class="title">
+					手机号
+				</view>
+				<view class="must">
+					*
+				</view>
+				<input type="text" value="" placeholder="您的手机号" v-model="store.phone"/>
+			</view>
+			<view class="list">
+				<view class="title">
+					所在区域
+				</view>
+				<view class="must">
+					*
+				</view>
+				<view class="select-con">
+					<picker mode="region" :range="years" @change="yearChange">
+					    <view>{{addresstext}} </view>
+					</picker>
+				</view>
+			</view>
+			<view class="list">
+				<view class="title">
+					详细地址
+				</view>
+				<view class="must">
+					*
+				</view>
+				<input type="text" value="" placeholder="门店的详细地址" v-model="store.area"/>
+			</view>
+			<view class="list">
+				<view class="list-tip">
+					用于登录多商户后台，请认真填写
+				</view>
+			</view>
+		</view>
+		
+		<view class="treaty-tip">
+			<checkbox-group @change="checkboxChange">
+				<checkbox :checked="checked" />
+			</checkbox-group>
+			<view class="treaty-see">
+				我已阅读并了解了
+			</view>
+			<view class="treaty-title">
+				【入驻申请协议】
+			</view>
+		</view>
+		
+		<view class="tj">
+			<button type="warn" @click="save">申请入驻</button>
+		</view>
+	</view>
+</template>
+
+<script>
+
+	
+	export default {
+		data() {
+		        return {
+					store:{},
+					
+		            array: ['中国', '美国', '巴西', '日本'],
+		            index: 0,
+					catetext:"经营类别",
+					
+					addresstext: '请选择地区',
+					
+					checked:false
+					
+		        }
+		    },
+		methods: {
+			
+			//选择类别
+		    bindPickerChange: function(e) {
+		        console.log('picker发送选择改变，携带值为', e.target.value)
+		        this.index = e.target.value;
+				this.catetext=this.array[this.index];
+				this.store.cate=this.array[this.index];
+		    },
+			
+			//选择城市
+			yearChange : function(e){  
+			    this.addresstext = e.detail.value;
+				this.store.address=this.addresstext;
+			},
+			
+			checkboxChange:function(e){
+				this.checked=!this.checked;
+			},
+			//提交数据
+			save:function(){
+				console.log(this.store);
+				console.log(this.checked)
+			}		
+		},
+		onLoad(){
+			this.global.utils.sethead("商家入驻")
+		}
+	}
+</script>
+
+<style lang="scss">
+	.page{
+		width: 100%;
+		min-height: 100vh;
+		background: $uni-border-color;
+		background: $any-zol;
+	}
+	.include-top{
+		width: 100%;
+	}
+	.list{
+		padding: 0 3%;
+		box-sizing: border-box;
+		@extend .any-flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		background: #ffffff;
+		border-bottom: 1rpx solid $uni-border-color;
+		.title{
+			width: 124rpx;
+			line-height: 80rpx;
+			padding-right:20rpx;
+			font-size: $uni-font-size-base;
+		}
+		.must{
+			width: 20rpx;
+			height: 80rpx;
+			line-height: 90rpx;
+			font-size: $uni-font-size-base;
+			color: $any-col;
+		}
+		input{
+			flex-grow: 1;
+			height: 80rpx;
+			font-size: $uni-font-size-base;
+		}
+		.select-con{
+			flex-grow: 1;
+			height: 80rpx;
+			line-height: 80rpx;
+			color: #575757;
+			font-size: $uni-font-size-base;
+		}
+		textarea{
+			flex-grow: 1;
+			min-height: 150rpx;
+			height: auto;
+			padding: 24rpx 10rpx;
+			box-sizing: border-box;
+			font-size: $uni-font-size-base;
+		}
+	}
+	.list-tip{
+		font-size: $uni-font-size-sm;
+		color: $uni-border-color;
+		padding: 8rpx 0;
+	}
+	.include-bottom{
+		width: 100%;
+		height: 400rpx;
+		margin-top: 20rpx;
+	}
+	.treaty-tip{
+		width: 100%;
+		height: 80rpx;
+		padding: 0 20rpx;
+		background: #ffffff;
+		box-sizing: border-box;
+		@extend .any-flex;
+		align-items: cneter;
+		font-size: $uni-font-size-base;
+	}
+	.treaty-title{
+		color: $any-col;
+	}
+	.tj{
+		width: 100%;
+		padding: 0 3%;
+		box-sizing: border-box;
+		position: fixed;
+		left: 0;
+		bottom: 10%;
+	}
+
+</style>
