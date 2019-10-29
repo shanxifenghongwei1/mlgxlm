@@ -3,21 +3,22 @@
 		<!-- 头部 -->
 		<view class="member-portrait" v-if="login">
 			<view class="member-portrait-image">
-				<image src="../../static/image/shop/shop-1.jpg" mode=""></image>
+				<image :src="userInfo[0].wx_headimg" mode=""></image>
+
 			</view>
 			<view class="member-information">
-				<view class="hs">冯宏伟</view>
+				<view class="hs">{{userInfo[0].wx_name}}</view>
 				<view class="member-VIP">LV1</view>
 			</view>
 			<view class="member-icon">
 				<view class="menber-edit">
 					<view class="icon iconfont icon-icon_function_xiugai memder-icon-edit"></view>
 				</view>
-				<view class="menber-Signin">
+				<navigator url="./signIn/signIn" class="menber-Signin">
 					<image src="/static/image/other/icon-calendar.png" mode=""></image>
 					<view class="menber-Signin-text">签到</view>
 					<image src="/static/image/other/icon-right-red.png" mode=""></image>
-				</view>
+				</navigator>
 			</view>
 		</view>
 		<view class="member-portrait" v-else>
@@ -30,15 +31,15 @@
 		<view class="member-assets">
 			<view class="member-assets-money">
 				<view class="member-assets-number">
-					<view class="member-assets-h6">0.00</view>
+					<view class="member-assets-h6">{{userInfo[0].balance}}</view>
 					<view class="member-assets-content">分享币</view>
 				</view>
 				<view class="member-assets-number">
-					<view class="member-assets-h6">0</view>
+					<view class="member-assets-h6">{{userInfo[0].integral}}</view>
 					<view class="member-assets-content">积分</view>
 				</view>
 				<view class="member-assets-number">
-					<view class="member-assets-h6">0</view>
+					<view class="member-assets-h6">{{coupon_num}}</view>
 					<view class="member-assets-content">优惠卷</view>
 				</view>
 			</view>
@@ -140,10 +141,10 @@
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">我的预约</view>
 				</view>
-				<view class="member-tool-content-w25">
+				<navigator url="./include/include" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">商家入驻</view>
-				</view>
+				</navigator>
 			</view>
 		</view>
 		<!-- 底部  -->
@@ -185,21 +186,35 @@
 				uniListItem
 			}
 			return {
-				login:!0,
+				login: !0,
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
 					'../../static/image/banner/4.jpg'
 				],
+				userInfo:{},
+				coupon_num:0
 			}
 		},
 		methods: {
-
+			findList() {
+				this.global.request.post({
+					url: "user_center",
+					method: "GET",
+					data: {},
+					success: (res) => {
+						this.userInfo=res.userInfo;
+						this.coupon_num=res.coupon_num
+					}
+				})
+			}
 		},
 		onLoad() {
-			this.global.utils.sethead("个人中心")
+			this.global.utils.sethead("个人中心");
+			console.log(this.global);
 		},
-		onShow(){
-			this.login=this.global.status.state.login;
+		onShow() {
+			this.login = this.global.status.state.login;
+			this.findList();
 		}
 	}
 </script>

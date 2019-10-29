@@ -13,7 +13,7 @@
 						<view class="name">
 							爱美世家
 						</view>
-						<view class="scrol-box">
+						<view class="scrol-box" v-if="frompage=='flash'">
 							<view class="scrol">
 								<cmd-progress stroke-width='8' stroke-color='#FE0000' :percent="30"></cmd-progress>
 							</view>
@@ -25,6 +25,20 @@
 								位
 							</view>
 						</view>
+						<view class="tag" v-else>
+							<view class="tag-box">
+								平台推荐
+							</view>
+							<view class="tag-box">
+								平台推荐
+							</view>
+							<view class="tag-box">
+								平台推荐
+							</view>
+							<view class="tag-box">
+								平台推荐
+							</view>
+						</view>
 						<view class="price">
 							<view class="new">
 								￥199
@@ -32,11 +46,21 @@
 							<view class="old"  v-if="cateid==2">
 								￥399
 							</view>
+							<view class="price-pin" v-if="frompage!='flash'">
+								已拼
+								<view class="">
+									258+
+								</view>
+								位
+							</view>
 						</view>
 					</view>
 					<view class="shop-message-right">
-						<view class="salc">
+						<view class="salc" v-if="frompage=='flash'">
 							马上抢
+						</view>
+						<view class="salc" v-else>
+							进店逛逛
 						</view>
 						<view class="km" v-if="cateid==1">
 							距离1.3Km
@@ -69,6 +93,10 @@
 			cateid:{
 				type:Number,
 				default:1
+			},
+			frompage:{
+				type:String,
+				default:"flash"
 			}
 		},
 		methods:{
@@ -85,12 +113,12 @@
 		.shop {
 			margin-top: 20rpx;
 			width: 100%;
-			height: 240rpx;
 			border-radius: 20rpx;
 			border: 2rpx solid $any-zol;
 			border-bottom: 4rpx solid $any-col;
 			@extend .any-flex;
 			align-items: flex-start;
+			position: relative;
 			.shop-img {
 				width: 20%;
 				height: 80%;
@@ -107,7 +135,7 @@
 				@extend .any-flex;
 			}
 			.shop-message-left{
-				width: 70%;
+				width: 100%;
 				height: 100%;
 				background: #ffffff;
 				.title{
@@ -118,7 +146,6 @@
 				}
 				.name{
 					width: 100%;
-					height: 50rpx;
 					font-size: $uni-font-size-sm;
 					color: #575757;
 				}
@@ -142,6 +169,20 @@
 						color: $any-col;
 					}
 				}
+				.tag{
+					width: 70%;
+					margin-bottom: 20rpx;
+					.tag-box{
+						display: inline-block;
+						font-size:$uni-font-size-sm;
+						background: #ffffff;
+						color: $any-col;
+						text-align: center;
+						padding: 3rpx 8rpx ;
+						border: 1rpx solid $any-col;
+						margin-right: 20rpx;
+					}
+				}
 				.price{
 					@extend .any-flex;
 					align-items: flex-end;
@@ -156,20 +197,32 @@
 						text-decoration: line-through;
 						margin-left: 5rpx;
 					}
+					.price-pin{
+						font-size: $uni-font-size-base;
+						color: #7e7e7e;
+						margin-left: 10rpx;
+					}
+					.price-pin view{
+						display: inline-block;
+						color: #ff8e8e;
+						padding: 4rpx;
+					}
 				}
-				
 			}
+
 			.shop-message-right{
 				width: 30%;
-				height: 100%;
+				height: 80%;
 				background: #ffffff;
 				@extend .any-flex;
 				flex-direction: column;
 				align-items: center;
 				padding: 15rpx 0;
 				box-sizing: border-box;
+				position: absolute;
+				right: 0;
+				top: 20%;
 				.salc{
-					width: 98rpx;
 					height: 40rpx;
 					font-size:$uni-font-size-base;
 					background: $any-col;
@@ -177,6 +230,7 @@
 					border-radius: 15rpx;
 					text-align: center;
 					line-height: 40rpx;
+					padding: 3rpx 8rpx;
 				}
 				.km{
 					font-size: $uni-font-size-sm;

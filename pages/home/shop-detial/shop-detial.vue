@@ -1,3 +1,5 @@
+<!-- 店铺详情 -->
+
 <template>
 	<view>
 		<!-- banner图 -->

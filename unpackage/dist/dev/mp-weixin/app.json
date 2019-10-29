@@ -13,7 +13,10 @@
     "pages/home/goods-detail/goods-detail",
     "pages/home/coupon/coupon",
     "pages/home/flashSale/flashSale",
-    "pages/member/include/include"
+    "pages/member/include/include",
+    "pages/home/nearby/nearby",
+    "pages/home/assemble/assemble",
+    "pages/member/signIn/signIn"
   ],
   "subPackages": [],
   "window": {
@@ -50,6 +53,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap30.json"
+  "usingComponents": {}
 }

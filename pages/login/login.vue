@@ -21,13 +21,6 @@
 					</view>
 				</view>
 
-				<view class="posit">
-					<view class="imgs"></view>
-				</view>
-
-
-
-
 
 			</view>
 		</view>

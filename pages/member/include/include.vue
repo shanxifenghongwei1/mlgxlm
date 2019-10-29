@@ -1,107 +1,121 @@
 <template>
 	<view class="page">
-		<view class="include-top">
-			<view class="list">
-				<view class="title">
-					商户名称
+		<block v-if="isEmpty">
+			<view class="include-top">
+				<view class="list">
+					<view class="title">
+						商户名称
+					</view>
+					<view class="must">
+						*
+					</view>
+					<input type="text" value="" placeholder="商户名称" v-model="store.name" />
 				</view>
-				<view class="must">
-					*
+				<view class="list">
+					<view class="title">
+						主营项目
+					</view>
+					<view class="must">
+						*
+					</view>
+					<view class="select-con" >
+						<picker @change="bindPickerChange" :value="index" :range="array">
+							<view class="uni-input">{{catetext}}</view>
+						</picker>                                        
+					</view>
 				</view>
-				<input type="text" value="" placeholder="商户名称" v-model="store.name" />
-			</view>
-			<view class="list">
-				<view class="title">
-					主营项目
-				</view>
-				<view class="must">
-					*
-				</view>
-				<view class="select-con" >
-					<picker @change="bindPickerChange" :value="index" :range="array">
-						<view class="uni-input">{{catetext}}</view>
-					</picker>                                        
-				</view>
-			</view>
-			<view class="list">
-				<view class="title">
-					简单介绍
-				</view>
-				<view class="must">
-
-				</view>
-				<textarea value="" placeholder="简单介绍下商户" v-model="store.intro"/>
-			</view>
-		</view>
-		
-		
-		
-		
-		<view class="include-bottom">
-			<view class="list">
-				<view class="title">
-					联系人
-				</view>
-				<view class="must">
-					*
-				</view>
-				<input type="text" value="" placeholder="您的称呼" v-model="store.person" />
-			</view>
-			<view class="list">
-				<view class="title">
-					手机号
-				</view>
-				<view class="must">
-					*
-				</view>
-				<input type="text" value="" placeholder="您的手机号" v-model="store.phone"/>
-			</view>
-			<view class="list">
-				<view class="title">
-					所在区域
-				</view>
-				<view class="must">
-					*
-				</view>
-				<view class="select-con">
-					<picker mode="region" :range="years" @change="yearChange">
-					    <view>{{addresstext}} </view>
-					</picker>
+				<view class="list">
+					<view class="title">
+						简单介绍
+					</view>
+					<view class="must">
+			
+					</view>
+					<textarea value="" placeholder="简单介绍下商户" v-model="store.intro"/>
 				</view>
 			</view>
-			<view class="list">
-				<view class="title">
-					详细地址
+			
+			
+			
+			
+			<view class="include-bottom">
+				<view class="list">
+					<view class="title">
+						联系人
+					</view>
+					<view class="must">
+						*
+					</view>
+					<input type="text" value="" placeholder="您的称呼" v-model="store.person" />
 				</view>
-				<view class="must">
-					*
+				<view class="list">
+					<view class="title">
+						手机号
+					</view>
+					<view class="must">
+						*
+					</view>
+					<input type="text" value="" placeholder="您的手机号" v-model="store.phone"/>
 				</view>
-				<input type="text" value="" placeholder="门店的详细地址" v-model="store.area"/>
-			</view>
-			<view class="list">
-				<view class="list-tip">
-					用于登录多商户后台，请认真填写
+				<view class="list">
+					<view class="title">
+						所在区域
+					</view>
+					<view class="must">
+						*
+					</view>
+					<view class="select-con">
+						<picker mode="region" :range="years" @change="yearChange">
+						    <view>{{addresstext}} </view>
+						</picker>
+					</view>
+				</view>
+				<view class="list">
+					<view class="title">
+						详细地址
+					</view>
+					<view class="must">
+						*
+					</view>
+					<input type="text" value="" placeholder="门店的详细地址" v-model="store.area"/>
+				</view>
+				<view class="list">
+					<view class="list-tip">
+						用于登录多商户后台，请认真填写
+					</view>
 				</view>
 			</view>
-		</view>
-		
-		<view class="treaty-tip">
-			<checkbox-group @change="checkboxChange">
-				<checkbox :checked="checked" />
-			</checkbox-group>
-			<view class="treaty-see">
-				我已阅读并了解了
+			
+			<view class="treaty-tip">
+				<checkbox-group @change="checkboxChange">
+					<checkbox :checked="checked" />
+				</checkbox-group>
+				<view class="treaty-see">
+					我已阅读并了解了
+				</view>
+				<view class="treaty-title">
+					【入驻申请协议】
+				</view>
 			</view>
-			<view class="treaty-title">
-				【入驻申请协议】
+			
+			<view class="tj">
+				<button type="warn" @click="save">申请入驻</button>
 			</view>
-		</view>
-		
-		<view class="tj">
-			<button type="warn" @click="save">申请入驻</button>
-		</view>
+		</block>
+		<block v-else>
+			<view class="empty">
+				<image class="empty-pic" src="/static/image/other/empty.png" mode=""></image>
+				<view class="success">
+					入驻信息及资料提交成功
+				</view>
+				<view class="wait">
+					请耐心等待平台审核
+				</view>
+			</view>
+		</block>
 	</view>
 </template>
+
 
 <script>
 
@@ -117,8 +131,9 @@
 					
 					addresstext: '请选择地区',
 					
-					checked:false
+					checked:false,
 					
+					isEmpty:true
 		        }
 		    },
 		methods: {
@@ -236,4 +251,30 @@
 		bottom: 10%;
 	}
 
+	.empty{
+		width: 100vw;
+		height: 100vh;
+		@extend .any-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: $uni-border-color;
+		padding-bottom: 30vh;
+		box-sizing: border-box;
+		background: #ffffff;
+		.empty-pic{
+			width: 400rpx;
+			height: 275rpx;
+		}
+		.success{
+			font-size: $uni-font-size-base;
+			letter-spacing: 8rpx;
+			padding-top: 15rpx;
+		}
+		.wait{
+			font-size: $uni-font-size-lg;
+			letter-spacing: 13rpx;
+			padding-top: 15rpx;
+		}
+	}
 </style>

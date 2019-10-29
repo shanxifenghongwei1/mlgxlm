@@ -13,7 +13,7 @@
 					<view class="text font-weig">优惠券</view>
 				</navigator>
 				
-				<navigator class="list-one" url="/pages/home/flashSale/flashSale">
+				<navigator class="list-one" url="/pages/home/assemble/assemble">
 					<view class="icon iconfont icon-pintuan"></view>
 					<view class="text font-weig">拼团</view>
 				</navigator>
@@ -28,6 +28,10 @@
 					<view class="text font-weig">置换</view>
 				</view>
  
+				<view class="list-one">
+					<view class="icon iconfont icon-hezuo"></view>
+					<view class="text font-weig">分销</view>
+				</view>
 			</view>
 		</view>
 		<!-- 主要功能 -->
@@ -40,10 +44,10 @@
 					<view class="text font-weig">{{item.t_name}}</view>
 				</view>
 				
-				<view class="sign-one">
+				<view @click="goNear()" class="sign-one">
 					<view class="icon-4"></view>
 					<view class="text font-weig">附近店铺</view>
-				</view>
+				</navigator>
 
 			</view>
 		</view>
@@ -118,100 +122,35 @@
 				<view class="more">更多</view>
 			</view>
 
-			<view class="shop-col">
+			<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index">
 				<view class="shop-col-img">
-					<image src="../../static/image/other/shopimg2.jpg" mode=""></image>
+					<image src="../../static/image/other/shopimg2.jpg" mode="widthFix"></image>
 				</view>
 				<view class="shop-col-message">
-					<view class="shopname">爱美食家 <text>山东青岛市市区</text> </view>
-					<view class="shopnameng">asdasdas </view>
-					<view class="gooods"> <text class="iconfont icon-icon-up"></text> 芳香精油乳腺疏通 </view>
-					<view class="gooods"> <text class="iconfont icon-icon-up"></text> 芳香精油乳腺疏通 </view>
-					<view class="gooods"> <text class="iconfont icon-icon-up"></text> 芳香精油乳腺疏通 </view>
-					<view class="gooods"> <text class="iconfont icon-icon-up"></text> 芳香精油乳腺疏通 </view>
+					<view class="shopname">{{item.shop_name}} <text>{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text> </view>
+					<view class="shopnameng" v-if="item.shop_Ename">{{item.shop_Ename}}</view>
+					<view class="gooods" v-for="(item) in item.shop_label" :key='index'> <text class="iconfont icon-icon-up"></text> {{item}} </view>
 					<view class="buy">Buy</view>
-
 				</view>
-
 			</view>
-
-
 		</view>
 
 		<!-- 今日推荐 -->
 		<view class="today">
 			<view class="bac-img">
-				<!-- <image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image> -->
+				<image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image>
 			</view>
-
 
 			<view class="father">
 				<view class="goodslist">
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-						<view class="goodsimg"></view>
+					<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index'>
+						<view class="goodsname">{{item.goods_name}}</view>
+						<view class="goodsprice"> <text>{{item.price}}</text> RMB </view>
+						<image class="goodsimg" src="../../static/image/other/goods.jpg" mode="widthFix"></image>
 					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
-					<view class="goods-one">
-						<view class="goodsname">肩颈按摩</view>
-						<view class="goodsprice"> <text>98</text> RMB </view>
-
-						<view class="goodsimg"></view>
-					</view>
-
 				</view>
 			</view>
 		</view>
-
-
 	</view>
 
 
@@ -234,6 +173,7 @@
 				
 				dataUrl:"",
 				picUrl:"",
+				
 				// 搜索栏样式
 				iconType: ['search'],
 				
@@ -252,34 +192,6 @@
 				
 				// 高亮id
 				ids: 1,
-				labels: '标签',
-				shoplists: [{
-					id:12,
-					prople: '2000',
-					image: '../../static/image/shop/shop-1.jpg',
-					shopname: '艾美世界家',
-					address: '山西大医院',
-					start: '3.5',
-					labels: '便签',
-					goodssprice: '998',
-					newgoodssprice: '398',
-					goodsname: '芳香精油乳腺疏通',
-					othergoods: '酒槽鼻修护套餐',
-					othergoodsprices: "100",
-				},{
-					id:12,
-					prople: '2000',
-					image: '../../static/image/shop/shop-1.jpg',
-					shopname: '艾美世界家',
-					address: '山西大医院',
-					start: '3.5',
-					labels: '便签',
-					goodssprice: '998',
-					newgoodssprice: '398',
-					goodsname: '芳香精油乳腺疏通',
-					othergoods: '酒槽鼻修护套餐',
-					othergoodsprices: "100",
-				}]
 
 			}
 
@@ -287,12 +199,17 @@
 		methods: {
 			// 组件事件实例
 			wearego() {
-				console.log('gogogogo')
 			},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
 			runHairdressing(e){
 				uni.navigateTo({
 					url:"/pages/home/hairdressing/hairdressing?runid="+e					
+				})
+			},
+			//跳转附近店铺
+			goNear(){
+				uni.navigateTo({
+					url:"/pages/home/nearby/nearby"				
 				})
 			},
 
@@ -303,25 +220,24 @@
 			},
 
 			init() {
-				console.log('this.global')
-				console.log(this.global)
-				this.global.request.post({
-					url: 'ad/admin',
-					data: {
-						wd:'123',
-						ie:'UTF-8'
-					},
-					isLoading: true,
-					load: '请求中...',
-					success: (res) => {
-						console.log(res)
-					}
-				})
+				// this.global.request.post({
+				// 	url: 'ad/admin',
+				// 	data: {
+				// 		wd:'123',
+				// 		ie:'UTF-8'
+				// 	},
+				// 	isLoading: true,
+				// 	load: '请求中...',
+				// 	success: (res) => {
+						
+				// 	}
+				// })
 			},
+			
+			//查找数据
 			findData:function(e){
 				let data={};
 				e?data.promotion_type=e:data={};
-				console.log(data)
 				//首页页面
 				uni.request({
 					url: demo.domain.request + "index",
@@ -333,7 +249,18 @@
 						'X-TOKEN-PETMALL': '' ,
 					},
 					success: (result) => {
-						console.log(result.data.data);
+						let list=result.data.data.week_newshop;
+						list.forEach((v)=>{
+							v.shop_label=v.shop_label.split(",")
+						})
+						result.data.data.week_newshop=list;
+						
+						
+						let list1=result.data.data.goodsInfo;
+						list1.forEach((v)=>{
+							v.shop_label=v.shop_label.split(",")
+						})
+						result.data.data.goodsInfo=list1;
 						this.indexData=result.data.data
 					},
 					complete: (res) => {
@@ -348,7 +275,6 @@
  
 		onLoad(Option) {
 			this.init()
-			console.log(this.global)
 			this.global.utils.sethead('美丽共享联盟');
 			this.picUrl=demo.domain.picUrl;
 			this.findData();
@@ -388,12 +314,15 @@
 					margin: 1.5%;
 					border-radius: 20rpx;
 					border: 2rpx solid $any-zol;
-
+					display: flex;
+					flex-direction: column;
+			
 					.goodsname {
-						font-size: 34rpx;
+						font-size: $uni-font-size-lg;
 						text-align: center;
 						width: 100%;
 						@extend .font-weig;
+						@include multi-row-apostrophe(1);
 					}
 
 					.goodsprice {
@@ -411,8 +340,6 @@
 						width: 100%;
 						height: 210rpx;
 						overflow: hidden;
-						background: url(../../static/image/other/goods.jpg) no-repeat center center;
-						background-size: cover;
 						border-bottom-right-radius: 20rpx;
 						border-bottom-left-radius: 20rpx;
 					}
@@ -424,7 +351,6 @@
 
 	.newshop {
 		@extend .cons;
-		height: 400rpx;
 
 		.newshop-head {
 			width: 100%;
@@ -464,6 +390,7 @@
 			width: 100%;
 			height: 300rpx;
 			border: 2rpx solid $any-col;
+			margin-bottom: 10rpx;
 
 			.shop-col-img {
 				width: 35%;
@@ -606,7 +533,6 @@
 		padding-bottom: 20rpx;
 
 		.son {
-			margin-top: 92rpx;
 			width: 100%;
 			height: 560rpx;
 			border: 2rpx solid #d6d6d6;

@@ -45,8 +45,36 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/member/include/include",
-					"pathName": "pages/member/include/include",
+					"name": "pages/home/flashSale/flashSale",
+					"pathName": "pages/home/flashSale/flashSale",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/nearby/nearby",
+					"pathName": "pages/home/nearby/nearby",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "拼团",
+					"pathName": "pages/home/assemble/assemble",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/member/signIn/signIn",
+					"pathName": "pages/member/signIn/signIn",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/member/member",
+					"pathName": "pages/member/member",
 					"scene": null
 				}
 			]

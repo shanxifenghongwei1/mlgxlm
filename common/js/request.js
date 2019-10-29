@@ -40,21 +40,24 @@ let requestPost = ajaxJson => {
 			// + uni.getStorageSync("token")
 		},
 		success: (result) => {
+			console.log(result)
+			console.log(result.data.data)
+			
 			// if (ajaxJson.globalJudge == true) { //在请求调用处，处理所有逻辑
 			// 	ajaxJson.success(result.data);
 			// }
-			if (result.data.code == 0) { //请求成功
+			if (result.data.data.code == 0) { //请求成功
 				if (typeof ajaxJson.success === "function") {
 					ajaxJson.success(result.data.data);
 				} else {
 					uni.showToast({
-						"title": result.data.msg,
+						"title": result.data.data.msg,
 						"icon": "success",
 					});
 				}
 			}else { //未知错误
 				uni.showToast({
-					"title": result.data.msg,
+					"title": result.data.data.msg,
 					"icon": "none",
 				});
 			}

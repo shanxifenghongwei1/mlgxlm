@@ -1500,7 +1500,7 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 101:
+/***/ 102:
 /*!*************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/shop-detial/shop-detial.scss ***!
   \*************************************************************************************/
@@ -1511,7 +1511,7 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 110:
+/***/ 111:
 /*!***************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/goods-detail/goods-detail.scss ***!
   \***************************************************************************************/
@@ -1679,21 +1679,24 @@ var requestPost = function requestPost(ajaxJson) {
       // + uni.getStorageSync("token")
     },
     success: function success(result) {
+      console.log(result);
+      console.log(result.data.data);
+
       // if (ajaxJson.globalJudge == true) { //在请求调用处，处理所有逻辑
       // 	ajaxJson.success(result.data);
       // }
-      if (result.data.code == 0) {//请求成功
+      if (result.data.data.code == 0) {//请求成功
         if (typeof ajaxJson.success === "function") {
           ajaxJson.success(result.data.data);
         } else {
           uni.showToast({
-            "title": result.data.msg,
+            "title": result.data.data.msg,
             "icon": "success" });
 
         }
       } else {//未知错误
         uni.showToast({
-          "title": result.data.msg,
+          "title": result.data.data.msg,
           "icon": "none" });
 
       }
@@ -1761,6 +1764,22 @@ module.exports = {
 /***/ }),
 
 /***/ 18:
+/*!*****************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/status.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var state = {
+  login: 0 };
+
+module.exports = {
+  state: state };
+
+/***/ }),
+
+/***/ 19:
 /*!*****************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/common/css/font.css ***!
   \*****************************************************************/
@@ -7734,22 +7753,6 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 294:
-/*!*****************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/status.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var state = {
-  login: 0 };
-
-module.exports = {
-  state: state };
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -7781,17 +7784,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 39:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/member/member.scss ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ 4:
 /*!********************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages.json ***!
@@ -7801,6 +7793,17 @@ module.exports = g;
 
 "use strict";
 
+
+/***/ }),
+
+/***/ 40:
+/*!**********************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/member/member.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -8710,7 +8713,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟" }, "pages/classify/classify": { "navigationBarTitleText": "分类" }, "pages/member/member": { "navigationBarTitleText": "会员中心" }, "pages/street/street": { "navigationBarTitleText": "店铺街" }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车" }, "pages/login/login": {}, "pages/home/search/search": {}, "pages/home/hairdressing/hairdressing": {}, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true }, "pages/home/shop-detial/shop-detial": {}, "pages/home/goods-detail/goods-detail": {}, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券" }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢" }, "pages/member/include/include": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟", "usingComponents": { "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/classify/classify": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/member/member": { "navigationBarTitleText": "会员中心", "usingComponents": {} }, "pages/street/street": { "navigationBarTitleText": "店铺街", "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/login/login": { "usingComponents": {} }, "pages/home/search/search": { "usingComponents": { "zy-search": "/components/zy-search/zy-search" } }, "pages/home/hairdressing/hairdressing": { "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist" } }, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true, "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist", "loadmore": "/components/uni-load-more/uni-load-more" } }, "pages/home/shop-detial/shop-detial": { "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "cate-more": "/components/mine/cate-more", "goods": "/components/mine/goods", "case-succ": "/components/mine/case-success", "top-title": "/components/mine/top-title", "evaluate": "/components/mine/evaluate" } }, "pages/home/goods-detail/goods-detail": { "usingComponents": { "my-swiper": "/components/mine/my-swiper", "evaluate": "/components/mine/evaluate", "top-tit": "/components/mine/top-title", "uni-rate": "/components/uni-rate/uni-rate", "goods-list": "/components/mine/goods", "goods-nav": "/components/uni-goods-nav/uni-goods-nav" } }, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券", "usingComponents": {} }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢", "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/include/include": { "usingComponents": {} }, "pages/home/nearby/nearby": { "usingComponents": { "shoplist": "/components/mine/shop-list", "search": "/components/my-search/my-search", "cate-flex": "/components/mine/cate-flex" } }, "pages/home/assemble/assemble": { "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/signIn/signIn": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 
@@ -8726,7 +8729,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 86:
+/***/ 87:
 /*!***************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/hairdressing/hairdressing.scss ***!
   \***************************************************************************************/

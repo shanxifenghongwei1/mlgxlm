@@ -1,3 +1,5 @@
+<!-- 优惠券 -->
+
 <template>
 	<view class="page">
 		<block v-for="(item,index) in list" :key="index">

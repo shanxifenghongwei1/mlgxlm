@@ -73,6 +73,18 @@
             "path" : "pages/member/include/include",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home/nearby/nearby",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/assemble/assemble",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/member/signIn/signIn",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

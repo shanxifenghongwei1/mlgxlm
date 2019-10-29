@@ -16,7 +16,7 @@
 					</view>
 					<view v-if="myid != 4">
 						<view v-if='myid != 4' class="label">
-							<text class="tex">{{ item.shop_label}}</text>
+							<view class="tex" v-for="(item,index) in item.shop_label" :key="index">{{item}}</view>
 						</view>
 						<view class="goods-price">
 							原价 <text>{{item.price}}</text> 平台价 <text>{{item.market_price}}</text>
@@ -34,8 +34,8 @@
 							<view class="havepeoples"> 已拼 <text>{{item.prople}}</text> 位 </view>
 						</view>
 						<view class="price-new">
-							￥ 199.9	
-							<text class="noscripe">￥ 330 </text>
+							￥ {{item.promotion_price}}
+							<text class="noscripe">￥ {{item.price}} </text>
 						</view>
 					</view>
 					
@@ -110,7 +110,6 @@
 		.shop {
 			margin-top: 20rpx;
 			width: 100%;
-			height: 240rpx;
 			border-radius: 20rpx;
 			border: 2rpx solid $any-zol;
 			border-bottom: 4rpx solid $any-col;
@@ -195,11 +194,15 @@
 				}
 
 				.label {
+					width: 70%;
 					.tex {
+						display: inline-block;
 						padding: 4rpx;
 						font-size: 20rpx;
 						color: #7f7f7f;
 						border: 2rpx solid #7f7f7f;
+						margin-right: 10rpx;
+					
 					}
 				}
 
@@ -215,7 +218,7 @@
 
 				.goodsname {
 					width: 70%;
-					height: 35rpx;
+					height: 38rpx;
 					@include multi-row-apostrophe(1);
 					overflow: hidden;
 					font-size: $uni-font-size-base;
