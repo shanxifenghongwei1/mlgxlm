@@ -17,7 +17,11 @@
     "pages/home/nearby/nearby",
     "pages/home/assemble/assemble",
     "pages/member/signIn/signIn",
-    "pages/member/my-coupon/my-coupon"
+    "pages/member/my-coupon/my-coupon",
+    "pages/member/address/address",
+    "pages/member/address/add-address",
+    "pages/home/retail/retail",
+    "pages/member/my-coupon/my-assets"
   ],
   "subPackages": [],
   "window": {

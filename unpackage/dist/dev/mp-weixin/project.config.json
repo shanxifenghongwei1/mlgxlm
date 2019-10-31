@@ -45,29 +45,15 @@
 				},
 				{
 					"id": -1,
-					"name": "签到",
-					"pathName": "pages/member/signIn/signIn",
+					"name": "分销",
+					"pathName": "pages/home/retail/retail",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "个人优惠券",
-					"pathName": "pages/member/my-coupon/my-coupon",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "商家入驻",
-					"pathName": "pages/member/include/include",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的优惠券",
-					"pathName": "pages/member/my-coupon/my-coupon",
+					"name": "我得资产",
+					"pathName": "pages/member/my-coupon/my-assets",
 					"scene": null
 				}
 			]

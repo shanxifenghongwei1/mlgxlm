@@ -23,10 +23,10 @@
 					<view class="text font-weig">限时抢</view>
 				</navigator>
 
-				<view class="list-one">
+				<navigator url="/pages/home/retail/retail" class="list-one">
 					<view class="icon iconfont icon-hezuo"></view>
-					<view class="text font-weig">置换</view>
-				</view>
+					<view class="text font-weig">置换商城</view>
+				</navigator>
  
 				<view class="list-one">
 					<view class="icon iconfont icon-hezuo"></view>

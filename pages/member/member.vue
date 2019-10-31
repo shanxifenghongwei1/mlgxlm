@@ -43,10 +43,10 @@
 					<view class="member-assets-content">优惠卷</view>
 				</navigator>
 			</view>
-			<view class="member-assets-money-fe">
+			<navigator hover-class="none" url="/pages/member/my-coupon/my-assets" class="member-assets-money-fe">
 				<view class="iocn iconfont icon-daifukuan member-assets-fe-icon"></view>
 				<view class="member-assets-fe-content">我的资产</view>
-			</view>
+			</navigator>
 		</view>
 		<!-- 轮播 -->
 		<view class="banner">
@@ -111,10 +111,10 @@
 				</view>
 			</view>
 			<view class="member-tool-content1">
-				<view class="member-tool-content-w25">
+				<navigator hover-class="none" url="/pages/member/address/address" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-dizhi" style="color: #33bafe;"></view>
 					<view class="member-tool-text">地址管理</view>
-				</view>
+				</navigator>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-jiaoyinzujifangke" style="color: #e42cff;"></view>
 					<view class="member-tool-text">我的足迹</view>
@@ -135,7 +135,7 @@
 				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-tousujianyi" style="color: #d1c7c8;"></view>
-					<view class="member-tool-text">投诉建议</view>
+					<view class="member-tool-text">置换中心</view>
 				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>

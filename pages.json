@@ -89,6 +89,22 @@
             "path" : "pages/member/my-coupon/my-coupon",
             "style" : {}
         }
+        ,{
+            "path" : "pages/member/address/address",
+            "style" : {}
+        }
+		,{
+		    "path" : "pages/member/address/add-address",
+		    "style" : {}
+		}
+        ,{
+            "path" : "pages/home/retail/retail",
+            "style" : {}
+        }
+		,{
+		    "path" : "pages/member/my-coupon/my-assets",
+		    "style" : {}
+		}
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{
