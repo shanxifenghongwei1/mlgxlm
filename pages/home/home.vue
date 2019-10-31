@@ -675,7 +675,6 @@
 	.sear {
 		width: 100%;
 		height: 60rpx;
-		// border: 1rpx solid $any-col;
 		border-radius: 50rpx;
 		background: $any-zol;
 		margin-top: 20rpx;

@@ -1,3 +1,4 @@
+<!-- 商家入驻页面 -->
 <template>
 	<view class="page">
 		<block v-if="isEmpty">
@@ -9,7 +10,7 @@
 					<view class="must">
 						*
 					</view>
-					<input type="text" value="" placeholder="商户名称" v-model="store.name" />
+					<input type="text" value="" placeholder="商户名称" v-model="store.shop_name" />
 				</view>
 				<view class="list">
 					<view class="title">
@@ -18,10 +19,10 @@
 					<view class="must">
 						*
 					</view>
-					<view class="select-con" >
-						<picker @change="bindPickerChange" :value="index" :range="array">
+					<view class="select-con">
+						<picker mode="selector" @change="bindPickerChange" :value="index" :range="array" range-key="t_name">
 							<view class="uni-input">{{catetext}}</view>
-						</picker>                                        
+						</picker>
 					</view>
 				</view>
 				<view class="list">
@@ -29,10 +30,10 @@
 						简单介绍
 					</view>
 					<view class="must">
-			
+
 					</view>
-					<textarea value="" placeholder="简单介绍下商户" v-model="store.intro"/>
-				</view>
+					<textarea value="" placeholder="简单介绍下商户" v-model="store.shop_desc" />
+					</view>
 			</view>
 			
 			
@@ -46,7 +47,7 @@
 					<view class="must">
 						*
 					</view>
-					<input type="text" value="" placeholder="您的称呼" v-model="store.person" />
+					<input type="text" value="" placeholder="您的称呼" v-model="store.shop_contacts" />
 				</view>
 				<view class="list">
 					<view class="title">
@@ -55,7 +56,7 @@
 					<view class="must">
 						*
 					</view>
-					<input type="text" value="" placeholder="您的手机号" v-model="store.phone"/>
+					<input type="text" value="" placeholder="您的手机号" v-model="store.shop_phone"/>
 				</view>
 				<view class="list">
 					<view class="title">
@@ -77,7 +78,7 @@
 					<view class="must">
 						*
 					</view>
-					<input type="text" value="" placeholder="门店的详细地址" v-model="store.area"/>
+					<input type="text" value="" placeholder="门店的详细地址" v-model="store.shop_address_detail"/>
 				</view>
 				<view class="list">
 					<view class="list-tip">
@@ -142,27 +143,91 @@
 		    bindPickerChange: function(e) {
 		        console.log('picker发送选择改变，携带值为', e.target.value)
 		        this.index = e.target.value;
-				this.catetext=this.array[this.index];
-				this.store.cate=this.array[this.index];
+				this.catetext=this.array[this.index].t_name;
+				this.store.shop_type=this.array[this.index].t_id;
 		    },
 			
 			//选择城市
-			yearChange : function(e){  
+			yearChange : function(e){
 			    this.addresstext = e.detail.value;
-				this.store.address=this.addresstext;
+				this.store.shop_area=e.detail.value.toString();
 			},
 			
 			checkboxChange:function(e){
 				this.checked=!this.checked;
 			},
+			showToast_my:function(e){
+				uni.showToast({
+				    title: e,
+				    duration: 2000,
+				    icon:"none"
+				});
+				return false;
+			},
+			check:function(){
+				var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+				switch(true) {
+				    case !this.store.shop_name:
+				        this.showToast_my("商家名字不能为空");
+				        break;
+				    case !this.store.shop_type:
+				        this.showToast_my("请选择经营类别")
+				        break;
+					case !this.store.shop_contacts:
+					   this.showToast_my("您的称呼不能为空")
+					   break;
+					case !myreg.test(this.store.shop_phone):
+					    this.showToast_my("请输入正确的手机号")
+					    break;
+					case !this.store.shop_area:
+					    this.showToast_my("请选择地区")
+					    break;
+					case !this.store.shop_address_detail:
+					    this.showToast_my("请填写详细信息");
+					    break;
+				     default:
+				        return true;
+				} 
+			},
+			
 			//提交数据
 			save:function(){
-				console.log(this.store);
-				console.log(this.checked)
+				if(this.check()){
+					if(this.checked){
+						console.log(111)
+						this.global.request.post({
+							url:"shop_settled",
+							method:"GET",
+							data:this.store,
+							success:(res)=>{
+								console.log("这是返回数据"+res)
+								console.log(res.msg)
+								this.showToast_my(res.msg);
+								setTimeout(()=>{
+									uni.switchTab({
+										url:"/pages/member/member"
+									})
+								},2000)
+							}
+						})
+					}else{
+						console.log(222)
+						this.showToast_my("请勾选商家入驻协议");
+					}
+				}
 			}		
 		},
 		onLoad(){
 			this.global.utils.sethead("商家入驻")
+			this.global.request.post({
+				url:"shop_type",
+				method:"GET",
+				data:{},
+				success:(res)=>{
+					console.log(res)
+					this.array=res.shop_type;
+				}
+			})
 		}
 	}
 </script>

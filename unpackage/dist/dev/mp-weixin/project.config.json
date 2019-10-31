@@ -45,36 +45,29 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/flashSale/flashSale",
-					"pathName": "pages/home/flashSale/flashSale",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/home/nearby/nearby",
-					"pathName": "pages/home/nearby/nearby",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "拼团",
-					"pathName": "pages/home/assemble/assemble",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/member/signIn/signIn",
+					"name": "签到",
 					"pathName": "pages/member/signIn/signIn",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/member/member",
-					"pathName": "pages/member/member",
+					"name": "个人优惠券",
+					"pathName": "pages/member/my-coupon/my-coupon",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商家入驻",
+					"pathName": "pages/member/include/include",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/member/my-coupon/my-coupon",
 					"scene": null
 				}
 			]

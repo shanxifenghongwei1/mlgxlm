@@ -38,10 +38,10 @@
 					<view class="member-assets-h6">{{userInfo[0].integral}}</view>
 					<view class="member-assets-content">积分</view>
 				</view>
-				<view class="member-assets-number">
+				<navigator hover-class="none" url="/pages/member/my-coupon/my-coupon" class="member-assets-number">
 					<view class="member-assets-h6">{{coupon_num}}</view>
 					<view class="member-assets-content">优惠卷</view>
-				</view>
+				</navigator>
 			</view>
 			<view class="member-assets-money-fe">
 				<view class="iocn iconfont icon-daifukuan member-assets-fe-icon"></view>

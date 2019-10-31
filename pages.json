@@ -85,6 +85,10 @@
             "path" : "pages/member/signIn/signIn",
             "style" : {}
         }
+        ,{
+            "path" : "pages/member/my-coupon/my-coupon",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

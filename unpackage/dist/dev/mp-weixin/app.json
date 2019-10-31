@@ -16,7 +16,8 @@
     "pages/member/include/include",
     "pages/home/nearby/nearby",
     "pages/home/assemble/assemble",
-    "pages/member/signIn/signIn"
+    "pages/member/signIn/signIn",
+    "pages/member/my-coupon/my-coupon"
   ],
   "subPackages": [],
   "window": {

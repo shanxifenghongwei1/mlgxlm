@@ -122,7 +122,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -266,28 +267,93 @@ var _default =
     bindPickerChange: function bindPickerChange(e) {
       console.log('picker发送选择改变，携带值为', e.target.value);
       this.index = e.target.value;
-      this.catetext = this.array[this.index];
-      this.store.cate = this.array[this.index];
+      this.catetext = this.array[this.index].t_name;
+      this.store.shop_type = this.array[this.index].t_id;
     },
 
     //选择城市
     yearChange: function yearChange(e) {
       this.addresstext = e.detail.value;
-      this.store.address = this.addresstext;
+      this.store.shop_area = e.detail.value.toString();
     },
 
     checkboxChange: function checkboxChange(e) {
       this.checked = !this.checked;
     },
+    showToast_my: function showToast_my(e) {
+      uni.showToast({
+        title: e,
+        duration: 2000,
+        icon: "none" });
+
+      return false;
+    },
+    check: function check() {
+      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+      switch (true) {
+        case !this.store.shop_name:
+          this.showToast_my("商家名字不能为空");
+          break;
+        case !this.store.shop_type:
+          this.showToast_my("请选择经营类别");
+          break;
+        case !this.store.shop_contacts:
+          this.showToast_my("您的称呼不能为空");
+          break;
+        case !myreg.test(this.store.shop_phone):
+          this.showToast_my("请输入正确的手机号");
+          break;
+        case !this.store.shop_area:
+          this.showToast_my("请选择地区");
+          break;
+        case !this.store.shop_address_detail:
+          this.showToast_my("请填写详细信息");
+          break;
+        default:
+          return true;}
+
+    },
+
     //提交数据
-    save: function save() {
-      console.log(this.store);
-      console.log(this.checked);
+    save: function save() {var _this = this;
+      if (this.check()) {
+        if (this.checked) {
+          console.log(111);
+          this.global.request.post({
+            url: "shop_settled",
+            method: "GET",
+            data: this.store,
+            success: function success(res) {
+              console.log("这是返回数据" + res);
+              console.log(res.msg);
+              _this.showToast_my(res.msg);
+              setTimeout(function () {
+                uni.switchTab({
+                  url: "/pages/member/member" });
+
+              }, 2000);
+            } });
+
+        } else {
+          console.log(222);
+          this.showToast_my("请勾选商家入驻协议");
+        }
+      }
     } },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this2 = this;
     this.global.utils.sethead("商家入驻");
+    this.global.request.post({
+      url: "shop_type",
+      method: "GET",
+      data: {},
+      success: function success(res) {
+        console.log(res);
+        _this2.array = res.shop_type;
+      } });
+
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
