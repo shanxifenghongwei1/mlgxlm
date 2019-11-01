@@ -175,7 +175,7 @@
 		
 		<!-- 支付 -->
 		<view class="topay">
-			<goodsNav :fill="true" :options="options" :button-group="buttonGroup" @click="pay" @butt="butt"></goodsNav>
+			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay" @butt="butt"></goodsNav>
 		</view>
 	</view>
 
@@ -203,6 +203,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				bannerlist: [
 					'/static/image/banner/1.jpg', '/static/image/banner/2.jpg', '/static/image/banner/3.jpg',
 					'/static/image/banner/4.jpg'
@@ -217,7 +218,7 @@
 				state: true,
 
 				//nav参数
-				options: [{
+				options_nav: [{
 					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/kefu.png',
 					text: '客服'
 				}, {
@@ -254,10 +255,14 @@
 				})
 			},
 			butt(e) {
-				console.log(e)
 				this.options[2].info++
 			}
-		}
+		},
+		onLoad(options) {
+			console.log(options)
+			this.options=options;
+			this.global.utils.sethead(options.head)
+		},
 	}
 </script>
 

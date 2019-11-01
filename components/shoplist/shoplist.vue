@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-for="(item,index) in shoplists" :key='index' class="shop-father" @click="toDetail(item.goods_id)">
+		<view v-for="(item,index) in shoplists" :key='index' class="shop-father" @click="toDetail(item.goods_id,item.shop_name)">
 			<view class="shop">
 				<view class="shop-img">
 					<image :src="picUrl+item.picture" mode="widthFix"></image>
@@ -91,10 +91,9 @@
 			onClick() {
 
 			},
-			toDetail(e){
-				console.log(e);
+			toDetail(e,f){
 				uni.navigateTo({
-					url:"/pages/home/shop-detial/shop-detial?id="+e
+					url:"/pages/home/shop-detial/shop-detial?shop_id="+e+"&&head="+f
 				})
 			}
 		},

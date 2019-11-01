@@ -13,15 +13,18 @@
     "pages/home/goods-detail/goods-detail",
     "pages/home/coupon/coupon",
     "pages/home/flashSale/flashSale",
-    "pages/member/include/include",
+    "pages/member/tool/include/include",
     "pages/home/nearby/nearby",
     "pages/home/assemble/assemble",
     "pages/member/signIn/signIn",
     "pages/member/my-coupon/my-coupon",
-    "pages/member/address/address",
-    "pages/member/address/add-address",
+    "pages/member/tool/address/address",
+    "pages/member/tool/address/add-address",
     "pages/home/retail/retail",
-    "pages/member/my-coupon/my-assets"
+    "pages/member/my-coupon/my-assets",
+    "pages/member/help/question",
+    "pages/member/tool/bankcard/bankcard",
+    "pages/member/tool/bankcard/addcard"
   ],
   "subPackages": [],
   "window": {
@@ -58,5 +61,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap4.json"
 }

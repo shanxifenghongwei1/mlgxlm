@@ -111,7 +111,7 @@
 				</view>
 			</view>
 			<view class="member-tool-content1">
-				<navigator hover-class="none" url="/pages/member/address/address" class="member-tool-content-w25">
+				<navigator hover-class="none" url="/pages/member/tool/address/address" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-dizhi" style="color: #33bafe;"></view>
 					<view class="member-tool-text">地址管理</view>
 				</navigator>
@@ -129,10 +129,10 @@
 				</view>
 			</view>
 			<view class="member-tool-content1">
-				<view class="member-tool-content-w25">
+				<navigator hover-class="none" url="/pages/member/tool/bankcard/bankcard" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-yinhangqia" style="color: #009707;"></view>
 					<view class="member-tool-text">银行卡</view>
-				</view>
+				</navigator>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-tousujianyi" style="color: #d1c7c8;"></view>
 					<view class="member-tool-text">置换中心</view>
@@ -141,9 +141,9 @@
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">我的预约</view>
 				</view>
-				<navigator url="./include/include" class="member-tool-content-w25">
+				<navigator url="/pages/member/tool/include/include" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
-					<view class="member-tool-text">商家入驻</view>
+					<view class="member-tool-text">商家入驻</view> 
 				</navigator>
 			</view>
 		</view>
@@ -160,11 +160,11 @@
 					<view class="member-bottom-text">意见反馈</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
 				</view>
-				<view class="member-bottom-within-w1">
+				<navigator hover-class="none" url="/pages/member/help/question" class="member-bottom-within-w1">
 					<view class="icon iconfont icon-wenti member-bottom-icon"></view>
 					<view class="member-bottom-text">常见问题</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
-				</view>
+				</navigator>
 				<view class="member-bottom-within-w1">
 					<view class="icon iconfont icon-shuoming3 member-bottom-icon"></view>
 					<view class="member-bottom-text">服务说明</view>
@@ -180,11 +180,11 @@
 	import uniList from "@/components/uni-list/uni-list.vue"
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
 	export default {
+		components: {
+			uniList,
+			uniListItem
+		},
 		data() {
-			components: {
-				uniList,
-				uniListItem
-			}
 			return {
 				login: !0,
 				bannerlist: [
@@ -210,7 +210,6 @@
 		},
 		onLoad() {
 			this.global.utils.sethead("个人中心");
-			console.log(this.global);
 		},
 		onShow() {
 			this.login = this.global.status.state.login;

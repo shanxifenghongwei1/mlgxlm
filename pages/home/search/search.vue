@@ -15,7 +15,7 @@
 		},
 		data() {
 			return {
-				
+				options:{}
 			}
 		},
 		methods: {

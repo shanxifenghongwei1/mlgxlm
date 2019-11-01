@@ -70,7 +70,7 @@
             }
         }
         ,{
-            "path" : "pages/member/include/include",
+            "path" : "pages/member/tool/include/include",
             "style" : {}
         }
         ,{
@@ -90,11 +90,11 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/member/address/address",
+            "path" : "pages/member/tool/address/address",
             "style" : {}
         }
 		,{
-		    "path" : "pages/member/address/add-address",
+		    "path" : "pages/member/tool/address/add-address",
 		    "style" : {}
 		}
         ,{
@@ -103,6 +103,18 @@
         }
 		,{
 		    "path" : "pages/member/my-coupon/my-assets",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/member/help/question",
+		    "style" : {}
+		}
+        ,{
+            "path" : "pages/member/tool/bankcard/bankcard",
+            "style" : {}
+        }
+		,{
+		    "path" : "pages/member/tool/bankcard/addcard",
 		    "style" : {}
 		}
     ],

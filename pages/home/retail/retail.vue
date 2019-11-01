@@ -127,6 +127,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
 					'../../static/image/banner/4.jpg'

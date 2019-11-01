@@ -24,6 +24,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				//分类列表以及选中id
 				list:[{
 					id:1,
@@ -197,6 +198,10 @@
 			seleId(e){
 				this.cateid=e;
 			}
+		},
+		onLoad(options) {
+			this.options=options;
+			this.global.utils.sethead(options.head)
 		}
 	}
 </script>

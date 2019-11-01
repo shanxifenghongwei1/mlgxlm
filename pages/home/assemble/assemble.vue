@@ -214,6 +214,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				list: [{
 					id: 1,
 					name: "距离最近"

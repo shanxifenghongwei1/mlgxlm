@@ -10,7 +10,7 @@
 					<image :src="item.picture" mode="widthFix" @click="menuDetail()"></image>
 				</view>
 			</view>
-			<view class="newshop-head">
+			<view class="newshop-head" v-if="options.runid!=3">
 				<view class="icons">
 					<view class="iconsss"></view>
 					<view>热门项目</view>
@@ -18,7 +18,7 @@
 				<view class="more">更多</view>
 			</view>
 			<!-- 热门项目 -->
-			<view class="device">
+			<view class="device" v-if="options.runid!=3">
 				<view v-for="(item,index) in gnlistmore" :key='index' class="device-son">
 					<image :src="item.picture" mode="widthFix"></image>
 				</view>
@@ -34,7 +34,7 @@
 				</swiper>
 			</view>
 			<!-- 栏目 -->
-			<view class='shoplist'>
+			<view class='shoplist' v-if="options.runid!=3">
 				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 			</view>
 		</view>
@@ -56,6 +56,7 @@
 		data() {
 			return {
 				// 一级功能列表
+				options:{},
 				gnlist:[
 					{id:1,text:'面部护理',picture:'../../../static/image/other/mianbu.png'},
 					{id:2,text:'抗衰除皱',picture:'../../../static/image/other/kangsui.png'},
@@ -110,9 +111,8 @@
 		},
 		onLoad(options) {
 			console.log(options)
-			if(options == 1){
-				this.global.utils.sethead('美容美发')
-			}
+			this.options=options;
+			this.global.utils.sethead(options.head)
 		}
 	}
 </script>

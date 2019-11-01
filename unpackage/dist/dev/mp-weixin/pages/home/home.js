@@ -282,7 +282,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -442,16 +441,17 @@ var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js
 //
 //
 //
-//
-var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 192));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 199));};var _default = { components: { shoplist: shoplist, searchAny: searchAny }, data: function data() {return { indexData: {}, dataUrl: "", picUrl: "", // 搜索栏样式
+var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 210));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 217));};var _default = { components: { shoplist: shoplist, searchAny: searchAny }, data: function data() {return { indexData: {}, dataUrl: "", picUrl: "", // 搜索栏样式
       iconType: ['search'], // banner图
       bannerlist: ['../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg', '../../static/image/banner/4.jpg'], // 指示点颜色
       colors: '#e01818', // 循环列表
       headlist: [{ id: 1, name: '拼团' }, { id: 2, name: '优惠' }, { id: 3, name: '销量' }, { id: 4, name: '限时抢' }, { id: 5, name: '免费送' }], // 高亮id
       ids: 1 };}, methods: { // 组件事件实例
     wearego: function wearego() {}, // 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
-    runHairdressing: function runHairdressing(e) {uni.navigateTo({ url: "/pages/home/hairdressing/hairdressing?runid=" + e });}, //跳转附近店铺
-    goNear: function goNear() {uni.navigateTo({ url: "/pages/home/nearby/nearby" });}, // 高亮id
+    runHairdressing: function runHairdressing(e, f) {uni.navigateTo({ url: "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f });}, //跳转附近店铺
+    goNear: function goNear() {uni.navigateTo({ url: "/pages/home/nearby/nearby?head=" + "附近店铺" });}, //跳转服务详情页面
+    menuDetail: function menuDetail(e, f) {uni.navigateTo({ url: "/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e });}, //跳转商品详情页面
+    toGoods: function toGoods(e, f) {uni.navigateTo({ url: "/pages/home/menu-details/menu-details?good_id=" + e + "&&head=" + f });}, // 高亮id
     exchanges: function exchanges(id) {this.ids = id;this.findData(id);}, init: function init() {// this.global.request.post({
       // 	url: 'ad/admin',
       // 	data: {
@@ -467,7 +467,7 @@ var shoplist = function shoplist() {return Promise.all(/*! import() | components
     findData: function findData(e) {var _this = this;var data = {};e ? data.promotion_type = e : data = {}; //首页页面
       uni.request({ url: _demao.default.domain.request + "index", data: data, method: "GET", dataType: "json", header: { "Content-Type": 'application/x-www-form-urlencoded', // 默认值
           'X-TOKEN-PETMALL': '' }, success: function success(result) {var list = result.data.data.week_newshop;list.forEach(function (v) {v.shop_label = v.shop_label.split(",");});result.data.data.week_newshop = list;var list1 = result.data.data.goodsInfo;list1.forEach(function (v) {v.shop_label = v.shop_label.split(",");});result.data.data.goodsInfo = list1;_this.indexData = result.data.data;}, complete: function complete(res) {} });} //页面跳转
-  }, onLoad: function onLoad(Option) {this.init();this.global.utils.sethead('美丽共享联盟');this.picUrl = _demao.default.domain.picUrl;this.findData();} };exports.default = _default;
+  }, onLoad: function onLoad(Option) {this.init();console.log(this.global.card_info.bankCardAttribution(6228480900796906312));this.global.utils.sethead('美丽共享联盟');this.picUrl = _demao.default.domain.picUrl;this.findData();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

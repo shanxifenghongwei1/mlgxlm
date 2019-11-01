@@ -133,6 +133,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				shopid: null,
 				// banner图
 				bannerlist: [
@@ -198,9 +199,14 @@
 				this.cateid=data;
 			}
 		},
-		onLoad(e) {
-			console.log(e);
-			this.shopid = e.id;
+		// onLoad(e) {
+		// 	console.log(e);
+		// 	this.shopid = e.id;
+		// }
+		onLoad(options) {
+			console.log(options)
+			this.options=options;
+			this.global.utils.sethead(options.head)
 		}
 	}
 </script>

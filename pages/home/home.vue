@@ -28,18 +28,17 @@
 					<view class="text font-weig">置换商城</view>
 				</navigator>
  
-				<view class="list-one">
-					<view class="icon iconfont icon-hezuo"></view>
+				<navigator url="/pages/home/retail/retail" class="list-one">
+					<view class="icon iconfont icon-fenxiao"></view>
 					<view class="text font-weig">分销</view>
-				</view>
+				</navigator>
 			</view>
 		</view>
 		<!-- 主要功能 -->
 		<view class="significance-father">
 			
 			<view class="significance">
-				<view @click="runHairdressing(1)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type" :key='index'>
-			<!-- 		<view class="icon" :style="background: url("+item.t_img) no-repeat center;"></view> -->
+				<view @click="runHairdressing(index,item.t_name)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type" :key='index'>
 					<image class="icon" :src="picUrl+item.t_img" mode=""></image>
 					<view class="text font-weig">{{item.t_name}}</view>
 				</view>
@@ -56,25 +55,25 @@
 		<view class="son-father">
 			<view class="son">
 				<view class="butf">
-					<view v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
+					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
 						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
 				<view class="head">
-					<view v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
+					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
 						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
 				<view class="head">
-					<view v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
+					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
 						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 						<view class="text">{{item.t_name}}</view>
 					</view>
 				</view>
 				<view class="head">
-					<view v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
+					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
 						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 						<view class="text">{{item.t_name}}</view>
 					</view>
@@ -143,7 +142,7 @@
 
 			<view class="father">
 				<view class="goodslist">
-					<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index'>
+					<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index' @click="toGoods(item.goods_id,item.goods_name)">
 						<view class="goodsname">{{item.goods_name}}</view>
 						<view class="goodsprice"> <text>{{item.price}}</text> RMB </view>
 						<image class="goodsimg" src="../../static/image/other/goods.jpg" mode="widthFix"></image>
@@ -201,17 +200,30 @@
 			wearego() {
 			},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
-			runHairdressing(e){
+			runHairdressing(e,f){
 				uni.navigateTo({
-					url:"/pages/home/hairdressing/hairdressing?runid="+e					
+					url:"/pages/home/hairdressing/hairdressing?runid="+e+"&&head="+f					
 				})
 			},
 			//跳转附近店铺
 			goNear(){
 				uni.navigateTo({
-					url:"/pages/home/nearby/nearby"				
+					url:"/pages/home/nearby/nearby?head="+"附近店铺"			
 				})
 			},
+			//跳转服务详情页面
+			menuDetail(e,f){
+				uni.navigateTo({
+					url:"/pages/home/menu-details/menu-details?head="+f+"&&goods_id="+e
+				})
+			},
+			//跳转商品详情页面
+			toGoods(e,f){
+				uni.navigateTo({
+					url:"/pages/home/menu-details/menu-details?good_id="+e+"&&head="+f			
+				})
+			},
+			
 
 			// 高亮id
 			exchanges(id) {
@@ -275,9 +287,11 @@
  
 		onLoad(Option) {
 			this.init()
+			console.log(this.global.card_info.bankCardAttribution(6228480900796906312))
 			this.global.utils.sethead('美丽共享联盟');
 			this.picUrl=demo.domain.picUrl;
 			this.findData();
+			
 		}
 
 	}

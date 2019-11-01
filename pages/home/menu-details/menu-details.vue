@@ -116,6 +116,7 @@
 		},
 		data() {
 			return {
+				options:{},
 				more:"more",
 				// 菜单列表
 				menulist: [{
@@ -203,6 +204,11 @@
 			cate(e){
 				this.cateid = e;
 			}
+		},
+		onLoad(options) {
+			console.log(options)
+			this.options=options;
+			this.global.utils.sethead(options.head)
 		},
 		onReachBottom(){
 			console.log("下拉了")

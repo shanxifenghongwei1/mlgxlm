@@ -45,8 +45,7 @@
 			<view class="water-group">
 				<view class="water water1"></view>
 				<view class="water water2"></view>
-	<!-- 			<view class="water water3"></view> -->
-				</view>
+			</view>
 		
 		</view>
 		<view class="sign-list">

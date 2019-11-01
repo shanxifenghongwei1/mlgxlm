@@ -23,38 +23,17 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"list": [
 				{
-					"id": 0,
 					"name": "抗谁除皱",
-					"pathName": "pages/home/shop-detial/shop-detial",
-					"query": "runid=1"
-				},
-				{
-					"id": -1,
-					"name": "分销",
-					"pathName": "pages/home/retail/retail",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我得资产",
-					"pathName": "pages/member/my-coupon/my-assets",
-					"scene": null
+					"query": "runid=1",
+					"id": 0,
+					"pathName": "pages/home/shop-detial/shop-detial"
 				}
 			]
 		}
