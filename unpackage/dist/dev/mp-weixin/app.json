@@ -24,7 +24,12 @@
     "pages/member/my-coupon/my-assets",
     "pages/member/help/question",
     "pages/member/tool/bankcard/bankcard",
-    "pages/member/tool/bankcard/addcard"
+    "pages/member/tool/bankcard/addcard",
+    "pages/member/my-coupon/money/money",
+    "pages/member/my-coupon/money/cash",
+    "pages/member/my-coupon/money/cash_success",
+    "pages/member/my-coupon/money/invest",
+    "pages/member/my-coupon/money/invest_success"
   ],
   "subPackages": [],
   "window": {
@@ -62,5 +67,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap4.json"
+  "sitemapLocation": "sitemap98.json"
 }

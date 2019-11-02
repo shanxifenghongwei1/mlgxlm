@@ -30,10 +30,10 @@
 		<!-- 资产 -->
 		<view class="member-assets">
 			<view class="member-assets-money">
-				<view class="member-assets-number">
+				<navigator hover-class="none" url="/pages/member/my-coupon/money/money" class="member-assets-number">
 					<view class="member-assets-h6">{{userInfo[0].balance}}</view>
 					<view class="member-assets-content">分享币</view>
-				</view>
+				</navigator>
 				<view class="member-assets-number">
 					<view class="member-assets-h6">{{userInfo[0].integral}}</view>
 					<view class="member-assets-content">积分</view>

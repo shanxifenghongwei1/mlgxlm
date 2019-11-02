@@ -117,6 +117,26 @@
 		    "path" : "pages/member/tool/bankcard/addcard",
 		    "style" : {}
 		}
+        ,{
+            "path" : "pages/member/my-coupon/money/money",
+            "style" : {}
+        }
+		,{
+		    "path" : "pages/member/my-coupon/money/cash",
+		    "style" : {}
+		},
+		{
+		    "path" : "pages/member/my-coupon/money/cash_success",
+		    "style" : {}
+		},
+		{
+		    "path" : "pages/member/my-coupon/money/invest",
+		    "style" : {}
+		},
+		{
+		    "path" : "pages/member/my-coupon/money/invest_success",
+		    "style" : {}
+		}
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

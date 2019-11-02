@@ -17,7 +17,7 @@
 				卡号
 			</view>
 			<input type="text" value="" placeholder="请输入卡号" />
-			<view class="pic">
+			<view class="pic" @click="chooseImage()">
 				<image src="/static/image/other/card-camera.png" mode=""></image>
 			</view>
 		</view>
@@ -51,6 +51,25 @@
 		data() {
 			return {
 
+			}
+		},
+		methods:{
+			chooseImage:()=>{
+				uni.chooseImage({
+					count:1,
+					success:(res)=>{
+						console.log(res)
+						console.log(res.tempFilePaths[0])
+						uni.uploadFile({
+							url:"http://mt.mlgxlm.com/bankcard",
+							filePath:res.tempFilePaths[0],
+							name: 'file',
+							success: (uploadFileRes) => {
+						        console.log(uploadFileRes.data); 
+						    }
+						})
+					}
+				})
 			}
 		}
 	}
