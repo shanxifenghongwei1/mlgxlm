@@ -157,13 +157,13 @@
 	}
 
 	.uni-popup__wrapper.uni-custom .uni-popup__wrapper-box {
-		padding: 30upx;
+	/* 	padding: 30upx; */
+		border-radius: 20rpx;
 		background: #fff
 	}
 
 	.uni-popup__wrapper.uni-custom.center .uni-popup__wrapper-box {
 		position: relative;
-		max-width: 80%;
 		max-height: 80%;
 		overflow-y: scroll
 	}

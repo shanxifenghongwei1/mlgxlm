@@ -102,6 +102,9 @@
 			<view class="tj">
 				<button type="warn" @click="save">申请入驻</button>
 			</view>
+			<picker mode="multiSelector" @change="bindPickerChange1" :value="index,index1" :range="testArr" range-key="name" @columnchange="columnchange">
+				<view class="uni-input">{{catetext}}</view>
+			</picker>
 		</block>
 		<block v-else>
 			<view class="empty">
@@ -134,7 +137,15 @@
 					
 					checked:false,
 					
-					isEmpty:true
+					isEmpty:true,
+					
+					testArr:[
+						
+						[{name:"美容美发",chil:[{fat:"asadas"}]},{name:"身体护理",[{fat:"asadas"}]},{name:"问题皮肤",[{fat:"asadas"}]},{name:"瑜伽健身"}]
+						// ["分类1","分类2","分类3","分类4"]
+						// [{name:"分类1"},{name:"分类2"},{name:"分类3"},{name:"分类4"}]
+					]
+					
 		        }
 		    },
 		methods: {
@@ -156,11 +167,11 @@
 			checkboxChange:function(e){
 				this.checked=!this.checked;
 			},
-			showToast_my:function(e){
+			showToast_my:function(e,f){
 				uni.showToast({
 				    title: e,
-				    duration: 2000,
-				    icon:"none"
+				    duration: 3000,
+				    icon: f?"success":"none"
 				});
 				return false;
 			},
@@ -202,12 +213,12 @@
 							success:(res)=>{
 								console.log("这是返回数据"+res)
 								console.log(res.msg)
-								this.showToast_my(res.msg);
+								this.showToast_my(res.msg,true);
 								setTimeout(()=>{
 									uni.switchTab({
 										url:"/pages/member/member"
 									})
-								},2000)
+								},3000)
 							}
 						})
 					}else{
@@ -215,7 +226,15 @@
 						this.showToast_my("请勾选商家入驻协议");
 					}
 				}
-			}		
+			},
+			
+			// 测试
+			columnchange(e){
+				console.log(e)
+			},
+			bindPickerChange1(e){
+				console.log("value的值改变了")
+			}
 		},
 		onLoad(){
 			this.global.utils.sethead("商家入驻")

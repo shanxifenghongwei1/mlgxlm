@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var mySwiper = function mySwiper() {return __webpack_require__.e(/*! import() | components/mine/my-swiper */ "components/mine/my-swiper").then(__webpack_require__.bind(null, /*! @/components/mine/my-swiper.vue */ 327));};var goods = function goods() {return __webpack_require__.e(/*! import() | components/mine/goods */ "components/mine/goods").then(__webpack_require__.bind(null, /*! @/components/mine/goods.vue */ 299));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var mySwiper = function mySwiper() {return __webpack_require__.e(/*! import() | components/mine/my-swiper */ "components/mine/my-swiper").then(__webpack_require__.bind(null, /*! @/components/mine/my-swiper.vue */ 333));};var goods = function goods() {return __webpack_require__.e(/*! import() | components/mine/goods */ "components/mine/goods").then(__webpack_require__.bind(null, /*! @/components/mine/goods.vue */ 305));};var _default =
 
 
 

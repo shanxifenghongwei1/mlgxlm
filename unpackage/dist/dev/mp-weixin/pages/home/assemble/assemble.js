@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var flashCard = function flashCard() {return __webpack_require__.e(/*! import() | components/mine/flashSale */ "components/mine/flashSale").then(__webpack_require__.bind(null, /*! @/components/mine/flashSale.vue */ 341));};var bwSwiper = function bwSwiper() {return __webpack_require__.e(/*! import() | components/bw-swiper/bw-swiper */ "components/bw-swiper/bw-swiper").then(__webpack_require__.bind(null, /*! @/components/bw-swiper/bw-swiper.vue */ 348));};var cateFlex = function cateFlex() {return __webpack_require__.e(/*! import() | components/mine/cate-flex */ "components/mine/cate-flex").then(__webpack_require__.bind(null, /*! @/components/mine/cate-flex.vue */ 355));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var flashCard = function flashCard() {return __webpack_require__.e(/*! import() | components/mine/flashSale */ "components/mine/flashSale").then(__webpack_require__.bind(null, /*! @/components/mine/flashSale.vue */ 347));};var bwSwiper = function bwSwiper() {return __webpack_require__.e(/*! import() | components/bw-swiper/bw-swiper */ "components/bw-swiper/bw-swiper").then(__webpack_require__.bind(null, /*! @/components/bw-swiper/bw-swiper.vue */ 354));};var cateFlex = function cateFlex() {return __webpack_require__.e(/*! import() | components/mine/cate-flex */ "components/mine/cate-flex").then(__webpack_require__.bind(null, /*! @/components/mine/cate-flex.vue */ 361));};var _default =
 
 
 

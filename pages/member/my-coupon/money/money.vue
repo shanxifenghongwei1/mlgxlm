@@ -13,11 +13,11 @@
 					</view>
 				</view>
 				<view class="opection">
-					<view class="">
+					<view class="" @click="cash()">
 						<image src="/static/image/other/money-1.png" mode=""></image>
 						分享币提现
 					</view>
-					<view class="">
+					<view class="" @click="inverst()">
 						<image src="/static/image/other/money-2.png" mode=""></image>
 						钱包充值
 					</view>
@@ -34,7 +34,9 @@
 					</view>
 					<view class="li">
 						<view class="li-box">
-							<image src="/static/image/other/money-2.png" mode=""></image>
+							<view class="pic">
+								￥
+							</view>
 							<view class="con">
 								<view class="">
 									充值
@@ -51,7 +53,9 @@
 							</view>
 						</view>
 						<view class="li-box">
-							<image src="/static/image/other/money-2.png" mode=""></image>
+							<view class="pic">
+								￥
+							</view>
 							<view class="con">
 								<view class="">
 									充值
@@ -68,7 +72,9 @@
 							</view>
 						</view>
 						<view class="li-box">
-							<image src="/static/image/other/money-2.png" mode=""></image>
+							<view class="pic">
+								￥
+							</view>
 							<view class="con">
 								<view class="">
 									充值
@@ -99,7 +105,16 @@
 			}
 		},
 		methods: {
-			
+			inverst:()=>{
+				uni.navigateTo({
+					url:"/pages/member/my-coupon/money/invest"
+				})
+			},
+			cash:()=>{
+				uni.navigateTo({
+					url:"/pages/member/my-coupon/money/cash"
+				})
+			}
 		}
 	}
 </script>
@@ -117,7 +132,7 @@
 	}
 	.num{
 		width: 100%;
-		height: 450rpx;
+		height: 380rpx;
 		padding: 0 3%;
 		box-sizing: border-box;
 		margin-top: -100rpx; 
@@ -218,10 +233,15 @@
 					@extend .any-flex;
 					align-items: flex-start;
 					padding: 10rpx 0;
-					image{
+					.pic{
 						width: 70rpx;
 						height: 70rpx;
 						border-radius: 50%;
+						background: #FF9101;
+						text-align: center;
+						line-height: 70rpx;
+						font-size: 50rpx;
+						color: #ffffff;
 					}
 					.con{
 						width: 400rpx;
@@ -236,13 +256,13 @@
 						}
 						view:nth-child(2){
 							margin-top: 10rpx;
-							font-size: $uni-font-size-base;
-							color: #575757;
+							font-size: $uni-font-size-sm;
+							color: #9A9A9A;
 						}
 						view:nth-child(3){
 							margin-top: 10rpx;
-							font-size: $uni-font-size-base;
-							color: #575757;
+							font-size: $uni-font-size-sm;
+							color: #9A9A9A;
 						}
 						
 					}
@@ -253,7 +273,6 @@
 						font-size: $uni-font-size-base;
 						text-align: right;
 					}
-					
 				}
 				.li-box:last-child{
 					border: none;

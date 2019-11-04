@@ -12,13 +12,10 @@
 
 					<view class="text4">您的公开信息 ( 昵称、头像等 )</view>
 
-					<button open-type="getUserInfo" class="user" @click="userinfor">微信授权登录</button>
+					<button open-type="getUserInfo" class="user" @getuserinfo="userinfor()">微信授权登录</button>
 
 					<view class="text5">返回首页</view>
 
-					<view>
-						{{obs}}
-					</view>
 				</view>
 
 
@@ -40,16 +37,21 @@
 			// this.global.utils.sethead("登录")
 		},
 		methods: {
+			// get(){
+			// 	console.log(1111)
+			// },
 			userinfor(){
 				let that = this;
 				uni.login({
 				  provider: 'weixin',
 				  success: function (loginRes) {
+					console.log(loginRes.code)
 					uni.getUserInfo({
 						provider:'weixin',
 						success:(userinfor)=>{
-							that.obs = JSON.stringify(userinfor) 
-							uni.setStorageSync("userinfo",userinfor)
+							console.log(userinfor)
+							// that.obs = JSON.stringify(userinfor) 
+							// uni.setStorageSync("userinfo",userinfor)
 							that.global.request.post({
 								url: 'weChat',
 								method:"GET",

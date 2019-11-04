@@ -150,9 +150,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -164,16 +161,21 @@ var _default =
     // this.global.utils.sethead("登录")
   },
   methods: {
+    // get(){
+    // 	console.log(1111)
+    // },
     userinfor: function userinfor() {
       var that = this;
       uni.login({
         provider: 'weixin',
         success: function success(loginRes) {
+          console.log(loginRes.code);
           uni.getUserInfo({
             provider: 'weixin',
             success: function success(userinfor) {
-              that.obs = JSON.stringify(userinfor);
-              uni.setStorageSync("userinfo", userinfor);
+              console.log(userinfor);
+              // that.obs = JSON.stringify(userinfor) 
+              // uni.setStorageSync("userinfo",userinfor)
               that.global.request.post({
                 url: 'weChat',
                 method: "GET",

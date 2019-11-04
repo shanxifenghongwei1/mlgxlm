@@ -441,7 +441,7 @@ var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js
 //
 //
 //
-var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 243));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 250));};var _default = { components: { shoplist: shoplist, searchAny: searchAny }, data: function data() {return { indexData: {}, dataUrl: "", picUrl: "", // 搜索栏样式
+var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 249));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 256));};var _default = { components: { shoplist: shoplist, searchAny: searchAny }, data: function data() {return { indexData: {}, dataUrl: "", picUrl: "", // 搜索栏样式
       iconType: ['search'], // banner图
       bannerlist: ['../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg', '../../static/image/banner/4.jpg'], // 指示点颜色
       colors: '#e01818', // 循环列表
