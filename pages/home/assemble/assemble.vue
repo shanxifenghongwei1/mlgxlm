@@ -325,7 +325,7 @@
 		.back {
 			width: 100%;
 			height: 340rpx;
-			background: blue;
+			background: #00A1EA;
 			position: relative;
 			overflow: hidden;
 		}
@@ -349,6 +349,7 @@
 			right: 100rpx;
 			top: 0;
 			background: rgba(255, 255, 255, 0.2);
+			color: #002539;
 		}
 
 		.title {
