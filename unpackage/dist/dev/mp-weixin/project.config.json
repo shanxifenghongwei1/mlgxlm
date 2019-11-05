@@ -1,67 +1,39 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": false,
-		"minified": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
-	"appid": "wxf97b8045146a0176",
-	"projectname": "美丽共享联盟",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"list": [
-				{
-					"id": 0,
-					"name": "抗谁除皱",
-					"pathName": "pages/home/shop-detial/shop-detial",
-					"query": "runid=1"
-				},
-				{
-					"id": -1,
-					"name": "提现明细",
-					"pathName": "pages/member/my-coupon/money/cash_detail",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我得评价",
-					"pathName": "pages/member/tool/evaluate/evaluate",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "置换商城",
-					"pathName": "pages/home/displace/displace",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.7.0",
+  "appid": "wxf97b8045146a0176",
+  "projectname": "美丽共享联盟",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "抗谁除皱",
+          "query": "runid=1",
+          "id": 0,
+          "pathName": "pages/home/shop-detial/shop-detial"
+        }
+      ]
+    }
+  }
 }
