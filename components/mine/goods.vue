@@ -1,10 +1,11 @@
-<!-- 商品组件（图+详细信息） -->
 <template>
+	<!-- 商品组件（图+详细信息） -->
 	<view class="goods">
-		<view class="goods-li" @click="toDetail(2)">
+		<view class="goods-li" @click="toDetail(2)" v-for="(item,index) in titCon" :key="index">
 			<view class="goods-pic">
 				<image src="/static/image/banner/1.jpg" mode=""></image>
 			</view>
+			<block v-if="!place">
 			<view class="goods-tit">
 				芳香精油经络疏通
 			</view>
@@ -29,93 +30,38 @@
 					减198元
 				</view>
 			</view>
-		</view>
-		<view class="goods-li" @click="toDetail(2)">
-			<view class="goods-pic">
-				<image src="/static/image/banner/1.jpg" mode=""></image>
+			</block>
+			<block v-else>
+			<view class="place place-title">
+				伊可佳人
 			</view>
-			<view class="goods-tit">
-				芳香精油经络疏通
+			<view class="place place-name">
+				姿美堂养颜套装（全新）
 			</view>
-			<view class="goods-con">
-				<view class="goods-con-left">
-					乳腺
+			<view class="place place-num" >
+				<view class="">
+					置换1000
 				</view>
-				<view class="goods-con-fight">
-					已售 10
-				</view>
-			</view>
-			<view class="goods-price">
-				<view class="goods-price-left">
-					<view class="goods-NewPrice">
-						198.00
-					</view>
-					<view class="goods-OldPrice">
-						398.00
-					</view>
-				</view>
-				<view class="goods-price-right">
-					减198元
+				<view class="">
+					置换1000
 				</view>
 			</view>
-		</view>
-		<view class="goods-li" @click="toDetail(2)">
-			<view class="goods-pic">
-				<image src="/static/image/banner/1.jpg" mode=""></image>
+			<view class="place place-price">
+				￥199.9
 			</view>
-			<view class="goods-tit">
-				芳香精油经络疏通
+			<view class="place place-address">
+				<view class="icon iconfont icon-xuanzhong1">
+					
+				</view>
+			
+				山西省太原市小店区天鑫花
+			
+				
 			</view>
-			<view class="goods-con">
-				<view class="goods-con-left">
-					乳腺
-				</view>
-				<view class="goods-con-fight">
-					已售 10
-				</view>
+			<view class="place place-time">
+				2019-10-16 10:03发布
 			</view>
-			<view class="goods-price">
-				<view class="goods-price-left">
-					<view class="goods-NewPrice">
-						198.00
-					</view>
-					<view class="goods-OldPrice">
-						398.00
-					</view>
-				</view>
-				<view class="goods-price-right">
-					减198元
-				</view>
-			</view>
-		</view>
-		<view class="goods-li" @click="toDetail(2)">
-			<view class="goods-pic">
-				<image src="/static/image/banner/1.jpg" mode=""></image>
-			</view>
-			<view class="goods-tit">
-				芳香精油经络疏通
-			</view>
-			<view class="goods-con">
-				<view class="goods-con-left">
-					乳腺
-				</view>
-				<view class="goods-con-fight">
-					已售 10
-				</view>
-			</view>
-			<view class="goods-price">
-				<view class="goods-price-left">
-					<view class="goods-NewPrice">
-						198.00
-					</view>
-					<view class="goods-OldPrice">
-						398.00
-					</view>
-				</view>
-				<view class="goods-price-right">
-					减198元
-				</view>
-			</view>
+			</block>
 		</view>
 		
 		<view class="look-more" v-if="more">
@@ -133,12 +79,16 @@
 		},
 		props:{
 			titCon:{
-				type:Object, //商品数据列表
-				default:{}
+				type:Array,  //商品数据列表
+				default:[]
 			},
 			more:{
-				type:Boolean, //商品数据列表
+				type:Boolean, //是否显示加载更多
 				default:true
+			},
+			place:{
+				type:Boolean, //显示的是正常商品false    置换商品true
+				default:false
 			}
 		},
 		methods:{
@@ -233,5 +183,52 @@
 		line-height: 55rpx;
 		font-size: $uni-font-size-base;
 		margin: 30rpx auto 0;
+	}
+	.place{
+		width: 100%;
+		padding: 0 10rpx;
+		box-sizing: border-box;
+	}
+	.place-title{
+		font-size: $uni-font-size-lg;
+		color: $any-col;
+		@include multi-row-apostrophe(1);
+			margin-bottom: 10rpx;
+	}
+	.place-name{
+		font-size: $uni-font-size-base;
+		@include multi-row-apostrophe(1);
+			margin-bottom: 10rpx;
+	}
+	.place-num{
+		font-size: $uni-font-size-base;
+		@extend .any-flex;
+		justify-content: space-between;
+		color: #7E7E7E;
+			margin-bottom: 10rpx;
+		view{
+			width: 50%;
+		}
+	}
+	.place-price{
+		font-size: 40rpx;
+		color: $any-col;
+		@include multi-row-apostrophe(1);
+			margin-bottom: 10rpx;
+	}
+	.place-address{
+		width: 100%; 
+		font-size: $uni-font-size-sm;
+		margin-bottom: 10rpx;
+		view:nth-child(1){
+			display: inline;
+				font-size: $uni-font-size-sm;
+		}
+	
+	}
+	.place-time{
+		font-size: $uni-font-size-sm;
+		@include multi-row-apostrophe(1);
+		margin-bottom: 10rpx;
 	}
 </style>

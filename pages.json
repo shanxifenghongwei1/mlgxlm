@@ -136,7 +136,19 @@
 		{
 		    "path" : "pages/member/my-coupon/money/invest_success",
 		    "style" : {}
+		},
+		{
+			"path" : "pages/member/my-coupon/money/cash_detail",
+			"style" : {}
 		}
+        ,{
+            "path" : "pages/member/tool/evaluate/evaluate",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/displace/displace",
+            "style" : {}
+        }
     ],
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{

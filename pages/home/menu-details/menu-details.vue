@@ -1,6 +1,5 @@
-<!-- 详情页 -->
-
 <template>
+	<!-- 二级分类详情页 -->
 	<view>
 		<view class="cons">
 			<searchAny></searchAny>

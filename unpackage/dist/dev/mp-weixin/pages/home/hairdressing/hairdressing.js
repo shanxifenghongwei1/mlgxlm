@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hairdressing_vue_vue_type_template_id_ea28eb7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hairdressing.vue?vue&type=template&id=ea28eb7c& */ 70);
 /* harmony import */ var _hairdressing_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hairdressing.vue?vue&type=script&lang=js& */ 72);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _hairdressing_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _hairdressing_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 14);
+/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 15);
 
 
 
@@ -166,7 +166,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 __webpack_require__(/*! ./hairdressing.scss */ 74); //
 //
 //
@@ -212,13 +211,13 @@ __webpack_require__(/*! ./hairdressing.scss */ 74); //
 //
 //
 //
-//
-var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 249));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 256));};var _default = { components: { searchAny: searchAny, shoplist: shoplist }, data: function data() {return { // 一级功能列表
+var shoplist = function shoplist() {return Promise.all(/*! import() | components/shoplist/shoplist */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/shoplist/shoplist")]).then(__webpack_require__.bind(null, /*! @/components/shoplist/shoplist.vue */ 257));};var searchAny = function searchAny() {return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 264));};var _default = { components: { searchAny: searchAny, shoplist: shoplist }, data: function data() {return { // 一级功能列表
       options: {}, gnlist: [{ id: 1, text: '面部护理', picture: '../../../static/image/other/mianbu.png' }, { id: 2, text: '抗衰除皱', picture: '../../../static/image/other/kangsui.png' }, { id: 3, text: '塑性焕肤', picture: '../../../static/image/other/shuxing.png' }, { id: 4, text: '美发美甲', picture: '../../../static/image/other/meifa.png' }, { id: 5, text: '深度清洁', picture: '../../../static/image/other/shendu.png' }], // 一级功能列表更多
       gnlistmore: [{ id: 1, text: '美白凝眸', picture: '../../../static/image/other/meibai.png' }, { id: 2, text: '激光除皱', picture: '../../../static/image/other/jiguang.png' }, { id: 3, text: '冰川补水', picture: '../../../static/image/other/bingchuan.png' }, { id: 4, text: '韩式美甲', picture: '../../../static/image/other/meijia.png' }, { id: 5, text: '磨砂气泡', picture: '../../../static/image/other/mosha.png' }], // 热门项目
       bannerlist: ['../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg', '../../../static/image/banner/4.jpg'], // 高亮id
       ids: 6, // 指示点颜色
-      colors: '#e01818', headlist: [{ id: 6, name: '精选' }, { id: 7, name: '除皱' }, { id: 8, name: '补水' }, { id: 9, name: '塑形' }, { id: 10, name: '美白' }], shoplists: [{ prople: '2000', image: '../../static/image/shop/shop-1.jpg', shopname: '艾美世界家', address: '山西大医院', start: '3.5', labels: '便签', goodssprice: '998', newgoodssprice: '398', goodsname: '芳香精油乳腺疏通', othergoods: '酒槽鼻修护套餐', othergoodsprices: "100" }] };},
+      colors: '#e01818', headlist: [{ id: 6, name: '精选' }, { id: 7, name: '除皱' }, { id: 8, name: '补水' }, { id: 9, name: '塑形' }, { id: 10, name: '美白' }], shoplists: [{ prople: '2000', image: '../../static/image/shop/shop-1.jpg', shopname: '艾美世界家', address: '山西大医院', start: '3.5', labels: '便签', goodssprice: '998', newgoodssprice: '398', goodsname: '芳香精油乳腺疏通', othergoods: '酒槽鼻修护套餐', othergoodsprices: "100" }] };
+  },
   methods: {
     // 高亮id
     exchanges: function exchanges(id) {

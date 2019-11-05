@@ -137,6 +137,9 @@
 		},
 		methods: {
 			
+		},
+		onLoad(options) {
+			this.global.utils.sethead("分销")
 		}
 	}
 </script>

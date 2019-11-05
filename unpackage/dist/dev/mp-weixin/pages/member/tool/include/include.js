@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _include_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./include.vue?vue&type=script&lang=js& */ 119);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _include_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _include_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _include_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./include.vue?vue&type=style&index=0&lang=scss& */ 121);
-/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 14);
+/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 15);
 
 
 
@@ -119,9 +119,259 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-custom-block-loader??ref--0-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Administrator/Desktop/mlgxlm/pages/member/tool/include/include.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js):\nSyntaxError: Unexpected token (144:71)\n    at _class.raise (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:4051:15)\n    at _class.unexpected (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:5382:16)\n    at _class.parseObjPropValue (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:7034:21)\n    at _class.parseObjPropValue (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10563:78)\n    at _class.parseObj (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6944:12)\n    at _class.parseExprAtom (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6487:21)\n    at _class.parseExprSubscripts (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6104:21)\n    at _class.parseMaybeUnary (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6083:21)\n    at _class.parseMaybeUnary (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10675:54)\n    at _class.parseExprOps (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:5968:21)\n    at _class.parseMaybeConditional (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:5940:21)\n    at _class.parseMaybeAssign (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:5887:21)\n    at _class.parseMaybeAssign (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10631:87)\n    at _class.parseExprListItem (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:7226:18)\n    at _class.parseExprList (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:7206:22)\n    at _class.parseExprAtom (F:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6478:30)");
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default =
+
+
+{
+  data: function data() {
+    return {
+      store: {},
+
+      array: ['中国', '美国', '巴西', '日本'],
+      index: 0,
+      catetext: "经营类别",
+
+      addresstext: '请选择地区',
+
+      checked: false,
+
+      isEmpty: true,
+
+      testArr: [
+
+      [{ name: "美容美发" }, { name: "身体护理" }, { name: "问题皮肤" }, { name: "瑜伽健身" }],
+      [{ name: "分类1" }, { name: "分类2" }, { name: "分类3" }, { name: "分类4" }]] };
+
+
+
+  },
+  methods: {
+
+    //选择类别
+    bindPickerChange: function bindPickerChange(e) {
+      console.log('picker发送选择改变，携带值为', e.target.value);
+      this.index = e.target.value;
+      this.catetext = this.array[this.index].t_name;
+      this.store.shop_type = this.array[this.index].t_id;
+    },
+
+    //选择城市
+    yearChange: function yearChange(e) {
+      this.addresstext = e.detail.value;
+      this.store.shop_area = e.detail.value.toString();
+    },
+
+    checkboxChange: function checkboxChange(e) {
+      this.checked = !this.checked;
+    },
+    showToast_my: function showToast_my(e, f) {
+      uni.showToast({
+        title: e,
+        duration: 3000,
+        icon: f ? "success" : "none" });
+
+      return false;
+    },
+    check: function check() {
+      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+      switch (true) {
+        case !this.store.shop_name:
+          this.showToast_my("商家名字不能为空");
+          break;
+        case !this.store.shop_type:
+          this.showToast_my("请选择经营类别");
+          break;
+        case !this.store.shop_contacts:
+          this.showToast_my("您的称呼不能为空");
+          break;
+        case !myreg.test(this.store.shop_phone):
+          this.showToast_my("请输入正确的手机号");
+          break;
+        case !this.store.shop_area:
+          this.showToast_my("请选择地区");
+          break;
+        case !this.store.shop_address_detail:
+          this.showToast_my("请填写详细信息");
+          break;
+        default:
+          return true;}
+
+    },
+
+    //提交数据
+    save: function save() {var _this = this;
+      if (this.check()) {
+        if (this.checked) {
+          console.log(111);
+          this.global.request.post({
+            url: "shop_settled",
+            method: "GET",
+            data: this.store,
+            success: function success(res) {
+              console.log("这是返回数据" + res);
+              console.log(res.msg);
+              _this.showToast_my(res.msg, true);
+              setTimeout(function () {
+                uni.switchTab({
+                  url: "/pages/member/member" });
+
+              }, 3000);
+            } });
+
+        } else {
+          console.log(222);
+          this.showToast_my("请勾选商家入驻协议");
+        }
+      }
+    },
+
+    // 测试
+    columnchange: function columnchange(e) {
+      console.log(e);
+    },
+    bindPickerChange1: function bindPickerChange1(e) {
+      console.log("value的值改变了");
+    } },
+
+  onLoad: function onLoad() {var _this2 = this;
+    this.global.utils.sethead("商家入驻");
+    this.global.request.post({
+      url: "shop_type",
+      method: "GET",
+      data: {},
+      success: function success(res) {
+        console.log(res);
+        _this2.array = res.shop_type;
+      } });
+
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

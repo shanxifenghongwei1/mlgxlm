@@ -141,9 +141,8 @@
 					
 					testArr:[
 						
-						[{name:"美容美发",chil:[{fat:"asadas"}]},{name:"身体护理",[{fat:"asadas"}]},{name:"问题皮肤",[{fat:"asadas"}]},{name:"瑜伽健身"}]
-						// ["分类1","分类2","分类3","分类4"]
-						// [{name:"分类1"},{name:"分类2"},{name:"分类3"},{name:"分类4"}]
+						[{name:"美容美发"},{name:"身体护理"},{name:"问题皮肤"},{name:"瑜伽健身"}],
+						[{name:"分类1"},{name:"分类2"},{name:"分类3"},{name:"分类4"}]
 					]
 					
 		        }

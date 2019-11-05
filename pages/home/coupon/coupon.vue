@@ -1,6 +1,5 @@
-<!-- 优惠券 -->
-
 <template>
+	<!-- 优惠券 -->
 	<view class="page">
 		<block v-for="(item,index) in list" :key="index">
 			<block v-if="index>3 && index%4==0">
@@ -92,6 +91,9 @@
 		},
 		methods: {
 			
+		},
+		onLoad(options) {
+			this.global.utils.sethead("优惠券")
 		}
 	}
 </script>

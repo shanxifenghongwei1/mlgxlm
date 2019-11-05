@@ -1,7 +1,5 @@
-<!-- 商品详情页面 -->
-
 <template>
-
+	<!-- 商品详情页面 -->
 	<view>
 		<!-- 轮播图 -->
 		<mySwiper :bannerlist="bannerlist"></mySwiper>

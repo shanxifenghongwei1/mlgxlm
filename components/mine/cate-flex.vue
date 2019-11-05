@@ -22,13 +22,12 @@
 			},
 				
 			cateid:{
-				type:Number,
+				type:Number,     //默认id
 				default:1
 			}
 		},
 		methods:{
 			selCate(e){
-				console.log(e);
 				this.$emit('seleId',e)
 			}
 		}

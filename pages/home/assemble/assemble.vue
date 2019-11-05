@@ -1,6 +1,5 @@
-<!-- 拼团页面 -->
-
 <template>
+	<!-- 拼团页面 -->
 	<view>
 		
 		<!-- 大的分类畅销榜 -->
@@ -245,6 +244,9 @@
 			seleId(e) {
 				this.cateid = e;
 			}
+		},
+		onLoad(options) {
+			this.global.utils.sethead("拼团")
 		}
 	}
 </script>

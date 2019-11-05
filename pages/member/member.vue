@@ -123,10 +123,10 @@
 					<view class="icon iconfont member-tool-content1 icon-ai204" style="color: #de0000;"></view>
 					<view class="member-tool-text">店铺收藏</view>
 				</view>
-				<view class="member-tool-content-w25">
+				<navigator hover-class="none" url="/pages/member/tool/evaluate/evaluate" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pingjia" style="color: #00e0df;"></view>
-					<view class="member-tool-text">我的评分</view>
-				</view>
+					<view class="member-tool-text">我的评价</view>
+				</navigator>
 			</view>
 			<view class="member-tool-content1">
 				<navigator hover-class="none" url="/pages/member/tool/bankcard/bankcard" class="member-tool-content-w25">

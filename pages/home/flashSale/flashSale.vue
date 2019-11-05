@@ -1,6 +1,5 @@
-<!-- 限时抢页面 -->
-
 <template>
+	<!-- 限时抢页面 -->
 	<view>
 		<!-- 分类切换 -->
 		<view style="margin-top: -20rpx;">
@@ -202,6 +201,9 @@
 			seleId(e){
 				this.cateid=e;
 			}
+		},
+		onLoad(options) {
+			this.global.utils.sethead("限时抢")
 		}
 	}
 </script>

@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _retail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./retail.vue?vue&type=script&lang=js& */ 175);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _retail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _retail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _retail_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./retail.vue?vue&type=style&index=0&lang=scss& */ 177);
-/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 14);
+/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 15);
 
 
 
@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var mySwiper = function mySwiper() {return __webpack_require__.e(/*! import() | components/mine/my-swiper */ "components/mine/my-swiper").then(__webpack_require__.bind(null, /*! @/components/mine/my-swiper.vue */ 333));};var goods = function goods() {return __webpack_require__.e(/*! import() | components/mine/goods */ "components/mine/goods").then(__webpack_require__.bind(null, /*! @/components/mine/goods.vue */ 305));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var mySwiper = function mySwiper() {return __webpack_require__.e(/*! import() | components/mine/my-swiper */ "components/mine/my-swiper").then(__webpack_require__.bind(null, /*! @/components/mine/my-swiper.vue */ 341));};var goods = function goods() {return __webpack_require__.e(/*! import() | components/mine/goods */ "components/mine/goods").then(__webpack_require__.bind(null, /*! @/components/mine/goods.vue */ 313));};var _default =
 
 
 
@@ -259,7 +259,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       titCon: [] //商品列表
     };
   },
-  methods: {} };exports.default = _default;
+  methods: {},
+
+
+  onLoad: function onLoad(options) {
+    this.global.utils.sethead("分销");
+  } };exports.default = _default;
 
 /***/ }),
 

@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _flashSale_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flashSale.vue?vue&type=script&lang=js& */ 111);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _flashSale_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _flashSale_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _flashSale_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./flashSale.vue?vue&type=style&index=0&lang=scss& */ 113);
-/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 14);
+/* harmony import */ var _F_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 15);
 
 
 
@@ -122,8 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var flashCard = function flashCard() {return __webpack_require__.e(/*! import() | components/mine/flashSale */ "components/mine/flashSale").then(__webpack_require__.bind(null, /*! @/components/mine/flashSale.vue */ 347));};var bwSwiper = function bwSwiper() {return __webpack_require__.e(/*! import() | components/bw-swiper/bw-swiper */ "components/bw-swiper/bw-swiper").then(__webpack_require__.bind(null, /*! @/components/bw-swiper/bw-swiper.vue */ 354));};var cateFlex = function cateFlex() {return __webpack_require__.e(/*! import() | components/mine/cate-flex */ "components/mine/cate-flex").then(__webpack_require__.bind(null, /*! @/components/mine/cate-flex.vue */ 361));};var _default =
-
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var flashCard = function flashCard() {return __webpack_require__.e(/*! import() | components/mine/flashSale */ "components/mine/flashSale").then(__webpack_require__.bind(null, /*! @/components/mine/flashSale.vue */ 355));};var bwSwiper = function bwSwiper() {return __webpack_require__.e(/*! import() | components/bw-swiper/bw-swiper */ "components/bw-swiper/bw-swiper").then(__webpack_require__.bind(null, /*! @/components/bw-swiper/bw-swiper.vue */ 362));};var cateFlex = function cateFlex() {return __webpack_require__.e(/*! import() | components/mine/cate-flex */ "components/mine/cate-flex").then(__webpack_require__.bind(null, /*! @/components/mine/cate-flex.vue */ 369));};var _default =
 
 
 
@@ -325,7 +324,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   methods: {
     seleId: function seleId(e) {
       this.cateid = e;
-    } } };exports.default = _default;
+    } },
+
+  onLoad: function onLoad(options) {
+    this.global.utils.sethead("限时抢");
+  } };exports.default = _default;
 
 /***/ }),
 

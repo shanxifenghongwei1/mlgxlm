@@ -12,8 +12,6 @@
 	"libVersion": "2.7.0",
 	"appid": "wxf97b8045146a0176",
 	"projectname": "美丽共享联盟",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -45,36 +43,22 @@
 				},
 				{
 					"id": -1,
-					"name": "提现成功",
-					"pathName": "pages/member/my-coupon/money/cash_success",
+					"name": "提现明细",
+					"pathName": "pages/member/my-coupon/money/cash_detail",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "登陆",
-					"pathName": "pages/login/login",
+					"name": "我得评价",
+					"pathName": "pages/member/tool/evaluate/evaluate",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "我得分享币",
-					"pathName": "pages/member/my-coupon/money/money",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "提现",
-					"pathName": "pages/member/my-coupon/money/cash",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "商家入驻",
-					"pathName": "pages/member/tool/include/include",
+					"name": "置换商城",
+					"pathName": "pages/home/displace/displace",
 					"scene": null
 				}
 			]

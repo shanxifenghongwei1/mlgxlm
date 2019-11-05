@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 /******段落省略号，默认两行******/
-.any-flex, .evaluate-box .evaluate-box-li .top {
+.any-flex, .evaluate-box .evaluate-box-li .top, .evaluate-box .evaluate-box-li .bottom, .evaluate-box .evaluate-box-li .bottom .right, .evaluate-box .evaluate-box-li .bottom .right view {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -84,7 +84,7 @@
 .evaluate-box .evaluate-box-li .con {
       width: 100%;
       word-break: break-all;
-      padding: 8rpx 0;
+      height: 60rpx;
       overflow: hidden;
       -o-text-overflow: ellipsis;
          text-overflow: ellipsis;
@@ -93,8 +93,46 @@
       -webkit-box-orient: vertical;
       autoprefixer: on;
       font-size: 24rpx;
+      margin: 8rpx 0;
+}
+.evaluate-box .evaluate-box-li .bottom {
+      width: 100%;
+      font-size: 20rpx;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      color: #8C8C8C;
+}
+.evaluate-box .evaluate-box-li .bottom .left {
+        width: 50%;
+        height: 100%;
+}
+.evaluate-box .evaluate-box-li .bottom .right {
+        height: 100%;
+}
+.evaluate-box .evaluate-box-li .bottom .right view:nth-child(2) {
+          margin-left: 20rpx;
+}
+.evaluate-box .evaluate-box-li .bottom .right view:nth-child(2).active {
+          color: #FE0000;
+}
+.evaluate-box .evaluate-box-li .bottom .right .iconfont {
+          margin-right: 10rpx;
+          font-size: 22rpx;
 }
 .evaluate-box .evaluate-box-li:last-child {
     border-bottom: 2rpx solid #dddddd;
+}
+.evaluate-box .evaluate-box-li.active {
+    border-bottom: 2rpx solid #dddddd;
+    border-radius: 10rpx;
+    -webkit-box-shadow: 0px 0px 10px #bfbdbd;
+            box-shadow: 0px 0px 10px #bfbdbd;
+    margin-top: 20rpx;
 }
 

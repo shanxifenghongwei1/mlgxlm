@@ -199,10 +199,6 @@
 				this.cateid=data;
 			}
 		},
-		// onLoad(e) {
-		// 	console.log(e);
-		// 	this.shopid = e.id;
-		// }
 		onLoad(options) {
 			console.log(options)
 			this.options=options;

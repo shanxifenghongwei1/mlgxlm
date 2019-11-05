@@ -20,6 +20,9 @@
 		},
 		methods: {
 			
+		},
+		onLoad(options) {
+			this.global.utils.sethead("搜索")
 		}
 	}
 </script>

@@ -1500,7 +1500,25 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
+/*!****************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/demao.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+module.exports = {
+
+  domain: {
+    //数据请求地址
+    request: "http://mt.mlgxlm.com/",
+    //图片地址
+    picUrl: "http://mt.mlgxlm.com/" } };
+
+/***/ }),
+
+/***/ 15:
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
@@ -1607,7 +1625,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 15:
+/***/ 16:
 /*!******************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/request.js ***!
   \******************************************************************/
@@ -1615,7 +1633,7 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _demao = _interopRequireDefault(__webpack_require__(/*! ./demao.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/* WEBPACK VAR INJECTION */(function(uni) {var _demao = _interopRequireDefault(__webpack_require__(/*! ./demao.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 /**
                                                                                                                                                                        * 封装ajax的post请求
                                                                                                                                                                        * ajaxJson.path 请求地址
@@ -1697,24 +1715,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ 16:
-/*!****************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/demao.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-module.exports = {
-
-  domain: {
-    //数据请求地址
-    request: "http://mt.mlgxlm.com/",
-    //图片地址
-    picUrl: "http://mt.mlgxlm.com/" } };
-
-/***/ }),
-
 /***/ 17:
 /*!****************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/utils.js ***!
@@ -1734,19 +1734,8 @@ var c = function c(data) {
   console.log(data);
 };
 
-//将时间戳转化为日期
-var dateTime = function dateTime(timestamp) {
-  var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-  var Y = date.getFullYear() + '-';
-  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-  var D = date.getDate() + ' ';
-  var h = date.getHours() + ':';
-  var m = date.getMinutes() + ':';
-  var s = date.getSeconds();
-  return Y;
-};
 module.exports = {
-  sethead: sethead, c: c, dateTime: dateTime };
+  sethead: sethead, c: c };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -1762,8 +1751,11 @@ module.exports = {
 var state = {
   login: 0 };
 
+var indexData = {
+  indexData: {} };
+
 module.exports = {
-  state: state };
+  state: state, indexData: indexData };
 
 /***/ }),
 
@@ -11717,7 +11709,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟" }, "pages/classify/classify": { "navigationBarTitleText": "分类" }, "pages/member/member": { "navigationBarTitleText": "会员中心" }, "pages/street/street": { "navigationBarTitleText": "店铺街" }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车" }, "pages/login/login": {}, "pages/home/search/search": {}, "pages/home/hairdressing/hairdressing": {}, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true }, "pages/home/shop-detial/shop-detial": {}, "pages/home/goods-detail/goods-detail": {}, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券" }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢" }, "pages/member/tool/include/include": {}, "pages/home/nearby/nearby": {}, "pages/home/assemble/assemble": {}, "pages/member/signIn/signIn": {}, "pages/member/my-coupon/my-coupon": {}, "pages/member/tool/address/address": {}, "pages/member/tool/address/add-address": {}, "pages/home/retail/retail": {}, "pages/member/my-coupon/my-assets": {}, "pages/member/help/question": {}, "pages/member/tool/bankcard/bankcard": {}, "pages/member/tool/bankcard/addcard": {}, "pages/member/my-coupon/money/money": {}, "pages/member/my-coupon/money/cash": {}, "pages/member/my-coupon/money/cash_success": {}, "pages/member/my-coupon/money/invest": {}, "pages/member/my-coupon/money/invest_success": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟", "usingComponents": { "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/classify/classify": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/member/member": { "navigationBarTitleText": "会员中心", "usingComponents": { "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" } }, "pages/street/street": { "navigationBarTitleText": "店铺街", "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/login/login": { "usingComponents": {} }, "pages/home/search/search": { "usingComponents": { "zy-search": "/components/zy-search/zy-search" } }, "pages/home/hairdressing/hairdressing": { "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist" } }, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true, "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist", "loadmore": "/components/uni-load-more/uni-load-more" } }, "pages/home/shop-detial/shop-detial": { "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "cate-more": "/components/mine/cate-more", "goods": "/components/mine/goods", "case-succ": "/components/mine/case-success", "top-title": "/components/mine/top-title", "evaluate": "/components/mine/evaluate" } }, "pages/home/goods-detail/goods-detail": { "usingComponents": { "my-swiper": "/components/mine/my-swiper", "evaluate": "/components/mine/evaluate", "top-tit": "/components/mine/top-title", "uni-rate": "/components/uni-rate/uni-rate", "goods-list": "/components/mine/goods", "goods-nav": "/components/uni-goods-nav/uni-goods-nav" } }, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券", "usingComponents": {} }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢", "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/tool/include/include": { "usingComponents": {} }, "pages/home/nearby/nearby": { "usingComponents": { "shoplist": "/components/mine/shop-list", "search": "/components/my-search/my-search", "cate-flex": "/components/mine/cate-flex" } }, "pages/home/assemble/assemble": { "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/signIn/signIn": { "usingComponents": { "uni-steps": "/components/uni-steps/uni-steps" } }, "pages/member/my-coupon/my-coupon": { "usingComponents": { "cate-flex": "/components/mine/cate-flex", "datejs": "/components/mine/datejs" } }, "pages/member/tool/address/address": { "usingComponents": {} }, "pages/member/tool/address/add-address": { "usingComponents": {} }, "pages/home/retail/retail": { "usingComponents": { "my-swiper": "/components/mine/my-swiper", "goods": "/components/mine/goods" } }, "pages/member/my-coupon/my-assets": { "usingComponents": {} }, "pages/member/help/question": { "usingComponents": {} }, "pages/member/tool/bankcard/bankcard": { "usingComponents": {} }, "pages/member/tool/bankcard/addcard": { "usingComponents": {} }, "pages/member/my-coupon/money/money": { "usingComponents": {} }, "pages/member/my-coupon/money/cash": { "usingComponents": { "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/member/my-coupon/money/cash_success": { "usingComponents": {} }, "pages/member/my-coupon/money/invest": { "usingComponents": {} }, "pages/member/my-coupon/money/invest_success": { "usingComponents": {} }, "pages/member/my-coupon/money/cash_detail": { "usingComponents": {} }, "pages/member/tool/evaluate/evaluate": { "usingComponents": { "evaluate": "/components/mine/evaluate" } }, "pages/home/displace/displace": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 

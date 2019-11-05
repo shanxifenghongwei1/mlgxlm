@@ -1,4 +1,5 @@
 <script>
+	import demo from "@/common/js/demao.js"
 	export default {
 		onLaunch: function() {
 			console.log('App Launch');

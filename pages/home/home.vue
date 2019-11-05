@@ -12,7 +12,7 @@
 					<view class="icon iconfont icon-icon_coupon"></view>
 					<view class="text font-weig">优惠券</view>
 				</navigator>
-				
+
 				<navigator class="list-one" url="/pages/home/assemble/assemble">
 					<view class="icon iconfont icon-pintuan"></view>
 					<view class="text font-weig">拼团</view>
@@ -23,11 +23,11 @@
 					<view class="text font-weig">限时抢</view>
 				</navigator>
 
-				<navigator url="/pages/home/retail/retail" class="list-one">
+				<navigator url="/pages/home/displace/displace" class="list-one">
 					<view class="icon iconfont icon-hezuo"></view>
 					<view class="text font-weig">置换商城</view>
 				</navigator>
- 
+
 				<navigator url="/pages/home/retail/retail" class="list-one">
 					<view class="icon iconfont icon-fenxiao"></view>
 					<view class="text font-weig">分销</view>
@@ -36,121 +36,124 @@
 		</view>
 		<!-- 主要功能 -->
 		<view class="significance-father">
-			
+
 			<view class="significance">
-				<view @click="runHairdressing(index,item.t_name)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type" :key='index'>
+				<view @click="runHairdressing(index,item.t_name)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type"
+				 :key='index'>
 					<image class="icon" :src="picUrl+item.t_img" mode=""></image>
 					<view class="text font-weig">{{item.t_name}}</view>
 				</view>
-				
+
 				<view @click="goNear()" class="sign-one">
 					<view class="icon-4"></view>
 					<view class="text font-weig">附近店铺</view>
-				</navigator>
+					</navigator>
 
+				</view>
+			</view>
+
+			<!-- 中间的20个功能图标 -->
+			<view class="son-father">
+				<view class="son">
+					<view class="butf">
+						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
+							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+							<view class="text">{{item.t_name}}</view>
+						</view>
+					</view>
+					<view class="head">
+						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
+							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+							<view class="text">{{item.t_name}}</view>
+						</view>
+					</view>
+					<view class="head">
+						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
+							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+							<view class="text">{{item.t_name}}</view>
+						</view>
+					</view>
+					<view class="head">
+						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
+							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
+							<view class="text">{{item.t_name}}</view>
+						</view>
+						<view class="list-one">
+							<image mode="aspectFit" src="../../static/image/homepage/quanbu.jpg" class="icon"></image>
+							<view class="text">更多</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- banner图 -->
+			<view class="banner">
+				<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
+					<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
+						<view class="swiper-item">
+							<image :src="item" mode="widthFix"></image>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+
+			<!-- 店铺精选 -->
+
+			<view class="choiceness">
+				<view class="bac-img">
+					<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
+				</view>
+				<view class='shoplist'>
+					<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
+				</view>
+
+				<shoplist :shoplists='indexData.goodsInfo' :myid='ids'></shoplist>
+
+			</view>
+
+			<!-- 本周新店 -->
+
+			<view class="newshop">
+				<view class="newshop-head">
+					<view class="icons">
+						<view class="iconsss"></view>
+						<view>本周新店</view>
+					</view>
+					<view class="more">更多</view>
+				</view>
+
+				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index">
+					<view class="shop-col-img">
+						<image src="../../static/image/other/shopimg2.jpg" mode="widthFix"></image>
+					</view>
+					<view class="shop-col-message">
+						<view class="shopname">{{item.shop_name}} <text>{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text>
+						</view>
+						<view class="shopnameng" v-if="item.shop_Ename">{{item.shop_Ename}}</view>
+						<view class="gooods" v-for="(item,index) in item.shop_label" :key='index'> <text class="iconfont icon-icon-up"></text>
+							{{item}} </view>
+						<view class="buy">Buy</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 今日推荐 -->
+			<view class="today">
+				<view class="bac-img">
+					<image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image>
+				</view>
+
+				<view class="father">
+					<view class="goodslist">
+						<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index' @click="toGoods(item.goods_id,item.goods_name)">
+							<view class="goodsname">{{item.goods_name}}</view>
+							<view class="goodsprice"> <text>{{item.price}}</text> RMB </view>
+							<image class="goodsimg" src="../../static/image/other/goods.jpg" mode="widthFix"></image>
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
-
-		<!-- 中间的20个功能图标 -->
-		<view class="son-father">
-			<view class="son">
-				<view class="butf">
-					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
-						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
-						<view class="text">{{item.t_name}}</view>
-					</view>
-				</view>
-				<view class="head">
-					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
-						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
-						<view class="text">{{item.t_name}}</view>
-					</view>
-				</view>
-				<view class="head">
-					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
-						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
-						<view class="text">{{item.t_name}}</view>
-					</view>
-				</view>
-				<view class="head">
-					<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
-						<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
-						<view class="text">{{item.t_name}}</view>
-					</view>
-					<view class="list-one">
-						<image mode="aspectFit" src="../../static/image/homepage/quanbu.jpg" class="icon"></image>
-						<view class="text">更多</view>
-					</view>
-				</view>
-			</view>
-		</view>
-
-		<!-- banner图 -->
-		<view class="banner">
-			<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
-				<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
-					<view class="swiper-item">
-						<image :src="item" mode="widthFix"></image>
-					</view>
-				</swiper-item>
-			</swiper>
-		</view>
-
-		<!-- 店铺精选 -->
-
-		<view class="choiceness">
-			<view class="bac-img">
-				<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
-			</view>
-			<view class='shoplist'>
-				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
-			</view>
-
-			<shoplist :shoplists='indexData.goodsInfo' :myid='ids'></shoplist>
-
-		</view>
-
-		<!-- 本周新店 -->
-
-		<view class="newshop">
-			<view class="newshop-head">
-				<view class="icons">
-					<view class="iconsss"></view>
-					<view>本周新店</view>
-				</view>
-				<view class="more">更多</view>
-			</view>
-
-			<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index">
-				<view class="shop-col-img">
-					<image src="../../static/image/other/shopimg2.jpg" mode="widthFix"></image>
-				</view>
-				<view class="shop-col-message">
-					<view class="shopname">{{item.shop_name}} <text>{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text> </view>
-					<view class="shopnameng" v-if="item.shop_Ename">{{item.shop_Ename}}</view>
-					<view class="gooods" v-for="(item) in item.shop_label" :key='index'> <text class="iconfont icon-icon-up"></text> {{item}} </view>
-					<view class="buy">Buy</view>
-				</view>
-			</view>
-		</view>
-
-		<!-- 今日推荐 -->
-		<view class="today">
-			<view class="bac-img">
-				<image src="../../static/image/other/shopings.png" mode="widthFix" class="bac-imgs"></image>
-			</view>
-
-			<view class="father">
-				<view class="goodslist">
-					<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index' @click="toGoods(item.goods_id,item.goods_name)">
-						<view class="goodsname">{{item.goods_name}}</view>
-						<view class="goodsprice"> <text>{{item.price}}</text> RMB </view>
-						<image class="goodsimg" src="../../static/image/other/goods.jpg" mode="widthFix"></image>
-					</view>
-				</view>
-			</view>
-		</view>
-	</view>
 
 
 	</view>
@@ -158,6 +161,7 @@
 
 
 <script>
+
 	import demo from "@/common/js/demao.js"
 	import shoplist from '@/components/shoplist/shoplist.vue'
 	import searchAny from '@/components/my-search/my-search.vue'
@@ -168,15 +172,183 @@
 		},
 		data() {
 			return {
-				indexData:{},
-				
-				dataUrl:"",
-				picUrl:"",
-				
+				indexData: {
+					type: [{
+						t_id: 1,
+						t_name: "美容美发",
+						t_img: "/images/0e1c1739e14db26c54921be94fd4d60.png",
+						p_id: 0,
+						is_hot: null,
+					
+					},{
+						t_id: 2,
+						t_name: "身体护理",
+						t_img: "/images/443baa8259c6045f30129f3373a3d78.png",
+						p_id: 0,
+						is_hot: null
+					},{
+						t_id: 3,
+						t_name: "问题皮肤",
+						t_img: "/images/c7a9301bf841c8300bfe090a38003bd.png",
+						p_id: 0,
+						is_hot: null
+					},{
+						t_id: 4,
+						t_name: "瑜伽健身",
+						t_img: "/images/c8e1b21b77f186848b6e6b7c402fa73.png",
+						p_id: 0,
+						is_hot: null
+					}],
+					s_type1:[
+						{
+							t_id	:	6,
+							t_name	:	"面部护理",
+							t_img	:	"/images/mianbuhuli.jpg",
+							p_id	:	1,
+							is_hot	:	1
+						},
+						{
+							t_id	:	7,
+							t_name	:	"抗衰除皱",
+							t_img	:	"/images/kangsuichuzhou.jpg",
+							p_id	:	1,
+							is_hot	:	1
+						},
+						{
+							t_id	:	8,
+							t_name	:	"塑形换肤",
+							t_img	:	"/images/shuxinghuanfu.jpg",
+							p_id	:	1,
+							is_hot	:	1
+						},
+						{
+							t_id	:	9,
+							t_name	:	"养发美甲",
+							t_img	:	"/images/meifameijia.jpg",
+							p_id	:	1,
+							is_hot	:	1
+						},
+						{
+							t_id	:	10,
+							t_name	:	"深度清洁",
+							t_img	:	"/images/shenduqingjie.jpg",
+							p_id	:	1,
+							is_hot	:	1
+						}
+					],
+					s_type2:[
+						{
+							t_id	:	11,
+							t_name	:	"私密保养",
+							t_img	:	"/images/simibaoyang.jpg",
+							p_id	:	2,
+							is_hot	:	null
+						},
+						{
+							t_id	:	12,
+							t_name	:	"冰点脱毛",
+							t_img	:	"/images/tuomao.jpg",
+							p_id	:	2,
+							is_hot	:	null
+						},
+						{
+							t_id	:	13,
+							t_name	:	"刮痧拔罐",
+							t_img	:	"/images/baguan.jpg",
+							p_id	:	2,
+							is_hot	:	null
+						},
+						{
+							t_id	:	14,
+							t_name	:	"肩颈护理",
+							t_img	:	"/images/anmo.jpg",
+							p_id	:	2,
+							is_hot	:	null
+						},
+						{
+							t_id	:	24,
+							t_name	:	"减肥健胸",
+							t_img	:	"/images/jianfei.jpg",
+							p_id	:	2,
+							is_hot	:	null
+						}
+					],
+					s_type3:[
+						{
+							t_id	:	15,
+							t_name	:	"祛斑祛痘",
+							t_img	:	"/images/qudou.jpg",
+							p_id	:	3,
+							is_hot	:	null
+						},
+						{
+							t_id	:	16,
+							t_name	:	"毛孔粗大",
+							t_img	:	"/images/maokong.jpg",
+							p_id	:	3,
+							is_hot	:	null
+						},
+						{
+							t_id	:	17,
+							t_name	:	"敏感肌肤",
+							t_img	:	"/images/mingganjifu.jpg",
+							p_id	:	3,
+							is_hot	:	null
+						},
+						{
+							t_id	:	18,
+							t_name	:	"肌肤暗沉",
+							t_img	:	"/images/jifuanchen.jpg",
+							p_id	:	3,
+							is_hot	:	null
+						},
+						{
+							t_id	:	19,
+							t_name	:	"黑头",
+							t_img	:	"/images/heitou.jpg",
+							p_id	:	3,
+							is_hot	:	null
+						}
+					],
+					s_type4:[
+						{
+							t_id	:	20,
+							t_name	:	"美容瑜伽",
+							t_img	:	"/images/meirongyujia.jpg",
+							p_id	:	4,
+							is_hot	:	null
+						},
+						{
+							t_id	:	21,
+							t_name	:	"纤体瑜伽",
+							t_img	:	"/images/qiantiyujia.jpg",
+							p_id	:	4,
+							is_hot	:	null
+						},
+						{
+							t_id	:	22,
+							t_name	:	"康复瑜伽",
+							t_img	:	"/images/kangfuyujia.jpg",
+							p_id	:	4,
+							is_hot	:	null
+						},
+						{
+							t_id	:	23,
+							t_name	:	"健身瑜伽",
+							t_img	:	"/images/jianshengyujia.jpg",
+							p_id	:	4,
+							is_hot	:	null
+						}
+					],
+				},
+
+				dataUrl: "",
+				picUrl: demo.domain.picUrl,
+
 				// 搜索栏样式
 				iconType: ['search'],
-				
-				
+
+
 				// banner图
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
@@ -186,9 +358,24 @@
 				colors: '#e01818',
 
 				// 循环列表
-				headlist: [{id: 1,name: '拼团'}, {id: 2,name: '优惠'}, {id: 3,name: '销量'}, {id: 4,name: '限时抢'}, {id: 5,name: '免费送'}],
-				
-				
+				headlist: [{
+					id: 1,
+					name: '拼团'
+				}, {
+					id: 2,
+					name: '优惠'
+				}, {
+					id: 3,
+					name: '销量'
+				}, {
+					id: 4,
+					name: '限时抢'
+				}, {
+					id: 5,
+					name: '免费送'
+				}],
+
+
 				// 高亮id
 				ids: 1,
 
@@ -197,33 +384,32 @@
 		},
 		methods: {
 			// 组件事件实例
-			wearego() {
-			},
+			wearego() {},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
-			runHairdressing(e,f){
+			runHairdressing(e, f) {
 				uni.navigateTo({
-					url:"/pages/home/hairdressing/hairdressing?runid="+e+"&&head="+f					
+					url: "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
 				})
 			},
 			//跳转附近店铺
-			goNear(){
+			goNear() {
 				uni.navigateTo({
-					url:"/pages/home/nearby/nearby?head="+"附近店铺"			
+					url: "/pages/home/nearby/nearby?head=" + "附近店铺"
 				})
 			},
 			//跳转服务详情页面
-			menuDetail(e,f){
+			menuDetail(e, f) {
 				uni.navigateTo({
-					url:"/pages/home/menu-details/menu-details?head="+f+"&&goods_id="+e
+					url: "/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
 				})
 			},
 			//跳转商品详情页面
-			toGoods(e,f){
+			toGoods(e, f) {
 				uni.navigateTo({
-					url:"/pages/home/menu-details/menu-details?good_id="+e+"&&head="+f			
+					url: "/pages/home/menu-details/menu-details?good_id=" + e + "&&head=" + f
 				})
 			},
-			
+
 
 			// 高亮id
 			exchanges(id) {
@@ -231,69 +417,48 @@
 				this.findData(id);
 			},
 
-			init() {
-				// this.global.request.post({
-				// 	url: 'ad/admin',
-				// 	data: {
-				// 		wd:'123',
-				// 		ie:'UTF-8'
-				// 	},
-				// 	isLoading: true,
-				// 	load: '请求中...',
-				// 	success: (res) => {
-						
-				// 	}
-				// })
-			},
-			
 			//查找数据
-			findData:function(e){
-				let data={};
-				e?data.promotion_type=e:data={};
+			findData: function(e) {
+				let data = {};
+				e ? data.promotion_type = e : data = {};
 				//首页页面
 				uni.request({
 					url: demo.domain.request + "index",
 					data: data,
-					method: "GET" ,
+					method: "GET",
 					dataType: "json",
 					header: {
 						"Content-Type": 'application/x-www-form-urlencoded', // 默认值
-						'X-TOKEN-PETMALL': '' ,
+						'X-TOKEN-PETMALL': '',
 					},
 					success: (result) => {
-						let list=result.data.data.week_newshop;
-						list.forEach((v)=>{
-							v.shop_label=v.shop_label.split(",")
+						let list = result.data.data.week_newshop;
+						list.forEach((v) => {
+							v.shop_label = v.shop_label.split(",")
 						})
-						result.data.data.week_newshop=list;
-						
-						
-						let list1=result.data.data.goodsInfo;
-						list1.forEach((v)=>{
-							v.shop_label=v.shop_label.split(",")
+						result.data.data.week_newshop = list;
+
+
+						let list1 = result.data.data.goodsInfo;
+						list1.forEach((v) => {
+							v.shop_label = v.shop_label.split(",")
 						})
-						result.data.data.goodsInfo=list1;
-						this.indexData=result.data.data
+						result.data.data.goodsInfo = list1;
+						console.log(result.data.data)
+
+						this.indexData = result.data.data
 					},
 					complete: (res) => {
-				
+
 					}
 				})
 			}
-			
-			//页面跳转
-			
 		},
- 
 		onLoad(Option) {
-			this.init()
 			console.log(this.global.card_info.bankCardAttribution(6228480900796906312))
 			this.global.utils.sethead('美丽共享联盟');
-			this.picUrl=demo.domain.picUrl;
 			this.findData();
-			
 		}
-
 	}
 </script>
 
@@ -330,7 +495,7 @@
 					border: 2rpx solid $any-zol;
 					display: flex;
 					flex-direction: column;
-			
+
 					.goodsname {
 						font-size: $uni-font-size-lg;
 						text-align: center;
@@ -694,7 +859,7 @@
 		margin-top: 20rpx;
 		@extend .any-flex;
 		justify-content: space-between;
-		
+
 
 		.sear-text {
 			font-size: $uni-font-size-base;

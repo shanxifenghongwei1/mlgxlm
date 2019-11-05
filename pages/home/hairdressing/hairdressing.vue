@@ -1,6 +1,5 @@
-<!-- 主要功能内容页面 -->
-
 <template>
+	<!-- 主要功能内容页面 -->
 	<view>
 		<view class="head-con">
 			<searchAny></searchAny>

@@ -38,12 +38,12 @@
 		<view class="save" @click="save()">
 			<button type="primary">确认提现</button>
 		</view>
-		<view class="bottom">
+		<navigator url="/pages/member/my-coupon/money/cash_detail" class="bottom">
 			查看记录
 			<view class="icon iconfont icon-jiantou-copy">
 				
 			</view>
-		</view>
+		</navigator>
 		
 		
 		<view>
