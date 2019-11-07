@@ -93,17 +93,13 @@
 				<view class="member-order-my">我的工具</view>
 			</view>
 			<view class="member-tool-content1">
-				<view class="member-tool-content-w25">
+				<navigator url="/pages/member/tool/wareCollect/wareCollect" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-xingzhuanggongnengtubiao-" style="color: #25aa7d;"></view>
 					<view class="member-tool-text">商品收藏</view>
-				</view>
+				</navigator>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-fenxiao" style="color: #feb640;"></view>
 					<view class="member-tool-text">分销中心</view>
-				</view>
-				<view class="member-tool-content-w25">
-					<view class="icon iconfont member-tool-content1 icon-kefu" style="color: #20b5af;"></view>
-					<view class="member-tool-text">官方客服</view>
 				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
@@ -115,14 +111,14 @@
 					<view class="icon iconfont member-tool-content1 icon-dizhi" style="color: #33bafe;"></view>
 					<view class="member-tool-text">地址管理</view>
 				</navigator>
-				<view class="member-tool-content-w25">
+				<navigator url="/pages/member/tool/tracks/tracks" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-jiaoyinzujifangke" style="color: #e42cff;"></view>
 					<view class="member-tool-text">我的足迹</view>
-				</view>
-				<view class="member-tool-content-w25">
+				</navigator>
+				<navigator url="/pages/member/tool/storeCollect/storeCollect" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-ai204" style="color: #de0000;"></view>
 					<view class="member-tool-text">店铺收藏</view>
-				</view>
+				</navigator>
 				<navigator hover-class="none" url="/pages/member/tool/evaluate/evaluate" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pingjia" style="color: #00e0df;"></view>
 					<view class="member-tool-text">我的评价</view>
@@ -150,11 +146,11 @@
 		<!-- 底部  -->
 		<view class="member-bottom-in member-assets">
 			<view class="member-bottom-within">
-				<view class="member-bottom-within-w1">
+				<navigator url="/pages/member/help/aboutUs" class="member-bottom-within-w1">
 					<view class="icon iconfont icon-guanyu member-bottom-icon"></view>
 					<view class="member-bottom-text">关于我们</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
-				</view>
+				</navigator>
 				<view class="member-bottom-within-w1">
 					<view class="icon iconfont icon-fankui member-bottom-icon"></view>
 					<view class="member-bottom-text">意见反馈</view>

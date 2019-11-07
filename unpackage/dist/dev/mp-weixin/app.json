@@ -32,7 +32,11 @@
     "pages/member/my-coupon/money/invest_success",
     "pages/member/my-coupon/money/cash_detail",
     "pages/member/tool/evaluate/evaluate",
-    "pages/home/displace/displace"
+    "pages/home/displace/displace",
+    "pages/member/help/aboutUs",
+    "pages/member/tool/tracks/tracks",
+    "pages/member/tool/storeCollect/storeCollect",
+    "pages/member/tool/wareCollect/wareCollect"
   ],
   "subPackages": [],
   "window": {
@@ -69,5 +73,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap60.json"
 }

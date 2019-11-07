@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
-
+import demao from "./common/js/demao"
 import request from "./common/js/request"
 import utils from "./common/js/utils"
 import status from "./common/js/status"
@@ -16,7 +16,11 @@ Vue.prototype.global = {
 	utils: utils,
 	status: status,
 	card_info: card_info,
+	demao,demao
 }
+Vue.filter("time",(res)=>{
+	return res+"111"
+})
 
 App.mpType = 'app'
 const app = new Vue({

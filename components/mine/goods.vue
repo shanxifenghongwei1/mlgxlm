@@ -5,65 +5,88 @@
 			<view class="goods-pic">
 				<image src="/static/image/banner/1.jpg" mode=""></image>
 			</view>
-			<block v-if="!place">
-			<view class="goods-tit">
-				芳香精油经络疏通
-			</view>
-			<view class="goods-con">
-				<view class="goods-con-left">
-					乳腺
+			<block v-if="place===1">
+				<view class="goods-tit">
+					芳香精油经络疏通
 				</view>
-				<view class="goods-con-fight">
-					已售 10
-				</view>
-			</view>
-			<view class="goods-price">
-				<view class="goods-price-left">
-					<view class="goods-NewPrice">
-						198.00
+				<view class="goods-con">
+					<view class="goods-con-left">
+						乳腺
 					</view>
-					<view class="goods-OldPrice">
-						398.00
+					<view class="goods-con-fight">
+						已售 10
 					</view>
 				</view>
-				<view class="goods-price-right">
-					减198元
+				<view class="goods-price">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							198.00
+						</view>
+						<view class="goods-OldPrice">
+							398.00
+						</view>
+					</view>
+					<view class="goods-price-right">
+						减198元
+					</view>
 				</view>
-			</view>
 			</block>
-			<block v-else>
-			<view class="place place-title">
-				伊可佳人
-			</view>
-			<view class="place place-name">
-				姿美堂养颜套装（全新）
-			</view>
-			<view class="place place-num" >
-				<view class="">
-					置换1000
+			<block v-if="place===2">
+				<view class="place place-title">
+					伊可佳人
 				</view>
-				<view class="">
-					置换1000
+				<view class="place place-name">
+					姿美堂养颜套装（全新）
 				</view>
-			</view>
-			<view class="place place-price">
-				￥199.9
-			</view>
-			<view class="place place-address">
-				<view class="icon iconfont icon-xuanzhong1">
-					
+				<view class="place place-num">
+					<view class="">
+						置换1000
+					</view>
+					<view class="">
+						置换1000
+					</view>
 				</view>
-			
-				山西省太原市小店区天鑫花
-			
-				
-			</view>
-			<view class="place place-time">
-				2019-10-16 10:03发布
-			</view>
+				<view class="place place-price">
+					￥199.9
+				</view>
+				<view class="place place-address">
+					<view class="icon iconfont icon-xuanzhong1">
+
+					</view>
+
+					山西省太原市小店区天鑫花
+
+
+				</view>
+				<view class="place place-time">
+					2019-10-16 10:03发布
+				</view>
+			</block>
+			<block v-if="place===3">
+				<view class="ware">
+					<view class="left title">
+						爱美世家
+					</view>
+					<view class="right">
+						<text>山东青岛市市区</text>
+					</view>
+				</view>
+				<view class="ware">
+					<view class="ware-ware">
+						层韩国小气泡深层清洁
+					</view>
+				</view>
+				<view class="ware">
+					<view class="left">
+						原价<text>198</text>
+					</view>
+					<view class="right">
+						平台价<text>198</text>
+					</view>
+				</view>
 			</block>
 		</view>
-		
+
 		<view class="look-more" v-if="more">
 			查看更多60个商品
 		</view>
@@ -71,30 +94,30 @@
 </template>
 
 <script>
-	export default{
-		data(){
-			return{
-				
+	export default {
+		data() {
+			return {
+
 			}
 		},
-		props:{
-			titCon:{
-				type:Array,  //商品数据列表
-				default:[]
+		props: {
+			titCon: {
+				type: Array, //商品数据列表
+				default: []
 			},
-			more:{
-				type:Boolean, //是否显示加载更多
-				default:true
+			more: {
+				type: Boolean, //是否显示加载更多
+				default: true
 			},
-			place:{
-				type:Boolean, //显示的是正常商品false    置换商品true
-				default:false
+			place: {
+				type: Number, //1正常商品false    2置换商品true   3收藏商品
+				default: 1
 			}
 		},
-		methods:{
-			toDetail(e){
+		methods: {
+			toDetail(e) {
 				uni.navigateTo({
-					url:"/pages/home/goods-detail/goods-detail?id="+e
+					url: "/pages/home/goods-detail/goods-detail?id=" + e
 				})
 			}
 		}
@@ -102,12 +125,13 @@
 </script>
 
 <style lang="scss">
-	.goods{
+	.goods {
 		width: 100%;
 		padding: 0 3%;
 		box-sizing: border-box;
 	}
-	.goods-li{
+
+	.goods-li {
 		width: 340rpx;
 		background: #ffffff;
 		display: inline-block;
@@ -115,27 +139,32 @@
 		overflow: hidden;
 		box-shadow: 0rpx 0rpx 10rpx #cfcdcd;
 	}
-	.goods-li:nth-child(2n){
+
+	.goods-li:nth-child(2n) {
 		margin-left: 25rpx;
 	}
-	.goods-pic{
+
+	.goods-pic {
 		width: 100%;
 		height: auto;
 	}
-	.goods-pic image{
+
+	.goods-pic image {
 		width: 100%;
 		height: 194rpx;
-		background:red;
+		background: red;
 	}
-	.goods-tit{
+
+	.goods-tit {
 		width: 80%;
 		text-align: center;
-		margin:0 auto;
+		margin: 0 auto;
 		font-size: $uni-font-size-lg;
 		padding: 5rpx 0;
 		margin-top: 10rpx;
 	}
-	.goods-con{
+
+	.goods-con {
 		width: 100%;
 		@extend .any-flex;
 		justify-content: space-between;
@@ -143,10 +172,11 @@
 		font-size: $uni-font-size-base;
 		padding: 0 15rpx;
 		box-sizing: border-box;
-		color:#7e7e7e;
+		color: #7e7e7e;
 		margin-top: 10rpx;
 	}
-	.goods-price{
+
+	.goods-price {
 		width: 100%;
 		@extend .any-flex;
 		padding: 0 15rpx;
@@ -154,27 +184,32 @@
 		justify-content: space-between;
 		margin: 10rpx 0;
 	}
-	.goods-price-left{
+
+	.goods-price-left {
 		@extend .any-flex;
 		align-items: flex-end;
 	}
-	.goods-NewPrice{
+
+	.goods-NewPrice {
 		font-size: $uni-font-size-lg;
 		color: $any-col;
 	}
-	.goods-OldPrice{
+
+	.goods-OldPrice {
 		font-size: $uni-font-size-base;
 		color: #7e7e7e;
 		text-decoration: line-through;
 		margin-left: 5rpx;
 	}
-	.goods-price-right{
+
+	.goods-price-right {
 		font-size: $uni-font-size-sm;
 		color: $any-col;
 		padding: 2rpx 5rpx;
-		border:2rpx solid $any-col;
+		border: 2rpx solid $any-col;
 	}
-	.look-more{
+
+	.look-more {
 		width: 350rpx;
 		height: 55rpx;
 		border-radius: 15rpx;
@@ -184,51 +219,107 @@
 		font-size: $uni-font-size-base;
 		margin: 30rpx auto 0;
 	}
-	.place{
+
+	.place {
 		width: 100%;
 		padding: 0 10rpx;
 		box-sizing: border-box;
 	}
-	.place-title{
+
+	.place-title {
 		font-size: $uni-font-size-lg;
 		color: $any-col;
 		@include multi-row-apostrophe(1);
-			margin-bottom: 10rpx;
+		margin-bottom: 10rpx;
 	}
-	.place-name{
+
+	.place-name {
 		font-size: $uni-font-size-base;
 		@include multi-row-apostrophe(1);
-			margin-bottom: 10rpx;
+		margin-bottom: 10rpx;
 	}
-	.place-num{
+
+	.place-num {
 		font-size: $uni-font-size-base;
 		@extend .any-flex;
 		justify-content: space-between;
 		color: #7E7E7E;
-			margin-bottom: 10rpx;
-		view{
+		margin-bottom: 10rpx;
+
+		view {
 			width: 50%;
 		}
 	}
-	.place-price{
+
+	.place-price {
 		font-size: 40rpx;
 		color: $any-col;
 		@include multi-row-apostrophe(1);
-			margin-bottom: 10rpx;
+		margin-bottom: 10rpx;
 	}
-	.place-address{
-		width: 100%; 
+
+	.place-address {
+		width: 100%;
 		font-size: $uni-font-size-sm;
 		margin-bottom: 10rpx;
-		view:nth-child(1){
+
+		view:nth-child(1) {
 			display: inline;
-				font-size: $uni-font-size-sm;
+			font-size: $uni-font-size-sm;
 		}
-	
+
 	}
-	.place-time{
+
+	.place-time {
 		font-size: $uni-font-size-sm;
 		@include multi-row-apostrophe(1);
 		margin-bottom: 10rpx;
+	}
+	
+	.ware{
+		width: 100%;
+		font-size: $uni-font-size-base;
+		padding: 0 10rpx;
+		box-sizing: border-box;
+		@extend .any-flex;
+		margin-bottom: 10rpx;
+		.title{
+			font-size: $uni-font-size-lg;
+			color: $any-col;
+			@include multi-row-apostrophe(1);
+		}
+		.left{
+			width: 50%;
+			height: 100%;
+			@include multi-row-apostrophe(1);
+		}
+		.right{
+			width: 50%;
+			height: 100%;
+			text-align: right;
+			font-size: $uni-font-size-sm;
+			@include multi-row-apostrophe(1);
+		}
+		.ware-ware{
+			width: 100%;
+			height: 100%;
+			@include multi-row-apostrophe(1);
+		}
+	}
+	.ware:last-child{
+		font-size: $uni-font-size-sm;
+		.right{
+			text-align: left;
+			text-decoration: line-through;
+		}
+	}
+	.ware:last-child{
+		color: #8C8C8C;
+		text{
+			color: $any-col;
+			text-align: left;
+			font-size: $uni-font-size-base;
+			margin-right: 10rpx;
+		}
 	}
 </style>

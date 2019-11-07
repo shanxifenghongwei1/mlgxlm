@@ -98,7 +98,7 @@
 		display: inline-flex;
 		flex-direction: row;
 		justify-content: flex-start;
-		height: 70upx;
+		height: 50upx;
 		position: relative
 	}
 
@@ -121,10 +121,10 @@
 	.uni-numbox__plus {
 		margin: 0;
 		background-color: #f8f8f8;
-		width: 70upx;
+		width: 45upx;
 		font-size: 40upx;
 		height: 100%;
-		line-height: 70upx;
+		line-height: 45upx;
 		text-align: center;
 		display: inline-flex;
 		align-items: center;
@@ -136,7 +136,7 @@
 	.uni-numbox__value {
 		position: relative;
 		background-color: #fff;
-		width: 80upx;
+		width: 50upx;
 		height: 100%;
 		text-align: center;
 		padding: 0
@@ -163,5 +163,9 @@
 
 	.uni-numbox--disabled {
 		color: silver
+	}
+	input{
+		min-height: 0.1rem;
+		font-size: 24rpx;
 	}
 </style>

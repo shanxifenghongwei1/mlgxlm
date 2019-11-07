@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "限时抢",
+  "usingComponents": {
+    "flash-card": "/components/mine/flashSale",
+    "bw-swiper": "/components/bw-swiper/bw-swiper",
+    "cate-flex": "/components/mine/cate-flex"
+  }
+}

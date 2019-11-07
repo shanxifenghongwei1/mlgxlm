@@ -149,7 +149,24 @@
             "path" : "pages/home/displace/displace",
             "style" : {}
         }
+		,{
+		    "path" : "pages/member/help/aboutUs",
+		    "style" : {}
+		}
+        ,{
+            "path" : "pages/member/tool/tracks/tracks",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/member/tool/storeCollect/storeCollect",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/member/tool/wareCollect/wareCollect",
+            "style" : {}
+        }
     ],
+	
 	 "condition": { //模式配置，仅开发期间生效
 	        "list": [{
 	            "name": "抗谁除皱", //模式名称

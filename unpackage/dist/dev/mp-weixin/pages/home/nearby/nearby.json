@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "shoplist": "/components/mine/shop-list",
+    "search": "/components/my-search/my-search",
+    "cate-flex": "/components/mine/cate-flex"
+  }
+}

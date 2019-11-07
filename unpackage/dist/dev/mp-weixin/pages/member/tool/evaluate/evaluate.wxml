@@ -1,0 +1,1 @@
+<view><evaluate vue-id="1" mine="{{true}}" bind:__l="__l"></evaluate></view>

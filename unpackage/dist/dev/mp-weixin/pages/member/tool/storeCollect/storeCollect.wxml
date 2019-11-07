@@ -1,0 +1,1 @@
+<view><store vue-id="1" bind:__l="__l"></store></view>

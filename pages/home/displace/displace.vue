@@ -7,7 +7,7 @@
 			
 		</view>
 		<view>
-			<goods :titCon="titCon" :more="false" :place="true"></goods>
+			<goods :titCon="titCon" :more="false" :place="2"></goods>
 		</view>
 	</view>
 

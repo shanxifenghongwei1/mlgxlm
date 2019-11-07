@@ -59,6 +59,16 @@
 					url:"./add-address?address_id="+e
 				})
 			}
+		},
+		onShow(){
+			this.global.request.post({
+				url: this.global.demao.api.user_Address_list,
+				method: "GET",
+				data: {},
+				success: (res) => {
+					console.log("hahaha"+res)
+				}
+			})
 		}
 	}
 </script>
