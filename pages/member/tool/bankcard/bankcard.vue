@@ -1,17 +1,17 @@
 <template>
 	<view class="page">
-		<view class="card" v-for="(item,index) in cardList" :key="index">
+		<view class="card" v-for="(item,index) in cardList" :key="index" @longpress="del(item.bankcard_id)">
 			<view class="card-box">
 				<view class="top">
 					<view class="card-name">
-						{{item.cardName}}
+						{{item.bank}}
 					</view>
 					<view class="card-cate">
-						{{item.cardCategory}}丨{{item.name}}
+						{{item.bankcard_type}}丨{{item.bankcard_name}}
 					</view>
 				</view>
 				<view class="card-num">
-					**** **** **** {{item.cardNum}}
+					**** **** **** {{item.bankcard_num | shear}}
 				</view>
 			</view>
 		</view>
@@ -30,59 +30,60 @@
 	export default {
 		data() {
 			return {
-				cardList: [{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					},
-					{
-						cardName: "招商银行",
-						cardCategory: "借记卡",
-						name: "边鹏举",
-						cardNum: "6666"
-					}
-				]
+				cardList: []
 			}
 		},
 		methods: {
-
+			del(e){
+				let that=this;
+				uni.showModal({
+					title: '提示',
+					content: '确认删除这张银行卡吗',
+					success: (res)=> {
+					    if (res.confirm) {
+					       that.global.request.post({
+					       	url:this.global.demao.api.add_bankcard_delete,
+					       	method:"GET",
+					       	data:{
+								bankcard_id:e
+							},
+					       	success:(res)=>{
+					       		that.showToast_my(res.msg);
+					       		that.findlist()
+					       	}
+					       })
+					    } else if (res.cancel) {
+					        console.log('用户点击取消');
+					    }
+					}
+				})
+			},
+			showToast_my: function(e) {
+				uni.showToast({
+					title: e,
+					duration: 2000,
+					icon: "none"
+				});
+				return false;
+			},
+			findlist(){
+				this.global.request.post({
+					url: this.global.demao.api.bankcard_list,
+					method: "GET",
+					data: {},
+					success: (res) => {
+						this.cardList=res.respo
+					}
+				})
+			},
+		},
+		onShow(){
+			this.findlist()
+		},
+		filters:{
+			shear(str){
+				return str.toString().slice(-4)
+			}
 		}
 	}
 </script>

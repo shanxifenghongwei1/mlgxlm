@@ -60,10 +60,10 @@
 		</view>
 		<!-- 订单 -->
 		<view class="member-order member-assets">
-			<view class="member-order-top">
+			<navigator url="/pages/pay/order" class="member-order-top">
 				<view class="member-order-my">我的订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
-			</view>
+			</navigator>
 			<view class="member-order-content">
 				<view class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>

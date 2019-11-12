@@ -8,7 +8,7 @@
 				:
 			</view>
 			<view class="right">
-				<input type="text" value="" placeholder="请填写您的姓名" v-model="store.name"/>
+				<input type="text" value="" placeholder="请填写您的姓名" v-model="store.name" />
 			</view>
 		</view>
 		<view class="user">
@@ -19,7 +19,7 @@
 				:
 			</view>
 			<view class="right">
-				<input type="text" value="" placeholder="请填写您的联系方式" v-model="store.phone"/>
+				<input type="text" value="" placeholder="请填写您的联系方式" v-model="store.tel" />
 			</view>
 		</view>
 		<view class="user">
@@ -43,10 +43,10 @@
 			<view class="con">
 				:
 			</view>
-			<textarea value="" placeholder="请填写详细地址" v-model="store.detaol"/>
-		</view>
+			<textarea value="" placeholder="请填写详细地址" v-model="store.address_detail" />
+			</view>
 		
-		<view class="detail active">
+		<view class="detail active" @click="checkboxChange">
 			<view class="left">
 				设为默认
 			</view>
@@ -54,13 +54,13 @@
 				:
 			</view>
 			<view class="right">
-				
+			
 			</view>
-			<image v-show="store.select" src="/static/image/other/icon-select-cir-on.png" mode=""></image>
-			<image v-show="!store.select" src="/static/image/other/icon-select-cir-out.png" mode=""></image>
+			<image v-show="store.is_default==1" src="/static/image/other/icon-select-cir-on.png" mode=""></image>
+			<image v-show="store.is_default==2" src="/static/image/other/icon-select-cir-out.png" mode=""></image>
 		</view>
 		
-		<button type="warn">选择</button>
+		<button type="warn" @click="save()">选择</button>
 	</view>
 </template>
 
@@ -71,13 +71,13 @@
 		        return {
 					address_id:0,
 					
-					store:{},
+					store:{
+						is_default:1
+					},
 					
 					addresstext: '请选择地区',
 					
-					select:false,
-					
-					isEmpty:true
+					// select:false,
 		        }
 		    },
 		methods: {
@@ -86,12 +86,14 @@
 			//选择城市
 			yearChange : function(e){
 			    this.addresstext = e.detail.value;
-				this.store.shop_area=e.detail.value.toString();
+				this.store.address_area=e.detail.value.toString();
 			},
 			
+			//是否选择默认
 			checkboxChange:function(e){
-				this.checked=!this.checked;
+				this.store.is_default==1?this.store.is_default=2:this.store.is_default=1
 			},
+			
 			showToast_my:function(e){
 				uni.showToast({
 				    title: e,
@@ -103,22 +105,16 @@
 			check:function(){
 				var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
 				switch(true) {
-				    case !this.store.shop_name:
-				        this.showToast_my("商家名字不能为空");
+				    case !this.store.name:
+				        this.showToast_my("用户名不能为空");
 				        break;
-				    case !this.store.shop_type:
-				        this.showToast_my("请选择经营类别")
-				        break;
-					case !this.store.shop_contacts:
-					   this.showToast_my("您的称呼不能为空")
-					   break;
-					case !myreg.test(this.store.shop_phone):
+					case !myreg.test(this.store.tel):
 					    this.showToast_my("请输入正确的手机号")
 					    break;
-					case !this.store.shop_area:
+					case !this.store.address_area:
 					    this.showToast_my("请选择地区")
 					    break;
-					case !this.store.shop_address_detail:
+					case !this.store.address_detail:
 					    this.showToast_my("请填写详细信息");
 					    break;
 				     default:
@@ -129,43 +125,44 @@
 			//提交数据
 			save:function(){
 				if(this.check()){
-					if(this.checked){
-						console.log(111)
-						this.global.request.post({
-							url:"shop_settled",
-							method:"GET",
-							data:this.store,
-							success:(res)=>{
-								console.log("这是返回数据"+res)
-								console.log(res.msg)
-								this.showToast_my(res.msg);
-								setTimeout(()=>{
-									uni.switchTab({
-										url:"/pages/member/member"
-									})
-								},2000)
-							}
-						})
-					}else{
-						console.log(222)
-						this.showToast_my("请勾选商家入驻协议");
-					}
+					console.log(this.store)
+					this.global.request.post({
+						url:this.store.id?this.global.demao.api.update_address:this.global.demao.api.user_Address,
+						method:"GET",
+						data:this.store,
+						success:(res)=>{
+							console.log("这是返回数据"+res)
+							console.log(res.msg)
+							this.showToast_my(res.msg);
+							setTimeout(()=>{
+								uni.navigateBack({
+									 delta: 1
+								})
+							},2000)
+						}
+					})
 				}
 			}		
 		},
 		onLoad(e){
-			console.log(e)
-			
-			// this.global.utils.sethead("商家入驻")
-			// this.global.request.post({
-			// 	url:"shop_type",
-			// 	method:"GET",
-			// 	data:{},
-			// 	success:(res)=>{
-			// 		console.log(res)
-			// 		this.array=res.shop_type;
-			// 	}
-			// })
+			let a=uni.getStorageSync("address_edit")
+			if(a){
+				this.store.id=a.id;
+				this.store.name=a.name;
+				this.store.tel=a.tel;
+				this.store.address_detail=a.address_detail;
+				this.store.address_area=a.address_provice+","+a.address_city+","+a.address_area;
+				this.store.is_default=a.is_default;
+				
+				
+				this.addresstext=a.address_provice+","+a.address_city+","+a.address_area
+				this.global.utils.sethead("修改地址")
+			}else{
+				this.global.utils.sethead("添加地址")
+			}
+		},
+		destroyed(){
+			uni.removeStorageSync('address_edit');
 		}
 	}
 </script>
@@ -175,6 +172,7 @@
 		width: 100%;
 		padding: 0 3%;
 		box-sizing: border-box;
+		background: #ffffff;
 	}
 	.user{
 		width: 100%;
@@ -226,7 +224,7 @@
 			line-height: 80rpx;
 		}
 		textarea{
-			flex-grow: 1;
+			width: 500rpx;
 			padding: 20rpx 0;
 			box-sizing: border-box;
 			margin-top: 10rpx;

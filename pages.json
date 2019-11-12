@@ -6,23 +6,53 @@
 				"navigationBarTitleText": "美丽共享联盟"
 			}
 		},
-		{
-			"path": "pages/classify/classify",
-			"style": {
-				"navigationBarTitleText": "分类"
-			}
-		},
 
 		{
 			"path": "pages/member/member",
 			"style": {
-				"navigationBarTitleText": "会员中心"
+				"navigationBarTitleText": "会员中心" 
 			}
 		},
 		{
 			"path": "pages/street/street",
 			"style": {
 				"navigationBarTitleText": "店铺街"
+			}
+		},
+		{
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": "在线支付"
+			}
+		},
+		{
+			"path": "pages/pay/pay_success",
+			"style": {
+				"navigationBarTitleText": "在线支付"
+			}
+		},
+		{
+			"path": "pages/pay/refund",
+			"style": {
+				"navigationBarTitleText": "申请退款"
+			}
+		},
+		{
+			"path": "pages/pay/refund_success",
+			"style": {
+				"navigationBarTitleText": "申请成功"
+			}
+		},
+		{
+			"path":"pages/pay/order",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path":"pages/pay/order_detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
 			}
 		},
 		{
@@ -77,10 +107,16 @@
             "path" : "pages/home/nearby/nearby",
             "style" : {}
         }
+		,{
+		    "path" : "pages/home/nearby/newStore",
+		    "style": {
+		    	"navigationBarTitleText": "本周新店"
+		    }
+		}
         ,{
             "path" : "pages/home/assemble/assemble",
             "style" : {}
-        }
+        } 
         ,{
             "path" : "pages/member/signIn/signIn",
             "style" : {}
@@ -91,7 +127,9 @@
         }
         ,{
             "path" : "pages/member/tool/address/address",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "地址管理"
+			}
         }
 		,{
 		    "path" : "pages/member/tool/address/add-address",
@@ -165,6 +203,7 @@
             "path" : "pages/member/tool/wareCollect/wareCollect",
             "style" : {}
         }
+		
     ],
 	
 	 "condition": { //模式配置，仅开发期间生效
@@ -180,9 +219,14 @@
 		"navigationBarBackgroundColor": "#Fe0000",
 		"backgroundColor": "#FFFFFF"
 	},
+	"permission": {
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
+		}
+	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#f73333",
+		"selectedColor": "#f73333", 
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{

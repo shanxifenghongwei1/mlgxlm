@@ -38,7 +38,7 @@
 		<view class="significance-father">
 
 			<view class="significance">
-				<view @click="runHairdressing(index,item.t_name)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type"
+				<view @click="runHairdressing(item.t_id,item.t_name)" data-bs='asdxs' class="sign-one" v-for="(item,index) in indexData.type"
 				 :key='index'>
 					<image class="icon" :src="picUrl+item.t_img" mode=""></image>
 					<view class="text font-weig">{{item.t_name}}</view>
@@ -51,6 +51,7 @@
 
 				</view>
 			</view>
+
 
 			<!-- 中间的20个功能图标 -->
 			<view class="son-father">
@@ -86,6 +87,7 @@
 				</view>
 			</view>
 
+
 			<!-- banner图 -->
 			<view class="banner">
 				<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
@@ -96,9 +98,9 @@
 					</swiper-item>
 				</swiper>
 			</view>
-
+			
+			
 			<!-- 店铺精选 -->
-
 			<view class="choiceness">
 				<view class="bac-img">
 					<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
@@ -119,7 +121,7 @@
 						<view class="iconsss"></view>
 						<view>本周新店</view>
 					</view>
-					<view class="more">更多</view>
+					<navigator url="/pages/home/nearby/newStore" class="more">更多</navigator>
 				</view>
 
 				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index">

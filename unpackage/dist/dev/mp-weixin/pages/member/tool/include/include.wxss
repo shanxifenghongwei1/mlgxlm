@@ -53,6 +53,12 @@
 .page {
   width: 100%;
   min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden;
+}
+.page {
+  width: 100%;
+  min-height: 100vh;
   background: #c8c7cc;
   background: #f0f0f0;
 }

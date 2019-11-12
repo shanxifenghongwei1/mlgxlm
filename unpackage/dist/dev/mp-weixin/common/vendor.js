@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1500,9 +1500,9 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 100:
+/***/ 117:
 /*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/goods-detail/goods-detail.scss ***!
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/hairdressing/hairdressing.scss ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1525,11 +1525,44 @@ module.exports = {
     //数据请求地址
     request: "http://mt.mlgxlm.com/",
     //图片地址
-    picUrl: "http://mt.mlgxlm.com/" },
+    picUrl: "http://mt.mlgxlm.com" },
 
   api: {
-    user_Address_list: "user_Address_list" //用户地址列表
+    index: "index", //首页
+    index_coupon: "index_coupon", //优惠券
+
+    user_Address_list: "user_Address_list", //用户地址列表
+    user_Address: "user_Address", //添加地址		
+    delete_address: "delete_address", //删除地址
+    update_address: "update_address", //修改地址
+
+
+    bankcard_list: "bankcard_list", //银行卡列表
+    add_bankcard: "add_bankcard", //添加银行卡
+    add_bankcard_delete: "add_bankcard_delete" //删除银行卡
   } };
+
+/***/ }),
+
+/***/ 132:
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/shop-detial/shop-detial.scss ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 141:
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/goods-detail/goods-detail.scss ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -1744,13 +1777,23 @@ var sethead = function sethead(data) {
     title: data });
 
 };
+var showToast_my = function showToast_my(e) {
+  uni.showToast({
+    title: e,
+    duration: 2000,
+    icon: "none" });
+
+  return false;
+};
 
 var c = function c(data) {
   console.log(data);
 };
 
 module.exports = {
-  sethead: sethead, c: c };
+  sethead: sethead,
+  c: c,
+  showToast_my: showToast_my };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -1766,11 +1809,12 @@ module.exports = {
 var state = {
   login: 0 };
 
+var city = {};
 var indexData = {
   indexData: {} };
 
 module.exports = {
-  state: state, indexData: indexData };
+  state: state, indexData: indexData, city: city };
 
 /***/ }),
 
@@ -10272,7 +10316,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -10293,14 +10337,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -10376,7 +10420,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10754,6 +10798,470 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
+/*!******************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/common/js/bmap-wx.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @file 微信小程序JSAPI
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author 崔健 cuijian03@baidu.com 2017.01.10
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @update 邓淑芳 623996689@qq.com 2019.07.03
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 百度地图微信小程序API类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
+BMapWX = /*#__PURE__*/function () {
+
+  /**
+                                    * 百度地图微信小程序API类
+                                    *
+                                    * @constructor
+                                    */
+  function BMapWX(param) {_classCallCheck(this, BMapWX);
+    this.ak = param["ak"];
+  }
+
+  /**
+     * 使用微信接口进行定位
+     *
+     * @param {string} type 坐标类型
+     * @param {Function} success 成功执行
+     * @param {Function} fail 失败执行
+     * @param {Function} complete 完成后执行
+     */_createClass(BMapWX, [{ key: "getWXLocation", value: function getWXLocation(
+    type, success, fail, complete) {
+      type = type || 'gcj02',
+      success = success || function () {};
+      fail = fail || function () {};
+      complete = complete || function () {};
+      uni.getLocation({
+        type: type,
+        success: success,
+        fail: fail,
+        complete: complete });
+
+    }
+
+    /**
+       * POI周边检索
+       *
+       * @param {Object} param 检索配置
+       * 参数对象结构可以参考
+       * http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi
+       */ }, { key: "search", value: function search(
+    param) {
+      var that = this;
+      param = param || {};
+      var searchparam = {
+        query: param["query"] || '生活服务$美食&酒店',
+        scope: param["scope"] || 1,
+        filter: param["filter"] || '',
+        coord_type: param["coord_type"] || 2,
+        page_size: param["page_size"] || 10,
+        page_num: param["page_num"] || 0,
+        output: param["output"] || 'json',
+        ak: that.ak,
+        sn: param["sn"] || '',
+        timestamp: param["timestamp"] || '',
+        radius: param["radius"] || 2000,
+        ret_coordtype: 'gcj02ll' };
+
+      var otherparam = {
+        iconPath: param["iconPath"],
+        iconTapPath: param["iconTapPath"],
+        width: param["width"],
+        height: param["height"],
+        alpha: param["alpha"] || 1,
+        success: param["success"] || function () {},
+        fail: param["fail"] || function () {} };
+
+      var type = 'gcj02';
+      var locationsuccess = function locationsuccess(result) {
+        searchparam["location"] = result["latitude"] + ',' + result["longitude"];
+        uni.request({
+          url: 'https://api.map.baidu.com/place/v2/search',
+          data: searchparam,
+          header: {
+            "content-type": "application/json" },
+
+          method: 'GET',
+          success: function success(data) {
+            var res = data["data"];
+            if (res["status"] === 0) {
+              var poiArr = res["results"];
+              // outputRes 包含两个对象，
+              // originalData为百度接口返回的原始数据
+              // wxMarkerData为小程序规范的marker格式
+              var outputRes = {};
+              outputRes["originalData"] = res;
+              outputRes["wxMarkerData"] = [];
+              for (var i = 0; i < poiArr.length; i++) {
+                outputRes["wxMarkerData"][i] = {
+                  id: i,
+                  latitude: poiArr[i]["location"]["lat"],
+                  longitude: poiArr[i]["location"]["lng"],
+                  title: poiArr[i]["name"],
+                  iconPath: otherparam["iconPath"],
+                  iconTapPath: otherparam["iconTapPath"],
+                  address: poiArr[i]["address"],
+                  telephone: poiArr[i]["telephone"],
+                  alpha: otherparam["alpha"],
+                  width: otherparam["width"],
+                  height: otherparam["height"] };
+
+              }
+              otherparam.success(outputRes);
+            } else {
+              otherparam.fail({
+                errMsg: res["message"],
+                statusCode: res["status"] });
+
+            }
+          },
+          fail: function fail(data) {
+            otherparam.fail(data);
+          } });
+
+      };
+      var locationfail = function locationfail(result) {
+        otherparam.fail(result);
+      };
+      var locationcomplete = function locationcomplete(result) {
+      };
+      if (!param["location"]) {
+        that.getWXLocation(type, locationsuccess, locationfail, locationcomplete);
+      } else {
+        var longitude = param.location.split(',')[1];
+        var latitude = param.location.split(',')[0];
+        var errMsg = 'input location';
+        var res = {
+          errMsg: errMsg,
+          latitude: latitude,
+          longitude: longitude };
+
+        locationsuccess(res);
+      }
+    }
+
+    /**
+       * sug模糊检索
+       *
+       * @param {Object} param 检索配置
+       * 参数对象结构可以参考
+       * http://lbsyun.baidu.com/index.php?title=webapi/place-suggestion-api
+       */ }, { key: "suggestion", value: function suggestion(
+    param) {
+      var that = this;
+      param = param || {};
+      var suggestionparam = {
+        query: param["query"] || '',
+        region: param["region"] || '全国',
+        city_limit: param["city_limit"] || false,
+        output: param["output"] || 'json',
+        ak: that.ak,
+        sn: param["sn"] || '',
+        timestamp: param["timestamp"] || '',
+        ret_coordtype: 'gcj02ll' };
+
+      var otherparam = {
+        success: param["success"] || function () {},
+        fail: param["fail"] || function () {} };
+
+      uni.request({
+        url: 'https://api.map.baidu.com/place/v2/suggestion',
+        data: suggestionparam,
+        header: {
+          "content-type": "application/json" },
+
+        method: 'GET',
+        success: function success(data) {
+          var res = data["data"];
+          if (res["status"] === 0) {
+            otherparam.success(res);
+          } else {
+            otherparam.fail({
+              errMsg: res["message"],
+              statusCode: res["status"] });
+
+          }
+        },
+        fail: function fail(data) {
+          otherparam.fail(data);
+        } });
+
+    }
+
+    /**
+       * rgc检索（逆地理编码：经纬度->地点描述）
+       * 
+       * @param {Object} param 检索配置
+       * 参数对象结构可以参考
+       * https://lbs.baidu.com/index.php?title=webapi/guide/webservice-geocoding-abroad
+       * 
+       */ }, { key: "regeocoding", value: function regeocoding(
+    param) {
+      var that = this;
+      param = param || {};
+      var regeocodingparam = {
+        coordtype: param["coordtype"] || 'gcj02ll',
+        ret_coordtype: 'gcj02ll',
+        radius: param["radius"] || 1000,
+        ak: that.ak,
+        sn: param["sn"] || '',
+        output: param["output"] || 'json',
+        callback: param["callback"] || function () {},
+        extensions_poi: param["extensions_poi"] || 1,
+        extensions_road: param["extensions_road"] || false,
+        extensions_town: param["extensions_town"] || false,
+        language: param["language"] || 'zh-CN',
+        language_auto: param["language_auto"] || 0 };
+
+      var otherparam = {
+        iconPath: param["iconPath"],
+        iconTapPath: param["iconTapPath"],
+        width: param["width"],
+        height: param["height"],
+        alpha: param["alpha"] || 1,
+        success: param["success"] || function () {},
+        fail: param["fail"] || function () {} };
+
+      var type = 'gcj02';
+      var locationsuccess = function locationsuccess(result) {
+        regeocodingparam["location"] = result["latitude"] + ',' + result["longitude"];
+        uni.request({
+          url: 'https://api.map.baidu.com/reverse_geocoding/v3',
+          data: regeocodingparam,
+          header: {
+            "content-type": "application/json" },
+
+          method: 'GET',
+          success: function success(data) {
+            var res = data["data"];
+            if (res["status"] === 0) {
+              var poiObj = res["result"];
+              // outputRes 包含两个对象：
+              // originalData为百度接口返回的原始数据
+              // wxMarkerData为小程序规范的marker格式
+              var outputRes = {};
+              outputRes["originalData"] = res;
+              outputRes["wxMarkerData"] = [];
+              outputRes["wxMarkerData"][0] = {
+                id: 0,
+                latitude: result["latitude"],
+                longitude: result["longitude"],
+                address: poiObj["formatted_address"],
+                iconPath: otherparam["iconPath"],
+                iconTapPath: otherparam["iconTapPath"],
+                desc: poiObj["sematic_description"],
+                business: poiObj["business"],
+                alpha: otherparam["alpha"],
+                width: otherparam["width"],
+                height: otherparam["height"] };
+
+              otherparam.success(outputRes);
+            } else {
+              otherparam.fail({
+                errMsg: res["message"],
+                statusCode: res["status"] });
+
+            }
+          },
+          fail: function fail(data) {
+            otherparam.fail(data);
+          } });
+
+      };
+      var locationfail = function locationfail(result) {
+        otherparam.fail(result);
+      };
+      var locationcomplete = function locationcomplete(result) {
+      };
+      if (!param["location"]) {
+        that.getWXLocation(type, locationsuccess, locationfail, locationcomplete);
+      } else {
+        var longitude = param.location.split(',')[1];
+        var latitude = param.location.split(',')[0];
+        var errMsg = 'input location';
+        var res = {
+          errMsg: errMsg,
+          latitude: latitude,
+          longitude: longitude };
+
+        locationsuccess(res);
+      }
+    }
+
+    /**
+       * gc检索（地理编码：地点->经纬度）
+       *
+       * @param {Object} param 检索配置
+       * 参数对象结构可以参考
+       * https://lbs.baidu.com/index.php?title=webapi/guide/webservice-geocoding
+       * 
+       */ }, { key: "geocoding", value: function geocoding(
+    param) {
+      var that = this;
+      param = param || {};
+      var geocodingparam = {
+        address: param["address"] || '',
+        city: param["city"] || '',
+        ret_coordtype: param["coordtype"] || 'gcj02ll',
+        ak: that.ak,
+        sn: param["sn"] || '',
+        output: param["output"] || 'json',
+        callback: param["callback"] || function () {} };
+
+      var otherparam = {
+        iconPath: param["iconPath"],
+        iconTapPath: param["iconTapPath"],
+        width: param["width"],
+        height: param["height"],
+        alpha: param["alpha"] || 1,
+        success: param["success"] || function () {},
+        fail: param["fail"] || function () {} };
+
+      if (param["address"]) {
+        uni.request({
+          url: 'https://api.map.baidu.com/geocoding/v3',
+          data: geocodingparam,
+          header: {
+            "content-type": "application/json" },
+
+          method: 'GET',
+          success: function success(data) {
+            var res = data["data"];
+            if (res["status"] === 0) {
+              var poiObj = res["result"];
+              // outputRes 包含两个对象：
+              // originalData为百度接口返回的原始数据
+              // wxMarkerData为小程序规范的marker格式
+              var outputRes = res;
+              outputRes["originalData"] = res;
+              outputRes["wxMarkerData"] = [];
+              outputRes["wxMarkerData"][0] = {
+                id: 0,
+                latitude: poiObj["location"]["lat"],
+                longitude: poiObj["location"]["lng"],
+                iconPath: otherparam["iconPath"],
+                iconTapPath: otherparam["iconTapPath"],
+                alpha: otherparam["alpha"],
+                width: otherparam["width"],
+                height: otherparam["height"] };
+
+              otherparam.success(outputRes);
+            } else {
+              otherparam.fail({
+                errMsg: res["message"],
+                statusCode: res["status"] });
+
+            }
+          },
+          fail: function fail(data) {
+            otherparam.fail(data);
+          } });
+
+      } else {
+        var errMsg = 'input address!';
+        var res = {
+          errMsg: errMsg };
+
+        otherparam.fail(res);
+      }
+    }
+
+    /**
+       * 天气检索
+       *
+       * @param {Object} param 检索配置
+       */ }, { key: "weather", value: function weather(
+    param) {
+      var that = this;
+      param = param || {};
+      var weatherparam = {
+        coord_type: param["coord_type"] || 'gcj02',
+        output: param["output"] || 'json',
+        ak: that.ak,
+        sn: param["sn"] || '',
+        timestamp: param["timestamp"] || '' };
+
+      var otherparam = {
+        success: param["success"] || function () {},
+        fail: param["fail"] || function () {} };
+
+      var type = 'gcj02';
+      var locationsuccess = function locationsuccess(result) {
+        weatherparam["location"] = result["longitude"] + ',' + result["latitude"];
+        uni.request({
+          url: 'https://api.map.baidu.com/telematics/v3/weather',
+          data: weatherparam,
+          header: {
+            "content-type": "application/json" },
+
+          method: 'GET',
+          success: function success(data) {
+            var res = data["data"];
+            if (res["error"] === 0 && res["status"] === 'success') {
+              var weatherArr = res["results"];
+              // outputRes 包含两个对象，
+              // originalData为百度接口返回的原始数据
+              // wxMarkerData为小程序规范的marker格式
+              var outputRes = {};
+              outputRes["originalData"] = res;
+              outputRes["currentWeather"] = [];
+              outputRes["currentWeather"][0] = {
+                currentCity: weatherArr[0]["currentCity"],
+                pm25: weatherArr[0]["pm25"],
+                date: weatherArr[0]["weather_data"][0]["date"],
+                temperature: weatherArr[0]["weather_data"][0]["temperature"],
+                weatherDesc: weatherArr[0]["weather_data"][0]["weather"],
+                wind: weatherArr[0]["weather_data"][0]["wind"] };
+
+              otherparam.success(outputRes);
+            } else {
+              otherparam.fail({
+                errMsg: res["message"],
+                statusCode: res["status"] });
+
+            }
+          },
+          fail: function fail(data) {
+            otherparam.fail(data);
+          } });
+
+      };
+      var locationfail = function locationfail(result) {
+        otherparam.fail(result);
+      };
+      var locationcomplete = function locationcomplete(result) {
+      };
+      if (!param["location"]) {
+        that.getWXLocation(type, locationsuccess, locationfail, locationcomplete);
+      } else {
+        var longitude = param.location.split(',')[0];
+        var latitude = param.location.split(',')[1];
+        var errMsg = 'input location';
+        var res = {
+          errMsg: errMsg,
+          latitude: latitude,
+          longitude: longitude };
+
+        locationsuccess(res);
+      }
+    } }]);return BMapWX;}();
+
+
+module.exports.BMapWX = BMapWX;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 21:
 /*!*****************************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/common/css/font.css ***!
   \*****************************************************************/
@@ -10795,6 +11303,17 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 36:
+/*!**********************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/member/member.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ 4:
 /*!********************************************************!*\
   !*** C:/Users/Administrator/Desktop/mlgxlm/pages.json ***!
@@ -10804,17 +11323,6 @@ module.exports = g;
 
 "use strict";
 
-
-/***/ }),
-
-/***/ 41:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/member/member.scss ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -11724,18 +12232,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟" }, "pages/classify/classify": { "navigationBarTitleText": "分类" }, "pages/member/member": { "navigationBarTitleText": "会员中心" }, "pages/street/street": { "navigationBarTitleText": "店铺街" }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车" }, "pages/login/login": {}, "pages/home/search/search": {}, "pages/home/hairdressing/hairdressing": {}, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true }, "pages/home/shop-detial/shop-detial": {}, "pages/home/goods-detail/goods-detail": {}, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券" }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢" }, "pages/member/tool/include/include": {}, "pages/home/nearby/nearby": {}, "pages/home/assemble/assemble": {}, "pages/member/signIn/signIn": {}, "pages/member/my-coupon/my-coupon": {}, "pages/member/tool/address/address": {}, "pages/member/tool/address/add-address": {}, "pages/home/retail/retail": {}, "pages/member/my-coupon/my-assets": {}, "pages/member/help/question": {}, "pages/member/tool/bankcard/bankcard": {}, "pages/member/tool/bankcard/addcard": {}, "pages/member/my-coupon/money/money": {}, "pages/member/my-coupon/money/cash": {}, "pages/member/my-coupon/money/cash_success": {}, "pages/member/my-coupon/money/invest": {}, "pages/member/my-coupon/money/invest_success": {}, "pages/member/my-coupon/money/cash_detail": {}, "pages/member/tool/evaluate/evaluate": {}, "pages/home/displace/displace": {}, "pages/member/help/aboutUs": {}, "pages/member/tool/tracks/tracks": {}, "pages/member/tool/storeCollect/storeCollect": {}, "pages/member/tool/wareCollect/wareCollect": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
-
-/***/ }),
-
-/***/ 76:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/hairdressing/hairdressing.scss ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "美丽共享联盟", "usingComponents": { "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/member/member": { "navigationBarTitleText": "会员中心", "usingComponents": { "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" } }, "pages/street/street": { "navigationBarTitleText": "店铺街", "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "shoplist": "/components/shoplist/shoplist", "search-any": "/components/my-search/my-search" } }, "pages/pay/pay": { "navigationBarTitleText": "在线支付", "usingComponents": { "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar" } }, "pages/pay/pay_success": { "navigationBarTitleText": "在线支付", "usingComponents": {} }, "pages/pay/refund": { "navigationBarTitleText": "申请退款", "usingComponents": {} }, "pages/pay/refund_success": { "navigationBarTitleText": "申请成功", "usingComponents": {} }, "pages/pay/order": { "navigationBarTitleText": "我的订单", "usingComponents": { "cateflex": "/components/mine/cate-flex" } }, "pages/pay/order_detail": { "navigationBarTitleText": "订单详情", "usingComponents": {} }, "pages/shopping/shopping": { "navigationBarTitleText": "购物车", "usingComponents": { "numbox": "/components/uni-number-box/uni-number-box", "goods": "/components/mine/goods" } }, "pages/login/login": { "usingComponents": {} }, "pages/home/search/search": { "usingComponents": { "zy-search": "/components/zy-search/zy-search" } }, "pages/home/hairdressing/hairdressing": { "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist" } }, "pages/home/menu-details/menu-details": { "enablePullDownRefresh": true, "usingComponents": { "search-any": "/components/my-search/my-search", "shoplist": "/components/shoplist/shoplist", "loadmore": "/components/uni-load-more/uni-load-more" } }, "pages/home/shop-detial/shop-detial": { "usingComponents": { "uni-rate": "/components/uni-rate/uni-rate", "cate-more": "/components/mine/cate-more", "goods": "/components/mine/goods", "case-succ": "/components/mine/case-success", "top-title": "/components/mine/top-title", "evaluate": "/components/mine/evaluate" } }, "pages/home/goods-detail/goods-detail": { "usingComponents": { "my-swiper": "/components/mine/my-swiper", "evaluate": "/components/mine/evaluate", "top-tit": "/components/mine/top-title", "uni-rate": "/components/uni-rate/uni-rate", "goods-list": "/components/mine/goods", "goods-nav": "/components/uni-goods-nav/uni-goods-nav" } }, "pages/home/coupon/coupon": { "navigationBarTitleText": "优惠券", "usingComponents": {} }, "pages/home/flashSale/flashSale": { "navigationBarTitleText": "限时抢", "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/tool/include/include": { "usingComponents": {} }, "pages/home/nearby/nearby": { "usingComponents": { "shoplist": "/components/mine/shop-list", "search": "/components/my-search/my-search", "cate-flex": "/components/mine/cate-flex" } }, "pages/home/nearby/newStore": { "navigationBarTitleText": "本周新店", "usingComponents": { "shoplist": "/components/mine/shop-list", "search": "/components/my-search/my-search" } }, "pages/home/assemble/assemble": { "usingComponents": { "flash-card": "/components/mine/flashSale", "bw-swiper": "/components/bw-swiper/bw-swiper", "cate-flex": "/components/mine/cate-flex" } }, "pages/member/signIn/signIn": { "usingComponents": { "uni-steps": "/components/uni-steps/uni-steps" } }, "pages/member/my-coupon/my-coupon": { "usingComponents": { "cate-flex": "/components/mine/cate-flex", "datejs": "/components/mine/datejs" } }, "pages/member/tool/address/address": { "navigationBarTitleText": "地址管理", "usingComponents": {} }, "pages/member/tool/address/add-address": { "usingComponents": {} }, "pages/home/retail/retail": { "usingComponents": { "my-swiper": "/components/mine/my-swiper", "goods": "/components/mine/goods" } }, "pages/member/my-coupon/my-assets": { "usingComponents": {} }, "pages/member/help/question": { "usingComponents": {} }, "pages/member/tool/bankcard/bankcard": { "usingComponents": {} }, "pages/member/tool/bankcard/addcard": { "usingComponents": {} }, "pages/member/my-coupon/money/money": { "usingComponents": {} }, "pages/member/my-coupon/money/cash": { "usingComponents": { "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/member/my-coupon/money/cash_success": { "usingComponents": {} }, "pages/member/my-coupon/money/invest": { "usingComponents": {} }, "pages/member/my-coupon/money/invest_success": { "usingComponents": {} }, "pages/member/my-coupon/money/cash_detail": { "usingComponents": {} }, "pages/member/tool/evaluate/evaluate": { "usingComponents": { "evaluate": "/components/mine/evaluate" } }, "pages/home/displace/displace": { "usingComponents": { "goods": "/components/mine/goods", "cateflex": "/components/mine/cate-flex" } }, "pages/member/help/aboutUs": { "usingComponents": {} }, "pages/member/tool/tracks/tracks": { "usingComponents": { "cate": "/components/mine/cate-flex", "goods": "/components/mine/goods", "store": "/components/mine/store" } }, "pages/member/tool/storeCollect/storeCollect": { "usingComponents": { "store": "/components/mine/store" } }, "pages/member/tool/wareCollect/wareCollect": { "usingComponents": { "goods": "/components/mine/goods" } } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#Fe0000", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 
@@ -11748,17 +12245,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__A5B6914" };exports.default = _default;
-
-/***/ }),
-
-/***/ 91:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/mlgxlm/pages/home/shop-detial/shop-detial.scss ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ })
 

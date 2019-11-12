@@ -46,6 +46,11 @@
   overflow: hidden; }
 .font-weig {
   font-weight: 600; }
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden; }
 .head-con .device {
   margin-top: 20rpx;
   -webkit-flex-wrap: wrap;

@@ -66,7 +66,7 @@
 			<view class="all-price">
 				<text class="ccc">合计:</text><text class="ccc">￥200.00</text>
 			</view>
-			<view class="pay">
+			<view class="pay" @click="pageTo">
 				去结算（1）
 			</view>
 		</view>
@@ -88,7 +88,11 @@
 			}
 		},
 		methods: {
-
+			pageTo:function(){
+				uni.navigateTo({
+					url:"/pages/pay/pay"
+				})
+			}
 		},
 		onLoad() {
 			console.log(this.global.demao.api.user_Address_list)

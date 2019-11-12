@@ -52,13 +52,22 @@
 }
 .page {
   width: 100%;
+  min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden;
+}
+.font-padd {
+  padding: 0 10rpx;
+  color: #FE0000;
+}
+.page {
+  width: 100%;
   padding: 20rpx 3%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 .page .shop-card {
     width: 100%;
-    height: 240rpx;
     background: #ffffff;
     border-radius: 20rpx;
     -webkit-box-shadow: #cccccc 0px 0px 10rpx;
@@ -89,10 +98,15 @@
           -ms-flex-align: start;
               align-items: flex-start;
 }
+.page .shop-card .card-name {
+      width: 100%;
+      word-wrap: break-word;
+}
 .page .shop-card .card-name view {
       font-size: 30rpx;
       display: inline;
       font-weight: bold;
+      word-break: break-all;
 }
 .page .shop-card .card {
       color: #FE0000;
@@ -106,7 +120,6 @@
       display: inline-block;
       width: 110rpx;
       height: 110rpx;
-      background: green;
       margin-right: 15rpx;
 }
 .page .shop-card .card-time {
@@ -116,7 +129,7 @@
 }
 .page .shop-card .dit {
       width: 5rpx;
-      height: 168rpx;
+      height: 170rpx;
 }
 .page .shop-card .card-size {
       -webkit-box-flex: 1;
@@ -142,19 +155,34 @@
 }
 .page .shop-card .price {
       padding: 10rpx 0;
-      font-size: 34rpx;
+      font-size: 35rpx;
       font-weight: bold;
 }
+.page .shop-card .price image {
+        width: 22rpx;
+        height: 28rpx;
+        margin-left: 5rpx;
+}
 .page .shop-card .manJian {
-      margin-top: 10rpx;
+      width: 80%;
       padding: 10rpx 0;
       font-size: 24rpx;
+      word-break: break-all;
+      text-align: center;
 }
 .page .shop-card .use {
       margin-top: 10rpx;
-      padding: 3rpx 5rpx;
+      padding: 4rpx 10rpx;
       border: 1rpx solid #FE0000;
       font-size: 20rpx;
+}
+.page .shop-card .draw {
+      margin-top: 10rpx;
+      padding: 4rpx 10rpx;
+      font-size: 20rpx;
+      background: #FE0000;
+      color: #ffffff;
+      border-radius: 50rpx;
 }
 .page .shop-card:first-child {
     margin-top: 0;

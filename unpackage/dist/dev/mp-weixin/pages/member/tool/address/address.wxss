@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 /******段落省略号，默认两行******/
-.any-flex, .address-box .box-top .name, .address-box .box-bottom, .address-box .box-bottom .bottom-left, .address-box .box-bottom .bottom-right, .address-box .box-bottom .bottom-right .left, .address-box .box-bottom .bottom-right .right {
+.any-flex, .address-box .box-top .name, .address-box .box-bottom, .address-box .box-bottom .bottom-left, .address-box .box-bottom .bottom-right, .address-box .box-bottom .bottom-right .left, .address-box .box-bottom .bottom-right .right, .emit-box {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -53,7 +53,19 @@
 .page {
   width: 100%;
   min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden;
+}
+.a {
+  background: red;
+}
+.page {
+  width: 100%;
+  min-height: 100vh;
   background: #efefef;
+}
+.page.active {
+  background: #ffffff;
 }
 .address-box {
   width: 100%;
@@ -77,10 +89,11 @@
 }
 .address-box .box-top .address {
       width: 100%;
-      word-break: break-all;
-      word-wrap: break-word;
       color: #c8c7cc;
       padding: 20rpx 0;
+      text-align: justify;
+      text-justify: newspaper;
+      word-break: break-all;
 }
 .address-box .box-bottom {
     -webkit-box-pack: justify;
@@ -126,5 +139,24 @@
   left: 0;
   bottom: 0;
   font-size: 24rpx;
+}
+.emit {
+  width: 100%;
+  height: 100rpx;
+}
+.emit-box {
+  width: 100%;
+  margin-top: 180rpx;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.emit-pic {
+  width: 320rpx;
 }
 

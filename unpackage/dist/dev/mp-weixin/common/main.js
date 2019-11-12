@@ -16,21 +16,25 @@ var _request = _interopRequireDefault(__webpack_require__(/*! ./common/js/reques
 var _utils = _interopRequireDefault(__webpack_require__(/*! ./common/js/utils */ 17));
 var _status = _interopRequireDefault(__webpack_require__(/*! ./common/js/status */ 18));
 var _card_info = _interopRequireDefault(__webpack_require__(/*! ./common/js/card_info.js */ 19));
+var _bmapWx = _interopRequireDefault(__webpack_require__(/*! ./common/js/bmap-wx.js */ 20));
 
-__webpack_require__(/*! ./common/css/font.css */ 20);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+__webpack_require__(/*! ./common/css/font.css */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 _vue.default.config.productionTip = false;
 
 
-_vue.default.prototype.global = _defineProperty({
+_vue.default.prototype.global = {
   request: _request.default,
   utils: _utils.default,
   status: _status.default,
   card_info: _card_info.default,
-  demao: _demao.default }, "demao", _demao.default);
+  demao: _demao.default,
+  bmap: _bmapWx.default };
 
-_vue.default.filter("time", function (res) {
-  return res + "111";
+_vue.default.filter("time", function (nS) {
+  console.log(parseInt(nS));
+  return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
 });
+
 
 _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({},
@@ -113,25 +117,27 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
-  onLaunch: function onLaunch() {var _this = this;
-    console.log('App Launch');
+  onLaunch: function onLaunch() {var _this2 = this;
+
+
+    this.isGetLocation();
     uni.checkSession({
       success: function success(res) {
         //1:登录  0：未登录
         if (res.errMsg !== "checkSession:ok") {
-          _this.global.status.state.login = 0;
+          _this2.global.status.state.login = 0;
         } else {
-          _this.global.status.state.login = 1;
+          _this2.global.status.state.login = 1;
         }
-        console.log(_this.global.status.state.login);
+        console.log(_this2.global.status.state.login);
       },
       fail: function fail(res) {
         if (res.errMsg !== "checkSession:ok") {
-          _this.global.status.state.login = 0;
+          _this2.global.status.state.login = 0;
         } else {
-          _this.global.status.state.login = 1;
+          _this2.global.status.state.login = 1;
         }
-        console.log(_this.global.status.state.login);
+        console.log(_this2.global.status.state.login);
       } });
 
   },
@@ -140,7 +146,117 @@ var _demao = _interopRequireDefault(__webpack_require__(/*! @/common/js/demao.js
   },
   onHide: function onHide() {
     console.log('App Hide');
-  } };exports.default = _default;
+  },
+  methods: {
+    getAuthorizeInfo: function getAuthorizeInfo() {//1. uniapp弹窗弹出获取授权（地理，个人微信信息等授权信息）弹窗
+
+      var that = this;
+      uni.getLocation({
+        type: 'wgs84',
+        success: function success(res) {
+          console.log("你当前经纬度是：");
+          var latitude, longitude;
+          latitude = res.latitude.toString();
+          longitude = res.longitude.toString();
+          console.log(latitude, longitude);
+
+
+          // var wxMarkerData = [];
+          // var BMap = new that.global.bmap.BMapWX({
+          // 	ak: 'AXHWyGXEyPgmFWvXIW3bQIrA9v7f991M'
+          // });
+          // var fail = function(data) {
+          // 	console.log(data)
+          // };
+          // var success = function(data) {
+          // 	wxMarkerData = data.wxMarkerData;
+
+          // 	that.global.status.city = wxMarkerData;
+
+          // 	that.latitude = wxMarkerData[0].latitude
+
+
+          // 	that.longitude = wxMarkerData[0].longitude
+
+          // 	console.log(that.global.status.city)
+
+          // }
+          // // 发起regeocoding检索请求 
+          // BMap.regeocoding({
+          // 	fail: fail,
+          // 	success: success,
+          // 	iconPath: '../../img/marker_red.png',
+          // 	iconTapPath: '../../img/marker_red.png'
+          // });
+
+
+
+
+
+
+
+
+
+
+          uni.request({
+            header: {
+              "Content-Type": "application/text" },
+
+            url: "https://api.map.baidu.com/reverse_geocoding/v3?coordtype=gcj02ll&ret_coordtype=gcj02ll&radius=1000&ak=AXHWyGXEyPgmFWvXIW3bQIrA9v7f991M&sn=&output=json&callback=function%20()%20%7B%7D&extensions_poi=1&extensions_road=false&extensions_town=false&language=zh-CN&language_auto=0&location=" +
+            latitude + "%2C" + longitude,
+            success: function success(re) {
+              if (re.statusCode === 200) {
+                console.log(re.data.result.addressComponent);
+                that.global.utils.showToast_my("获取位置成功！");
+              } else {
+                that.global.utils.showToast_my("获取信息失败，请稍后重试！");
+              }
+            } });
+
+
+
+        } });
+
+
+    },
+    getLocationInfo: function getLocationInfo() {var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "scope.userLocation"; //2. 获取地理位置
+      var _this = this;
+      uni.authorize({
+        scope: a,
+        success: function success() {//1.1 允许授权
+          _this.getAuthorizeInfo();
+        },
+        fail: function fail() {//1.2 拒绝授权
+          console.log("你拒绝了授权，无法获得周边信息");
+        } });
+
+    },
+    isGetLocation: function isGetLocation() {var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "scope.userLocation"; // 3. 检查当前是否已经授权访问scope属性，参考下截图
+      var _this = this;
+      uni.getSetting({
+        success: function success(res) {
+          console.log("获取授权情况");
+          console.log(res);
+          console.log(res.authSetting[a] == false);
+          if (res.authSetting[a] == undefined) {//3.1 每次进入程序判断当前是否获得授权，如果没有就去获得授权，如果获得授权，就直接获取当前地理位置
+
+            _this.getAuthorizeInfo();
+
+          } else if (res.authSetting[a]) {
+
+            _this.getLocationInfo();
+
+          } else if (res.authSetting[a] == false) {
+            console.log("打开设置");
+            uni.openSetting({
+              success: function success(res) {
+                console.log(res);
+              } });
+
+          }
+        } });
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -46,6 +46,11 @@
   overflow: hidden; }
 .font-weig {
   font-weight: 600; }
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden; }
 @-webkit-keyframes tea_arrow {
   0% {
     -webkit-transform: rotate(180deg);

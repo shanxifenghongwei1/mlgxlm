@@ -109,7 +109,6 @@
 			
 		},
 		onLoad(options) {
-			console.log(options)
 			this.options=options;
 			this.global.utils.sethead(options.head)
 		}
