@@ -3,7 +3,7 @@
 		<swiper :autoplay="true" :indicator-dots="true" :interval="2000" :duration="1000" indicator-active-color="#FE0000">
 			<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
 				<view class="swiper-item">
-					<image :src="item" mode="widthFix"></image>
+					<image :src="picUrl+item" mode="widthFix"></image>
 				</view>
 			</swiper-item>
 		</swiper>
@@ -14,13 +14,12 @@
 	export default{
 		data(){
 			return{
-				
+				picUrl:""
 			}
 		},
 		props:{
 			bannerlist:{
 				type:Array, //商品数据列表
-				default:[]
 			}
 		},
 		methods:{
@@ -30,6 +29,12 @@
 					url:e
 				})
 			}
+		},
+		created(){
+			console.log(this.global.demao.domain.picUrl)
+			this.picUrl=this.global.demao.domain.picUrl
+			
+			console.log(this.picUrl)
 		}
 	}
 </script>
@@ -38,7 +43,6 @@
 	.banner {
 		width: 100%;
 		height: 400rpx;
-		background: #007AFF;
 	
 		swiper {
 			width: 100%;

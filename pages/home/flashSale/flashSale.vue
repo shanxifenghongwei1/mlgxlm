@@ -11,7 +11,7 @@
 		</view>
 		<!-- 分类切换 -->
 		<view class="">
-			<cateFlex :cateList="list" :cateid="cateid" @seleId="seleId"></cateFlex>
+			<cateFlex :cateList="list" :cateid="cateid" @seleId="seleId1"></cateFlex>
 		</view>
 		
 
@@ -164,13 +164,13 @@
 				options:{},
 				list1:[{
 					id:1,
-					name:"距离最近"
+					name:"正在抢购"
 				},{
 					id:2,
-					name:"价格最优"
+					name:"即将开枪"
 				},{
 					id:3,
-					name:"价格最优"
+					name:"明日预告"
 				}],
 				cateid1:1,
 				
@@ -199,11 +199,34 @@
 		},
 		methods: {
 			seleId(e){
+				this.cateid1=e;
+				this.findDetail()
+			},
+			seleId1(e){
 				this.cateid=e;
+				this.findDetail()
+			},
+			findDetail(){
+				let data={};
+				data.limited_type=this.cateid1;
+				data.two_bar=this.cateid;
+				data.lat1=this.global.lat;
+				data.lng1=this.global.lng;
+				this.global.request.post({
+					url: this.global.demao.api.limited_time,
+					method: "GET",
+					data: data,
+					success: (res) => {
+						console.log(res)
+					}
+				})
 			}
 		},
 		onLoad(options) {
 			this.global.utils.sethead("限时抢")
+		},
+		onShow(){
+			this.findDetail()
 		}
 	}
 </script>

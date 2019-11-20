@@ -5,7 +5,7 @@
 			<view class="iconsss"></view>
 			<view>{{titCon.name}}</view>
 		</view>
-		<view class="more" @click="linkPages(titCon.link)">{{titCon.more}}</view>
+		<view class="more" @click="linkPages(titCon.link)" v-if="right">{{titCon.more}}</view>
 	</view>
 </template>
 
@@ -19,7 +19,10 @@
 		props:{
 			titCon:{
 				type:Object, //商品数据列表
-				default:{}
+			},
+			right:{
+				type:Boolean, //商品数据列表
+				default:true
 			}
 		},
 		methods:{

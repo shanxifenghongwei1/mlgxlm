@@ -1,10 +1,11 @@
-<!-- 分销中心 -->
 <template>
+	<!-- 分销中心页面 -->
 	<view>
 		<!-- 个人信息 -->
 		<view class="header">
 			<view class="header-box">
-				<image src="https://wx.qlogo.cn/mmopen/vi_32/cFtcpjRVvcnovLu2icBOoHwvLxQzicOxcGqO7uFuptibX39e2bcm45kqY14RYDs0oX01NhHExKibnqLGbVHIrHSllg/132" mode="widthFix"></image>
+				<image src="https://wx.qlogo.cn/mmopen/vi_32/cFtcpjRVvcnovLu2icBOoHwvLxQzicOxcGqO7uFuptibX39e2bcm45kqY14RYDs0oX01NhHExKibnqLGbVHIrHSllg/132"
+				 mode="widthFix"></image>
 				<view class="con">
 					<view class="">
 						冯红伟的家12345678
@@ -15,8 +16,8 @@
 				</view>
 			</view>
 		</view>
-		
-		
+
+
 		<!-- 提现 -->
 		<view class="tixian">
 			<view class="left">
@@ -31,7 +32,7 @@
 				提现
 			</view>
 		</view>
-		
+
 		<!-- 额度 -->
 		<view class="edu">
 			<view class="">
@@ -51,11 +52,18 @@
 				</view>
 			</view>
 		</view>
-		
-		
+
+
 		<view class="gather">
 			<view class="gather-box">
-				<view class="list">
+				<view class="list" v-for="(item,index) in cate" :key="index" @click="toDetail(item.link_url)">
+					<image :src="item.img" mode=""></image>
+					<view class="name">
+						{{item.name}}
+					</view>
+				</view>
+
+				<!-- <view class="list">
 					<image src="/static/image/other/retail_money.png" mode=""></image>
 					<view class="name">
 						分销佣金
@@ -99,10 +107,10 @@
 					<view class="num">
 						
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
-		
+
 		<view class="banner">
 			<mySwiper :bannerlist="bannerlist"></mySwiper>
 		</view>
@@ -122,21 +130,55 @@
 	import mySwiper from "@/components/mine/my-swiper.vue";
 	import goods from "@/components/mine/goods.vue";
 	export default {
-		components:{
-			mySwiper,goods
+		components: {
+			mySwiper,
+			goods
 		},
 		data() {
 			return {
-				options:{},
+				options: {},
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
 					'../../static/image/banner/4.jpg'
 				],
-				titCon:[]   //商品列表
+				titCon: [1, 2, 3, 4], //商品列表
+				cate: [{
+						name: "分销佣金",
+						link_url: "/pages/home/retail/rank",
+						img: "/static/image/other/retail_money.png",
+						cell: "元"
+					},
+					{
+						name: "提现明细",
+						link_url: "/pages/home/retail/retail_cash",
+						img: "/static/image/other/retail_detail.png"
+					},
+					{
+						name: "分销订单",
+						link_url: "/pages/home/retail/my_order",
+						img: "/static/image/other/retail_order.png"
+					},
+					{
+						name: "我的团队",
+						link_url: "/pages/home/retail/my_team",
+						img: "/static/image/other/retail_team.png"
+					},
+
+					{
+						name: "邀请二维码",
+						img: "/static/image/other/retail_code.png"
+					}
+				]
 			}
 		},
 		methods: {
-			
+			toDetail(e) {
+				if (e) {
+					this.global.utils.jump(1, e)
+				} else {
+					console.log("该打开二维码了")
+				}
+			}
 		},
 		onLoad(options) {
 			this.global.utils.sethead("分销")
@@ -145,26 +187,29 @@
 </script>
 
 <style lang="scss">
-	.header{
+	.header {
 		width: 100%;
 		height: 254rpx;
 		background: $any-col;
 	}
-	.header-box{
+
+	.header-box {
 		width: 100%;
 		height: 190rpx;
 		padding: 30rpx 6%;
 		box-sizing: border-box;
 		@extend .any-flex;
-		image{
+
+		image {
 			width: 130rpx;
 			height: 130rpx;
 			border-radius: 50%;
 		}
-		.con{
+
+		.con {
 			flex-grow: 1;
 			height: 100%;
-			padding: 10rpx 0 10rpx 30rpx ;
+			padding: 10rpx 0 10rpx 30rpx;
 			box-sizing: border-box;
 			font-size: $uni-font-size-base;
 			@extend .any-flex;
@@ -172,36 +217,40 @@
 			justify-content: center;
 			align-items: flex-start;
 			color: #ffffff;
-			view{
-				padding-bottom: 10rpx ;
+
+			view {
+				padding-bottom: 10rpx;
 				font-weight: bold;
 			}
 		}
 	}
-	
-	.tixian{
+
+	.tixian {
 		width: 94%;
 		height: 150rpx;
 		background: #ffffff;
 		margin: -60rpx auto 0;
 		border-radius: 20rpx;
 		box-shadow: #cccccc 0px 0px 10rpx;
-		padding: 0 20rpx;
+		padding: 0 30rpx;
 		box-sizing: border-box;
 		@extend .any-flex;
 		font-size: $uni-font-size-base;
-		.left{
+
+		.left {
 			flex-grow: 1;
 			height: 100%;
 			@extend .any-flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: flex-start;
-			view{
+
+			view {
 				padding: 10rpx 0;
 			}
 		}
-		.right{
+
+		.right {
 			display: inline-block;
 			padding: 3rpx 5rpx;
 			background: $any-col;
@@ -209,27 +258,30 @@
 			border-radius: 10rpx;
 		}
 	}
-	
-	.edu{
+
+	.edu {
 		width: 100%;
 		height: 100rpx;
 		@extend .any-flex;
 		font-size: $uni-font-size-sm;
 		position: relative;
 		margin-top: 20rpx;
-		view{
+
+		view {
 			flex-grow: 1;
 			@extend .any-flex;
 			justify-content: center;
 			flex-direction: column;
 			align-items: center;
-			.green{
+
+			.green {
 				font-size: $uni-font-size-base;
 				color: #09BB07;
 				padding: 10rpx 0;
 				font-weight: bold;
 			}
-			.red{
+
+			.red {
 				font-size: $uni-font-size-base;
 				color: $any-col;
 				padding: 10rpx 0;
@@ -237,7 +289,8 @@
 			}
 		}
 	}
-	.edu:after{
+
+	.edu:after {
 		content: "";
 		width: 2rpx;
 		height: 80%;
@@ -249,60 +302,66 @@
 
 
 	}
-	
-	.gather{
+
+	.gather {
 		width: 100%;
-		padding: 0 3%;
+		padding: 20rpx 3%;
 		box-sizing: border-box;
 		margin-top: 15rpx;
 		font-size: $uni-font-size-sm;
 		margin-top: 20rpx;
-		.gather-box{
+
+		.gather-box {
 			width: 100%;
 			height: 100%;
 			@extend .any-flex;
 			flex-wrap: wrap;
 			border-radius: 20rpx;
 			box-shadow: #cccccc 0px 0px 10rpx;
-			.list{
+
+			.list {
 				width: 30%;
-				height: 180rpx;
+				height: 160rpx;
 				@extend .any-flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
 				margin-right: 3%;
-				image{
+
+				image {
 					width: 75rpx;
 					height: 66rpx;
 				}
-				.name{
+
+				.name {
 					width: 100%;
 					text-align: center;
 					margin-top: 15rpx;
 				}
-				.num{
+
+				.num {
 					width: 100%;
 					text-align: center;
 					height: 26rpx;
 				}
 			}
-			.list:nth-child(3n){
+
+			.list:nth-child(3n) {
 				margin-right: 0;
 			}
 		}
 	}
-	
-	.banner{
+
+	.banner {
 		margin-top: 20rpx;
 	}
-	
+
 	.jingxuan {
 		.bac-img {
 			margin: 20rpx 0;
 			height: 74rpx;
 			width: 100%;
-	
+
 			image {
 				width: 100%;
 			}

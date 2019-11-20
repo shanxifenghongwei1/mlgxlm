@@ -14,8 +14,8 @@
 			<view class="" @click="toDetail()">
 				查看订单
 			</view>
-			<view class="" @click="toHome()">
-				返回首页
+			<view class="" @click="appointment()">
+				立即预约
 			</view>
 		</view>
 	</view>
@@ -29,14 +29,14 @@
 			}
 		},
 		methods:{
-			toHome(){
-				uni.switchTab({
-					url:"/pages/home/home"
-				})
-			},
 			toDetail(){
 				uni.navigateTo({
-					url:"/pages/pay/order_detail"
+					url:"/pages/pay/order"
+				})
+			},
+			appointment(){
+				uni.navigateTo({
+					url:"/pages/pay/appointment"
 				})
 			}
 		}
@@ -83,11 +83,11 @@
 			text-align: center;
 			border-radius: 15rpx;
 		}
-		view:nth-child(1){
+		view:nth-child(2){
 			background: #FE5050;
 			color: #ffffff;
 		}
-		view:nth-child(2){
+		view:nth-child(1){
 			background: #ffffff;
 			color: #B7B7B7;
 			border: 1rpx solid #B7B7B7;

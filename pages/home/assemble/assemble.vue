@@ -1,61 +1,26 @@
 <template>
 	<!-- 拼团页面 -->
 	<view>
-		
+
 		<!-- 大的分类畅销榜 -->
 		<view class="cate-top-shop">
 			<view class="title">
-				本周美容美甲畅销榜
+				本周畅销榜
 			</view>
+
 			<view class="con">
-				<view class="box">
+				<view class="box" v-for="(item,index) in assemble_detail.seller" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 					<image class="box-pic" src="/static/image/shop/shop-1.jpg" mode="widthFix"></image>
 					<view class="box-tit">
-						这个是商品名字这个是商品的名字
+						{{item.goods_name}}
 					</view>
 					<view class="box-tit2">
-						这个是店铺的标题这个是店铺标题
+						{{item.shop_name}}
 					</view>
 					<view class="box-price">
+						<text class="icon iconfont icon-tuan"></text>
 						<view class="box-new">
-							￥199
-						</view>
-						<view class="box-old">
-							￥399
-						</view>
-					</view>
-				</view>
-				<view class="box">
-					<image class="box-pic" src="/static/image/shop/shop-1.jpg" mode="widthFix"></image>
-					<view class="box-tit">
-						这个是商品名字这个是商品的名字
-					</view>
-					<view class="box-tit2">
-						这个是店铺的标题这个是店铺标题
-					</view>
-					<view class="box-price">
-						<view class="box-new">
-							￥199
-						</view>
-						<view class="box-old">
-							￥399
-						</view>
-					</view>
-				</view>
-				<view class="box">
-					<image class="box-pic" src="/static/image/shop/shop-1.jpg" mode="widthFix"></image>
-					<view class="box-tit">
-						这个是商品名字这个是商品的名字
-					</view>
-					<view class="box-tit2">
-						这个是店铺的标题这个是店铺标题
-					</view>
-					<view class="box-price">
-						<view class="box-new">
-							￥199
-						</view>
-						<view class="box-old">
-							￥399
+							￥{{item.promotion_price}}
 						</view>
 					</view>
 				</view>
@@ -66,13 +31,16 @@
 			<cateFlex :cateList="list" :cateid="cateid" @seleId="seleId"></cateFlex>
 		</view>
 
-
-		<!-- 第一个列表 -->
-		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid" :frompage="assemble"></flashCard>
+		<view class="" style="position: relative;" v-if="cateid==1">
+			<flashCard :flashList="assemble_detail.distance" :cateid="cateid" :frompage="asd"></flashCard>
 		</view>
+		<view class="" style="position: relative;" v-if="cateid==2">
+			<flashCard :flashList="assemble_detail.assembleInfo" :cateid="cateid" :frompage="asd"></flashCard>
+		</view>
+		
+		
 		<!-- 展示多个 -->
-		<view class="flash-shop">
+		<!-- <view class="flash-shop">
 			<view class="back"></view>
 
 			<view class="flash">
@@ -127,75 +95,8 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
-
-		<!-- 第二个列表 -->
-		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid" :frompage="assemble"></flashCard>
-		</view>
-		<!-- 展示多个 -->
-		<view class="flash-shop">
-			<view class="back" style="background: #ffcb49;"></view>
-
-			<view class="flash">
-				<view class="num">
-					已售出520
-				</view>
-				<view class="title">
-					这是标题
-				</view>
-				<view class="flash-box">
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-
-		<!-- 第三个列表 -->
-		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid" :frompage="assemble"></flashCard>
-		</view>
 
 
 	</view>
@@ -213,7 +114,7 @@
 		},
 		data() {
 			return {
-				options:{},
+				options: {},
 				list: [{
 					id: 1,
 					name: "距离最近"
@@ -222,54 +123,64 @@
 					name: "价格最优"
 				}],
 				cateid: 1,
-
-
-				//
-				flashList: [{
-						img: '/static/image/banner/1.jpg',
-						text: '加油'
-					},
-					{
-						img: '/static/image/banner/1.jpg',
-						text: '加油'
-					},
-					{
-						img: '/static/image/banner/1.jpg',
-						text: '加油'
-					}
-				]
+				assemble_detail: {}
 			}
 		},
 		methods: {
 			seleId(e) {
 				this.cateid = e;
+			},
+			findDetail() {
+				let data = {};
+				data.lat1 = this.global.lat;
+				data.lng1 = this.global.lng;
+				this.global.request.post({
+					url: "assemble",
+					method: "GET",
+					data: data,
+					success: (res) => {
+						console.log(res)
+						let a=res.distance;
+						a.forEach((v)=>{
+							v.juli=v.juli.toFixed(2)
+						})
+						res.distance=a
+						this.assemble_detail = res;
+					}
+				})
+			},
+			toDetail(e,f){
+				this.global.utils.jump(1,"/pages/home/goods-detail/goods-detail?goods_id="+e+"&&head="+f)
 			}
 		},
 		onLoad(options) {
 			this.global.utils.sethead("拼团")
+			this.findDetail()
 		}
 	}
 </script>
 
 <style lang="scss">
-
-	.cate-top-shop{
+	.cate-top-shop {
 		width: 100%;
 		background: $any-col;
 		margin-top: 5rpx;
 		padding: 20rpx 3%;
 		box-sizing: border-box;
-		.title{
+
+		.title {
 			font-size: $uni-font-size-lg;
 			color: #ffffff;
 		}
-		.con{
+
+		.con {
 			width: 100%;
 			@extend .any-flex;
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 20rpx;
-			.box{
+
+			.box {
 				width: 225rpx;
 				background: #ffffff;
 				border-radius: 20rpx;
@@ -277,43 +188,51 @@
 				padding: 10rpx;
 				box-sizing: border-box;
 			}
+
 			.box-pic {
 				width: 100%;
-			
+
 			}
-			
+
 			.box-tit {
 				width: 100%;
 				font-size: $uni-font-size-base;
 				color: ffffff;
 				@include multi-row-apostrophe(1);
 			}
+
 			.box-tit2 {
 				width: 100%;
 				font-size: $uni-font-size-sm;
 				color: #7e7e7e;
 				@include multi-row-apostrophe(1);
 			}
-			
+
 			.box-price {
 				@extend .any-flex;
 				align-items: flex-end;
-			
+
 				.box-new {
 					font-size: $uni-font-size-lg;
 					color: $any-col;
 					font-weight: bold;
 				}
-			
+
 				.box-old {
 					font-size: $uni-font-size-base;
 					color: #7e7e7e;
 					text-decoration: line-through;
 					margin-left: 5rpx;
 				}
+				.icon-tuan{
+					font-size: 40rpx;
+					color: $any-col;
+					margin-right:15rpx;
+				}
 			}
 		}
 	}
+
 	.flash-shop {
 		width: 100%;
 		height: 420rpx;
@@ -339,6 +258,7 @@
 			left: 0;
 			top: 0;
 		}
+
 		.num {
 			display: inline-block;
 			font-size: $uni-font-size-base;

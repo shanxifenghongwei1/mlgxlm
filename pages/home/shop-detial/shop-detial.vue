@@ -15,97 +15,74 @@
 
 		<view class="shop-some-message">
 			<view class="header-nav">
-
+				
 			</view>
-			<view class="head-run"></view>
-			<view class="shop-name">山东爱美食家美容中心</view>
-			<view class="shop-start">
-				<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.start" color="#7f7f7f" @change='onChange'
-				 active-color="#ffb540" />
+			<view class="head-run"><image :src="shop_detail.shopInfo.shop_logo" mode=""></image></view>
+		
+			<view class="shop-name">{{shop_detail.shopInfo.shop_name}}</view>
+			<view class="any-flex">
+				<view class="shop-start">
+					<uni-rate :disabled='false' margin='2' size="15" max='5' :value="shop_detail.shopInfo.shop_star" color="#7f7f7f" @change='onChange'
+					 active-color="#ffb540" />
+				</view>
 			</view>
-			<view class="some-message">sdasdada</view>
+			<view class="some-message">{{shop_detail.shopInfo.shop_desc}}</view>
 			<view class="shop-obj">
-				<view class="obj"> <text>特色项目</text> 乳腺疏通、激光美肤 </view>
-				<view class="obj"><text>夤夜时间</text> 周一至周日08:30-19:00</view>
+				<view class="obj"> <text>特色项目</text> {{shop_detail.shopInfo.t_name}} </view>
+				<view class="obj"><text>营业时间</text> {{shop_detail.shopInfo.shop_bus}}</view>
 			</view>
 			<view class="serve">特色服务</view>
 			<view class="serve-message">
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-				<view class=""><text class="icon iconfont icon-xuanzhong"></text> 有车位</view>
-
+				<block v-for="(item,index) in shop_detail.shopInfo.shop_service" :key="index"><view class=""><text class="icon iconfont icon-xuanzhong"></text>{{item}}</view></block>
 			</view>
-			<view class="address"> <text class="iconfont icon-dizhi"></text> 山东济南市天成步行街138号 </view>
+			<view class="any-flex add-box">
+				<view class="address any-flex"><text class="iconfont icon-dizhi"></text><text class="red">{{shop_detail.shopInfo.shop_address_detail}}</text></view>
+				<view class="phone" @click="phone">
+					<image src="/static/image/other/phone.png" mode=""></image>
+				</view>
+			</view>
+			
 		</view>
 
 		<!-- 优惠券的导航条 -->
-		<view class="coupon">
+		<view class="coupon" @click="coupon">
 			<view class="coupon-left">
 				<image src="/static/image/other/icon-manjian.png" mode="" class="icon-manjian"></image>
-				<view class="">
-					满20减10
-				</view>
-				<view class="">
-					满40减18
+				<view class="" v-for="(item,index) in shop_detail.shop_coupon" :key="index">
+					<text v-if="item.coupon_type===0">满{{item.coupon_redouction}}减{{item.coupon_price}}</text>
+					<text v-if="item.coupon_type===1">{{item.discount}}折购买</text>
 				</view>
 			</view>
 			<view class="coupon-num">
 				<view class="">
-					6张
+					{{coupon_list.couponInfo.length}}张
 				</view>
 				<image class="icon-left" src="/static/image/other/icon-left.png" mode=""></image>
 			</view>
 		</view>
 
-		<!-- 商家会员卡 -->
-		<view class="shop-card">
-			<view class="shop-card-tit">
-				<image src="/static/image/other/icon-shop-card.png" mode=""></image>
-				<view class="">
-					商家会员卡
-				</view>
-			</view>
-			<view class="shop-card-con">
-				<image src="/static/image/shop/shop-1.jpg" mode=""></image>
-				<image src="/static/image/shop/shop-1.jpg" mode=""></image>
-				<image src="/static/image/shop/shop-1.jpg" mode=""></image>
-				<image src="/static/image/shop/shop-1.jpg" mode=""></image>
-			</view>
-		</view>
 
 		<!-- 精选商品 -->
 		<view class="jingxuan">
 			<view class="bac-img">
 				<image src="/static/image/other/shoping-jingxuan.png" mode="widthFix" class="bac-imgs"></image>
 			</view>
-			<view class="" style="margin-top: 40rpx;">
+			<!-- <view class="" style="margin-top: 40rpx;">
 				<cateMore :menulist="menuList" @cateid="getCateId" ></cateMore>
-			</view>
+			</view> -->
 			<view class="">
-				<goods></goods>
+				<goods :more="false" :titCon="shop_detail.goods_list" :place="3"></goods>
 			</view>
 		</view>
 		
 		<!-- 成功案例 -->
 		<view class="case-succ">
 			<topTitle :titCon="titCon"></topTitle>
-			<caseSucc :caseList="caseList"></caseSucc>
+			<caseSucc :caseList="caseList_1"></caseSucc>
 		</view>
 		
-		<!-- 商品评价 -->
-		<view class="evaluate">
-			<view class="evaluate-top">
-				<topTitle :titCon="titCon1"></topTitle>
-			</view>
-			<view style="margin-top: 20rpx;">
-				<evaluate></evaluate>
-			</view>
-			
-		</view>
 		
+		<coll @collect="collect" @share="share" :collect_state="collect_state"></coll>
 		<view class="shop-bottom">
 			
 		</view>
@@ -120,6 +97,7 @@
 	import caseSucc from "@/components/mine/case-success.vue";
 	import topTitle from "@/components/mine/top-title.vue";
 	import evaluate from "@/components/mine/evaluate.vue"
+	import coll from "@/components/mine/collect.vue"
 	export default {
 		components: {
 			uniRate,
@@ -127,14 +105,18 @@
 			goods,
 			caseSucc,
 			topTitle,
-			evaluate
-			
+			evaluate,
+			coll
 			
 		},
 		data() {
 			return {
 				options:{},
-				shopid: null,
+				shop_detail:{},
+				collect_state: false,
+				coupon_list:{},
+				caseList_0:[],
+				caseList_1:[],
 				// banner图
 				bannerlist: [
 					'../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg',
@@ -170,39 +152,165 @@
 							text: '用来凑数'
 						}
 				],
-				caseList:[{
-					pic:"/static/image/shop/shop-1.jpg",
-					prepic:"/static/image/shop/shop-1.jpg",
-					age:"23",
-					state:"面部松弛"
-				},{
-					pic:"/static/image/shop/shop-1.jpg",
-					prepic:"/static/image/shop/shop-1.jpg",
-					age:"23",
-					state:"面部松弛"
-				}],
 				titCon:{
 					name:"成功案例 (99)",
 					more:"更多案例",
-					link:"/pages/home/hairdressing/hairdressing"
+					link:"/pages/home/shop-detial/case"
 				},
-				titCon1:{
-					name:"商品评价 (99)",
-					more:"更多评价",
-					link:"/pages/home/hairdressing/hairdressing"
-				}
+				goodlist:[1,2,3,4]
 			};
 		},
 		methods:{
+			caselist(){
+				let that=this;
+				let data = {};
+				data.shop_id = this.options.shop_id;
+				this.global.request.post({
+					url: this.global.demao.api.caselist,
+					method: "GET",
+					data: data,
+					success(res){
+						console.log("1111111")
+						console.log(res.caseInfo)
+						console.log("1111111")
+						that.caseList_0=res.caseInfo;
+						if(res.caseInfo[1]){
+							that.caseList_1[1]=res.caseInfo[1]
+						}
+						if(res.caseInfo[0]){
+							that.caseList_1[0]=res.caseInfo[0]
+						}
+						let a=that.titCon;
+						a.link="/pages/home/shop-detial/case?shop_id="+that.options.shop_id;
+						a.name="成功案例 ("+ res.caseInfo.length +")" 
+						that.titCon=a
+					}
+				})
+			},
+			//跳转至优惠券列表页面
+			coupon(){
+				this.global.utils.jump(1,"/pages/home/coupon/coupon?shop_id="+this.options.shop_id)
+			},
+			//请求优惠券列表
+			couponlist(){
+				let that=this;
+				let data = {};
+				data.shop_id = this.options.shop_id;
+				this.global.request.post({
+					url: this.global.demao.api.couponlist,
+					method: "GET",
+					data: data,
+					success(res){
+						console.log(res)
+						that.coupon_list=res;
+					}
+				})
+			},
+			//打电话
+			phone(){
+				uni.makePhoneCall({
+					phoneNumber: "18435105990",
+					success(res) {
+				
+					}
+				})
+			},
 			getCateId(data){
 				console.log("这是父组件得到的值"+data)
 				this.cateid=data;
+			},
+			//获取店铺详情
+			finddetail(){
+				let data={};
+				console.log(this.options)
+				data.shop_id=this.options.shop_id 
+				console.log(data)
+				this.global.request.post({
+					url: this.global.demao.api.shop_goods,
+					method: "GET",
+					data: data,
+					success: (res) => {
+						if(res.shopInfo.shop_service){
+							res.shopInfo.shop_service=res.shopInfo.shop_service.split(",")
+						}
+						this.shop_detail=res;
+					}
+				})
+			},
+			//点击收藏按钮
+			collect(){
+				let that=this;
+				if (this.collect_state) {
+					wx.showModal({
+						title: '提示',
+						content: '确定要取消该商品的收藏吗',
+						success(res) {
+							if (res.confirm) {
+								that.select_or_delect();
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					})
+				} else {
+					that.select_or_delect()
+				}
+				
+			},
+			share() {
+				console.log("点击分享了")
+			},
+			//收藏与取消
+			select_or_delect(){
+				let that=this;
+				let data = {};
+				data.shop_id = this.options.shop_id;
+				this.global.request.post({
+					url: this.collect_state ? this.global.demao.api.shop_collection_dele : this.global.demao.api.shop_collection,
+					method: "GET",
+					data: data,
+					success(res){
+						that.global.utils.showToast_my(res.msg)
+						that.collect_state=!that.collect_state;
+					}
+				})
+			},
+			//查询是否被收藏
+			findSellect() {
+				let data = {};
+				data.shop_id = this.options.shop_id
+				this.global.request.post({
+					url: this.global.demao.api.collectionaddd,
+					method: "GET",
+					data: data,
+					success: (res) => {
+						console.log(res);
+						if (res.msg == "店铺已收藏") {
+							this.collect_state = true;
+						} else {
+							this.collect_state = false;
+						}
+					}
+				})
 			}
 		},
 		onLoad(options) {
 			console.log(options)
 			this.options=options;
 			this.global.utils.sethead(options.head)
+			this.finddetail()
+			this.findSellect()
+			this.couponlist()
+			this.caselist()
+		},
+		onShareAppMessage(res) {
+			if (res.from === 'button') { // 来自页面内分享按钮
+				console.log(res.target)
+			}
+			return {
+				title: '自定义分享标题',
+				path: '/pages/home/share/share?open_id=' + open_id
+			}
 		}
 	}
 </script>
@@ -212,8 +320,15 @@
 		width: 60rpx;
 		height: 80rpx;
 		margin-top: -60rpx;
+		
 	}
-
+	.head-run{
+		image{
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
+	}
 	.coupon {
 		width: 100%;
 		background: #ffffff;

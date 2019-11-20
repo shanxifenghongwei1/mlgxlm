@@ -31,15 +31,15 @@
 		<view class="member-assets">
 			<view class="member-assets-money">
 				<navigator hover-class="none" url="/pages/member/my-coupon/money/money" class="member-assets-number">
-					<view class="member-assets-h6">{{userInfo[0].balance}}</view>
+					<view class="member-assets-h6">{{userInfo[0].balance?userInfo[0].balance:0}}</view>
 					<view class="member-assets-content">分享币</view>
 				</navigator>
 				<view class="member-assets-number">
-					<view class="member-assets-h6">{{userInfo[0].integral}}</view>
+					<view class="member-assets-h6">{{userInfo[0].integral?userInfo[0].integral:0}}</view>
 					<view class="member-assets-content">积分</view>
 				</view>
 				<navigator hover-class="none" url="/pages/member/my-coupon/my-coupon" class="member-assets-number">
-					<view class="member-assets-h6">{{coupon_num}}</view>
+					<view class="member-assets-h6">{{coupon_num?coupon_num:0}}</view>
 					<view class="member-assets-content">优惠卷</view>
 				</navigator>
 			</view>
@@ -97,10 +97,10 @@
 					<view class="icon iconfont member-tool-content1 icon-xingzhuanggongnengtubiao-" style="color: #25aa7d;"></view>
 					<view class="member-tool-text">商品收藏</view>
 				</navigator>
-				<view class="member-tool-content-w25">
+				<navigator url="/pages/home/retail/retail" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-fenxiao" style="color: #feb640;"></view>
 					<view class="member-tool-text">分销中心</view>
-				</view>
+				</navigator>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
 					<view class="member-tool-text">拼团订单</view>
@@ -131,7 +131,7 @@
 				</navigator>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-tousujianyi" style="color: #d1c7c8;"></view>
-					<view class="member-tool-text">置换中心</view>
+					<view class="member-tool-text">分享好礼</view>
 				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
@@ -141,6 +141,10 @@
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">商家入驻</view> 
 				</navigator>
+				<view class="member-tool-content-w25">
+					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
+					<view class="member-tool-text">分销申请</view>
+				</view>
 			</view>
 		</view>
 		<!-- 底部  -->
@@ -183,6 +187,7 @@
 		data() {
 			return {
 				login: !0,
+				city:"",
 				bannerlist: [
 					'../../static/image/banner/1.jpg', '../../static/image/banner/2.jpg', '../../static/image/banner/3.jpg',
 					'../../static/image/banner/4.jpg'
@@ -205,9 +210,14 @@
 			}
 		},
 		onLoad() {
-			this.global.utils.sethead("个人中心");
+			this.global.utils.sethead("个人中心");		
+			this.city=this.global.city;
+			this.global.watch((v)=>{
+				this.city=v;
+			})
 		},
 		onShow() {
+			console.log(this.global.status.state.login)
 			this.login = this.global.status.state.login;
 			this.findList();
 		}

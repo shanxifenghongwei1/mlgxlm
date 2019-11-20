@@ -1,6 +1,5 @@
-<!-- 首页 -->
-
 <template>
+	<!-- 首页 -->
 	<view class="">
 
 		<view class="conss">
@@ -8,30 +7,11 @@
 			<searchAny></searchAny>
 			<!-- 下面四个图标 -->
 			<view class="seduce">
-				<navigator class="list-one" url="/pages/home/coupon/coupon">
-					<view class="icon iconfont icon-icon_coupon"></view>
-					<view class="text font-weig">优惠券</view>
-				</navigator>
-
-				<navigator class="list-one" url="/pages/home/assemble/assemble">
-					<view class="icon iconfont icon-pintuan"></view>
-					<view class="text font-weig">拼团</view>
-				</navigator>
-
-				<navigator class="list-one" url="/pages/home/flashSale/flashSale">
-					<view class="icon iconfont icon-shijian"></view>
-					<view class="text font-weig">限时抢</view>
-				</navigator>
-
-				<navigator url="/pages/home/displace/displace" class="list-one">
-					<view class="icon iconfont icon-hezuo"></view>
-					<view class="text font-weig">置换商城</view>
-				</navigator>
-
-				<navigator url="/pages/home/retail/retail" class="list-one">
-					<view class="icon iconfont icon-fenxiao"></view>
-					<view class="text font-weig">分销</view>
-				</navigator>
+				<view class="list-one" @click="one_cate_page(item.url)" v-for="(item,index) in one_cate" :key="index">
+					<view class="icon iconfont" :class="item.icon"></view>
+					<view class="text font-weig">{{item.name}}</view>
+				</view>
+				
 			</view>
 		</view>
 		<!-- 主要功能 -->
@@ -47,8 +27,6 @@
 				<view @click="goNear()" class="sign-one">
 					<view class="icon-4"></view>
 					<view class="text font-weig">附近店铺</view>
-					</navigator>
-
 				</view>
 			</view>
 
@@ -98,8 +76,8 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			
-			
+
+
 			<!-- 店铺精选 -->
 			<view class="choiceness">
 				<view class="bac-img">
@@ -108,8 +86,8 @@
 				<view class='shoplist'>
 					<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 				</view>
-
-				<shoplist :shoplists='indexData.goodsInfo' :myid='ids'></shoplist>
+				
+				<goodlist :cateid="ids" :goodslist="indexData"></goodlist>
 
 			</view>
 
@@ -121,10 +99,10 @@
 						<view class="iconsss"></view>
 						<view>本周新店</view>
 					</view>
-					<navigator url="/pages/home/nearby/newStore" class="more">更多</navigator>
+					<view @click="new_store()"  class="more">更多</view>
 				</view>
 
-				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index">
+				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index" @click="jump(item.shop_id,item.shop_name)">
 					<view class="shop-col-img">
 						<image src="../../static/image/other/shopimg2.jpg" mode="widthFix"></image>
 					</view>
@@ -156,24 +134,32 @@
 				</view>
 			</view>
 		</view>
-
-
+		<sunblind v-if="sunblind"></sunblind>
 	</view>
 </template>
 
 
 <script>
-
 	import demo from "@/common/js/demao.js"
-	import shoplist from '@/components/shoplist/shoplist.vue'
+	import goodlist from '@/components/mine/goods-row.vue'
 	import searchAny from '@/components/my-search/my-search.vue'
 	export default {
 		components: {
-			shoplist,
+			goodlist,
 			searchAny
 		},
 		data() {
 			return {
+				city: "",
+				sunblind:false,
+				one_cate:[
+					{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
+					{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
+					{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+					// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
+					{name:"分享有礼",url:"/pages/home/share/share",icon:"icon-hezuo"},
+					{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+				],
 				indexData: {
 					type: [{
 						t_id: 1,
@@ -181,168 +167,165 @@
 						t_img: "/images/0e1c1739e14db26c54921be94fd4d60.png",
 						p_id: 0,
 						is_hot: null,
-					
-					},{
+
+					}, {
 						t_id: 2,
 						t_name: "身体护理",
 						t_img: "/images/443baa8259c6045f30129f3373a3d78.png",
 						p_id: 0,
 						is_hot: null
-					},{
+					}, {
 						t_id: 3,
 						t_name: "问题皮肤",
 						t_img: "/images/c7a9301bf841c8300bfe090a38003bd.png",
 						p_id: 0,
 						is_hot: null
-					},{
+					}, {
 						t_id: 4,
 						t_name: "瑜伽健身",
 						t_img: "/images/c8e1b21b77f186848b6e6b7c402fa73.png",
 						p_id: 0,
 						is_hot: null
 					}],
-					s_type1:[
-						{
-							t_id	:	6,
-							t_name	:	"面部护理",
-							t_img	:	"/images/mianbuhuli.jpg",
-							p_id	:	1,
-							is_hot	:	1
+					s_type1: [{
+							t_id: 6,
+							t_name: "面部护理",
+							t_img: "/images/mianbuhuli.jpg",
+							p_id: 1,
+							is_hot: 1
 						},
 						{
-							t_id	:	7,
-							t_name	:	"抗衰除皱",
-							t_img	:	"/images/kangsuichuzhou.jpg",
-							p_id	:	1,
-							is_hot	:	1
+							t_id: 7,
+							t_name: "抗衰除皱",
+							t_img: "/images/kangsuichuzhou.jpg",
+							p_id: 1,
+							is_hot: 1
 						},
 						{
-							t_id	:	8,
-							t_name	:	"塑形换肤",
-							t_img	:	"/images/shuxinghuanfu.jpg",
-							p_id	:	1,
-							is_hot	:	1
+							t_id: 8,
+							t_name: "塑形换肤",
+							t_img: "/images/shuxinghuanfu.jpg",
+							p_id: 1,
+							is_hot: 1
 						},
 						{
-							t_id	:	9,
-							t_name	:	"养发美甲",
-							t_img	:	"/images/meifameijia.jpg",
-							p_id	:	1,
-							is_hot	:	1
+							t_id: 9,
+							t_name: "养发美甲",
+							t_img: "/images/meifameijia.jpg",
+							p_id: 1,
+							is_hot: 1
 						},
 						{
-							t_id	:	10,
-							t_name	:	"深度清洁",
-							t_img	:	"/images/shenduqingjie.jpg",
-							p_id	:	1,
-							is_hot	:	1
+							t_id: 10,
+							t_name: "深度清洁",
+							t_img: "/images/shenduqingjie.jpg",
+							p_id: 1,
+							is_hot: 1
 						}
 					],
-					s_type2:[
-						{
-							t_id	:	11,
-							t_name	:	"私密保养",
-							t_img	:	"/images/simibaoyang.jpg",
-							p_id	:	2,
-							is_hot	:	null
+					s_type2: [{
+							t_id: 11,
+							t_name: "私密保养",
+							t_img: "/images/simibaoyang.jpg",
+							p_id: 2,
+							is_hot: null
 						},
 						{
-							t_id	:	12,
-							t_name	:	"冰点脱毛",
-							t_img	:	"/images/tuomao.jpg",
-							p_id	:	2,
-							is_hot	:	null
+							t_id: 12,
+							t_name: "冰点脱毛",
+							t_img: "/images/tuomao.jpg",
+							p_id: 2,
+							is_hot: null
 						},
 						{
-							t_id	:	13,
-							t_name	:	"刮痧拔罐",
-							t_img	:	"/images/baguan.jpg",
-							p_id	:	2,
-							is_hot	:	null
+							t_id: 13,
+							t_name: "刮痧拔罐",
+							t_img: "/images/baguan.jpg",
+							p_id: 2,
+							is_hot: null
 						},
 						{
-							t_id	:	14,
-							t_name	:	"肩颈护理",
-							t_img	:	"/images/anmo.jpg",
-							p_id	:	2,
-							is_hot	:	null
+							t_id: 14,
+							t_name: "肩颈护理",
+							t_img: "/images/anmo.jpg",
+							p_id: 2,
+							is_hot: null
 						},
 						{
-							t_id	:	24,
-							t_name	:	"减肥健胸",
-							t_img	:	"/images/jianfei.jpg",
-							p_id	:	2,
-							is_hot	:	null
+							t_id: 24,
+							t_name: "减肥健胸",
+							t_img: "/images/jianfei.jpg",
+							p_id: 2,
+							is_hot: null
 						}
 					],
-					s_type3:[
-						{
-							t_id	:	15,
-							t_name	:	"祛斑祛痘",
-							t_img	:	"/images/qudou.jpg",
-							p_id	:	3,
-							is_hot	:	null
+					s_type3: [{
+							t_id: 15,
+							t_name: "祛斑祛痘",
+							t_img: "/images/qudou.jpg",
+							p_id: 3,
+							is_hot: null
 						},
 						{
-							t_id	:	16,
-							t_name	:	"毛孔粗大",
-							t_img	:	"/images/maokong.jpg",
-							p_id	:	3,
-							is_hot	:	null
+							t_id: 16,
+							t_name: "毛孔粗大",
+							t_img: "/images/maokong.jpg",
+							p_id: 3,
+							is_hot: null
 						},
 						{
-							t_id	:	17,
-							t_name	:	"敏感肌肤",
-							t_img	:	"/images/mingganjifu.jpg",
-							p_id	:	3,
-							is_hot	:	null
+							t_id: 17,
+							t_name: "敏感肌肤",
+							t_img: "/images/mingganjifu.jpg",
+							p_id: 3,
+							is_hot: null
 						},
 						{
-							t_id	:	18,
-							t_name	:	"肌肤暗沉",
-							t_img	:	"/images/jifuanchen.jpg",
-							p_id	:	3,
-							is_hot	:	null
+							t_id: 18,
+							t_name: "肌肤暗沉",
+							t_img: "/images/jifuanchen.jpg",
+							p_id: 3,
+							is_hot: null
 						},
 						{
-							t_id	:	19,
-							t_name	:	"黑头",
-							t_img	:	"/images/heitou.jpg",
-							p_id	:	3,
-							is_hot	:	null
+							t_id: 19,
+							t_name: "黑头",
+							t_img: "/images/heitou.jpg",
+							p_id: 3,
+							is_hot: null
 						}
 					],
-					s_type4:[
-						{
-							t_id	:	20,
-							t_name	:	"美容瑜伽",
-							t_img	:	"/images/meirongyujia.jpg",
-							p_id	:	4,
-							is_hot	:	null
+					s_type4: [{
+							t_id: 20,
+							t_name: "美容瑜伽",
+							t_img: "/images/meirongyujia.jpg",
+							p_id: 4,
+							is_hot: null
 						},
 						{
-							t_id	:	21,
-							t_name	:	"纤体瑜伽",
-							t_img	:	"/images/qiantiyujia.jpg",
-							p_id	:	4,
-							is_hot	:	null
+							t_id: 21,
+							t_name: "纤体瑜伽",
+							t_img: "/images/qiantiyujia.jpg",
+							p_id: 4,
+							is_hot: null
 						},
 						{
-							t_id	:	22,
-							t_name	:	"康复瑜伽",
-							t_img	:	"/images/kangfuyujia.jpg",
-							p_id	:	4,
-							is_hot	:	null
+							t_id: 22,
+							t_name: "康复瑜伽",
+							t_img: "/images/kangfuyujia.jpg",
+							p_id: 4,
+							is_hot: null
 						},
 						{
-							t_id	:	23,
-							t_name	:	"健身瑜伽",
-							t_img	:	"/images/jianshengyujia.jpg",
-							p_id	:	4,
-							is_hot	:	null
+							t_id: 23,
+							t_name: "健身瑜伽",
+							t_img: "/images/jianshengyujia.jpg",
+							p_id: 4,
+							is_hot: null
 						}
 					],
 				},
+				list:[1,2,3,4],
 
 				dataUrl: "",
 				picUrl: demo.domain.picUrl,
@@ -372,9 +355,6 @@
 				}, {
 					id: 4,
 					name: '限时抢'
-				}, {
-					id: 5,
-					name: '免费送'
 				}],
 
 
@@ -385,38 +365,50 @@
 
 		},
 		methods: {
-			// 组件事件实例
-			wearego() {},
+			one_cate_page(e){
+				this.global.utils.jump(1,e);
+			},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
 			runHairdressing(e, f) {
-				uni.navigateTo({
-					url: "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
-				})
+				this.sunblind=true;
+				let url= "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
+				this.global.utils.jump(1,url);
 			},
 			//跳转附近店铺
 			goNear() {
-				uni.navigateTo({
-					url: "/pages/home/nearby/nearby?head=" + "附近店铺"
-				})
+				this.sunblind=true;
+				let url="/pages/home/nearby/nearby?head=" + "附近店铺"
+				this.global.utils.jump(1,url);
+			}, 
+			//跳转本周新店
+			new_store(){
+				this.sunblind=true;
+				let url="/pages/home/nearby/newStore"
+				this.global.utils.jump(1,url);
 			},
-			//跳转服务详情页面
+			//跳转二级分类详情页面
 			menuDetail(e, f) {
-				uni.navigateTo({
-					url: "/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
-				})
+				this.sunblind=true;
+				let url="/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
+				this.global.utils.jump(1,url);
 			},
 			//跳转商品详情页面
 			toGoods(e, f) {
-				uni.navigateTo({
-					url: "/pages/home/menu-details/menu-details?good_id=" + e + "&&head=" + f
-				})
+				this.sunblind=true;
+				let url="/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
+				this.global.utils.jump(1,url);
 			},
 
-
+			//跳转店铺详情页面
+			jump(e, f){
+				this.sunblind=true;
+				let url="/pages/home/shop-detial/shop-detial?shop_id=" + e + "&&head=" + f;
+				this.global.utils.jump(1,url);
+			},
+			
 			// 高亮id
 			exchanges(id) {
 				this.ids = id;
-				this.findData(id);
 			},
 
 			//查找数据
@@ -434,16 +426,17 @@
 						'X-TOKEN-PETMALL': '',
 					},
 					success: (result) => {
+						console.log(result.data.data)
 						let list = result.data.data.week_newshop;
 						list.forEach((v) => {
-							v.shop_label = v.shop_label.split(",")
+							v.shop_label = v.shop_label?v.shop_label.split(","):[]
 						})
 						result.data.data.week_newshop = list;
 
 
 						let list1 = result.data.data.goodsInfo;
 						list1.forEach((v) => {
-							v.shop_label = v.shop_label.split(",")
+							v.shop_label = v.shop_label?v.shop_label.split(","):[]
 						})
 						result.data.data.goodsInfo = list1;
 						console.log(result.data.data)
@@ -454,12 +447,21 @@
 
 					}
 				})
-			}
+			},
 		},
 		onLoad(Option) {
-			console.log(this.global.card_info.bankCardAttribution(6228480900796906312))
+			
 			this.global.utils.sethead('美丽共享联盟');
-			this.findData();
+			this.findData(); 
+			
+			
+			this.city=this.global.city;
+			this.global.watch((v)=>{
+				this.city=v;
+			})
+		},
+		onShow(){
+			this.sunblind=false;
 		}
 	}
 </script>
@@ -717,7 +719,8 @@
 			width: 100%;
 			height: 560rpx;
 			border: 2rpx solid #d6d6d6;
-			box-shadow: 0rpx 0rpx 20rpx #bfbdbd;
+			box-shadow: 0rpx 0rpx 15rpx #bfbdbd;
+			border-radius: 18rpx;
 
 			.butf,
 			.head,

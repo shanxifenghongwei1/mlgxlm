@@ -41,7 +41,9 @@ let requestPost = ajaxJson => {
 		},
 		success: (result) => {
 			console.log(result)
+			console.log("执行成功")
 			console.log(result.data.data)
+
 			
 			// if (ajaxJson.globalJudge == true) { //在请求调用处，处理所有逻辑
 			// 	ajaxJson.success(result.data);

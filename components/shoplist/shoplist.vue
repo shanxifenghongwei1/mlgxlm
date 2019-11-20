@@ -145,7 +145,7 @@
 				}
 				.havepeoples{
 					position: absolute;
-					top: 114rpx;
+					bottom: 20%;
 					right: 48rpx;
 					font-size: $uni-font-size-base;
 					text {

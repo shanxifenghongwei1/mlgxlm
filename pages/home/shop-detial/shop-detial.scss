@@ -19,7 +19,9 @@
 	.pos {
 		position: relative;
 	}
-	
+	.red{
+		color: $any-col !important;
+	}
 	.shop-some-message {
 		position: relative;
 		width: 94%;
@@ -53,7 +55,6 @@
 		}
 	
 		.shop-start {
-			width: 124rpx;
 			margin: 0 auto;
 
 		}
@@ -92,23 +93,28 @@
 			margin:10rpx 10rpx 10rpx 40rpx;
 		}
 		.serve-message {
+			padding: 0 30rpx;
+			box-sizing: border-box;
 			@extend .any-flex;
-			
 			flex-wrap: wrap;
 			view{
 				width: 30%;
-				text-align: center;
-				font-size: $uni-font-size-lg;
+				text-align: left;	
+				font-size: $uni-font-size-base;
 				margin: 5rpx;
+				margin-right: 20rpx; 
 				.icon {
 					font-size: $uni-font-size-base;
 					color: $any-col;
 					margin-right: 10rpx;
 				}
 			}
-			
+			view:nth-child(3n){
+				margin-right: 0;
+			}
 		}
 		.address{
+			width: 70%;
 			margin:10rpx 10rpx 20rpx 32rpx;
 			font-size: $uni-font-size-base;
 			color: $any-col;
@@ -116,7 +122,37 @@
 				color:#23D6FF;
 				margin-right: 10rpx;
 			}
-			padding-bottom: 20rpx;
+			// padding-bottom: 20rpx;
+			padding-right: 8rpx;
+		}
+		.phone{
+			width: 30%;
+			height: 100%;
+			@extend .any-flex;
+			justify-content: center;
+			align-items: center;
+			image{
+				width: 38rpx;
+				height: 38rpx;
+				margin-bottom: 15rpx;
+			}
+		}
+		.address.any-flex{
+			align-items: flex-start;
+			
+		}
+		.address{
+			position: relative;
+		}
+		.address:after{
+			content: "";
+			display: block;
+			width: 2rpx;
+			height: 80%;
+			position: absolute;
+			right: 0;
+			top: 10%;
+			background: #A1A1A1;
 		}
 	
 	}

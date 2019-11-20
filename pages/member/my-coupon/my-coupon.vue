@@ -10,17 +10,17 @@
 			<view class="use-box" v-if="cateDate.coupon.length" v-for="(item,index) in cateDate.coupon" :key="index">
 				<view class="left">
 					<view class="title">
-						<text>{{item.shop_name}}</text>优惠券优惠券优惠券优惠券优惠券优惠券优惠券
+						<text>{{item.shop_name}}</text>
 					</view>
 					<view class="con">
 						{{item.goods_name}}
 					</view>
 					<view class="time">
-						使用期限: <datejs :date="item.create_time"></datejs>—<datejs :date="item.expiration"></datejs>
+						使用期限: {{item.create_time|time}}--{{item.expiration|time}}
 					</view>
 				</view>
-				<view class="right">
-					<view class="price">
+				<view class="right" v-if="item.coupon_type==0">
+					<view class="price" >
 						<view class="price-base">
 							￥
 						</view>
@@ -32,6 +32,19 @@
 						满{{item.coupon_redouction}}减{{item.coupon_price}}
 					</view>
 					<view class="go">
+						去使用
+					</view>
+				</view>
+				<view class="right" v-if="item.coupon_type==1">
+					<view class="price" >
+						<view class="price-num">
+							{{item.discount}}
+						</view>
+						<view class="price-base">
+							折
+						</view>
+					</view>
+					<view class="go" @click="toUse(item.goods_id,item.goods_name)">
 						去使用
 					</view>
 				</view>
@@ -58,8 +71,8 @@
 						使用期限: <datejs :date="item.create_time"></datejs>—<datejs :date="item.expiration"></datejs>
 					</view>
 				</view>
-				<view class="right">
-					<view class="price">
+				<view class="right" v-if="item.coupon_type==0">
+					<view class="price" >
 						<view class="price-base">
 							￥
 						</view>
@@ -71,7 +84,20 @@
 						满{{item.coupon_redouction}}减{{item.coupon_price}}
 					</view>
 					<view class="go">
-						去使用
+						已使用
+					</view>
+				</view>
+				<view class="right" v-if="item.coupon_type==1">
+					<view class="price" >
+						<view class="price-num">
+							{{item.discount}}
+						</view>
+						<view class="price-base">
+							折
+						</view>
+					</view>
+					<view class="go">
+						已使用
 					</view>
 				</view>
 				<view class="hasuse">
@@ -99,8 +125,8 @@
 						使用期限: <datejs :date="item.create_time"></datejs>—<datejs :date="item.expiration"></datejs>
 					</view>
 				</view>
-				<view class="right">
-					<view class="price">
+				<view class="right" v-if="item.coupon_type==0">
+					<view class="price" >
 						<view class="price-base">
 							￥
 						</view>
@@ -112,7 +138,20 @@
 						满{{item.coupon_redouction}}减{{item.coupon_price}}
 					</view>
 					<view class="go">
-						去使用
+						已过期
+					</view>
+				</view>
+				<view class="right" v-if="item.coupon_type==1">
+					<view class="price" >
+						<view class="price-num">
+							{{item.discount}}
+						</view>
+						<view class="price-base">
+							折
+						</view>
+					</view>
+					<view class="go">
+						已过期
 					</view>
 				</view>
 			</view>
@@ -153,15 +192,8 @@
 			seleId(e) {
 				this.cateid = e;
 			},
-			dateTime(timestamp){
-				var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-				var Y = date.getFullYear() + '-';
-				var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-				var D = date.getDate() + ' ';
-				var h = date.getHours() + ':';
-				var m = date.getMinutes() + ':';
-				var s = date.getSeconds();
-				return Y+M+D;
+			toUse(e,f){
+				this.global.utils.jump(1,"/pages/home/goods-detail/goods-detail?goods_id="+e+"&&head="+f)
 			}
 		},
 		onShow(){
@@ -174,13 +206,6 @@
 					console.log("这是返回数据"+res)
 					console.log(res)
 					this.cateDate=res;
-					// console.log(res.msg)
-					// this.showToast_my(res.msg);
-					// setTimeout(()=>{
-					// 	uni.switchTab({
-					// 		url:"/pages/member/member"
-					// 	})
-					// },2000)
 				}
 			})
 		}
@@ -225,7 +250,7 @@
 			height: 100%;
 			@extend .any-flex;
 			flex-direction: column;
-			justify-content: space-between;
+			justify-content: center;
 			align-items: center;
 			padding: 20rpx 0;
 			box-sizing: border-box;
@@ -242,24 +267,30 @@
 			@include multi-row-apostrophe(1);
 		}
 		.time{
+			width: 100%;
+			padding: 0 10rpx;
+			box-sizing: border-box;
 			font-size: $uni-font-size-sm;
+			word-wrap: break-word;word-break: break-all;overflow: hidden;
 		}
 		.price{
 			@extend .any-flex;
 			justify-content: center;
 			align-items: flex-end;
+			margin-top: 10rpx;
 			.price-base{
 				font-size: $uni-font-size-base;
 			}
 			.price-num{
 				font-size: $uni-font-size-lg;
-				// color: $any-col;
 			}
 		}
 		.full{
+			margin-top: 10rpx;
 			font-size: $uni-font-size-sm;
 		}
 		.go{
+			margin-top: 10rpx;
 			display: inline-block;
 			padding: 5rpx 15rpx;
 			border: 1rpx solid #ffffff;

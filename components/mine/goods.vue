@@ -1,7 +1,7 @@
 <template>
-	<!-- 商品组件（图+详细信息） -->
+	<!-- 商品组件（图+详细信息） --> 
 	<view class="goods">
-		<view class="goods-li" @click="toDetail(2)" v-for="(item,index) in titCon" :key="index">
+		<!-- <view class="goods-li" @click="toDetail(2)" v-for="(item,index) in titCon" :key="index">
 			<view class="goods-pic">
 				<image src="/static/image/banner/1.jpg" mode=""></image>
 			</view>
@@ -85,6 +85,198 @@
 					</view>
 				</view>
 			</block>
+		</view> -->
+		
+		<view class="goods-li" @click="toDetail(2)" v-for="(item,index) in titCon" :key="index">
+			<view class="goods-pic">
+				<image src="/static/image/banner/1.jpg" mode=""></image>
+			</view>
+			
+			<!-- 正常 -->
+			<block v-if="place===1">
+				<view class="goods-tit">
+					￥{{item.goods_name}}
+				</view>
+				<view class="goods-con">
+					<view class="goods-con-left">
+					{{item.t_name}}
+					</view>
+					<view class="goods-con-fight">
+						已售 {{item.goods_gd_num|isN(Number)}}
+					</view>
+				</view>
+				
+				
+				<!-- 不参与任何活动 -->
+				<view class="goods-price" v-if="item.promotion_type==0">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							{{item.price}}
+						</view>
+					</view>
+				</view> 
+				
+				<!-- 参与满减 -->
+				<view class="goods-price" v-if="item.promotion_type==2">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						满{{item.coupon_redouction|isN(Number)}}减{{item.coupon_price|isN(Number)}}元
+					</view>
+				</view>
+				
+				<!-- 参与拼团 -->
+				<view class="goods-price" v-if="item.promotion_type==1">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							￥{{item.promotion_price|isN(Number)}}
+						</view>
+						<view class="goods-OldPrice">
+							￥{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						拼团
+					</view>
+				</view>
+				
+				<!-- 参与限时抢 -->
+				<view class="goods-price" v-if="item.promotion_type==4">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							￥{{item.limited_price|isN(Number)}}
+						</view>
+						<view class="goods-OldPrice">
+							￥{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						限时抢
+					</view>
+				</view>
+			</block>
+			
+			<!-- 置换 -->
+			<block v-if="place===2">
+				<view class="place place-title">
+					{{item.goods_name}}
+				</view>
+				<view class="place place-name">
+					姿美堂养颜套装（全新）
+				</view>
+				<view class="place place-num">
+					<view class="">
+						置换1000
+					</view>
+					<view class="">
+						置换1000
+					</view>
+				</view>
+				<view class="place place-price">
+					￥199.9
+				</view>
+				<view class="place place-address">
+					<view class="icon iconfont icon-xuanzhong1">
+		
+					</view>
+		
+					山西省太原市小店区天鑫花
+		
+		
+				</view>
+				<view class="place place-time">
+					2019-10-16 10:03发布
+				</view>
+			</block>
+			
+			<!-- 收藏 -->
+			<block v-if="place===3">
+				<view class="ware">
+					<view class="left title">
+						{{item.shop_name}}
+					</view>
+					<view class="right">
+						<text>{{item.shop_address_provice+item.shop_address_city}}</text>
+					</view>
+				</view>
+				<view class="ware">
+					<view class="ware-ware">
+						{{item.goods_name}}
+					</view>
+				</view>
+				<!-- 不参与任何活动 -->
+				<view class="goods-price" v-if="item.promotion_type==0">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							{{item.price}}
+						</view>
+					</view>
+				</view> 
+				
+				<!-- 参与满减 -->
+				<view class="goods-price" v-if="item.promotion_type==2">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						满{{item.coupon_redouction|isN(Number)}}减{{item.coupon_price|isN(Number)}}元
+					</view>
+				</view>
+				
+				<!-- 参与拼团 -->
+				<view class="goods-price" v-if="item.promotion_type==1">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							￥{{item.promotion_price|isN(Number)}}
+						</view>
+						<view class="goods-OldPrice">
+							￥{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						拼团
+					</view>
+				</view>
+				
+				<!-- 参与限时抢 -->
+				<view class="goods-price" v-if="item.promotion_type==4">
+					<view class="goods-price-left">
+						<view class="goods-NewPrice">
+							￥{{item.limited_price|isN(Number)}}
+						</view>
+						<view class="goods-OldPrice">
+							￥{{item.price|isN(Number)}}
+						</view>
+					</view>
+					<view class="goods-price-right">
+						限时抢
+					</view>
+				</view>
+			</block>
+			
+			
+			<!-- 分销 -->
+			<block v-if="place===5">
+				<view class="place place-address">			
+					专业美颜防护
+				</view>
+				<view class="place place-name red">
+					YIAN伊岸冻干粉修复去
+				</view>
+				<view class="place place-price flex">
+					<view>￥199.9</view><text class="block sm">可分销购买</text>
+				</view>
+				<view class="hasbuy">
+					<view class="hasbuy-box">
+						已售1000件
+					</view>
+				</view>
+			</block>
 		</view>
 
 		<view class="look-more" v-if="more">
@@ -97,20 +289,19 @@
 	export default {
 		data() {
 			return {
-
+ 
 			}
 		},
 		props: {
 			titCon: {
 				type: Array, //商品数据列表
-				default: []
 			},
 			more: {
 				type: Boolean, //是否显示加载更多
 				default: true
 			},
 			place: {
-				type: Number, //1正常商品false    2置换商品true   3收藏商品
+				type: Number, //1正常商品false    2置换商品true   3收藏商品   4分销
 				default: 1
 			}
 		},
@@ -138,6 +329,7 @@
 		margin-top: 20rpx;
 		overflow: hidden;
 		box-shadow: 0rpx 0rpx 10rpx #cfcdcd;
+		justify-content: space-between;
 	}
 
 	.goods-li:nth-child(2n) {
@@ -205,8 +397,9 @@
 	.goods-price-right {
 		font-size: $uni-font-size-sm;
 		color: $any-col;
-		padding: 2rpx 5rpx;
+		padding: 2rpx 8rpx;
 		border: 2rpx solid $any-col;
+		border-radius: 5rpx;
 	}
 
 	.look-more {
@@ -275,7 +468,36 @@
 		@include multi-row-apostrophe(1);
 		margin-bottom: 10rpx;
 	}
-	
+	.red{
+		color: $any-col;
+	}
+	.sm{
+		font-size: $uni-font-size-sm;
+	}
+	.block{
+		color: #1A1A1A;
+	}
+	.flex{
+		display:flex;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+	.hasbuy{
+		width: 100%;
+		.hasbuy-box{
+			width: 170rpx;
+			height: 40rpx;
+			border: 1rpx solid  $any-col;
+			border-radius: 20rpx;
+			color: $any-col;
+			font-size: $uni-font-size-base;
+			float: right;
+			margin-bottom: 15rpx;
+			margin-right: 5rpx;
+			text-align:center;
+			line-height:40rpx;
+		}
+	}
 	.ware{
 		width: 100%;
 		font-size: $uni-font-size-base;

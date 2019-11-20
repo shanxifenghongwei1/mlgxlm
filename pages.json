@@ -16,7 +16,7 @@
 		{
 			"path": "pages/street/street",
 			"style": {
-				"navigationBarTitleText": "店铺街"
+				"navigationBarTitleText": "发现"
 			}
 		},
 		{
@@ -47,6 +47,12 @@
 			"path":"pages/pay/order",
 			"style": {
 				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path":"pages/pay/assess",
+			"style": {
+				"navigationBarTitleText": "评价晒单"
 			}
 		},
 		{
@@ -83,6 +89,10 @@
             "path" : "pages/home/shop-detial/shop-detial",
             "style" : {}
         }
+		,{
+		    "path" : "pages/home/shop-detial/case",
+		    "style" : {}
+		}
         ,{
             "path" : "pages/home/goods-detail/goods-detail",
             "style" : {}
@@ -139,6 +149,22 @@
             "path" : "pages/home/retail/retail",
             "style" : {}
         }
+		,{
+		    "path" : "pages/home/retail/my_order",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/home/retail/my_team",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/home/retail/rank",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/home/retail/retail_cash",
+		    "style" : {}
+		}
 		,{
 		    "path" : "pages/member/my-coupon/my-assets",
 		    "style" : {}
@@ -204,6 +230,30 @@
             "style" : {}
         }
 		
+        ,{
+            "path" : "pages/home/share/share",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/retail_home/retail_home",
+            "style" : {}
+        },
+		{
+			"path" : "pages/home/retail_home/shop_detail",
+			"style" : {}
+		},
+		{
+			"path" : "pages/pay/appointment",
+			"style" : {
+				"navigationBarTitleText": "我要预约"
+			}
+		},
+		{
+			"path" : "pages/pay/appointment_success",
+			"style" : {
+				"navigationBarTitleText": "预约成功"
+			}
+		}
     ],
 	
 	 "condition": { //模式配置，仅开发期间生效
@@ -219,11 +269,6 @@
 		"navigationBarBackgroundColor": "#Fe0000",
 		"backgroundColor": "#FFFFFF"
 	},
-	"permission": {
-		"scope.userLocation": {
-			"desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
-		}
-	},
 	"tabBar": {
 		"color": "#7A7E83",
 		"selectedColor": "#f73333", 
@@ -237,10 +282,10 @@
 			},
 			{
 				"pagePath": "pages/street/street",
-				"iconPath": "static/image/street.png",
-				"selectedIconPath": "static/image/street1.png"
+				"iconPath": "static/image/find1.png",
+				"selectedIconPath": "static/image/find.png"
 				
-			},
+			}, 
 			{
 				"pagePath": "pages/shopping/shopping",
 				"iconPath": "static/image/shopping.png",

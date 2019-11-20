@@ -111,7 +111,8 @@
 		line-height: 0;
 		font-size: 0;
 		display: flex;
-		flex-direction: row
+	/* 	flex-direction: row; */
+
 	}
 
 	.uni-rate-icon {
@@ -127,5 +128,8 @@
 		top: 0;
 		left: 0;
 		overflow: hidden
+	}
+	.order-detail .right view{
+		align-items: center !important;
 	}
 </style>

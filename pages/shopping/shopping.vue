@@ -83,7 +83,7 @@
 		},
 		data() {
 			return {
-				list: 2,
+				list: [],
 				titCon: [1, 2, 3, 3]
 			}
 		},
@@ -92,10 +92,27 @@
 				uni.navigateTo({
 					url:"/pages/pay/pay"
 				})
-			}
+			},
+			//查询购物车的数量
+			findCar() {
+				let data = {};
+				this.global.request.post({
+					url: this.global.demao.api.cartList,
+					method: "GET",
+					data: data,
+					success: (res) => {
+						res.cartInfo=res.cartInfo.forEach((v)=>{
+							v.check
+						})
+						this.list=res.cartInfo;
+						
+					}
+				})
+			},
 		},
-		onLoad() {
+		onShow() {
 			console.log(this.global.demao.api.user_Address_list)
+			this.findCar()
 		}
 	}
 </script>

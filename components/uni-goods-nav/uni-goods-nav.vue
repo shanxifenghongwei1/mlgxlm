@@ -73,7 +73,7 @@
 				if (uni.report) {
 					uni.report(item.text, item.text)
 				}
-				this.$emit('buttonClick', {
+				this.$emit('butt', {
 					index,
 					content: item
 				})

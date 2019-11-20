@@ -8,6 +8,9 @@ import status from "./common/js/status"
 import card_info from "./common/js/card_info.js"
 import bmap from "./common/js/bmap-wx.js"
 
+import sunblinds from "./components/all/sunblind.vue"
+Vue.component("sunblind",sunblinds)
+
 import "./common/css/font.css"
 Vue.config.productionTip = false
 
@@ -18,12 +21,42 @@ Vue.prototype.global = {
 	status: status,
 	card_info: card_info,
 	demao,
-	bmap
+	bmap,
+	city: "",
+	lat:null,
+	lng:null,
+	watch: function(method) {									//监听city变化
+		var obj = this;
+		Object.defineProperty(obj, "city", {
+			configurable: true,
+			enumerable: true,
+			set: function(value) {
+				this._city = value;
+				method(value);
+			},
+			get: function() {
+				// 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.name的时候，这里就会执行。
+				return this._city
+			}
+		})
+	}
+
 }
 Vue.filter("time", (nS) => {
-	console.log(parseInt(nS))
-	return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');  
+	return new Date(parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/, ' ');
 })
+Vue.filter("isN", (e,f=String) => {
+	if(e){
+		return e
+	}else{
+		if(f==String){
+			return "";
+		}else{
+			return 0;
+		}
+	}
+})
+
 
 
 App.mpType = 'app'

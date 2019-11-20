@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<evaluate :mine="true"></evaluate>
+		<evaluate :mine="true" :evallist="evallist"></evaluate>
 	</view>
 </template>
 
@@ -12,7 +12,7 @@
 		},
 		data() {
 			return {
-				
+				evallist:[1,2,3]
 			}
 		},
 		methods: {

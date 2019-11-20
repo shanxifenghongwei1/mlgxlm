@@ -5,13 +5,13 @@
 			<!-- 图片展示 -->
 			<view class="picture">
 				<view class="picture-box">
-					<image :src="item.prepic" mode=""></image>
+					<image :src="picUrl+item.case_front" mode=""></image>
 					<view class="picture-time">
 						体验前
 					</view>
 				</view>
 				<view class="picture-box">
-					<image :src="item.pic" mode=""></image>
+					<image :src="picUrl+item.case_after" mode=""></image>
 					<view class="picture-time">
 						体验后35天
 					</view>
@@ -21,10 +21,10 @@
 			<view class="case-info">
 				<image src="/static/image/other/bookmark.png" mode=""></image>
 				<view class="info-age">
-					{{item.age}}
+					{{item.shop_name}}
 				</view>
 				<view class="info-state">
-					{{item.state}}
+					{{item.case_trouble}}
 				</view>
 			</view>
 		</view>
@@ -35,15 +35,17 @@
 	export default{
 		data(){
 			return{
-				
+				picUrl:""
 			}
 		},
 		props:{
 			caseList:{
 				type:Array, //商品数据列表
-				default:[]
 			}
 		},
+		created(){
+			this.picUrl=this.global.demao.domain.picUrl
+		}
 	}
 </script>
 
@@ -71,6 +73,7 @@
 		bottom: 0;
 		font-size: $uni-font-size-base;
 		padding: 7rpx;
+		color: #ffffff;
 	}
 	.case-info{
 		@extend .any-flex;

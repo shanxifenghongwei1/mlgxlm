@@ -62,7 +62,7 @@
 	align-items: flex-end;
 	padding: 15rpx;
 	.NewPrice{
-		font-size: $uni-font-size-lg;
+		font-size: 50rpx;
 		color: $any-col;
 		font-weight: bold;
 	}
@@ -72,13 +72,24 @@
 		text-decoration: line-through;
 		margin-left: 12rpx;
 	}
+	.yuyue{
+		font-size: $uni-font-size-base;
+		color: #7e7e7e;
+		margin-left: 15rpx;
+		margin-bottom: 12rpx;
+	}
+	.time{
+		margin-left: 40rpx;
+		margin-bottom: 5rpx;
+	}
 	.manJian{
-		font-size: 16rpx;
+		font-size: $uni-font-size-base;
 		border: 1rpx solid $any-col;
 		color: $any-col;
-		margin-left: 12rpx;
-		padding: 0 3rpx;
+		margin-left: 35rpx;
+		padding: 4rpx 6rpx;
 		box-sizing: border-box;
+		margin-bottom: 10rpx;
 	}
 }
 
@@ -161,10 +172,16 @@
 	justify-content: space-between;			
 	align-items: center;
 	box-sizing: border-box;
+	margin-top: 20rpx;
 	.goShop-pic{
 		width: 90rpx;
 		height: 90rpx;
 		background: yellow;
+		image{
+			width: 90rpx;
+			height: 90rpx;
+			border-radius: 50%;
+		}
 	}
 	.goShop-name{
 		width: 450rpx;
@@ -260,4 +277,31 @@
 	position: fixed;
 	left: 0;
 	bottom: 0;
+}
+
+.table{
+	width: 100%;
+	font-size: $uni-font-size-sm;
+	.tl{
+		width: 100%;
+		@extend .any-flex;
+		align-items: center;
+		padding: 15rpx 0;
+		box-sizing: border-box;
+		border-bottom: 1rpx solid #d5d5d5;
+		color: #919191;
+		.tr{
+			width: 105rpx;
+			padding: 5rpx 10rpx; 
+			background: #f2f2f0;
+		}
+		.td{
+			width: 580rpx;
+			padding: 5rpx 10rpx; 
+			box-sizing: border-box;
+		}
+	}
+	.tl:first-child{
+		border-top: 1rpx solid #d5d5d5;
+	}
 }

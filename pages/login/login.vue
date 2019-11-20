@@ -50,8 +50,6 @@
 						provider:'weixin',
 						success:(userinfor)=>{
 							console.log(userinfor)
-							// that.obs = JSON.stringify(userinfor) 
-							// uni.setStorageSync("userinfo",userinfor)
 							that.global.request.post({
 								url: 'weChat',
 								method:"GET",
@@ -61,6 +59,8 @@
 								},
 								isLoading: true,
 								success: (res) => {
+									console.log("-----------登录打印")
+									console.log(res)
 									that.global.status.state.login=1;
 									uni.setStorageSync("session",res);
 									uni.navigateBack({

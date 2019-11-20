@@ -8,10 +8,10 @@
 				<view class="shop-message">
 					<view class="shop-message-left">
 						<view class="title">
-							芳香精油乳腺疏通
+							{{item.goods_name}}
 						</view>
 						<view class="name">
-							爱美世家
+							{{item.shop_name}}
 						</view>
 						<view class="scrol-box" v-if="frompage=='flash'">
 							<view class="scrol">
@@ -25,45 +25,49 @@
 								位
 							</view>
 						</view>
-						<view class="tag" v-else>
-							<view class="tag-box">
-								平台推荐
-							</view>
-							<view class="tag-box">
-								平台推荐
-							</view>
-							<view class="tag-box">
-								平台推荐
-							</view>
-							<view class="tag-box">
-								平台推荐
-							</view>
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old"  v-if="cateid==2">
-								￥399
-							</view>
-							<view class="price-pin" v-if="frompage!='flash'">
-								已拼
+
+						<view class="price" :class="frompage=='flash'?'':'mar'">
+							<block v-if="frompage=='flash'">
+								<view class="new">
+									￥199
+								</view>
+								<view class="old"  v-if="cateid==2">
+									￥399
+								</view>
+							</block>
+							<block v-if="frompage!='flash'">
+								<text class="icon iconfont icon-tuan"></text>
+								<view class="new">
+									￥{{item.promotion_price}}
+								</view>
+							</block>
+						
+							<view class="price-pin" v-if="frompage=='flash'">
+								已抢
 								<view class="">
 									258+
 								</view>
 								位
 							</view>
+							<view class="price-pin" v-else>
+								已拼
+								<view class="">
+									{{item.prople}}+
+								</view>
+								位
+							</view>
 						</view>
+						
 					</view>
 					<view class="shop-message-right">
-						<view class="salc" v-if="frompage=='flash'">
+						<view class="salc" v-if="frompage=='flash'" @click="toDetail(item.goods_id,item.goods_name)">
 							马上抢
 						</view>
-						<view class="salc" v-else>
-							进店逛逛
+						<view class="salc" v-else  @click="toDetail(item.goods_id,item.goods_name)">
+							马上拼
 						</view>
 						<view class="km" v-if="cateid==1">
-							距离1.3Km
+							距离约{{item.juli}}Km
 						</view>
 					</view>
 				</view>
@@ -102,12 +106,23 @@
 		methods:{
 			selCate(e){
 				this.$emit('seleId',e)
+			},
+			toDetail(e,f){
+				this.global.utils.jump(1,"/pages/home/goods-detail/goods-detail?goods_id="+e+"&&head="+f)
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.mar{
+		margin-top:30rpx;
+	}
+	.icon-tuan{
+		font-size: 40rpx;
+		color: $any-col;
+		margin-right:15rpx;
+	}
 	.shop-father {
 		@extend .cons;
 		.shop {
@@ -139,21 +154,23 @@
 				height: 100%;
 				background: #ffffff;
 				.title{
-					width: 100%;
-					height: 50rpx;
+					width: 70%;
+					height: 40rpx;
 					font-size: $uni-font-size-lg;
 					color: $any-col;
+					@include multi-row-apostrophe(1);
 				}
 				.name{
-					width: 100%;
+					width: 70%;
 					font-size: $uni-font-size-sm;
 					color: #575757;
+					@include multi-row-apostrophe(1);
 				}
 				.scrol-box{
 					@extend .any-flex;
 					align-items: flex-start;
 					.scrol{
-						width: 60%;
+						width: 52%;
 						height: 50rpx;
 					}
 					.scrol-num{
@@ -167,20 +184,6 @@
 					.scrol-num view{
 						display: inline-block;
 						color: $any-col;
-					}
-				}
-				.tag{
-					width: 70%;
-					margin-bottom: 20rpx;
-					.tag-box{
-						display: inline-block;
-						font-size:$uni-font-size-sm;
-						background: #ffffff;
-						color: $any-col;
-						text-align: center;
-						padding: 3rpx 8rpx ;
-						border: 1rpx solid $any-col;
-						margin-right: 20rpx;
 					}
 				}
 				.price{
@@ -230,7 +233,7 @@
 					border-radius: 15rpx;
 					text-align: center;
 					line-height: 40rpx;
-					padding: 3rpx 8rpx;
+					padding: 4rpx 12rpx;
 				}
 				.km{
 					font-size: $uni-font-size-sm;
