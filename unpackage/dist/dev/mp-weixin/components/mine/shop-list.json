@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "uni-rate": "/components/uni-rate/uni-rate",
-    "cmd-progress": "/components/cmd-progress/cmd-progress"
-  },
-  "component": true
-}
