@@ -3,7 +3,7 @@
 		<view  class="shop-father" v-for="(item,index) in flashList" :key="index">
 			<view class="shop">
 				<view class="shop-img">
-					<image src="/static/image/shop/shop-1.jpg" mode="widthFix"></image>
+					<image :src="picUrl+ item.picture" mode=""></image>
 				</view>
 				<view class="shop-message">
 					<view class="shop-message-left">
@@ -13,59 +13,73 @@
 						<view class="name">
 							{{item.shop_name}}
 						</view>
-						<view class="scrol-box" v-if="frompage=='flash'">
-							<view class="scrol">
-								<cmd-progress stroke-width='8' stroke-color='#FE0000' :percent="30"></cmd-progress>
-							</view>
-							<view class="scrol-num">
-								已拼
-								<view class="">
-									0
+						<block v-if="time!=1">
+							<view class="scrol-box" v-if="frompage=='flash'">
+								<view class="scrol">
+									<cmd-progress stroke-width='8' stroke-color='#FE0000' :percent="0"></cmd-progress>
 								</view>
-								位
 							</view>
-						</view>
+						</block>
+						<block v-if="time==1">
+							<view class="scrol-box" v-if="frompage=='flash'">
+								<view class="scrol">
+									<cmd-progress stroke-width='8' stroke-color='#FE0000' :percent="Math.floor((item.prople)/(item.limited_prople?item.limited_prople:1))"></cmd-progress>
+								</view>
+								<view class="scrol-num">
+									已抢
+									<view class="">
+										{{item.prople}}
+									</view>
+									位
+								</view>
+							</view>
+						</block>
+						
 
 						<view class="price" :class="frompage=='flash'?'':'mar'">
 							<block v-if="frompage=='flash'">
 								<view class="new">
-									￥199
+									￥{{item.limited_price?item.limited_price:0}}
 								</view>
 								<view class="old"  v-if="cateid==2">
-									￥399
+									￥{{item.price?item.price:0}}
 								</view>
 							</block>
 							<block v-if="frompage!='flash'">
 								<text class="icon iconfont icon-tuan"></text>
 								<view class="new">
-									￥{{item.promotion_price}}
+									￥{{item.promotion_price?item.promotion_price:0}}
 								</view>
 							</block>
-						
-							<view class="price-pin" v-if="frompage=='flash'">
-								已抢
-								<view class="">
-									258+
+							<block v-if="time==1">
+								<view class="price-pin" v-if="frompage=='flash'">
+									已抢
+									<view class="">
+										{{item.prople}}+
+									</view>
+									位
 								</view>
-								位
-							</view>
-							<view class="price-pin" v-else>
-								已拼
-								<view class="">
-									{{item.prople}}+
+								<view class="price-pin" v-else>
+									已拼
+									<view class="">
+										{{item.prople}}+
+									</view>
+									位
 								</view>
-								位
-							</view>
+							</block>
+							
 						</view>
 						
 					</view>
 					<view class="shop-message-right">
-						<view class="salc" v-if="frompage=='flash'" @click="toDetail(item.goods_id,item.goods_name)">
-							马上抢
-						</view>
-						<view class="salc" v-else  @click="toDetail(item.goods_id,item.goods_name)">
-							马上拼
-						</view>
+						<block v-if="time==1">
+							<view class="salc" v-if="frompage=='flash'" @click="toDetail(item.goods_id,item.goods_name)">
+								马上抢
+							</view>
+							<view class="salc" v-else  @click="toDetail(item.goods_id,item.goods_name)">
+								马上拼
+							</view>
+						</block>
 						<view class="km" v-if="cateid==1">
 							距离约{{item.juli}}Km
 						</view>
@@ -85,13 +99,12 @@
 		},
 		data(){
 			return{
-				
+				picUrl:""
 			}
 		},
 		props:{
 			flashList:{
 				type:Array, //商品数据列表
-				default:[]
 			},
 				
 			cateid:{
@@ -101,6 +114,10 @@
 			frompage:{
 				type:String,
 				default:"flash"
+			},
+			time:{
+				type:Number,
+				default:1
 			}
 		},
 		methods:{
@@ -110,6 +127,9 @@
 			toDetail(e,f){
 				this.global.utils.jump(1,"/pages/home/goods-detail/goods-detail?goods_id="+e+"&&head="+f)
 			}
+		},
+		created(){
+			this.picUrl=this.global.demao.domain.picUrl
 		}
 	}
 </script>
@@ -139,7 +159,7 @@
 				height: 80%;
 				image {
 					width: 100%;
-					height: 100%;
+					height: 150rpx;
 				}
 			}
 			.shop-message {
@@ -170,7 +190,7 @@
 					@extend .any-flex;
 					align-items: flex-start;
 					.scrol{
-						width: 52%;
+						width: 47%;
 						height: 50rpx;
 					}
 					.scrol-num{

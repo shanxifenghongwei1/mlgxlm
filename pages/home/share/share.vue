@@ -4,7 +4,7 @@
 			<image src="/static/image/other/share_1.png" mode="" class="back"></image>
 			<view class="person-box">
 
-				<view class="list" v-for="(item) in num">
+				<view class="list" v-for="(item,index) in num" :key="index">
 					<view class="li">
 
 					</view>
@@ -24,7 +24,7 @@
 	export default {
 		data() {
 			return {
-				open_id:"12315",
+				open_id:"",
 				join_id:"",
 				num: [1, 2, 3, 4, 5, 6]
 			}
@@ -33,9 +33,14 @@
 	
 		},
 		onLoad(e){
-			console.log(e);
-			this.join_id=e.open_id;
-			this.open_id=uni.getStorageSync("open_id")
+			console.log("分享页面数据")
+			console.log(e)
+			let a=uni.getStorageSync("session");
+			console.log(a)
+			this.open_id=a.data.openid
+			// console.log(e);
+			// this.join_id=e.open_id;
+			// this.open_id=uni.getStorageSync("open_id")
 		},
 		onShareAppMessage(res) {
 			if (res.from === 'button') { // 来自页面内分享按钮
@@ -43,7 +48,7 @@
 			}
 			return {
 				title: '自定义分享标题',
-				path: '/pages/home/share/share?open_id='+open_id
+				path: '/pages/home/share/share?p_id='+this.open_id
 			}
 		}
 	}

@@ -28,7 +28,7 @@
 					1024.05元
 				</view>
 			</view>
-			<view class="right">
+			<view class="right" @click="toCash()">
 				提现
 			</view>
 		</view>
@@ -62,52 +62,6 @@
 						{{item.name}}
 					</view>
 				</view>
-
-				<!-- <view class="list">
-					<image src="/static/image/other/retail_money.png" mode=""></image>
-					<view class="name">
-						分销佣金
-					</view>
-					<view class="num">
-						102540元
-					</view>
-				</view>
-				<view class="list">
-					<image src="/static/image/other/retail_order.png" mode=""></image>
-					<view class="name">
-						分销订单
-					</view>
-					<view class="num">
-						385元
-					</view>
-				</view>
-				<view class="list">
-					<image src="/static/image/other/retail_detail.png" mode=""></image>
-					<view class="name">
-						提现明细
-					</view>
-					<view class="num">
-						98元
-					</view>
-				</view>
-				<view class="list">
-					<image src="/static/image/other/retail_team.png" mode=""></image>
-					<view class="name">
-						我的团队
-					</view>
-					<view class="num">
-						38人
-					</view>
-				</view>
-				<view class="list">
-					<image src="/static/image/other/retail_code.png" mode=""></image>
-					<view class="name">
-						分销佣金
-					</view>
-					<view class="num">
-						
-					</view>
-				</view> -->
 			</view>
 		</view>
 
@@ -178,6 +132,9 @@
 				} else {
 					console.log("该打开二维码了")
 				}
+			},
+			toCash(){
+				this.global.utils.jump(1, "/pages/member/my-coupon/money/cash?cate=yj")
 			}
 		},
 		onLoad(options) {
@@ -252,7 +209,7 @@
 
 		.right {
 			display: inline-block;
-			padding: 3rpx 5rpx;
+			padding: 5rpx 15rpx;
 			background: $any-col;
 			color: #ffffff;
 			border-radius: 10rpx;

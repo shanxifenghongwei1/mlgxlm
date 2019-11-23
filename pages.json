@@ -253,7 +253,53 @@
 			"style" : {
 				"navigationBarTitleText": "预约成功"
 			}
+		},
+		{
+			"path" : "pages/home/retail/retail_order_detail",
+			"style" : {
+				"navigationBarTitleText": "分销订单详情"
+			}
+		},
+		{
+			"path" : "pages/home/retail_home/goods_detail",
+			"style" : {
+				"navigationBarTitleText": "分销商品详情"
+			}
+		},
+		{
+			"path" : "pages/home/retail_home/make_order",
+			"style" : {
+				"navigationBarTitleText": "购买商品"
+			}
+		},
+		{
+			"path" : "pages/member/my-coupon/integral/integral",
+			"style" : {
+				"navigationBarTitleText": "我的积分"
+			}
+		},
+		{
+			"path" : "pages/member/my-coupon/integral/integral_store",
+			"style" : {
+				"navigationBarTitleText": "积分商城"
+			}
+		},
+		{
+			"path" : "pages/member/my-coupon/integral/integral_order",
+			"style" : {
+				"navigationBarTitleText": "积分商城"
+			}
+		},
+		{
+			"path" : "pages/member/my-coupon/integral/integral_exchange_list",
+			"style" : {
+				"navigationBarTitleText": "兑换记录"
+			}
 		}
+        ,{
+            "path" : "pages/cate/cate",
+            "style" : {}
+        }
     ],
 	
 	 "condition": { //模式配置，仅开发期间生效

@@ -1,7 +1,11 @@
 <script>
 	import demo from "@/common/js/demao.js"
 	export default {
-		onLaunch: function() {
+		onLaunch: function(e) {
+			console.log("全局数据")
+			if(e.query.p_id){
+				uni.setStorageSync("p_id",e.query.p_id)
+			}
 			uni.checkSession({
 				success: (res) => {
 					console.log("成功")
@@ -41,6 +45,7 @@
 					type: 'wgs84',
 					success(res) {
 						console.log("获取成功")
+						console.log(res)
 						let latitude, longitude;
 						latitude = res.latitude.toString();
 						longitude = res.longitude.toString();

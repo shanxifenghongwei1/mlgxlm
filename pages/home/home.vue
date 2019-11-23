@@ -57,7 +57,7 @@
 							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 							<view class="text">{{item.t_name}}</view>
 						</view>
-						<view class="list-one">
+						<view class="list-one" @click="toCatePage()">
 							<image mode="aspectFit" src="../../static/image/homepage/quanbu.jpg" class="icon"></image>
 							<view class="text">更多</view>
 						</view>
@@ -78,7 +78,7 @@
 			</view>
 
 
-			<!-- 店铺精选 -->
+			<!-- 商品精选 -->
 			<view class="choiceness">
 				<view class="bac-img">
 					<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
@@ -405,7 +405,10 @@
 				let url="/pages/home/shop-detial/shop-detial?shop_id=" + e + "&&head=" + f;
 				this.global.utils.jump(1,url);
 			},
-			
+			// 跳转至更多分类
+			toCatePage(){
+				this.global.utils.jump(1,"/pages/cate/cate");
+			},
 			// 高亮id
 			exchanges(id) {
 				this.ids = id;

@@ -17,10 +17,10 @@
 
 		<!-- 第一个列表 -->
 		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid"></flashCard>
+			<flashCard :flashList="flashList" :cateid="cateid" :time="cateid1"></flashCard>
 		</view>
 		<!-- 展示多个 -->
-		<view class="flash-shop">
+		<!-- <view class="flash-shop">
 			<view class="back"></view>
 			
 			<view class="flash">
@@ -75,76 +75,11 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 			
 		
-		<!-- 第二个列表 -->
-		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid"></flashCard>
-		</view>
-		<!-- 展示多个 -->
-		<view class="flash-shop">
-			<view class="back" style="background: #ffcb49;"></view>
-			
-			<view class="flash">
-				<view class="num">
-					已售出520
-				</view>
-				<view class="title">
-					这是标题
-				</view>
-				<view class="flash-box">
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-					<view class="fs">
-						<image class="fs-pic" src="/static/image/shop/shop-1.jpg" mode=""></image>
-						<view class="fs-tit">
-							这个是店铺的标题
-						</view>
-						<view class="price">
-							<view class="new">
-								￥199
-							</view>
-							<view class="old">
-								￥399
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-			
-		<!-- 第三个列表 -->
-		<view class="" style="position: relative;">
-			<flashCard :flashList="flashList" :cateid="cateid"></flashCard>
-		</view>
-		
+	
+
 
 	</view>
 </template>
@@ -189,7 +124,10 @@
 					{img: '/static/image/banner/3.jpg',text:'加油'}
 				],
 				
-				//
+				flash1:{
+					flashList:[],
+					page:1
+				},
 				flashList:[
 					{img: '/static/image/banner/1.jpg',text:'加油'},
 					{img: '/static/image/banner/1.jpg',text:'加油'},
@@ -217,7 +155,15 @@
 					method: "GET",
 					data: data,
 					success: (res) => {
-						console.log(res)
+						console.log("得到数据了")
+						console.log(res.limitedInfo)
+						this.flashList=res.limitedInfo;
+						
+						let a=res.limitedInfo;
+						a.forEach((v)=>{
+							v.juli=v.juli?v.juli.toFixed(2):0
+						})
+						this.flashList = a;
 					}
 				})
 			}

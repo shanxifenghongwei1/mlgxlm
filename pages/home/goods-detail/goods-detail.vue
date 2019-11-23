@@ -339,7 +339,8 @@
 						backgroundColor: '#ffa200',
 						color: '#fff'
 					}
-				]
+				],
+				carlist:[]
 			}
 		},
 		methods: {
@@ -393,6 +394,7 @@
 						console.log("购物车数量")
 						console.log(res.cartInfo)
 						this.options_nav[2].info = res.cartInfo.length;
+						this.carlist=res.cartInfo;
 					}
 				})
 			},
@@ -460,9 +462,12 @@
 			butt(e) {
 				if (e.index === 0) {
 					console.log("加入购物车")
+					let a=this.carlist.filter((v)=>{
+						v.goods_id==this.options.goods_id
+					})
+					console.log(a.length)
 					let data = {};
 					data.goods_id = this.options.goods_id;
-					data.shop_id = this. this.good_detail.goodsInfo.shop_id;
 					data.buy_num = 1;
 					this.global.request.post({
 						url: this.global.demao.api.add_cart,

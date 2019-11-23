@@ -30,16 +30,17 @@
 	export default {
 		data() {
 			return {
-				obs:''
+				obs:'',
+				p_id:""
 			}
 		},
 		onLoad(){
-			// this.global.utils.sethead("登录")
+			console.log("登录页")
+			console.log(uni.getStorageSync("p_id"))
+			this.p_id=uni.getStorageSync("p_id")
+			this.global.utils.sethead("登录")
 		},
 		methods: {
-			// get(){
-			// 	console.log(1111)
-			// },
 			userinfor(){
 				let that = this;
 				uni.login({
@@ -50,13 +51,18 @@
 						provider:'weixin',
 						success:(userinfor)=>{
 							console.log(userinfor)
+							let data={};
+							data.userinfo=userinfor;
+							data.code=loginRes.code;
+							if(that.p_id){
+								data.openid_d=that.p_id;
+							}
+							console.log("这是请求数据")
+							console.log(data)
 							that.global.request.post({
 								url: 'weChat',
 								method:"GET",
-								data: {
-									userinfo:userinfor,
-									code:loginRes.code
-								},
+								data: data,
 								isLoading: true,
 								success: (res) => {
 									console.log("-----------登录打印")

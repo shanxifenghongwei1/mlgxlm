@@ -277,6 +277,23 @@
 					</view>
 				</view>
 			</block>
+			<!-- 积分 -->
+			<block v-if="place===6">
+				<view class="place place-address">			
+					专业美颜防护
+				</view>
+				<view class="place place-name red">
+					YIAN伊岸冻干粉修复去
+				</view>
+				<view class="place place-name flex red">
+					<view>￥666+66积分</view><text class="block sm">可兑换购买</text>
+				</view>
+				<view class="hasbuy">
+					<view class="hasbuy-box">
+						已售1000件
+					</view>
+				</view>
+			</block>
 		</view>
 
 		<view class="look-more" v-if="more">
@@ -301,16 +318,27 @@
 				default: true
 			},
 			place: {
-				type: Number, //1正常商品false    2置换商品true   3收藏商品   4分销
+				type: Number, //1正常商品false    2置换商品true   3收藏商品   5分销
 				default: 1
 			}
 		},
 		methods: {
 			toDetail(e) {
-				uni.navigateTo({
-					url: "/pages/home/goods-detail/goods-detail?id=" + e
-				})
+				console.log(this.place)
+				if(this.place==5){
+					uni.navigateTo({
+						url: "/pages/home/retail_home/goods_detail" 
+					})
+				}else{
+					uni.navigateTo({
+						url: "/pages/home/goods-detail/goods-detail?id=" + e
+					})
+				}
+				
 			}
+		},
+		created(){
+			
 		}
 	}
 </script>

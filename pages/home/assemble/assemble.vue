@@ -142,7 +142,7 @@
 						console.log(res)
 						let a=res.distance;
 						a.forEach((v)=>{
-							v.juli=v.juli.toFixed(2)
+							v.juli=v.juli?v.juli.toFixed(2):0
 						})
 						res.distance=a
 						this.assemble_detail = res;

@@ -39,8 +39,37 @@ Vue.prototype.global = {
 				return this._city
 			}
 		})
+	},
+	watch1: function(method) {									//监听city变化
+		var obj = this;
+		Object.defineProperty(obj, "lat", {
+			configurable: true,
+			enumerable: true,
+			set: function(value) {
+				this._lat = value;
+				method(value);
+			},
+			get: function() {
+				// 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.name的时候，这里就会执行。
+				return this._lat
+			}
+		})
+	},
+	watch2: function(method) {									//监听city变化
+		var obj = this;
+		Object.defineProperty(obj, "lng", {
+			configurable: true,
+			enumerable: true,
+			set: function(value) {
+				this._lng = value;
+				method(value);
+			},
+			get: function() {
+				// 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.name的时候，这里就会执行。
+				return this._lng
+			}
+		})
 	}
-
 }
 Vue.filter("time", (nS) => {
 	return new Date(parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/, ' ');

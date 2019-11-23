@@ -46,7 +46,43 @@
 					+2888.00元
 				</view>
 			</view>
-		</view>
+			<view class="list-box any-flex">
+				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
+				<view class="center base">
+					我是冯宏伟
+				</view>
+				<view class="right base">
+					+2888.00元
+				</view>
+			</view>
+			<view class="list-box any-flex">
+				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
+				<view class="center base">
+					我是冯宏伟
+				</view>
+				<view class="right base">
+					+2888.00元
+				</view>
+			</view>
+			<view class="list-box any-flex">
+				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
+				<view class="center base">
+					我是冯宏伟
+				</view>
+				<view class="right base">
+					+2888.00元
+				</view>
+			</view>
+			<view class="list-box any-flex">
+				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
+				<view class="center base">
+					我是冯宏伟
+				</view>
+				<view class="right base">
+					+2888.00元
+				</view>
+			</view>
+		</view>	
 	</view>
 </template>
 
@@ -128,6 +164,7 @@
 		width: 100%;
 		height: 130rpx;
 		padding-top: 15rpx;
+				position: relative;
 	}
 
 	.nun {
@@ -137,17 +174,17 @@
 		flex-direction: column;
 		justify-content: center;
 		color: #ffffff;
-		position: relative;
+
 	}
-	.nun:after{
+	.num-box:before{
 		content:"";
-		display: flex;
+		display: block;
 		width: 1rpx;
 		height: 60%;
 		position: absolute;
 		left: 50%;
-		height: 20%;
-		color: #ffffff;
+		top: 26%;
+		background: #ffffff;
 	}
 
 	.num-con {
@@ -160,7 +197,6 @@
 	}
 	.list{
 		width: 100%;
-		height: 200rpx;
 		padding: 0 3%;
 		box-sizing: border-box;
 		.list-box{
@@ -168,22 +204,31 @@
 			height: 100rpx;
 			justify-content: space-between;
 			align-items: center;
-			border-top: 1rpx solid #cccccc;
+			border-top: 1rpx solid #f0f0f0;
+			padding: 0 10rpx;
+			box-sizing: border-box;
 			.left{
-				width: 80rpx;
-				height: 80rpx;
+				width: 60rpx;
+				height: 60rpx;
 				border-radius: 50%;
 			}
 			.center{
-				width: 400rpx;
+				width: 350rpx;
 				@include multi-row-apostrophe(1);
 			}
 			.right{
-				width: 150rpx;
+				width: 180rpx;
+				text-align: right;
 			}
 		}
 		.list-box:last-child{
-			border-bottom: 1rpx solid #cccccc;
+			border-bottom: 1rpx solid #f0f0f0;
+		}
+		.list-box:nth-child(2n){
+			background:#ffffff;
+		}
+		.list-box:nth-child(2n-1){
+			background:#f0f0f0;
 		}
 	}
 </style>

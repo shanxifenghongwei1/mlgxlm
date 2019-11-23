@@ -34,10 +34,10 @@
 					<view class="member-assets-h6">{{userInfo[0].balance?userInfo[0].balance:0}}</view>
 					<view class="member-assets-content">分享币</view>
 				</navigator>
-				<view class="member-assets-number">
+				<navigator url="/pages/member/my-coupon/integral/integral" hover-class="none" class="member-assets-number">
 					<view class="member-assets-h6">{{userInfo[0].integral?userInfo[0].integral:0}}</view>
 					<view class="member-assets-content">积分</view>
-				</view>
+				</navigator>
 				<navigator hover-class="none" url="/pages/member/my-coupon/my-coupon" class="member-assets-number">
 					<view class="member-assets-h6">{{coupon_num?coupon_num:0}}</view>
 					<view class="member-assets-content">优惠卷</view>
@@ -61,7 +61,32 @@
 		<!-- 订单 -->
 		<view class="member-order member-assets">
 			<navigator url="/pages/pay/order" class="member-order-top">
-				<view class="member-order-my">我的订单</view>
+				<view class="member-order-my">服务订单</view>
+				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
+			</navigator>
+			<view class="member-order-content">
+				<view class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>
+					<view class="member-order-text">代付款</view>
+				</view>
+				<view class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
+					<view class="member-order-text">待预约</view>
+				</view>
+				<view class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
+					<view class="member-order-text">待服务</view>
+				</view>
+				<view class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
+					<view class="member-order-text">待评价</view>
+				</view>
+			</view>
+		</view>
+		
+		<view class="member-order member-assets">
+			<navigator url="/pages/pay/order" class="member-order-top">
+				<view class="member-order-my">商品订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
 			</navigator>
 			<view class="member-order-content">
@@ -80,10 +105,6 @@
 				<view class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">待评价</view>
-				</view>
-				<view class="member-order-content-w20">
-					<view class="icon iconfont member-order-content1 icon-shouhou"></view>
-					<view class="member-order-text">售后</view>
 				</view>
 			</view>
 		</view>

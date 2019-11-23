@@ -39,7 +39,9 @@
 			<button type="primary">确认提现</button>
 		</view>
 		<navigator url="/pages/member/my-coupon/money/cash_detail" class="bottom">
-			查看记录
+			<view class="see">
+				查看记录
+			</view>
 			<view class="icon iconfont icon-jiantou-copy">
 				
 			</view>
@@ -238,8 +240,11 @@
 		justify-content: center;
 		padding: 10rpx 0;
 		color: #9A9A9A;
-		font-size: $uni-font-size-sm;
-		
+		font-size: $uni-font-size-base;
+		align-items: center;
+		.see{
+			line-height: 40rpx;
+		}
 	}
 	button[type=primary] {
 		background-color: $any-col;

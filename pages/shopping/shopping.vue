@@ -1,42 +1,30 @@
 <template>
 	<!-- 购物车 -->
 	<view>
-		<view class="goodlist" v-for="i in list" :key="i">
+		<view class="goodlist" v-for="(item,index) in list" :key="index">
 			<view class="box">
 				<view class="title">
-					<text class="icon iconfont icon-weixuanzhong"></text><text class="icon iconfont icon-chongzhichenggong"></text><text
-					 class="icon iconfont icon-dianpu"></text><text>爱美世家</text>
+					<text class="icon iconfont icon-weixuanzhong" v-show="!item.checked" @click="allShopCheck(item.id)"></text>
+					<text class="icon iconfont icon-chongzhichenggong" v-show="item.checked" @click="allShopCheck(item.id)"></text>
+					<text class="icon iconfont icon-dianpu"></text><text>{{item.child[0].shop_name}}</text>
 				</view>
-				<view class="con" v-for="i in list" :key="i">
-					<text class="icon iconfont icon-weixuanzhong"></text>
+				<view class="con" v-for="(i,t) in item.child" :key="t">
+					<text class="icon iconfont icon-weixuanzhong" v-show="!i.checked" @click="oneCheck(i.goods_id,item.id)"></text>
+					<text class="icon iconfont icon-chongzhichenggong" v-show="i.checked" @click="oneCheck(i.goods_id,item.id)"></text>
 					<image src="" mode=""></image>
 					<view class="goods-info">
 						<view class="name">
-							芳香精油乳腺疏通
-							芳香精油乳腺疏通
-							芳香精油乳腺疏通
-							芳香精油乳腺疏通
-						</view>
-						<view class="cate">
-							<view class="">
-								免费皮肤检测
-							</view>
-							<view class="">
-								免费皮肤检测
-							</view>
-							<view class="">
-								免费皮肤检测
-							</view>
+							{{i.goods_name}}
 						</view>
 						<view class="price">
-							￥9987元
+							￥{{i.price}}元
 						</view>
 						<view class="dtl">
-							【祛痘】酒槽鼻修护套餐
+							{{item.introduction}}
 						</view>
 					</view>
 					<view class="opection">
-						<numbox :Number="1" :min="1" :max="10" :step="1"></numbox>
+						<numbox :Number="1" :min="1" :max="1" :step="1"></numbox>
 						<view class="opection-box">
 							<view class="icon iconfont icon-shanchu-copy-copy">
 
@@ -57,11 +45,13 @@
 			<goods :titCon="titCon" :more="false" place="1"></goods>
 		</view>
 		<view class="emit-view">
-			
+
 		</view>
 		<view class="bottom">
 			<view class="ccc">
-				<text class="icon iconfont icon-chongzhichenggong"></text><text class="all">全选</text>
+				<text class="icon iconfont icon-weixuanzhong" v-show="!checked" @click="chec()"></text>
+				<text class="icon iconfont icon-chongzhichenggong" v-show="checked" @click="chec()"></text>
+				<text class="all">全选</text>
 			</view>
 			<view class="all-price">
 				<text class="ccc">合计:</text><text class="ccc">￥200.00</text>
@@ -84,16 +74,18 @@
 		data() {
 			return {
 				list: [],
-				titCon: [1, 2, 3, 3]
+				titCon: [1, 2, 3, 3],
+				checked:false
 			}
 		},
 		methods: {
-			pageTo:function(){
+			//去支付
+			pageTo: function() {
 				uni.navigateTo({
-					url:"/pages/pay/pay"
+					url: "/pages/pay/pay"
 				})
 			},
-			//查询购物车的数量
+			//查询购物车
 			findCar() {
 				let data = {};
 				this.global.request.post({
@@ -101,14 +93,115 @@
 					method: "GET",
 					data: data,
 					success: (res) => {
-						res.cartInfo=res.cartInfo.forEach((v)=>{
-							v.check
+						console.log("购物车数据")
+						let a = []
+						res.cartInfo.forEach((v) => {
+							v.checked = false;
+							a.push(v.shop_id)
 						})
-						this.list=res.cartInfo;
-						
+
+						console.log(a)
+						let b = this.unique(a);
+
+						let d = [];
+						b.forEach((v) => {
+							let c = {};
+							c.id = v;
+							c.checked = false;
+							c.child = [];
+							res.cartInfo.forEach((h) => {
+								if (h.shop_id == v) {
+									c.child.push(h)
+								}
+							})
+							d.push(c)
+						})
+						this.list = d;
 					}
 				})
 			},
+			// 数组去重
+			unique(arr) {
+				return Array.from(new Set(arr))
+			},
+			
+			//监听是否所有的商品被选中或反选
+			allCheck(){
+				let a=this.list;
+				let b=a.filter((v)=>{
+					return v.checked==true;
+				})
+				console.log(b)
+				if(b.length==a.length){
+					this.checked=true;
+				}else{
+					this.checked=false;
+				}
+			},
+			//监听该店铺的商品是否被全选
+			dx(f){
+				let a=this.list;
+				a.forEach((v)=>{
+					if(v.id==f){
+						let b=v.child.filter((h)=>{
+							return h.checked==true;
+						})
+						console.log(b)
+						console.log(v.child)
+						console.log(v)
+						if(b.length==v.child.length){
+							v.checked=true;
+						}else{
+							v.checked=false;
+						}
+					}
+				})
+				this.allCheck() 
+			},
+			// 点击单选
+			oneCheck(e,f){
+				console.log(e,f)
+				let a=this.list;
+				a.forEach((v)=>{
+					if(v.id==f){
+						v.child.forEach((h)=>{
+							if(h.goods_id==e){
+								h.checked=!h.checked;
+							}
+						})
+						this.dx(f)
+					}
+				})
+			},
+			
+			// 点击全选反选该店铺的商品
+			allShopCheck(e){
+				let a=this.list;
+				a.forEach((v)=>{
+					if(v.id==e){
+						let s=v.checked
+						v.checked=!s;
+						v.child.forEach((h)=>{
+							return h.checked=!s;
+						})
+					}
+				})
+				this.allCheck()
+			},
+			chec(){
+				this.checked=!this.checked;
+				let a=this.list;
+				a.forEach((v)=>{
+					this.allShopCheck(v.id)
+					if(v.id==e){
+						let s=v.checked
+						v.checked=!s;
+						v.child.forEach((h)=>{
+							return h.checked=!s;
+						})
+					}
+				})
+			}
 		},
 		onShow() {
 			console.log(this.global.demao.api.user_Address_list)
@@ -175,8 +268,8 @@
 			}
 
 			image {
-				width: 140rpx;
-				height: 150rpx;
+				width: 98rpx;
+				height: 105rpx;
 				margin-right: 20rpx;
 				background: red;
 			}
@@ -234,7 +327,6 @@
 			.opection {
 				position: absolute;
 				right: 20rpx;
-				bottom: 30rpx;
 			}
 
 			.opection-box {
@@ -256,9 +348,11 @@
 			}
 		}
 	}
+
 	.bac-img {
 		margin-top: 20rpx;
 	}
+
 	.bac-imgs {
 		width: 100%;
 	}
@@ -266,7 +360,7 @@
 	.bottom {
 		width: 100%;
 		height: 90rpx;
-		background: pink;
+		background: #ffffff;
 		padding-left: 3%;
 		box-sizing: border-box;
 		position: fixed;
@@ -309,7 +403,8 @@
 	.ccc {
 		color: #808080;
 	}
-	.emit-view{
+
+	.emit-view {
 		width: 100%;
 		height: 100rpx;
 	}

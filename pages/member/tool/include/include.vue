@@ -88,7 +88,7 @@
 			</view>
 			
 			<view class="treaty-tip">
-				<checkbox-group @change="checkboxChange">
+				<checkbox-group @change="checkboxChange" style="transform:scale(0.7)">
 					<checkbox :checked="checked" />
 				</checkbox-group>
 				<view class="treaty-see">
@@ -102,9 +102,9 @@
 			<view class="tj">
 				<button type="warn" @click="save">申请入驻</button>
 			</view>
-			<picker mode="multiSelector" @change="bindPickerChange1" :value="index,index1" :range="testArr" range-key="name" @columnchange="columnchange">
+			<!-- <picker mode="multiSelector" @change="bindPickerChange1" :value="index,index1" :range="testArr" range-key="name" @columnchange="columnchange">
 				<view class="uni-input">{{catetext}}</view>
-			</picker>
+			</picker> -->
 		</block>
 		<block v-else>
 			<view class="empty">
@@ -243,7 +243,15 @@
 				data:{},
 				success:(res)=>{
 					console.log(res)
-					this.array=res.shop_type;
+					let a=res.shop_type.filter((v)=>{
+						return v.t_id!=5
+					})
+					
+					let b=a.filter((v)=>{
+						return v.p_id==0
+					})
+					this.array=b;
+					
 				}
 			})
 		}

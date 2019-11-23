@@ -33,8 +33,6 @@
 		created(){
 			console.log(this.global.demao.domain.picUrl)
 			this.picUrl=this.global.demao.domain.picUrl
-			
-			console.log(this.picUrl)
 		}
 	}
 </script>
@@ -43,6 +41,7 @@
 	.banner {
 		width: 100%;
 		height: 400rpx;
+		background: pink;
 	
 		swiper {
 			width: 100%;

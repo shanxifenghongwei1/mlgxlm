@@ -1,10 +1,8 @@
 <template>
 	<view>
-
 		<view class="app">
 			<waterfall-flow :list="list" :loading="loading" @click="choose"></waterfall-flow>
 		</view>
-
 	</view>
 </template>
 

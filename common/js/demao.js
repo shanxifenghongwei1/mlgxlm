@@ -2,9 +2,9 @@ module.exports={
 
 	domain:{
 		//数据请求地址
-		request:"http://mt.mlgxlm.com/",
+		request:"https://mt.mlgxlm.com/",
 		//图片地址
-		picUrl:"http://mt.mlgxlm.com"
+		picUrl:"https://mt.mlgxlm.com"
 	}, 
 	api:{
 		index:"index"										,//首页
