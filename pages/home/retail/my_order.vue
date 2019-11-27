@@ -69,7 +69,6 @@
 
 <script>
 	export default{
-		name:'分销订单页面',
 		data(){
 			return{
 				cateId:1,

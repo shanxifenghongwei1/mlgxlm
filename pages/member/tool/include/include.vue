@@ -1,7 +1,7 @@
 <!-- 商家入驻页面 -->
 <template>
 	<view class="page">
-		<block v-if="isEmpty">
+		<block v-if="isEmpty==1">
 			<view class="include-top">
 				<view class="list">
 					<view class="title">
@@ -35,9 +35,6 @@
 					<textarea value="" placeholder="简单介绍下商户" v-model="store.shop_desc" />
 					</view>
 			</view>
-			
-			
-			
 			
 			<view class="include-bottom">
 				<view class="list">
@@ -102,11 +99,8 @@
 			<view class="tj">
 				<button type="warn" @click="save">申请入驻</button>
 			</view>
-			<!-- <picker mode="multiSelector" @change="bindPickerChange1" :value="index,index1" :range="testArr" range-key="name" @columnchange="columnchange">
-				<view class="uni-input">{{catetext}}</view>
-			</picker> -->
 		</block>
-		<block v-else>
+		<block v-if="isEmpty==2">
 			<view class="empty">
 				<image class="empty-pic" src="/static/image/other/empty.png" mode=""></image>
 				<view class="success">
@@ -114,6 +108,17 @@
 				</view>
 				<view class="wait">
 					请耐心等待平台审核
+				</view>
+			</view>
+		</block>
+		<block v-if="isEmpty==3">
+			<view class="empty">
+				<image class="empty-pic" src="/static/image/other/empty.png" mode=""></image>
+				<view class="success">
+					商家信息审核成功
+				</view>
+				<view class="wait">
+					快去后台添加商品吧
 				</view>
 			</view>
 		</block>
@@ -137,14 +142,13 @@
 					
 					checked:false,
 					
-					isEmpty:true,
+					isEmpty:0,			//1.未申请  2.申请中  3.审核通过
 					
 					testArr:[
 						
 						[{name:"美容美发"},{name:"身体护理"},{name:"问题皮肤"},{name:"瑜伽健身"}],
 						[{name:"分类1"},{name:"分类2"},{name:"分类3"},{name:"分类4"}]
 					]
-					
 		        }
 		    },
 		methods: {
@@ -210,14 +214,9 @@
 							method:"GET",
 							data:this.store,
 							success:(res)=>{
-								console.log("这是返回数据"+res)
-								console.log(res.msg)
-								this.showToast_my(res.msg,true);
-								setTimeout(()=>{
-									uni.switchTab({
-										url:"/pages/member/member"
-									})
-								},3000)
+								this.find_has()
+								this.showToast_my(res.msg);
+								
 							}
 						})
 					}else{
@@ -233,16 +232,35 @@
 			},
 			bindPickerChange1(e){
 				console.log("value的值改变了")
+			},
+			//查看我是否入驻
+			find_has(){
+				this.global.request.post({
+					url:"is_shop_settled",
+					method:"GET",
+					data:{},
+					success:(res)=>{
+						if(res.data.length){
+							if(res.data[0].shop_status==0){
+								this.isEmpty=2
+							}else if(res.data[0].shop_status==2){
+								this.isEmpty=3
+							}
+						}else{
+							this.isEmpty=1
+						}
+					}
+				})
 			}
 		},
 		onLoad(){
 			this.global.utils.sethead("商家入驻")
+			this.find_has()
 			this.global.request.post({
 				url:"shop_type",
 				method:"GET",
 				data:{},
 				success:(res)=>{
-					console.log(res)
 					let a=res.shop_type.filter((v)=>{
 						return v.t_id!=5
 					})

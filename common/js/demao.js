@@ -4,9 +4,14 @@ module.exports={
 		//数据请求地址
 		request:"https://mt.mlgxlm.com/",
 		//图片地址
-		picUrl:"https://mt.mlgxlm.com"
+		picUrl:"https://mt.mlgxlm.com",
+		//视频地址
+		videoUrl:"http://video.mlgxlm.com/"
 	}, 
 	api:{
+		upload:"xcx_upload"									,//上传图片
+		vidoes:"vidoes"										,//上传视频
+		
 		index:"index"										,//首页
 		index_coupon:"index_coupon"							,//优惠券
 		assemble:"assemble"									,//拼团
@@ -45,6 +50,11 @@ module.exports={
 		bankcard_list:"bankcard_list"						,//银行卡列表
 		add_bankcard:"add_bankcard"							,//添加银行卡
 		add_bankcard_delete:"add_bankcard_delete"			,//删除银行卡
+		
+		releaseadd:"releaseadd"								,//发布
+
+		is_shop_settled:"is_shop_settled"					,//判断商家是否入驻
+		
 		
 		
 	}

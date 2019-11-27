@@ -23,7 +23,7 @@
 			"path": "pages/pay/pay",
 			"style": {
 				"navigationBarTitleText": "在线支付"
-			}
+			} 
 		},
 		{
 			"path": "pages/pay/pay_success",
@@ -231,9 +231,13 @@
         }
 		
         ,{
-            "path" : "pages/home/share/share",
+            "path" : "pages/home/hongbao/share",
             "style" : {}
         }
+		,{
+		    "path" : "pages/home/hongbao/newPeople",
+		    "style" : {}
+		}
         ,{
             "path" : "pages/home/retail_home/retail_home",
             "style" : {}
@@ -255,9 +259,9 @@
 			}
 		},
 		{
-			"path" : "pages/home/retail/retail_order_detail",
+			"path" : "pages/home/retail/threeBtn",
 			"style" : {
-				"navigationBarTitleText": "分销订单详情"
+				"navigationBarTitleText": "提交信息"
 			}
 		},
 		{
@@ -299,7 +303,29 @@
         ,{
             "path" : "pages/cate/cate",
             "style" : {}
-        }
+        }, 
+		{
+		    "path" : "pages/street/publish",
+		    "style" : {
+				"navigationBarTitleText": "发布"
+			}
+		},
+		{
+		    "path" : "pages/street/street_detail",
+		    "style" : {}
+		},
+		{
+			"path":"pages/member/help/feedback",
+			"style":{
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path":"pages/member/help/feedback_success",
+			"style":{
+				"navigationBarTitleText": "反馈成功"
+			}
+		}
     ],
 	
 	 "condition": { //模式配置，仅开发期间生效

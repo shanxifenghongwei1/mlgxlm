@@ -1,7 +1,6 @@
 <template>
 	<!-- 首页 -->
 	<view class="">
-
 		<view class="conss">
 			<!-- 搜索框 -->
 			<searchAny></searchAny>
@@ -135,6 +134,7 @@
 			</view>
 		</view>
 		<sunblind v-if="sunblind"></sunblind>
+		<btn font="提交按钮" @save="save()"></btn>
 	</view>
 </template>
 
@@ -157,7 +157,8 @@
 					{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
 					{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
 					// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-					{name:"分享有礼",url:"/pages/home/share/share",icon:"icon-hezuo"},
+					{name:"分享有礼",url:"/pages/home/hongbao/share",icon:"icon-hezuo"},
+					{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
 					{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
 				],
 				indexData: {
@@ -451,6 +452,10 @@
 					}
 				})
 			},
+			save(e){
+				console.log("这是首页的数据")
+				console.log(e)
+			}
 		},
 		onLoad(Option) {
 			

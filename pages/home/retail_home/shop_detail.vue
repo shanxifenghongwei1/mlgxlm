@@ -1,4 +1,5 @@
 <template>
+	<!-- 商品列表页面 -->
 	<view class="">
 		<view class="">
 			<cateflex :cateList="cateList" :cateid="cateid" @seleId="seleId()"></cateflex>

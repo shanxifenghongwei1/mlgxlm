@@ -176,7 +176,7 @@
 					<view class="member-bottom-text">关于我们</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
 				</navigator>
-				<view class="member-bottom-within-w1">
+				<view @click="toDetail('/pages/member/help/feedback')" class="member-bottom-within-w1">
 					<view class="icon iconfont icon-fankui member-bottom-icon"></view>
 					<view class="member-bottom-text">意见反馈</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
@@ -228,6 +228,9 @@
 						this.coupon_num=res.coupon_num
 					}
 				})
+			},
+			toDetail(e){
+				this.global.utils.jump(1,e)
 			}
 		},
 		onLoad() {

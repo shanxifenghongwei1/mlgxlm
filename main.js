@@ -9,7 +9,9 @@ import card_info from "./common/js/card_info.js"
 import bmap from "./common/js/bmap-wx.js"
 
 import sunblinds from "./components/all/sunblind.vue"
+import btn from "./components/all/btn.vue"
 Vue.component("sunblind",sunblinds)
+Vue.component("btn",btn)
 
 import "./common/css/font.css"
 Vue.config.productionTip = false

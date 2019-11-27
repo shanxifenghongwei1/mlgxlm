@@ -1,6 +1,20 @@
 <template>
 	<!-- 首页分销页面 -->
 	<view>
+		<view class="opection">
+			<view @click="opec(1)" class="opection-li">
+				分销代理
+			</view>
+			<view @click="opec(2)" class="opection-li">
+				分销商
+			</view>
+			<view @click="opec(3)" class="opection-li">
+				异业联盟
+			</view>
+		</view>
+		<view class="emit">
+			
+		</view>
 		<view class="shop_box" @click="toDetail()">
 			<view class="shop">
 				<view class="top">
@@ -111,18 +125,46 @@
 		methods: {
 			toDetail(){
 				this.global.utils.jump(1,"/pages/home/retail_home/shop_detail")
+			},
+			opec(e){
+				this.global.utils.jump(1,"/pages/home/retail/threeBtn?opec="+e)
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.emit{
+		width: 100%;
+		height: 110rpx;
+	}
+	.opection{
+		width: 100%;
+		height: 110rpx;
+		padding: 0 3%;
+		box-sizing: border-box;
+		position: fixed;
+		left: 0;
+		top: 0;
+		@extend .any-flex;
+		justify-content: space-between;
+		align-items: center;
+		.opection-li{
+			width: 170rpx;
+			height: 52rpx;
+			background: $any-col;
+			color: #ffffff;
+			border-radius: 26rpx;
+			text-align: center;
+			line-height: 52rpx;
+			font-size: $uni-font-size-lg;
+		}
+	}
 	.shop_box {
 		width: 100%;
 		height: 300rpx;
 		padding: 0 3%;
 		box-sizing: border-box;
-		margin-top: 20rpx;
 	}
 
 	.shop {
