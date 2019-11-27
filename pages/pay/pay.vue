@@ -11,13 +11,13 @@
 				</view>
 				<view class="con">
 					<view class="con-box">
-						<text>产品名称：</text><text>头皮深层清洁阿萨德法师速度氨基酸地方hi阿USD爱的色放</text>
+						<text>产品名称：</text><text>{{order_detail.goods_name}}</text>
 					</view>
 					<view class="con-box">
-						<text>订单编号：</text><text>头皮深层清洁支付(1)123打蜡粉红色的积分结案率SDK不符合静安寺考虑到</text>
+						<text>订单编号：</text><text>{{order_detail.order_no}}</text>
 					</view>
 					<view class="con-box">
-						<text>总计金额：</text><text>头皮深层清洁打飞机号时代峰峻爱说电话发炮弹</text>
+						<text>总计金额：</text><text>{{order_detail.price}}</text>
 					</view>
 				</view>
 			</view>
@@ -34,15 +34,17 @@
 			<view class="method-box" @click="selectMethod(0)">
 				<image src="/static/image/other/pay_money.png" class="left-pic" mode=""></image>
 				<view class="con">
-					分享币支付{{meth}}
+					分享币支付
 				</view>
 				<image src="/static/image/other/icon-select-cir-on.png"  class="right-pic"  mode="" v-show="meth==0"></image>
 				<image src="/static/image/other/icon-select-cir-out.png"  class="right-pic"  mode="" v-show="meth==1"></image>
 			</view>
 		</view>
-		<view class="pay" @click="pay">
-			<button type="warn">确认支付220元</button>
+		<view class="pay">
+			<!-- <button type="warn">确认支付220元</button> -->
+			<btn :font="'确认支付'+ order_detail.price +'元'" @save="save()"></btn>
 		</view>
+	
 	</view>
 </template>
 
@@ -54,11 +56,14 @@
 		},
 		data() {
 			return {
-				meth:0
+				meth:0,
+				options:{},
+				order_detail:{},
+				userInfo:{}
 			}
 		},
-		onLoad() {
-
+		onLoad(options) {
+			this.options=options;
 		},
 		methods: {
 			selectMethod(e){
@@ -68,7 +73,73 @@
 				uni.navigateTo({
 					url:"/pages/pay/pay_success"
 				})
+			},
+			save(){
+				if(this.meth==0){
+					if(this.userInfo[0].money>this.order_detail.price){
+						// console.log("分享币支付")
+						let data={};
+						data.price=this.order_detail.price;
+						data.order_id=this.order_detail.order_id;
+						this.global.request.post({
+							url: this.global.demao.api.moneybuy,
+							method: "GET",
+							data: data,
+							success: (res) => {
+								console.log()
+								if(res.code==0){
+									this.global.utils.showToast_my("支付成功")
+									setTimeout(()=>{
+										this.global.utils.jump(1,"/pages/pay/pay_success")
+									},2000)
+								}else{
+									
+								}
+							}
+						})
+					}else{
+						// console.log("充值")
+						uni.showModal({
+						    title: '提示',
+						    content: '分享币不足，是否切换为微信支付',
+						    success:(res)=> {
+						        if (res.confirm) {
+						            console.log('用户点击确定');
+						        } else if (res.cancel) {
+						           this.global.utils.showToast_my("支付失败")
+						        }
+						    }
+						});
+					}
+				}else{
+					console.log("走微信支付")
+				}
 			}
+		},
+		onLoad(options){
+			console.log(options)
+			let data={};
+			data.order_id=options.order_id;
+			this.global.request.post({
+				url: "user_center",
+				method: "GET",
+				data: {},
+				success: (res) => {
+					console.log("这是个人中心数据")
+					console.log(res.userInfo)
+					this.userInfo=res.userInfo;
+					
+				}
+			})
+			this.global.request.post({
+				url: this.global.demao.api.order_detail,
+				method: "GET",
+				data: data,
+				isLoading: true,
+				success: (res) => {
+					this.order_detail=res.data[0]
+				}
+			})
 		}
 	}
 </script>
@@ -128,7 +199,7 @@
 	
 	.method{
 		width: 100%;
-		height: 202rpx;
+
 		margin-top: 30rpx;
 		background: #ffffff;
 		position: relative;

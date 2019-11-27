@@ -158,7 +158,7 @@
 
 	.uni-popup__wrapper.uni-custom .uni-popup__wrapper-box {
 	/* 	padding: 30upx; */
-		border-radius: 20rpx;
+		border-radius: 10rpx;
 		background: #fff
 	}
 

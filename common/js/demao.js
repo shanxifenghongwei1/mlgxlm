@@ -12,6 +12,10 @@ module.exports={
 		
 	}, 
 	api:{
+		
+		weChat:"weChat"										,//微信登录
+		usertime:"usertime"									,//判断是否为新人
+		
 		upload:"xcx_upload"									,//上传图片
 		vidoes:"vidoes"										,//上传视频
 		
@@ -58,7 +62,9 @@ module.exports={
 
 		is_shop_settled:"is_shop_settled"					,//判断商家是否入驻
 		
-		
+		add_order:"add_order"								,//下订单
+		order_detail:"order_detail"							,//订单详情
+		moneybuy:"moneybuy"									,//支付
 		
 	}
 }

@@ -30,59 +30,71 @@
 	export default {
 		data() {
 			return {
-				obs:'',
-				p_id:""
+				obs: '',
+				p_id: ""
 			}
 		},
-		onLoad(){
+		onLoad() {
 			console.log("登录页")
 			console.log(uni.getStorageSync("p_id"))
-			this.p_id=uni.getStorageSync("p_id")
+			this.p_id = uni.getStorageSync("p_id")
 			this.global.utils.sethead("登录")
 		},
 		methods: {
-			userinfor(){
+			userinfor() {
 				let that = this;
 				uni.login({
-				  provider: 'weixin',
-				  success: function (loginRes) {
-					console.log(loginRes.code)
-					uni.getUserInfo({
-						provider:'weixin',
-						success:(userinfor)=>{
-							console.log(userinfor)
-							let data={};
-							data.userinfo=userinfor;
-							data.code=loginRes.code;
-							if(that.p_id){
-								data.openid_d=that.p_id;
-							}
-							console.log("这是请求数据")
-							console.log(data)
-							that.global.request.post({
-								url: 'weChat',
-								method:"GET",
-								data: data,
-								isLoading: true,
-								success: (res) => {
-									console.log("-----------登录打印")
-									console.log(res)
-									that.global.status.state.login=1;
-									uni.setStorageSync("session",res);
-									uni.navigateBack({
-										delta:1
-									})
+					provider: 'weixin',
+					success: function(loginRes) {
+						console.log(loginRes.code)
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: (userinfor) => {
+								console.log(userinfor)
+								let data = {};
+								data.userinfo = userinfor;
+								data.code = loginRes.code;
+								if (that.p_id) {
+									data.openid_d = that.p_id;
 								}
-							})	
-						}
-					})
-				  }
+								// console.log("这是请求数据")
+								// console.log(data)
+								// that.global.request.post({
+								// 	url: 'weChat',
+								// 	method:"GET",
+								// 	data: data,
+								// 	isLoading: true,
+								// 	success: (res) => {
+								// 		that.global.status.state.login=1;
+								// 		uni.setStorageSync("session",res);
+								// 		uni.navigateBack({
+								// 			delta:1
+								// 		})
+								// 	}
+								// })
+
+								that.global.request.post({
+									url: that.global.demao.api.weChat,
+									method: "GET",
+									data: data,
+									isLoading: true,
+									success: (res) => {
+										that.global.status.state.login = 1;
+										uni.setStorageSync("session", res);
+										uni.navigateBack({
+											delta: 1
+										})
+									}
+								})
+							}
+						})
+					}
 				});
 			}
-			
-			
-			
-		
+
+
+
+
 		}
 	}
 </script>

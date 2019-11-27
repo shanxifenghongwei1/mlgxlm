@@ -43,7 +43,6 @@
 	.collect{
 		width: 180rpx;
 		height: 70rpx;
-		background: rgba(0,0,0,0.3);
 		position: fixed; 
 		right: 10rpx;
 		top: 10rpx;
@@ -53,7 +52,7 @@
 	button{
 		width: 50%;
 		height: 100%;
-		background: rgba(0,0,0,0);
+		background: rgba(0,0,0,0) !important;
 		border: none;
 		padding: 0;
 		font-size: 48rpx;

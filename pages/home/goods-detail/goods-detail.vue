@@ -271,6 +271,12 @@
 		<view class="topay">
 			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay" @butt="butt"></goodsNav>
 		</view>
+		
+		<uni-popup class="uni-popup" ref="popup" type="center">
+			<view @click="son1(pay_method[0].id)" class="son1">{{pay_method[0].amsg}} </view>
+			<view @click="son2(pay_method[1].id)" class="son2">{{pay_method[1].amsg}} </view>
+		</uni-popup>
+
 	</view>
 
 
@@ -286,6 +292,8 @@
 	import goodsNav from "@/components/uni-goods-nav/uni-goods-nav.vue"
 	import uniCountdown from "@/components/uni-countdown/uni-countdown.vue"
 	import coll from "@/components/mine/collect.vue"
+	//弹窗
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	export default {
 		components: {
 			mySwiper,
@@ -295,7 +303,8 @@
 			goodsList,
 			goodsNav,
 			uniCountdown,
-			coll
+			coll,
+			uniPopup
 		},
 		data() {
 			return {
@@ -340,10 +349,68 @@
 						color: '#fff'
 					}
 				],
-				carlist:[]
+				carlist:[],
+				pay_method:[
+				],
 			}
 		},
 		methods: {
+			// 支付上面的按钮
+			son1(e){
+				if(e==2){
+					//拼团
+					let price=this.good_detail.goodsInfo.promotion_price
+					// this.global.utils.jump(1,"/pages/pay/pay?method=2&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+ price)
+					let a=[];
+					a.push(this.good_detail.goodsInfo.goods_id)
+					let data={};
+					data.goods_id=a.join(',');
+					data.buy_num=1;
+					data.is_cart=0;
+					data.total_price=this.good_detail.goodsInfo.price;
+					this.global.request.post({								
+						url: this.global.demao.api.add_order,
+						method: "GET",
+						data: data,
+						isLoading: true,
+						success: (res) => {
+							if(res.order_id){
+								this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
+							}
+						}
+					})
+				}else if(e==3){
+					//优惠
+					this.global.utils.jump(1,"/pages/pay/pay?method=3&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+this.good_detail.goodsInfo.price)
+				}else if(e==4){
+					//限时抢
+					let price=this.good_detail.goodsInfo.limited_price
+					this.global.utils.jump(1,"/pages/pay/pay?method=4&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+price)
+				}
+			},
+			//支付下面的按钮
+			son2(e){
+				
+				let a=[1,2,3];
+				a.push(this.good_detail.goodsInfo.goods_id)
+				let data={};
+				data.is_cart=0;
+				data.goods_id=a.join(',');
+				data.buy_num=1;
+				data.total_price=this.good_detail.goodsInfo.price;
+				this.global.request.post({								
+					url: this.global.demao.api.add_order,
+					method: "GET",
+					data: data,
+					isLoading: true,
+					success: (res) => {
+						if(res.order_id){
+							this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
+						}
+					}
+				})
+			},
+			
 			// 跳转至店铺详情页面
 			toshop() {
 				this.global.utils.jump(1, "/pages/home/shop-detial/shop-detial?shop_id=" + this.good_detail.goodsInfo.shop_id +
@@ -427,21 +494,35 @@
 						let d = res.goodsInfo.limited_stop_time ? res.goodsInfo.limited_stop_time : c + 100000000;
 						let e = d - c;
 						let f = this.formatDuring(d - c);
-
-
-						if (res.goodsInfo.promotion_type == 4) {
-							this.buttonGroup[1].text = "立即抢购"
-						}
 						this.time = f;
 
 						this.good_detail = res;
+						
+						if(this.good_detail.goodsInfo.promotion_type==0){
+							console.log("没有参加任何活动")
+						}else if(this.good_detail.goodsInfo.promotion_type==1){
+							this.pay_method=[
+								{id:2,amsg:'拼团购买'},
+								{id:1,amsg:'正常购买'},
+							]
+						}else if(this.good_detail.goodsInfo.promotion_type==2){
+							this.pay_method=[
+								{id:3,amsg:'优惠券购买'},
+								{id:1,amsg:'正常购买'},
+							]
+						}else if(this.good_detail.goodsInfo.promotion_type==4){
+							this.pay_method=[
+								{id:4,amsg:'优惠券购买'},
+								{id:1,amsg:'正常购买'},
+							]
+						}
 					}
 				})
 			},
 			trans() {
 				this.state = this.state ? false : true
 			},
-
+			
 			pay(e) {
 				console.log(e)
 				if (e.index === 0) {
@@ -454,7 +535,6 @@
 				} else if (e.index === 1) {
 					this.toshop()
 				} else {
-
 					this.global.utils.jump(2, "/pages/shopping/shopping")
 				}
 
@@ -480,8 +560,32 @@
 					})
 
 				} else {
+					if(this.pay_method.length){
+						this.$refs.popup.open()
+					}else{
+						let a=[];
+						a.push(this.good_detail.goodsInfo.goods_id)
+						let data={};
+						data.goods_id=a.join(',');
+						data.buy_num=1;
+						data.is_cart=0;
+						data.total_price=this.good_detail.goodsInfo.price;
+						this.global.request.post({								
+							url: this.global.demao.api.add_order,
+							method: "GET",
+							data: data,
+							isLoading: true,
+							success: (res) => {
+								if(res.order_id){
+									this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
+								}
+							}
+						})
+					}
+					
 					console.log("立即购买")
-					this.global.utils.jump(1,"/pages/pay/pay")
+					
+					
 				}
 			},
 			formatDuring(mss) {
@@ -527,6 +631,9 @@
 			this.findCar();
 			this.findSellect();
 		},
+		onShow(){
+			this.$refs.popup.close()
+		},
 		onShareAppMessage(res) {
 			if (res.from === 'button') { // 来自页面内分享按钮
 				console.log(res.target)
@@ -539,6 +646,14 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	.uni-popup{
+		font-size: $uni-font-size-lg;
+		.son1{
+			 width: 500rpx;height: 80rpx; line-height: 80rpx; text-align: center; border-bottom:1rpx solid #cccccc;
+		}
+		.son2{
+			 width: 500rpx;height: 80rpx; line-height: 80rpx; text-align: center; 
+		}
+	}
 </style>
