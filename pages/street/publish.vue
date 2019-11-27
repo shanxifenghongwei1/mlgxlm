@@ -15,8 +15,8 @@
 
 				<view class="pic-box">
 					<block v-show="pic_list.length">
-						<view class="pic" v-for="(item,index) in pic_list" :key="index" @click="prev(index)">
-							<image :src="item" mode="aspectFit"></image>
+						<view class="pic" v-for="(item,index) in pic_list" :key="index">
+							<image :src="item" mode="aspectFit"  @click="prev(index)"></image>
 							<view class="icon iconfont icon-shanchu" @click="del(index)">
 
 							</view>
@@ -64,10 +64,11 @@
 
 		data() {
 			return {
-				dataUrl: "",
+				dataUrl: this.global.demao.domain.videoUrl,
 				picUrl: "",
-				pic_list: [],
-				video_url: "",
+				pic_list: [],			//本地预览
+				pic_list1:[],			//上传地址
+				video_url: "",			
 				content: "",
 				title: "",
 				video: ""
@@ -90,7 +91,7 @@
 								sizeType: ['original', 'compressed'],
 								sourceType: ['album'],
 								success: (res) => {
-									console.log(res.tempFilePaths)
+									that.pic_list=res.tempFilePaths
 									let pic_box = []
 									res.tempFilePaths.forEach((v, index) => {
 										uni.uploadFile({
@@ -101,7 +102,7 @@
 												let a = JSON.parse(uploadFileRes.data)
 												pic_box.push(a.data.path)
 												if (index + 1 == res.tempFilePaths.length) {
-													that.pic_list = pic_box
+													that.pic_list1 = pic_box
 													that.video_url="";
 													that.video=""
 												}
@@ -160,6 +161,7 @@
 					success: (res) => {
 						if (res.confirm) {
 							this.pic_list.splice(e, 1)
+							this.pic_list1.splice(e, 1)
 							this.global.utils.showToast_my("删除成功")
 						} else if (res.cancel) {
 
@@ -204,7 +206,7 @@
 					data.mt_experience = this.content;
 					data.mt_title = this.title;
 					data.mt_move_url = this.video;
-					data.mt_pic_url = this.pic_list.toString();
+					data.mt_pic_url = this.pic_list1.toString();
 					this.global.request.post({
 						url: "releaseadd",
 						method: "GET",

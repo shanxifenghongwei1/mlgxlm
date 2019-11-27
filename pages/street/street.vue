@@ -1,11 +1,14 @@
 <template>
-	<view>
-		<view class="app">
+	<view class="qqq">
+		<view class="app" >
 			<waterfall-flow :list="list" :loading="loading" @click="choose"></waterfall-flow>
 		</view>
+		<!-- 小飞机 -->
 		<navigator hover-class="none" url="/pages/street/publish" class="publish">
 			<image src="/static/image/other/publish.png" mode=""></image>
 		</navigator>
+
+
 	</view>
 </template>
 
@@ -24,85 +27,96 @@
 				end: 0,
 				list: [], // 列表
 				loading: true,
+				
+				videoUrl:this.global.demao.domain.videoUrl
 			}
 		},
-
+		onReady() {
+			this.init()
+		},
+		
 		onLoad() {
-			this.getList();
+			
+			// this.getList();
 		},
 		onReachBottom() {
 			// this.page++;
 			// this.loading = true;
 			// this.getList();
+			console.log('上拉加载')
+			this.init()
+		},
+		onPullDownRefresh(){
+			console.log('下拉刷新')
+			this.global.request.post({
+				url: 'releaselist',
+				success: res => {	
+					let a = []		
+					res.info.data.forEach((item, index) => {
+						a.push({
+							"id": item.mt_release_id,
+							"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
+							"isimage" : item.mt_move_url ? false : true,
+							"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
+							"content": item.mt_title,
+							"user": {
+								"name": item.wx_name,
+								"avatar": item.wx_headimg
+							}
+						})
+					})
+					this.page = 1
+					this.list = a 
+					uni.stopPullDownRefresh()
+					
+				}
+			})
 		},
 		methods: {
+			
+
+			// 请求数据
+			init() {
+				this.global.request.post({
+					url: 'releaselist',
+					data:{ page:this.page },
+					success: res => {	
+						let a = []		
+						res.info.data.forEach((item, index) => {
+							a.push({
+								"id": item.mt_release_id,
+								"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
+								"isimage" : item.mt_move_url ? false : true,
+								"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
+								"content": item.mt_title,
+								"user": {
+									"name": item.wx_name,
+									"avatar": item.wx_headimg
+								}
+							})
+						})
+						this.list = this.list.concat(a) 
+						this.page ++ 
+					}
+				})
+			},
 			// 选中
 			choose(item) {
 				// item 返回选中 JSON 对象
 				console.log(item)
-				this.global.utils.jump(1,"/pages/street/street_detail")
+				this.global.utils.jump( 1 , "/pages/street/street_detail")
 			},
 			// 模拟加载数据
-			getList() {
-				setTimeout(() => {
-					this.list = [{
-							"id": 1,
-							"image": "http://img2.imgtn.bdimg.com/it/u=2436940115,2560273015&fm=26&gp=0.jpg",
-							"content": "我的左手吗？呵…我把它送给了新世界",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						}, {
-							"id": 2,
-							"image": "http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg",
-							"content": "我是要成为海贼王的男人",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						}, {
-							"id": 2,
-							"image": "http://img1.imgtn.bdimg.com/it/u=2498530398,3497901317&fm=26&gp=0.jpg",
-							"content": "我是要成为海贼王的男人",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						},
-						{
-							"id": 1,
-							"image": "http://img2.imgtn.bdimg.com/it/u=2436940115,2560273015&fm=26&gp=0.jpg",
-							"content": "我的左手吗？呵…我把它送给了新世界",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						}, {
-							"id": 2,
-							"image": "http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg",
-							"content": "我是要成为海贼王的男人",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						}, {
-							"id": 2,
-							"image": "http://img1.imgtn.bdimg.com/it/u=2498530398,3497901317&fm=26&gp=0.jpg",
-							"content": "我是要成为海贼王的男人",
-							"user": {
-								"name": "nairenk",
-								"avatar": "https://avatars2.githubusercontent.com/u/24265249?s=40&v=4"
-							}
-						},
-					]
-				}, 1000)
-			}
+			
 		}
 	}
 </script>
 
 <style lang="scss">
+	.qqq{
+		padding-top: 10rpx;
+		background: #ccc; 
+	}
 	.publish {
 		width: 92rpx;
 		height: 92rpx;
@@ -110,7 +124,8 @@
 		right: 25rpx;
 		top: 60%;
 		border-radius: 50%;
-		image{
+
+		image {
 			width: 92rpx;
 			height: 92rpx;
 		}

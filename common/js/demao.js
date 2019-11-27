@@ -6,7 +6,10 @@ module.exports={
 		//图片地址
 		picUrl:"https://mt.mlgxlm.com",
 		//视频地址
-		videoUrl:"http://video.mlgxlm.com/"
+		videoUrl:"http://video.mlgxlm.com/",
+		
+
+		
 	}, 
 	api:{
 		upload:"xcx_upload"									,//上传图片

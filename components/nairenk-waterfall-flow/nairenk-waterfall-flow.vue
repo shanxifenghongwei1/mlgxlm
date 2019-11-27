@@ -5,11 +5,14 @@
 			:style="'top:' + top[index] + 'px;'"
 			v-for="(item, index) in newList" :key="index"
 			:data-index="index"
-			 @click="choose">
-			<view class="pic">
-				<image class="image" mode="widthFix" :src="item.image" style="width: 100%; display: block;" ></image>
+			 >
+			<view class="pic" v-if="item.isimage" @click="choose">
+				<image class="image" mode="widthFix" :src="item.image" style="width: 100%; display: block;"></image>
 			</view>
-			<view class="content">
+			<view class="pic" style="border-radius: 10rpx; overflow: hidden;" v-if="!item.isimage">
+				<video loop show-fullscreen-btn='false' style="width: 356rpx;" objectFit="cover" :src="item.vadve" controls></video>
+			</view>
+			<view class="content" @click="choose">
 				<text>{{item.content}}</text>
 				<view class="user">
 					<image style="width: 40upx; height: 40upx; border-radius: 50%; margin-right: 10upx;" 
@@ -18,9 +21,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="loading" v-show="loading" :style="'top: ' + loadingTop + 'px'" >
-			<image src="/static/nairenk-waterfall-flow/loading.gif" style="width: 80upx; height: 80upx;"></image>
-		</view>
+
 	</view>
 </template>
 
@@ -65,6 +66,8 @@
 			}
 		},
 		methods: {
+					
+			
 			// 瀑布流定位
 			waterFall() {
 				const query = uni.createSelectorQuery().in(this);
@@ -108,6 +111,7 @@
 
 <style scoped>
 	.flow-box {
+		background: #ccc;
 		position: relative;
 		color: #1a1a1a;
 		padding-bottom: var(--window-bottom);
@@ -118,6 +122,8 @@
 		width: calc(50% - 20upx);
 		border: 1upx solid #f9f9f9;
 		background: #fff;
+		border-radius: 20rpx;
+		overflow: hidden;
 	}
 	.flow-box .left {
 		left: 380upx;
