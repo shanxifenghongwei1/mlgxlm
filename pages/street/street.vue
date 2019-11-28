@@ -67,8 +67,7 @@
 					})
 					this.page = 1
 					this.list = a 
-					uni.stopPullDownRefresh()
-					
+					uni.stopPullDownRefresh()	
 				}
 			})
 		},
