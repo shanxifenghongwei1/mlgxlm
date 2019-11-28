@@ -2,34 +2,43 @@
 	<view>
 		<view class="detail_head">
 			<view class="left">
-				<image src="/static/image/other/person_nav.png" mode=""></image>
-				<text class="tit base wei">冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家</text>
+				<image :src=" messages.user_image " mode=""></image>
+				<text class="tit base wei">{{ messages.user_name}}</text>
 			</view>
 			<view class="right base">
-				发布时间：11月21日
+				{{ messages.time * 1000 | time }}
+			</view>
+			
+		</view>
+		<view class="abcdefg">
+			
+			<view class="title big wei mul">
+				{{messages.tittle}}
 			</view>
 		</view>
-		<view class="pic-box" v-if="pic_list.length">
+
+		
+		<view class="pic-box" v-if="pic_list.length && !messages.isvideo">
 			<block v-if="pic_list.length!=1&&pic_list.length!=4">
-				<view class="pic" v-for="(item,index) in pic_list" :key="index" @click="prev(index)">
-					<image src="/static/image/other/1.jpg" mode="aspectFill"></image>
+				<view class="pic" v-for="(item,index) in messages.content_img" :key="index" @click="prev(index)">
+					<image :src="dataUrl + item" mode="aspectFill"></image>
 				</view>
 			</block>
 			<block v-if="pic_list.length==1">
-				<view class="pic1" @click="prev(index)">
-					<image src="/static/image/other/1.jpg" mode="widthFix"></image>
+				<view class="pic1" @click="prev(index)" v-for="(item,index) in messages.content_img">
+					<image :src="dataUrl + item" mode="widthFix"></image>
 				</view>
 			</block>
 			<block v-if="pic_list.length==4">
-				<block v-for="(item,index) in pic_list" :key="index">
+				<block v-for="(item,index) in messages.content_img" :key="index">
 					<block v-if="index+1!=2">
 						<view class="pic" @click="prev(index)">
-							<image src="/static/image/other/1.jpg" mode="aspectFill"></image>
+							<image :src="dataUrl + item" mode="aspectFill"></image>
 						</view>
 					</block>
 					<block v-if="index+1==2">
 						<view class="pic" @click="prev(index)">
-							<image src="/static/image/other/1.jpg" mode="aspectFill"></image>
+							<image :src="dataUrl + item" mode="aspectFill"></image>
 						</view>
 						<view class="pic">
 							<image src="" mode="aspectFill"></image>
@@ -39,9 +48,9 @@
 				
 			</block>
 		</view>
-		<view class="video-box" v-show="video_url">
+		<view class="video-box" v-if="messages.isvideo" >
 			<view class="video-con">
-				<video objectFit="cover" class="video" src="http://video.mlgxlm.com/files/wxf97b8045146a0176.o6zAJszImGr1vKcHHbAyRMsB6ACQ.XhdSHO807e8Iff12ba92cf2e233b646b8d329cfbfbe0.mp4" controls></video>
+				<video objectFit="cover" class="video" :src="dataUrl + messages.content_img[0]" controls></video>
 				<cover-view class="icon iconfont icon-shanchu" @click="del()">
 						
 				</cover-view>
@@ -49,24 +58,22 @@
 		</view>
 		
 		<view class="article">
-			<view class="title lg wei">
-				这个是文章的标题
-			</view>
-			<textarea class="base" value="冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家冯宏伟的家" placeholder=""  auto-height disabled/>
+
+			<textarea class="base" :value="messages.contents" placeholder=""  auto-height disabled/>
 		</view>
 		
-		<view class="shop-box">
+		<view class="shop-box" v-if='messages.isshop'>
 			<view class="shop">
 				<image src="/static/image/other/1.jpg" mode=""></image>
 				<view class="right">
 					<view class="lg wei">
-						芳香精油乳腺疏通（爱美世家）
+						{{messages.shop_name}}
 					</view>
 					<view class="star">
 						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="4" color="#7f7f7f"  active-color="#ffb540" />
 					</view>
 					<view class="sm">
-						小店天鑫花园
+						{{messages.shop_address}}
 					</view>
 				</view>
 			</view>
@@ -74,7 +81,7 @@
 		
 		<view class="eval">
 			<view class="title lg">
-				<text class="title-con wei">全部商品（99）</text>
+				<text class="title-con wei">全部评价</text>
 			</view>
 			
 			<view class="li">
@@ -139,65 +146,61 @@
 		},
 		data() {
 			return {
-				dataUrl: "",
+				dataUrl: this.global.demao.domain.videoUrl,
 				picUrl: "",
 				pic_list: [],
-				video_url:"123"
+				video_url:"123",
+				messages:{}
 			};
 		},
 		onLoad(options) {
-			this.videoContext = uni.createVideoContext('myVideo')
+		
+			this.init(options.id)
+			// this.videoContext = uni.createVideoContext('myVideo')
 		},
 		methods: {
-			add() {
-				uni.showActionSheet({
-					itemList: ['图片', '视频'],
-					success: function(res) {
-						console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
-						if (res.tapIndex == 0) { //上传图片
-							uni.chooseImage({
-								count: 6,
-								sizeType: ['original', 'compressed'],
-								sourceType: ['album'],
-								success: (res) => {
-									console.log(res.tempFilePaths)
-									uni.uploadFile({
-										url: "http://mt.mlgxlm.com/upload",
-										filePath: res.tempFilePaths[0],
-										name: 'file',
-										success: (uploadFileRes) => {
-											let a = JSON.parse(uploadFileRes.data)
-											this.pic_list.push(a.data.path)
-										}
-									})
-								}
-							});
-						} else if (res.tapIndex == 1) { //上传视频
-							uni.chooseVideo({
-								count: 1,
-								sourceType: ['camera', 'album'],
-								success: function(res) {
-									console.log(res)
-	
-									uni.uploadFile({
-										url: "https://mt.mlgxlm.com/vidoes",
-										method: "POST",
-										filePath: res.tempFilePath,
-										name: 'file',
-										success: (uploadFileRes) => {
-											console.log(res)
-										}
-									})
-								}
-							})
-						}
+			// 当前的详情
+			init(e){
+				this.global.request.post({
+					url:'releaselist_Detail',
+					data:{
+						mt_release_id:e
 					},
-					fail: function(res) {
-						console.log(res.errMsg);
+					success: res => {
+						
+						// this.messages = res.info[0]
+						// res.info[0].mt_pic_url
+						let a = {
+							user_image:res.info.shop_img ? res.info.shop_img : res.info.wx_headimg ,
+							user_name: res.info.shop_id ? res.info.shop_name : res.info.wx_name ,
+							isshop:res.info.shop_id ? true : false ,
+							tittle: res.info.mt_title ,
+							time: res.info.create_time ,
+							contents:res.info.mt_experience,
+							content_img: (res.info.mt_pic_url ? res.info.mt_pic_url : res.info.mt_move_url).split(','),
+							isvideo:res.info.mt_pic_url ? false : true ,
+							shop_score:res.info.shop_score ? res.info.shop_score : '',
+							shop_address:res.info.shop_address_area ? res.info.shop_address_provice + res.info.shop_address_city + res.info.shop_address_area + '' : '' ,
+							
+						}
+						
+						
+
+						this.messages = a
+						console.log(a.content_img)
+						let ccc=[]
+						a.content_img.forEach((v)=>{
+							ccc.push(this.dataUrl+v+"")
+						})
+						console.log(a.content_img)
+						this.pic_list = ccc;
+						
+						
 					}
-				});
-	
+				})
 			},
+			
+
 	
 			prev(e) {
 				uni.previewImage({
@@ -221,11 +224,13 @@
 				}, 2000);
 				
 			}
-		}
+		},
+		
 	}
 </script>
 
 <style lang="scss">
+
 	.red {
 		color: $any-col;
 	}
@@ -318,7 +323,8 @@
 			margin-right: 0%;
 		}
 		.pic1{
-			width: 30%;
+			width: 100%;
+			margin: 20rpx;
 			image{
 				width: 100%;
 			}
@@ -349,10 +355,17 @@
 		margin-top: 20rpx;
 		padding: 0 3%;
 		box-sizing: border-box;
+
+	}
+	
+	.abcdefg{
 		.title{
 			text-align: center;
+			margin-top: 20rpx;
+			
 		}
 	}
+	
 	
 	textarea{
 		width: 100%;

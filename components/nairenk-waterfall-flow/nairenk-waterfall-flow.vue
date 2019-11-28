@@ -6,13 +6,13 @@
 			v-for="(item, index) in newList" :key="index"
 			:data-index="index"
 			 >
-			<view class="pic" v-if="item.isimage" @click="choose">
+			<view class="pic" v-if="item.isimage" :data-id='item.id' @click="choose">
 				<image class="image" mode="widthFix" :src="item.image" style="width: 100%; display: block;"></image>
 			</view>
 			<view class="pic" style="border-radius: 10rpx; overflow: hidden;" v-if="!item.isimage">
 				<video loop show-fullscreen-btn='false' style="width: 356rpx;" objectFit="cover" :src="item.vadve" controls></video>
 			</view>
-			<view class="content" @click="choose">
+			<view class="content" :data-id='item.id' @click="choose">
 				<text>{{item.content}}</text>
 				<view class="user">
 					<image style="width: 40upx; height: 40upx; border-radius: 50%; margin-right: 10upx;" 
@@ -53,6 +53,7 @@
 		},
 		watch: {
 			// 数据
+			
 			list: function (newVal, oldVal) {
 				this.mark = oldVal.length;
 				if (newVal != oldVal) {
@@ -60,7 +61,7 @@
 					this.$nextTick(function () {
 						setTimeout(() => {
 							this.waterFall();
-						}, 120)
+						}, 1000)
 					})
 				}
 			}
@@ -102,8 +103,8 @@
 			},
 			// 选中
 			choose(e) {
-				let index = e.currentTarget.dataset.index;
-				this.$emit('click', this.newList[index]);
+				// let index = e.currentTarget.dataset.index;
+				this.$emit('click', e);
 			}
 		}
 	}

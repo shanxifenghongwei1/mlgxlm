@@ -5,7 +5,7 @@
 		</view>
 		<!-- 小飞机 -->
 		<navigator hover-class="none" url="/pages/street/publish" class="publish">
-			<image src="/static/image/other/publish.png" mode=""></image>
+			<image src="/static/image/other/publish.png" mode="widthFix"></image>
 		</navigator>
 
 
@@ -33,12 +33,10 @@
 		},
 		onReady() {
 			this.init()
+			
 		},
 		
-		onLoad() {
-			
-			// this.getList();
-		},
+
 		onReachBottom() {
 			// this.page++;
 			// this.loading = true;
@@ -51,6 +49,7 @@
 			this.global.request.post({
 				url: 'releaselist',
 				success: res => {	
+					if(!res.info.data == []){
 					let a = []		
 					res.info.data.forEach((item, index) => {
 						a.push({
@@ -68,11 +67,26 @@
 					this.page = 1
 					this.list = a 
 					uni.stopPullDownRefresh()	
+					}else{
+						this.global.utils.showToast_my('没有更多新资讯啦 ~')
+						
+					}
 				}
+					
 			})
+			
+			
+			// setTimeout(()=>{
+			// 	console.log('dasda')
+			// 	this.global.utils.jump( 4 ,'/pages/street/street')
+			// },1000)
+		},
+		onLoad() {
+			
+			// this.getList();
 		},
 		methods: {
-			
+
 
 			// 请求数据
 			init() {
@@ -80,22 +94,26 @@
 					url: 'releaselist',
 					data:{ page:this.page },
 					success: res => {	
-						let a = []		
-						res.info.data.forEach((item, index) => {
-							a.push({
-								"id": item.mt_release_id,
-								"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
-								"isimage" : item.mt_move_url ? false : true,
-								"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
-								"content": item.mt_title,
-								"user": {
-									"name": item.wx_name,
-									"avatar": item.wx_headimg
-								}
+						if(!res.info.data == []){
+							let a = []
+							res.info.data.forEach((item, index) => {
+								a.push({
+									"id": item.mt_release_id,
+									"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
+									"isimage" : item.mt_move_url ? false : true,
+									"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
+									"content": item.mt_title,
+									"user": {
+										"name": item.wx_name,
+										"avatar": item.wx_headimg
+									}
+								})
 							})
-						})
-						this.list = this.list.concat(a) 
-						this.page ++ 
+							this.list = this.list.concat(a) 
+							this.page ++ 
+						}else{
+							this.global.utils.showToast_my('没有更多新资讯啦 ~')
+						}	
 					}
 				})
 			},
@@ -103,7 +121,7 @@
 			choose(item) {
 				// item 返回选中 JSON 对象
 				console.log(item)
-				this.global.utils.jump( 1 , "/pages/street/street_detail")
+				this.global.utils.jump(  1 , "/pages/street/street_detail?id=" + item.currentTarget.dataset.id  )
 			},
 			// 模拟加载数据
 			
