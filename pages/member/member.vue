@@ -222,7 +222,9 @@
 				this.global.request.post({
 					url: "user_center",
 					method: "GET",
-					data: {},
+					data: {
+						openid:uni.getStorageSync("session").data.openid
+					},
 					success: (res) => {
 						this.userInfo=res.userInfo;
 						this.coupon_num=res.coupon_num

@@ -34,69 +34,7 @@
 	export default {
 		data() {
 			return {
-				s_type1: [{
-						t_id: 6,
-						t_name: "面部护理",
-						t_img: "/images/mianbuhuli.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 7,
-						t_name: "抗衰除皱",
-						t_img: "/images/kangsuichuzhou.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 8,
-						t_name: "塑形换肤",
-						t_img: "/images/shuxinghuanfu.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 9,
-						t_name: "养发美甲",
-						t_img: "/images/meifameijia.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 10,
-						t_name: "深度清洁",
-						t_img: "/images/shenduqingjie.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 7,
-						t_name: "抗衰除皱",
-						t_img: "/images/kangsuichuzhou.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 8,
-						t_name: "塑形换肤",
-						t_img: "/images/shuxinghuanfu.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 9,
-						t_name: "养发美甲",
-						t_img: "/images/meifameijia.jpg",
-						p_id: 1,
-						is_hot: 1
-					},
-					{
-						t_id: 10,
-						t_name: "深度清洁",
-						t_img: "/images/shenduqingjie.jpg",
-						p_id: 1,
-						is_hot: 1
-					}
+				s_type1: [
 				],
 				picUrl: ""
 			}
@@ -106,6 +44,20 @@
 		},
 		onLoad(){
 			this.picUrl=this.global.demao.domain.picUrl
+			this.global.request.post({
+				url: this.global.demao.api.type_lists,
+				method: "GET",
+				data: {},
+				success: (res) => {
+					console.log(res);
+					// if (res.code == 0) {
+					// 	this.global.utils.showToast_my("签到成功")
+					// 	this.findList()
+					// } else {
+					// 	this.global.utils.showToast_my("签到失败，请稍后重试")
+					// }
+				}
+			})
 		}
 	}
 </script>

@@ -27,7 +27,7 @@ module.exports={
 		assemble:"assemble"									,//拼团
 		limited_time:"limited_time"							,//限时抢
 		
-		
+		type_lists:"type_lists"								,//更多分类
 		couponadd:"couponadd"								,//领取优惠券
 		
 		

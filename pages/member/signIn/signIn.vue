@@ -51,7 +51,7 @@
 			</view>
 
 		</view>
-		<view class="sign-list">
+		<view class="sign-list" v-if="datelist.length">
 			<view class="sign-list-box">
 				<view class="sign-list-title">
 					签到明细
@@ -69,19 +69,6 @@
 						+ {{item.integral}}
 					</view>
 				</view>
-				<!-- <view class="sign-list-li">
-					<view class="left">
-						<view class="top">
-							每日签到奖励每日签到奖励
-						</view>
-						<view class="bottom">
-							2019年10月24日
-						</view>
-					</view>
-					<view class="right">
-						+1
-					</view>
-				</view> -->
 			</view>
 		</view>
 	</view>
