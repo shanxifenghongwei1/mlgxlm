@@ -141,7 +141,36 @@
 			}
 		},
 		methods: {
-
+			save(){
+				this.global.request.post({
+					url: this.global.demao.api.user_sign,
+					method: "GET",
+					data: {},
+					success: (res) => {
+						console.log(res);
+					}
+				})
+			}
+		},
+		onLoad(){
+			// this.global.request.post({
+			// 	url: this.global.demao.api.user_sign_add,
+			// 	method: "GET",
+			// 	data: {},
+			// 	success: (res) => {
+			// 		console.log(res);
+			// 	}
+			// })
+			
+			
+			this.global.request.post({
+				url: this.global.demao.api.user_sign,
+				method: "GET",
+				data: {},
+				success: (res) => {
+					console.log(res);
+				}
+			})
 		}
 	}
 </script>

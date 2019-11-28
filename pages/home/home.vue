@@ -134,7 +134,6 @@
 			</view>
 		</view>
 		<sunblind v-if="sunblind"></sunblind>
-		<btn font="提交按钮" @save="save()"></btn>
 	</view>
 </template>
 
@@ -329,7 +328,7 @@
 				list:[1,2,3,4],
 
 				dataUrl: "",
-				picUrl: demo.domain.picUrl,
+				picUrl: demo.domain.videoUrl,
 
 				// 搜索栏样式
 				iconType: ['search'],

@@ -16,6 +16,9 @@ module.exports={
 		weChat:"weChat"										,//微信登录
 		usertime:"usertime"									,//判断是否为新人
 		
+		user_sign:"user_sign"								,//签到
+		user_sign_add:"user_sign_add"						,//签到数据
+		
 		upload:"xcx_upload"									,//上传图片
 		vidoes:"vidoes"										,//上传视频
 		
@@ -65,6 +68,8 @@ module.exports={
 		add_order:"add_order"								,//下订单
 		order_detail:"order_detail"							,//订单详情
 		moneybuy:"moneybuy"									,//支付
+		
+		
 		
 	}
 }

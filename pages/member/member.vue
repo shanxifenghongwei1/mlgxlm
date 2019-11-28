@@ -31,7 +31,7 @@
 		<view class="member-assets">
 			<view class="member-assets-money">
 				<navigator hover-class="none" url="/pages/member/my-coupon/money/money" class="member-assets-number">
-					<view class="member-assets-h6">{{userInfo[0].balance?userInfo[0].balance:0}}</view>
+					<view class="member-assets-h6">{{userInfo[0].money?userInfo[0].money:0}}</view>
 					<view class="member-assets-content">分享币</view>
 				</navigator>
 				<navigator url="/pages/member/my-coupon/integral/integral" hover-class="none" class="member-assets-number">
