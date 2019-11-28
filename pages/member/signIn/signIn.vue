@@ -9,7 +9,7 @@
 				当前积分
 			</view>
 			<view class="signIn">
-				<view class="sign" v-for="(item,index) in week">
+				<view class="sign" v-for="(item,index) in week" :key="index">
 					<view class="" style="width: 100%;height: 80rpx;"></view>
 					<view class="sign-box" v-if="item.state">
 						<view class="dit">
@@ -36,8 +36,11 @@
 					</view>
 				</view>
 			</view>
-			<view class="sign-click-box">
+			<view class="sign-click-box" v-if="!issign" @click="save()">
 				签到
+			</view>
+			<view class="sign-click-box" v-else>
+				签到成功
 			</view>
 			<view class="desc">
 				每天签到有惊喜，领取积分换好礼
@@ -46,17 +49,30 @@
 				<view class="water water1"></view>
 				<view class="water water2"></view>
 			</view>
-		
+
 		</view>
 		<view class="sign-list">
 			<view class="sign-list-box">
 				<view class="sign-list-title">
 					签到明细
 				</view>
-				<view class="sign-list-li">
+				<view class="sign-list-li" v-for="(item,index) in datelist" :key="index">
 					<view class="left">
 						<view class="top">
-							 每日签到奖励每日签到奖励
+							每日签到奖励每日签到奖励
+						</view>
+						<view class="bottom">
+							{{item.first_sign_time*1000 | time}}
+						</view>
+					</view>
+					<view class="right red">
+						+ {{item.integral}}
+					</view>
+				</view>
+				<!-- <view class="sign-list-li">
+					<view class="left">
+						<view class="top">
+							每日签到奖励每日签到奖励
 						</view>
 						<view class="bottom">
 							2019年10月24日
@@ -65,117 +81,106 @@
 					<view class="right">
 						+1
 					</view>
-				</view>
-				<view class="sign-list-li">
-					<view class="left">
-						<view class="top">
-							 每日签到奖励每日签到奖励
-						</view>
-						<view class="bottom">
-							2019年10月24日
-						</view>
-					</view>
-					<view class="right">
-						+1
-					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import uniSteps from "@/components/uni-steps/uni-steps.vue"
 	export default {
-		components: {
-			uniSteps
-		},
 		data() {
 			return {
-				steps: [{
-					title: '事件一'
-				}, {
-					title: '事件二'
-				}, {
-					title: '事件三'
-				}, {
-					title: '事件四'
-				}],
+				issign:0,
 				week: [{
 						state: false,
-						name: "周一",
+						name: "星期一",
+						isdouble: false
+					},
+					{
+						state: false,
+						name: "星期二",
+						isdouble: false
+					},
+					{
+						state: false,
+						name: "星期三",
+						isdouble: false
+					},
+					{
+						state: false,
+						name: "星期四",
+						isdouble: false
+					},
+					{
+						state: false,
+						name: "星期五",
+						isdouble: false
+					},
+					{
+						state: false,
+						name: "星期六",
 						isdouble: true
 					},
 					{
-						state: true,
-						name: "周二",
-						isdouble: false
-					},
-					{
 						state: false,
-						name: "周三",
-						isdouble: false
-					},
-					{
-						state: true,
-						name: "周四",
-						isdouble: false
-					},
-					{
-						state: false,
-						name: "周五",
-						isdouble: false
-					},
-					{
-						state: true,
-						name: "周六",
-						isdouble: false
-					},
-					{
-						state: false,
-						name: "周日",
+						name: "星期日",
 						isdouble: true
 					}
 				],
-
+				datelist:[]
 			}
 		},
 		methods: {
-			save(){
+			save() {
 				this.global.request.post({
 					url: this.global.demao.api.user_sign,
 					method: "GET",
 					data: {},
 					success: (res) => {
 						console.log(res);
+						if (res.code == 0) {
+							this.global.utils.showToast_my("签到成功")
+							this.findList()
+						} else {
+							this.global.utils.showToast_my("签到失败，请稍后重试")
+						}
 					}
+				})
+			},
+			findList(){
+				this.global.request.post({
+					url: this.global.demao.api.user_sign_add,
+					method: "GET",
+					data: {},
+					success: (res) => {
+						this.datelist=res.data;
+						let list = this.week;
+						res.data.forEach((v) => {
+							list.forEach((x)=>{
+								if(v.wekkend==x.name){
+									x.state=true
+								}
+							})
+						})
+						this.week=list;
+						this.issign=res.issign
+					}
+				
+				
 				})
 			}
 		},
-		onLoad(){
-			// this.global.request.post({
-			// 	url: this.global.demao.api.user_sign_add,
-			// 	method: "GET",
-			// 	data: {},
-			// 	success: (res) => {
-			// 		console.log(res);
-			// 	}
-			// })
-			
-			
-			this.global.request.post({
-				url: this.global.demao.api.user_sign,
-				method: "GET",
-				data: {},
-				success: (res) => {
-					console.log(res);
-				}
-			})
+		onLoad() {
+			this.findList()
 		}
 	}
 </script>
 
 <style lang="scss">
+	.red{
+		color: $any-col;
+	}
 	.signIn-box {
 		width: 100%;
 		height: 686rpx;
@@ -353,7 +358,7 @@
 		width: 200%;
 		height: 100%;
 		background-size: 50% 100%;
-		
+
 	}
 
 	.water-group .water1 {
@@ -382,52 +387,60 @@
 		0% {
 			transform: translateX(0) translateZ(0) scaleY(1)
 		}
-		25%{
+
+		25% {
 			transform: translateX(10%) translateZ(0) scaleY(1)
 		}
+
 		50% {
 			transform: translateX(30%) translateZ(0) scaleY(1)
 		}
+
 		75% {
 			transform: translateX(20%) translateZ(0) scaleY(1)
 		}
-		100%{
+
+		100% {
 			transform: translateX(0) translateZ(0) scaleY(1)
 		}
 	}
 
 	@keyframes water-left {
-		
+
 		0% {
 			transform: translateX(-5%) translateZ(0) scaleY(1)
 		}
-		25%{
+
+		25% {
 			transform: translateX(-20%) translateZ(0) scaleY(1)
 		}
+
 		50% {
 			transform: translateX(-40%) translateZ(0) scaleY(1)
 		}
+
 		75% {
 			transform: translateX(-20%) translateZ(0) scaleY(1)
 		}
-		100%{
+
+		100% {
 			transform: translateX(-5%) translateZ(0) scaleY(1)
 		}
 	}
-	
-	.sign-list{
+
+	.sign-list {
 		width: 100%;
-		height: 500rpx;
 		padding: 20rpx 3%;
 		box-sizing: border-box;
 
-		.sign-list-box{
+		.sign-list-box {
 			width: 100%;
 			height: 100%;
 			border-radius: 20rpx;
 			box-shadow: 0rpx 0rpx 10rpx #bfbdbd;
 		}
-		.sign-list-title{
+
+		.sign-list-title {
 			width: 100%;
 			height: 90rpx;
 			background: #ffffff;
@@ -438,13 +451,15 @@
 			justify-content: center;
 			align-items: center;
 		}
-		.sign-list-li{
+
+		.sign-list-li {
 			width: 100%;
 			height: 90rpx;
 			background: #ffffff;
 			border-bottom: 1rpx solid #cccccc;
 			@extend .any-flex;
-			.left{
+
+			.left {
 				width: 80%;
 				padding-left: 20rpx;
 				@extend .any-flex;
@@ -452,13 +467,15 @@
 				justify-content: center;
 				align-items: flex-start;
 				box-sizing: border-box;
-				.top{
+
+				.top {
 					width: 80%;
 					font-size: $uni-font-size-base;
 					padding: 5rpx;
 					@include multi-row-apostrophe(1);
 				}
-				.bottom{
+
+				.bottom {
 					width: 80%;
 					font-size: $uni-font-size-sm;
 					padding: 5rpx;
@@ -466,7 +483,8 @@
 					color: $uni-border-color;
 				}
 			}
-			.right{
+
+			.right {
 				width: 20%;
 				height: 100%;
 				text-align: right;
