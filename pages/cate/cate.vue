@@ -1,6 +1,18 @@
 <template>
 	<view>
-		<view class="title lg wei">
+		<block v-for="(item,index) in s_type1" :key="index">
+			<view class="title lg wei">
+				{{item.t_name}}
+			</view>
+			<view class="con">
+				<view @click="menuDetail(v.t_id,v.t_name)"   v-for="(v,i) in item.child" :key="i" class="list-one">
+					<image mode="aspectFit" :src="picUrl+v.t_img" class="icon"></image>
+					<view class="text">{{v.t_name}}</view>
+				</view>
+			</view>
+		</block>
+		
+		<!-- <view class="title lg wei">
 			美容美发
 		</view>
 		<view class="con">
@@ -17,16 +29,7 @@
 				<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 				<view class="text">{{item.t_name}}</view>
 			</view>
-		</view>
-		<view class="title lg wei">
-			美容美发
-		</view>
-		<view class="con">
-			<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in s_type1" :key='index' class="list-one">
-				<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
-				<view class="text">{{item.t_name}}</view>
-			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -43,19 +46,22 @@
 
 		},
 		onLoad(){
-			this.picUrl=this.global.demao.domain.picUrl
+			this.picUrl=this.global.demao.domain.videoUrl;
 			this.global.request.post({
 				url: this.global.demao.api.type_lists,
 				method: "GET",
 				data: {},
 				success: (res) => {
-					console.log(res);
-					// if (res.code == 0) {
-					// 	this.global.utils.showToast_my("签到成功")
-					// 	this.findList()
-					// } else {
-					// 	this.global.utils.showToast_my("签到失败，请稍后重试")
-					// }
+					let a =res.data.filter((v)=>{
+						return v.p_id==0
+					})
+					a.forEach((v)=>{
+						console.log(v.t_id)
+						v.child=res.data.filter((x)=>{
+							return x.p_id==v.t_id;
+						})
+					})
+					this.s_type1=a;
 				}
 			})
 		}

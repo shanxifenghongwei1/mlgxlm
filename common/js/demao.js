@@ -37,6 +37,7 @@ module.exports={
 		add_cart:"add_cart"									,//加购   goods_id
 		cartList:"cartList"									,//购物车列表
 		
+		nearby_shop:"nearby_shop"							,//附近店铺
 		
 		add_collection:"add_collection"						,//商品收藏  goods_id
 		collection_list:" collection_list"					,//商品收藏列表

@@ -153,7 +153,6 @@
 		.shop {
 			margin-top: 20rpx;
 			width: 100%;
-			height: 240rpx;
 			border-radius: 20rpx;
 			border: 2rpx solid $any-zol;
 			border-bottom: 4rpx solid $any-col;
@@ -231,7 +230,6 @@
 
 				.goodsname {
 					width: 70%;
-					height: 35rpx;
 					@include multi-row-apostrophe(1);
 					overflow: hidden;
 					font-size: $uni-font-size-base;

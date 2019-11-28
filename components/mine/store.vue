@@ -1,7 +1,7 @@
 <template>
 	<!-- 我得店铺  用于我得收藏，我的足迹 -->
 	<view class="store">
-		<view class="con-box">
+		<!-- <view class="con-box">
 			<image src="" mode="widthFix"></image>
 			<view class="con">
 				<view class="title">
@@ -24,6 +24,31 @@
 					太原市小店区
 				</view>
 			</view>
+		</view> -->
+		
+		<view class="con-box" v-for="(item) in store" :key="index">
+			<image :src="picUrl+item.picture" mode="widthFix"></image>
+			<view class="con">
+				<view class="title">
+					{{item.shop_name}}
+				</view>
+				<view class="star">
+					<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.shop_score" color="#7f7f7f"
+					 active-color="#ffb540" />
+				</view>
+				<view class="contex">
+					<text class="icon iconfont icon-xiangmu">
+						
+					</text>
+					面部管理
+				</view>
+				<view class="address">	
+					<text class="icon iconfont icon-dizhi-01">
+						
+					</text>
+					{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -37,7 +62,7 @@
 			uniRate
 		},
 		props: {
-			storelists: {
+			store: {
 				type: Array, //商品数据列表
 				default: []
 			}
@@ -60,7 +85,7 @@
 			}
 		},
 		created() {
-			this.picUrl = demo.domain.picUrl;
+			this.picUrl = demo.domain.videoUrl;
 		}
 	}
 </script>

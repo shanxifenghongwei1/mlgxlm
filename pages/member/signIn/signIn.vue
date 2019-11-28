@@ -3,7 +3,7 @@
 	<view>
 		<view class="signIn-box">
 			<view class="num">
-				86
+				{{integral}}
 			</view>
 			<view class="tit">
 				当前积分
@@ -115,7 +115,8 @@
 						isdouble: true
 					}
 				],
-				datelist:[]
+				datelist:[],
+				integral:0
 			}
 		},
 		methods: {
@@ -151,7 +152,8 @@
 							})
 						})
 						this.week=list;
-						this.issign=res.issign
+						this.issign=res.is_issign;
+						this.integral=res.integral[0].integral
 					}
 				
 				
@@ -170,7 +172,6 @@
 	}
 	.signIn-box {
 		width: 100%;
-		height: 686rpx;
 		background: url('~@/static/image/other/icon-sign.jpg') no-repeat center;
 		background-size: cover;
 		@extend .any-flex;
@@ -179,7 +180,8 @@
 		color: #ffffff;
 
 		.num {
-			font-size: 55rpx;
+			font-size: 60rpx;
+			margin-top: 120rpx;
 		}
 
 		.tit {
