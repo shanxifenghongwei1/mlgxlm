@@ -27,6 +27,8 @@ let requestPost = ajaxJson => {
 	}
 	if (ajaxJson.data == undefined) {
 		ajaxJson.data = {};
+	}else{
+		ajaxJson.data.openid=uni.getStorageSync("session").data.openid?uni.getStorageSync("session").data.openid:""
 	}
 	
 	uni.request({
