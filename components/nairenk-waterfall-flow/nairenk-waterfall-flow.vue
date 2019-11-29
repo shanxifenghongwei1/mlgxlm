@@ -1,5 +1,5 @@
 <template>
-	<view class="flow-box" :style="'height: ' + loadingTop + 'px'">
+	<view class="flow-box" :style="'height: ' + loadingTop + 'px;opacity:'+ block_style+';background:' + color">
 		<view class="item"
 			:class="left[index] == 1 ? 'left' : ''"
 			:style="'top:' + top[index] + 'px;'"
@@ -48,22 +48,35 @@
 				boxHeight: [],
 				top: [], 
 				left: [],
-				loadingTop: 0
+				loadingTop: 0,
+				block_style:"0",
+				color:"#ffffff"
 			}
 		},
 		watch: {
 			// 数据
 			
-			list: function (newVal, oldVal) {
-				this.mark = oldVal.length;
-				if (newVal != oldVal) {
+			list: function (newVal, oldVal) {	
+				this.block_style="0";
+				this.color="#ffffff"
+				if(oldVal.length>newVal.length){
+					this.mark=0;
+					this.boxHeight=[];
+					this.top=[];
+					this.left=[];
+				}else{
+					this.mark=oldVal.length;
+				}
+				// if (newVal != oldVal) {
 					this.newList = this.list;
 					this.$nextTick(function () {
 						setTimeout(() => {
+							this.block_style="1";
+							this.color="#ccc"
 							this.waterFall();
-						}, 1000)
+						}, 500)
 					})
-				}
+				// }
 			}
 		},
 		methods: {

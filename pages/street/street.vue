@@ -1,7 +1,7 @@
 <template>
 	<view class="qqq">
 		<view class="app" >
-			<waterfall-flow :list="list" :loading="loading" @click="choose"></waterfall-flow>
+			<waterfall-flow :key="key" :list="list" :loading="loading" @click="choose"></waterfall-flow>
 		</view>
 		<!-- 小飞机 -->
 		<navigator hover-class="none" url="/pages/street/publish" class="publish">
@@ -23,6 +23,8 @@
 			return {
 				//数据列表
 				page: 1,
+				 key: 0,
+				
 				start: 0,
 				end: 0,
 				list: [], // 列表
@@ -45,11 +47,13 @@
 			this.init()
 		},
 		onPullDownRefresh(){
-			console.log('下拉刷新')
+			console.log('下拉刷新,你刷新个鸡er')
+			this.list = [] 
+			 this.key += 1 
 			this.global.request.post({
 				url: 'releaselist',
 				success: res => {	
-					if(!res.info.data == []){
+					if(res.info.data.length){
 					let a = []		
 					res.info.data.forEach((item, index) => {
 						a.push({
@@ -65,12 +69,15 @@
 						})
 					})
 					this.page = 1
-					this.list = a 
-					uni.stopPullDownRefresh()	
+					
+					this.list =a.reverse();
+
+						
 					}else{
 						this.global.utils.showToast_my('没有更多新资讯啦 ~')
 						
 					}
+					uni.stopPullDownRefresh()
 				}
 					
 			})
@@ -94,7 +101,7 @@
 					url: 'releaselist',
 					data:{ page:this.page },
 					success: res => {	
-						if(!res.info.data == []){
+						if(res.info.data.length){
 							let a = []
 							res.info.data.forEach((item, index) => {
 								a.push({
