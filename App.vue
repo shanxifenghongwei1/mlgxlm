@@ -13,20 +13,22 @@
 					//1:登录  0：未登录
 					if (res.errMsg !== "checkSession:ok") {
 						this.global.status.state.login = 0;
+						uni.clearStorageSync()
 					} else {
-						this.global.status.state.login = 1;
+						// this.global.status.state.login = 1;
+						if(uni.getStorageSync("session")){
+							this.global.status.state.login = 1;
+						}else{
+							this.global.status.state.login = 0;
+							uni.clearStorageSync()
+						}
 					}
-					console.log(this.global.status.state.login)
 				},
 				fail: (res) => {
 					console.log("失败")
 					console.log(res)
-					if (res.errMsg !== "checkSession:ok") {
-						this.global.status.state.login = 0;
-					} else {
-						this.global.status.state.login = 1;
-					}
-					console.log(this.global.status.state.login)
+					this.global.status.state.login = 0;
+					uni.clearStorageSync()
 				}
 			})
 		},

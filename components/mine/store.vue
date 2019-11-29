@@ -40,7 +40,7 @@
 					<text class="icon iconfont icon-xiangmu">
 						
 					</text>
-					面部管理
+					{{}}
 				</view>
 				<view class="address">	
 					<text class="icon iconfont icon-dizhi-01">
@@ -72,9 +72,6 @@
 				dataUrl: "",
 				picUrl: "",
 			};
-		},
-		onLoad(options) {
-	
 		},
 		methods: {
 			toDetail(e) {

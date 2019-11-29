@@ -117,7 +117,10 @@
         }
         ,{
             "path" : "pages/home/nearby/nearby",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "附近店铺", 
+				"onReachBottomDistance":50
+			}
         }
 		,{
 		    "path" : "pages/home/nearby/newStore",

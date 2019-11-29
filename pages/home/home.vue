@@ -6,7 +6,7 @@
 			<searchAny></searchAny>
 			<!-- 下面四个图标 -->
 			<view class="seduce">
-				<view class="list-one" @click="one_cate_page(item.url)" v-for="(item,index) in one_cate" :key="index">
+				<view class="list-one" @click="one_cate_page(item.url,index)" v-for="(item,index) in one_cate" :key="index">
 					<view class="icon iconfont" :class="item.icon"></view>
 					<view class="text font-weig">{{item.name}}</view>
 				</view>
@@ -366,8 +366,17 @@
 
 		},
 		methods: {
-			one_cate_page(e){
-				this.global.utils.jump(1,e);
+			one_cate_page(e,f){
+				if(f==3){
+					if(this.global.status.state.login==1){
+						this.global.utils.jump(1,e);
+					}else{
+						this.global.utils.showModel_my();
+					}
+				}else{
+					this.global.utils.jump(1,e);
+				}
+				
 			},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
 			runHairdressing(e, f) {
@@ -461,45 +470,54 @@
 			this.city=this.global.city;								//获取当前所在城市
 			this.global.watch((v)=>{
 				this.city=v;
-			})
-			
-			
-			this.global.request.post({								//判断是否登录以及是否为新人
-				url: this.global.demao.api.usertime,
-				method: "GET",
-				data: {},
-				isLoading: true,
-				success: (res) => {
-					let a=new Date();
-					a=a.getTime();
-					if(a-res.data[0].wx_user_login * 1000 > 60*60*24*1000*3){
-						console.log("不是新人了")
-						this.one_cate=[
-							{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-							{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-							{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
-							// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-							{name:"分享有礼",url:"/pages/home/hongbao/share",icon:"icon-hezuo"},
-							{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
-						]
-					}else{
-						console.log("是新人")
-						this.one_cate=[
-							{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-							{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-							{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
-							// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-							{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
-							{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
-						]
-					}
-				}
-			})
-			
-			
+			})				
 		},
 		onShow(){
 			this.sunblind=false;
+			if(uni.getStorageSync("session")){
+				console.log("已登录")
+				this.global.request.post({								//判断是否登录以及是否为新人
+					url: this.global.demao.api.usertime,
+					method: "GET",
+					data: {},
+					isLoading: true,
+					success: (res) => {
+						let a=new Date();
+						a=a.getTime();
+						if(a-res.data[0].wx_user_login * 1000 > 60*60*24*1000*3){
+							console.log("不是新人了")
+							this.one_cate=[
+								{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
+								{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
+								{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+								// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
+								{name:"分享有礼",url:"/pages/home/hongbao/share",icon:"icon-hezuo"},
+								{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+							]
+						}else{
+							console.log("是新人")
+							this.one_cate=[
+								{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
+								{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
+								{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+								// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
+								{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
+								{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+							]
+						}
+					}
+				})
+			}else{
+				console.log("未登录")
+				this.one_cate=[
+					{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
+					{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
+					{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+					// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
+					{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
+					{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+				]
+			}
 		}
 	}
 </script>
@@ -616,6 +634,7 @@
 			.shop-col-img {
 				width: 35%;
 				height: 100%;
+				margin-left: 4rpx;
 
 				image {
 					width: 100%;
