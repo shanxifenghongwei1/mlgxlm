@@ -2,14 +2,11 @@
 	import demo from "@/common/js/demao.js"
 	export default {
 		onLaunch: function(e) {
-			console.log("全局数据")
 			if(e.query.p_id){
 				uni.setStorageSync("p_id",e.query.p_id)
 			}
 			uni.checkSession({
 				success: (res) => {
-					console.log("成功")
-					console.log(res)
 					//1:登录  0：未登录
 					if (res.errMsg !== "checkSession:ok") {
 						this.global.status.state.login = 0;
@@ -25,8 +22,6 @@
 					}
 				},
 				fail: (res) => {
-					console.log("失败")
-					console.log(res)
 					this.global.status.state.login = 0;
 					uni.clearStorageSync()
 				}
@@ -36,7 +31,7 @@
 			this.getLocationInfo()
 		},
 		onHide: function() {
-			console.log('App Hide')
+
 		},
 
 		methods: {
@@ -46,8 +41,6 @@
 				uni.getLocation({
 					type: 'wgs84',
 					success(res) {
-						console.log("获取成功")
-						console.log(res)
 						let latitude, longitude;
 						latitude = res.latitude.toString();
 						longitude = res.longitude.toString();
@@ -56,7 +49,6 @@
 						that.getCity(latitude,longitude)
 					},
 					fail(res){
-						console.log("获取失败")
 					}
 				});
 			},
@@ -70,7 +62,6 @@
 						lat + "%2C" + lon,
 					success(re) {
 						if (re.statusCode === 200) {
-							console.log(re.data.result.addressComponent.city)
 							that.global.city = re.data.result.addressComponent.city;
 						} else {
 							that.global.utils.showToast_my("获取信息失败，请稍后重试！")

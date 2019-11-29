@@ -10,7 +10,7 @@
 					<view class="icon iconfont" :class="item.icon"></view>
 					<view class="text font-weig">{{item.name}}</view>
 				</view>
-				
+
 			</view>
 		</view>
 		<!-- 主要功能 -->
@@ -23,10 +23,14 @@
 					<view class="text font-weig">{{item.t_name}}</view>
 				</view>
 
-				<view @click="goNear()" class="sign-one">
+				<view @click="goNear()" class="sign-one" v-if="hasLocation">
 					<view class="icon-4"></view>
 					<view class="text font-weig">附近店铺</view>
 				</view>
+				<button open-type="openSetting" @opensetting="openSetting" class="sign-one" v-else>
+					<view class="icon-4"></view>
+					<view class="text font-weig">附近店铺</view>
+				</button>
 			</view>
 
 
@@ -85,7 +89,7 @@
 				<view class='shoplist'>
 					<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>
 				</view>
-				
+
 				<goodlist :cateid="ids" :goodslist="indexData"></goodlist>
 
 			</view>
@@ -98,7 +102,7 @@
 						<view class="iconsss"></view>
 						<view>本周新店</view>
 					</view>
-					<view @click="new_store()"  class="more">更多</view>
+					<view @click="new_store()" class="more">更多</view>
 				</view>
 
 				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index" @click="jump(item.shop_id,item.shop_name)">
@@ -149,16 +153,40 @@
 		},
 		data() {
 			return {
+				hasLocation:false,
 				city: "",
-				sunblind:false,
-				one_cate:[
-					{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-					{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-					{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+				sunblind: false,
+				one_cate: [{
+						name: "优惠券",
+						url: "/pages/home/coupon/coupon",
+						icon: "icon-icon_coupon"
+					},
+					{
+						name: "拼团",
+						url: "/pages/home/assemble/assemble",
+						icon: "icon-pintuan"
+					},
+					{
+						name: "限时抢",
+						url: "/pages/home/flashSale/flashSale",
+						icon: "icon-shijian"
+					},
 					// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-					{name:"分享有礼",url:"/pages/home/hongbao/share",icon:"icon-hezuo"},
-					{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
-					{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+					{
+						name: "分享有礼",
+						url: "/pages/home/hongbao/share",
+						icon: "icon-hezuo"
+					},
+					{
+						name: "新人专享",
+						url: "/pages/home/hongbao/newPeople",
+						icon: "icon-hezuo"
+					},
+					{
+						name: "分销",
+						url: "/pages/home/retail_home/retail_home",
+						icon: "icon-fenxiao"
+					}
 				],
 				indexData: {
 					type: [{
@@ -325,7 +353,7 @@
 						}
 					],
 				},
-				list:[1,2,3,4],
+				list: [1, 2, 3, 4],
 
 				dataUrl: "",
 				picUrl: demo.domain.videoUrl,
@@ -361,63 +389,71 @@
 				// 高亮id
 				ids: 1,
 				//是否为新人
-				isNew:false
+				isNew: false
 			}
 
 		},
 		methods: {
-			one_cate_page(e,f){
-				if(f==3){
-					if(this.global.status.state.login==1){
-						this.global.utils.jump(1,e);
-					}else{
+			openSetting(e){
+				console.log(e)
+			},
+			one_cate_page(e, f) {
+				if (f == 3) {
+					if (this.global.status.state.login == 1) {
+						this.global.utils.jump(1, e);
+					} else {
 						this.global.utils.showModel_my();
 					}
-				}else{
-					this.global.utils.jump(1,e);
+				} else {
+					this.global.utils.jump(1, e);
 				}
-				
+
 			},
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
 			runHairdressing(e, f) {
-				this.sunblind=true;
-				let url= "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
-				this.global.utils.jump(1,url);
+				this.sunblind = true;
+				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
+				this.global.utils.jump(1, url);
 			},
 			//跳转附近店铺
 			goNear() {
-				this.sunblind=true;
-				let url="/pages/home/nearby/nearby?head=" + "附近店铺"
-				this.global.utils.jump(1,url);
-			}, 
+				this.sunblind = true;
+				if (this.city) {
+					let url = "/pages/home/nearby/nearby?head=" + "附近店铺"
+					this.global.utils.jump(1, url);
+				} else {
+
+				}
+
+			},
 			//跳转本周新店
-			new_store(){
-				this.sunblind=true;
-				let url="/pages/home/nearby/newStore"
-				this.global.utils.jump(1,url);
+			new_store() {
+				this.sunblind = true;
+				let url = "/pages/home/nearby/newStore"
+				this.global.utils.jump(1, url);
 			},
 			//跳转二级分类详情页面
 			menuDetail(e, f) {
-				this.sunblind=true;
-				let url="/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
-				this.global.utils.jump(1,url);
+				this.sunblind = true;
+				let url = "/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
+				this.global.utils.jump(1, url);
 			},
 			//跳转商品详情页面
 			toGoods(e, f) {
-				this.sunblind=true;
-				let url="/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
-				this.global.utils.jump(1,url);
+				this.sunblind = true;
+				let url = "/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
+				this.global.utils.jump(1, url);
 			},
 
 			//跳转店铺详情页面
-			jump(e, f){
-				this.sunblind=true;
-				let url="/pages/home/shop-detial/shop-detial?shop_id=" + e + "&&head=" + f;
-				this.global.utils.jump(1,url);
+			jump(e, f) {
+				this.sunblind = true;
+				let url = "/pages/home/shop-detial/shop-detial?shop_id=" + e + "&&head=" + f;
+				this.global.utils.jump(1, url);
 			},
 			// 跳转至更多分类
-			toCatePage(){
-				this.global.utils.jump(1,"/pages/cate/cate");
+			toCatePage() {
+				this.global.utils.jump(1, "/pages/cate/cate");
 			},
 			// 高亮id
 			exchanges(id) {
@@ -441,14 +477,14 @@
 					success: (result) => {
 						let list = result.data.data.week_newshop;
 						list.forEach((v) => {
-							v.shop_label = v.shop_label?v.shop_label.split(","):[]
+							v.shop_label = v.shop_label ? v.shop_label.split(",") : []
 						})
 						result.data.data.week_newshop = list;
 
 
 						let list1 = result.data.data.goodsInfo;
 						list1.forEach((v) => {
-							v.shop_label = v.shop_label?v.shop_label.split(","):[]
+							v.shop_label = v.shop_label ? v.shop_label.split(",") : []
 						})
 						result.data.data.goodsInfo = list1;
 
@@ -462,60 +498,129 @@
 			}
 		},
 		onLoad(Option) {
-			
-			this.global.utils.sethead('美丽共享联盟');				//设置标题
-			
-			this.findData(); 										//获取首页数据
-			
-			this.city=this.global.city;								//获取当前所在城市
-			this.global.watch((v)=>{
-				this.city=v;
-			})				
+			this.global.utils.sethead('美丽共享联盟'); //设置标题
+			this.findData(); //获取首页数据
+
+			this.city = this.global.city; //获取当前所在城市
+			this.global.watch((v) => {
+				this.city = v;
+			})
 		},
-		onShow(){
-			this.sunblind=false;
-			if(uni.getStorageSync("session")){
+		onShow() {
+			this.sunblind = false;
+			
+			let that=this;
+			uni.getLocation({
+				type: 'wgs84',
+				success(res) {
+					console.log(res)
+					if(res.latitude){
+						that.hasLocation=true;
+					}else{
+						that.hasLocation=false;
+					}
+				}
+			})
+			
+			if (uni.getStorageSync("session")) {
 				console.log("已登录")
-				this.global.request.post({								//判断是否登录以及是否为新人
+				this.global.request.post({ //判断是否登录以及是否为新人
 					url: this.global.demao.api.usertime,
 					method: "GET",
 					data: {},
 					isLoading: true,
 					success: (res) => {
-						let a=new Date();
-						a=a.getTime();
-						if(a-res.data[0].wx_user_login * 1000 > 60*60*24*1000*3){
+						let a = new Date();
+						a = a.getTime();
+						if (a - res.data[0].wx_user_login * 1000 > 60 * 60 * 24 * 1000 * 3) {
 							console.log("不是新人了")
-							this.one_cate=[
-								{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-								{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-								{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+							this.one_cate = [{
+									name: "优惠券",
+									url: "/pages/home/coupon/coupon",
+									icon: "icon-icon_coupon"
+								},
+								{
+									name: "拼团",
+									url: "/pages/home/assemble/assemble",
+									icon: "icon-pintuan"
+								},
+								{
+									name: "限时抢",
+									url: "/pages/home/flashSale/flashSale",
+									icon: "icon-shijian"
+								},
 								// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-								{name:"分享有礼",url:"/pages/home/hongbao/share",icon:"icon-hezuo"},
-								{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+								{
+									name: "分享有礼",
+									url: "/pages/home/hongbao/share",
+									icon: "icon-hezuo"
+								},
+								{
+									name: "分销",
+									url: "/pages/home/retail_home/retail_home",
+									icon: "icon-fenxiao"
+								}
 							]
-						}else{
+						} else {
 							console.log("是新人")
-							this.one_cate=[
-								{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-								{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-								{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+							this.one_cate = [{
+									name: "优惠券",
+									url: "/pages/home/coupon/coupon",
+									icon: "icon-icon_coupon"
+								},
+								{
+									name: "拼团",
+									url: "/pages/home/assemble/assemble",
+									icon: "icon-pintuan"
+								},
+								{
+									name: "限时抢",
+									url: "/pages/home/flashSale/flashSale",
+									icon: "icon-shijian"
+								},
 								// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-								{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
-								{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+								{
+									name: "新人专享",
+									url: "/pages/home/hongbao/newPeople",
+									icon: "icon-hezuo"
+								},
+								{
+									name: "分销",
+									url: "/pages/home/retail_home/retail_home",
+									icon: "icon-fenxiao"
+								}
 							]
 						}
 					}
 				})
-			}else{
+			} else {
 				console.log("未登录")
-				this.one_cate=[
-					{name:"优惠券",url:"/pages/home/coupon/coupon",icon:"icon-icon_coupon"},
-					{name:"拼团",url:"/pages/home/assemble/assemble",icon:"icon-pintuan"},
-					{name:"限时抢",url:"/pages/home/flashSale/flashSale",icon:"icon-shijian"},
+				this.one_cate = [{
+						name: "优惠券",
+						url: "/pages/home/coupon/coupon",
+						icon: "icon-icon_coupon"
+					},
+					{
+						name: "拼团",
+						url: "/pages/home/assemble/assemble",
+						icon: "icon-pintuan"
+					},
+					{
+						name: "限时抢",
+						url: "/pages/home/flashSale/flashSale",
+						icon: "icon-shijian"
+					},
 					// {name:"置换",url:"/pages/home/displace/displace",icon:"icon-hezuo"},
-					{name:"新人专享",url:"/pages/home/hongbao/newPeople",icon:"icon-hezuo"},
-					{name:"分销",url:"/pages/home/retail_home/retail_home",icon:"icon-fenxiao"}
+					{
+						name: "新人专享",
+						url: "/pages/home/hongbao/newPeople",
+						icon: "icon-hezuo"
+					},
+					{
+						name: "分销",
+						url: "/pages/home/retail_home/retail_home",
+						icon: "icon-fenxiao"
+					}
 				]
 			}
 		}
@@ -839,6 +944,18 @@
 			@extend .any-flex;
 			justify-content: space-around;
 
+			button {
+				margin: 0;
+				padding: 0;
+				background: #ffffff;
+				line-height: 38rpx;
+				color: #000000;
+			}
+
+			button::after {
+				border: none;
+			}
+
 			.sign-one {
 				margin-top: 30rpx;
 				width: 20%;
@@ -944,6 +1061,5 @@
 				color: #000000;
 			}
 		}
-
 	}
 </style>

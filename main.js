@@ -94,5 +94,4 @@ App.mpType = 'app'
 const app = new Vue({
 	...App
 })
-console.log(app)
 app.$mount()

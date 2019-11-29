@@ -146,9 +146,7 @@
 						let b=v.child.filter((h)=>{
 							return h.checked==true;
 						})
-						console.log(b)
-						console.log(v.child)
-						console.log(v)
+						console.log(b.length,v.child.length)
 						if(b.length==v.child.length){
 							v.checked=true;
 						}else{
@@ -165,13 +163,14 @@
 				a.forEach((v)=>{
 					if(v.id==f){
 						v.child.forEach((h)=>{
+							console.log(h.goods_id,e)
 							if(h.goods_id==e){
 								h.checked=!h.checked;
 							}
 						})
-						this.dx(f)
 					}
 				})
+				this.dx(f)
 			},
 			
 			// 点击全选反选该店铺的商品
@@ -188,7 +187,7 @@
 				})
 				this.allCheck()
 			},
-			chec(){
+			chec(e){
 				this.checked=!this.checked;
 				let a=this.list;
 				a.forEach((v)=>{

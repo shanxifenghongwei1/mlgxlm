@@ -1,7 +1,7 @@
 <template>
 	<view class="cate">
-		<view class="cate-item"  v-for="(item,index) in cateList" :key="index">
-			<view class="" :class="cateid==item.id?'active':'' " @click="selCate(item.id)">
+		<view class="cate-item"  v-for="(item,index) in cateList" :key="index" @click="selCate(item.id)">
+			<view class="" :class="cateid==item.id?'active':'' ">
 				{{item.name}}
 			</view>
 		</view>
@@ -18,7 +18,6 @@
 		props:{
 			cateList:{
 				type:Array, //商品数据列表
-				default:[]
 			},
 				
 			cateid:{

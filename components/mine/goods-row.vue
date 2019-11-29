@@ -3,7 +3,7 @@
 
 		<view class="goods" v-if="cateid==1" v-for="(item,index) in goodslist.goodsInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<view class="pic-box">
-				<image :src="picUrl +item.picture" mode="widthFix"></image>
+				<image :src="picUrl +item.picture" mode=""></image>
 			</view>
 			<view class="con">
 				<view class="title">
@@ -37,7 +37,7 @@
 		<!-- 优惠 -->
 		<view class="goods" v-if="cateid==2" v-for="(item,index) in goodslist.discountInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<view class="pic-box">
-				<image :src="picUrl +item.picture" mode="widthFix"></image>
+				<image :src="picUrl +item.picture" mode=""></image>
 			</view>
 			<view class="con">
 				<view class="title">
@@ -76,7 +76,7 @@
 		<view class="goods" v-if="cateid==3" v-for="(item,index) in goodslist.salesInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<block v-if="item.promotion_type==1">
 				<view class="pic-box">
-					<image :src="picUrl +item.picture" mode="widthFix"></image>
+					<image :src="picUrl +item.picture" mode=""></image>
 				</view>
 				<view class="con">
 					<view class="title">
@@ -108,7 +108,7 @@
 			</block>
 			<block v-if="item.promotion_type==2">
 				<view class="pic-box">
-					<image :src="picUrl +item.picture" mode="widthFix"></image>
+					<image :src="picUrl +item.picture" mode=""></image>
 				</view>
 				<view class="con">
 					<view class="title">
@@ -144,7 +144,7 @@
 			</block>
 			<block v-if="item.promotion_type==4">
 				<view class="pic-box">
-					<image src="" mode="widthFix"></image>
+					<image src="" mode=""></image>
 				</view>
 				<view class="con">
 					<view class="title">
@@ -174,7 +174,7 @@
 
 		<view class="goods" v-if="cateid==4" v-for="(item,index) in goodslist.limitedInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<view class="pic-box">
-				<image src="" mode="widthFix"></image>
+				<image src="" mode=""></image>
 			</view>
 			<view class="con">
 				<view class="title">
@@ -239,7 +239,7 @@
 			}
 		},
 		created() {
-			this.picUrl = demo.domain.picUrl;
+			this.picUrl = demo.domain.videoUrl;
 		}
 	}
 </script>
@@ -262,8 +262,8 @@
 		}
 
 		image {
-			width: 140rpx;
-			height: 150rpx;
+			width: 160rpx;
+			height: 160rpx;
 			background: red;
 		}
 

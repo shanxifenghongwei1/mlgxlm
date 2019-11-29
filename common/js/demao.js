@@ -40,7 +40,7 @@ module.exports={
 		nearby_shop:"nearby_shop"							,//附近店铺
 		
 		add_collection:"add_collection"						,//商品收藏  goods_id
-		collection_list:" collection_list"					,//商品收藏列表
+		collection_list:"collection_list"					,//商品收藏列表
 		shop_collection:"shop_collection"					,//店铺收藏  shop_id
 		shop_collection_list:"shop_collection_list"			,//店铺收藏列表
 		

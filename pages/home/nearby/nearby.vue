@@ -8,11 +8,8 @@
 		<view class="cate-box">
 			<cateFlex :cateList="list" :cateid="cateid" @seleId="seleId"></cateFlex>
 		</view>
-		<view class="emit">
-			
-		</view>
 		<view>
-			<store :store="cateid==1?store:store1"></store>
+			<store :store="cateid==1?store:store1" :store_cate="cateid"></store>
 		</view>
 	</view>
 </template>
@@ -45,7 +42,9 @@
 				page: 1,
 
 				store1: [],
-				page1: 1
+				page1: 1,
+				
+				page_num:10
 			}
 		},
 		methods: {
@@ -60,17 +59,21 @@
 					success: (res) => {
 
 						if(res.shopInfo.length){
+							let a=res.shopInfo;
+							a.forEach((v)=>{
+								v.juli=v.juli?v.juli.toFixed(2):0
+							})
+							console.log(a)
 							if (f == 1) {
-								this.store = this.store.concat(res.shopInfo)
+								this.store = this.store.concat(a)
 								this.page = this.page + 1
 							} else {
-								this.store1 = this.store1.concat(res.shopInfo)
+								this.store1 = this.store1.concat(a)
 								this.page1 = this.page1 + 1
 							}
 						}else{
 							this.global.utils.showToast_my("没有更多数据了")
 						}
-						
 					}
 				})
 			}
@@ -85,6 +88,7 @@
 				lng: this.global.lng,
 				page: this.page,
 				limited_type: 1,
+				page_num: this.page_num,
 			}
 			this.findlist(data, 1)
 			let data1 = {};
@@ -93,6 +97,7 @@
 				lng: this.global.lng,
 				page: this.page1,
 				limited_type: 2,
+				page_num: this.page_num,
 			}
 			this.findlist(data1, 2)
 		},
@@ -104,6 +109,7 @@
 					lat: this.global.lat,
 					lng: this.global.lng,
 					page: this.page,
+					page_num: this.page_num,
 					limited_type: 1,
 				}
 				this.findlist(data, 1)
@@ -112,10 +118,11 @@
 				data = {
 					lat: this.global.lat,
 					lng: this.global.lng,
-					page: this.page,
+					page: this.page1,
+					page_num: this.page_num,
 					limited_type: 1,
 				}
-				this.findlist(data, 1)
+				this.findlist(data, 2)
 			}
 		},
 	}

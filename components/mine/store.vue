@@ -26,11 +26,17 @@
 			</view>
 		</view> -->
 		
-		<view class="con-box" v-for="(item) in store" :key="index">
-			<image :src="picUrl+item.picture" mode="widthFix"></image>
+		<view class="con-box" v-for="(item,index) in store" :key="index" @click="toDetail(item.shop_id,item.shop_name)">
+			<image :src="picUrl+item.shop_img" mode="widthFix"></image>
 			<view class="con">
 				<view class="title">
-					{{item.shop_name}}
+					<view class="left">
+						{{item.shop_name}}
+					</view>
+					<view class="right">
+						进店看看
+					</view>
+				
 				</view>
 				<view class="star">
 					<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.shop_score" color="#7f7f7f"
@@ -40,7 +46,9 @@
 					<text class="icon iconfont icon-xiangmu">
 						
 					</text>
-					{{}}
+					{{item.t_name}}
+					<view style="float: right;" v-if="store_cate==2">已售{{item.shop_volume}}次</view>
+					<view style="float: right;" v-if="store_cate==1&&item.juli">距您约{{item.juli}}Km</view>
 				</view>
 				<view class="address">	
 					<text class="icon iconfont icon-dizhi-01">
@@ -64,7 +72,10 @@
 		props: {
 			store: {
 				type: Array, //商品数据列表
-				default: []
+			},
+			store_cate: {
+				type: Number, //商品数据列表
+				default:1
 			}
 		},
 		data() {
@@ -74,10 +85,9 @@
 			};
 		},
 		methods: {
-			toDetail(e) {
-				console.log(e);
+			toDetail(e,f) {
 				uni.navigateTo({
-					url: "/pages/home/shop-detial/shop-detial?id=" + e
+					url: "/pages/home/shop-detial/shop-detial?shop_id=" + e + "&&head=" + f 
 				})
 			}
 		},
@@ -114,18 +124,34 @@
 				align-items: flex-start;
 				justify-content: space-between;
 				.title{
+					width: 100%;
 					font-size: $uni-font-size-base;
 					color: $any-col;
 					font-weight: bold;
+					@extend .any-flex;
+					justify-content: space-between;
+					.left{
+						width: 60%;
+					}
+					.right{
+						display: inline-block;
+						padding: 3rpx 18rpx;
+						background:$any-col;
+						color: #ffffff;
+						border-radius: 20rpx;
+					}
 				}
 				.contex{
+					width: 100%;
 					font-size: $uni-font-size-sm;
 				}
 				.address{
+					width: 100%;
 					font-size: $uni-font-size-sm;
 					color: $any-col;
 				}
 				.iconfont{
+					width: 100%;
 					font-size: $uni-font-size-sm;
 					margin-right: 20rpx;
 					color: $any-col;
