@@ -40,9 +40,6 @@
 		
 
 		onReachBottom() {
-			// this.page++;
-			// this.loading = true;
-			// this.getList();
 			console.log('上拉加载')
 			this.init()
 		},
@@ -52,6 +49,7 @@
 			 this.key += 1 
 			this.global.request.post({
 				url: 'releaselist',
+				// data:{},
 				success: res => {	
 					if(res.info.data.length){
 					let a = []		
@@ -81,16 +79,9 @@
 				}
 					
 			})
-			
-			
-			// setTimeout(()=>{
-			// 	console.log('dasda')
-			// 	this.global.utils.jump( 4 ,'/pages/street/street')
-			// },1000)
 		},
 		onLoad() {
-			
-			// this.getList();
+
 		},
 		methods: {
 
@@ -127,7 +118,6 @@
 			// 选中
 			choose(item) {
 				// item 返回选中 JSON 对象
-				console.log(item)
 				this.global.utils.jump(  1 , "/pages/street/street_detail?id=" + item.currentTarget.dataset.id  )
 			},
 			// 模拟加载数据

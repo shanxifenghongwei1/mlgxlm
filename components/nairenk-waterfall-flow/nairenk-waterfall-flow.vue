@@ -90,7 +90,6 @@
 					let height = 0;
 					for (let i = this.mark; i < len; i++) {
 						height = res[i].height;
-						console.log(this.boxHeight)
 						if (i < 2) {
 							this.$set(this.newList[i], 'top', 0);
 							this.$set(this.newList[i], 'left', i);

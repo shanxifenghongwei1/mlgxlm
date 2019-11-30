@@ -25,6 +25,11 @@ let requestPost = ajaxJson => {
 			}
 
 	}
+	if(!ajaxJson.data){
+		ajaxJson.data={}
+	}else{
+		ajaxJson.data=ajaxJson.data
+	}
 
 	if(uni.getStorageSync("session")){
 		ajaxJson.data.openid=uni.getStorageSync("session").data.openid
@@ -41,14 +46,7 @@ let requestPost = ajaxJson => {
 			// + uni.getStorageSync("token")
 		},
 		success: (result) => {
-			console.log(result)
-			console.log("执行成功")
-			console.log(result.data.data)
-
-			
-			// if (ajaxJson.globalJudge == true) { //在请求调用处，处理所有逻辑
-			// 	ajaxJson.success(result.data);
-			// }
+			// console.log(result.data.data)
 			if (result.data.data.code == 0) { //请求成功
 				if (typeof ajaxJson.success === "function") {
 					ajaxJson.success(result.data.data);
