@@ -68,6 +68,7 @@ module.exports={
 		
 		add_order:"add_order"								,//下订单
 		pt_add:"pt_add"										,//拼团下订单
+		conput_add:"conput_add"								,//优惠券
 		pt_add_list:"pt_add_list"							,//拼团列表
 		order_detail:"order_detail"							,//订单详情
 		moneybuy:"moneybuy"									,//支付

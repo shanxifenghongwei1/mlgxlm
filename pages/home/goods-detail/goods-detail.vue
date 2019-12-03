@@ -8,10 +8,10 @@
 		<view class="goods-title">
 			<view class="goods-info">
 				<view class="goods-name">
-					{{good_detail.goodsInfo.goods_name|isN()}}
+					{{good_detail.goodsInfo.goods_name}}
 				</view>
 				<view class="goods-add">
-					{{good_detail.goodsInfo.shop_name|isN()}}
+					{{good_detail.goodsInfo.shop_name}}
 				</view>
 			</view>
 			<view class="goods-num">
@@ -81,7 +81,7 @@
 					<view class="u-team">
 						<image :src="item.wx_headimg" mode=""></image>
 						<view class="">
-							{{item.wx_name|isN()}}
+							{{item.wx_name}}
 						</view>
 					</view>
 					<view class="u-info">
@@ -114,7 +114,7 @@
 			</view>
 			<view class="goShop-name">
 				<view class="">
-					{{good_detail.goodsInfo.shop_name|isN()}}
+					{{good_detail.goodsInfo.shop_name}}
 				</view>
 				<view class="">
 					<uniRate value="3.5" size="15"></uniRate>
@@ -140,7 +140,7 @@
 							门店名称：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].shop_name|isN()}}
+							{{good_detail.shop_set[0].shop_name}}
 						</view>
 					</view>
 					<view class="tl">
@@ -148,7 +148,7 @@
 							联系热线：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].admin_tel|isN()}}
+							{{good_detail.shop_set[0].admin_tel}}
 						</view>
 					</view>
 					<view class="tl">
@@ -156,7 +156,7 @@
 							门店地址：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].shop_address_detail|isN()}}
+							{{good_detail.shop_set[0].shop_address_detail}}
 						</view>
 					</view>
 				</view>
@@ -171,7 +171,7 @@
 							产品名称：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_name|isN()}}
+							{{good_detail.shop_set[0].goods_name}}
 						</view>
 					</view>
 					<view class="tl">
@@ -179,7 +179,7 @@
 							服务功效：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_effect|isN()}}
+							{{good_detail.shop_set[0].goods_effect}}
 						</view>
 					</view>
 					<view class="tl">
@@ -187,7 +187,7 @@
 							服务时长：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_duration|isN()}}
+							{{good_detail.shop_set[0].goods_duration}}
 						</view>
 					</view>
 					<view class="tl">
@@ -195,7 +195,7 @@
 							服务流程：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_process|isN()}}
+							{{good_detail.shop_set[0].goods_process}}
 						</view>
 					</view>
 				</view>
@@ -210,7 +210,7 @@
 							有效期限：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_overdue_time|isN()}}
+							{{good_detail.shop_set[0].goods_overdue_time}}
 						</view>
 					</view>
 					<view class="tl">
@@ -226,7 +226,7 @@
 							预约提醒：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_appointment|isN()}}
+							{{good_detail.shop_set[0].goods_appointment}}
 						</view>
 					</view>
 					<view class="tl">
@@ -234,7 +234,7 @@
 							使用规则：
 						</view>
 						<view class="td">
-							{{good_detail.shop_set[0].goods_use_rule|isN()}}
+							{{good_detail.shop_set[0].goods_use_rule}}
 						</view>
 					</view>
 				</view>
@@ -272,7 +272,7 @@
 
 		<!-- 支付 -->
 		<view class="topay">
-			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay" @butt="butt"></goodsNav>
+			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay"  @butt="butt"></goodsNav>
 		</view>
 
 		<!-- 	<uni-popup class="uni-popup" ref="popup" type="center">
@@ -350,7 +350,8 @@
 					}
 				],
 				carlist: [],
-				pt_num_all:0
+				pt_num_all:0,
+				cumpadd:false,
 			}
 		},
 		methods: {
@@ -452,6 +453,11 @@
 						this.good_detail = res;
 
 						this.pt_num_all=num;
+						
+						
+						this.cumpadd = res.goodsInfo.conput_add
+						
+						
 						if (this.good_detail.goodsInfo.promotion_type == 0) {
 							this.buttonGroup = [{
 									id: 99,
@@ -534,6 +540,7 @@
 			},
 			butt(e) {
 				console.log(e)
+				
 				if (e == 99) {
 					console.log("加入购物车")
 					let a = this.carlist.filter((v) => {
@@ -639,6 +646,13 @@
 								}
 							}
 						})
+					}
+				}else if(e == 2){
+					
+					if(this.cumpadd){
+						console.log('搜狗输入法真傻')
+					}else{
+						console.log('没有优惠券的丫子真可爱')
 					}
 				}
 			},

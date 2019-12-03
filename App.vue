@@ -5,6 +5,10 @@
 			if(e.query.p_id){
 				uni.setStorageSync("p_id",e.query.p_id)
 			}
+			
+		},
+		onShow: function() {
+			this.getLocationInfo()
 			uni.checkSession({
 				success: (res) => {
 					//1:登录  0：未登录
@@ -26,9 +30,6 @@
 					uni.clearStorageSync()
 				}
 			})
-		},
-		onShow: function() {
-			this.getLocationInfo()
 		},
 		onHide: function() {
 

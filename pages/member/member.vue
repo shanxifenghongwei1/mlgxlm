@@ -60,24 +60,24 @@
 		</view>
 		<!-- 订单 -->
 		<view class="member-order member-assets">
-			<navigator url="/pages/pay/order?good_cate=0" class="member-order-top">
+			<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=99')" class="member-order-top">
 				<view class="member-order-my">服务订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
-			</navigator>
+			</view>
 			<view class="member-order-content">
-				<view class="member-order-content-w20">
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=0')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>
 					<view class="member-order-text">代付款</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=1')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
 					<view class="member-order-text">待预约</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=2')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
 					<view class="member-order-text">待服务</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=3')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">待评价</view>
 				</view>
@@ -85,24 +85,24 @@
 		</view>
 		
 		<view class="member-order member-assets">
-			<navigator url="/pages/pay/order?good_cate=1" class="member-order-top">
+			<view @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=99')" class="member-order-top">
 				<view class="member-order-my">商品订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
-			</navigator>
+			</view>
 			<view class="member-order-content">
-				<view class="member-order-content-w20">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=0')">
 					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>
 					<view class="member-order-text">代付款</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=1')">
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
 					<view class="member-order-text">待发货</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=2')">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
 					<view class="member-order-text">待收货</view>
 				</view>
-				<view class="member-order-content-w20">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=3')">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">待评价</view>
 				</view>
@@ -176,7 +176,7 @@
 					<view class="member-bottom-text">关于我们</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
 				</navigator>
-				<view @click="toDetail('/pages/member/help/feedback')" class="member-bottom-within-w1">
+				<view @click="toDetail(1,'/pages/member/help/feedback')" class="member-bottom-within-w1">
 					<view class="icon iconfont icon-fankui member-bottom-icon"></view>
 					<view class="member-bottom-text">意见反馈</view>
 					<view class="icon iconfont icon-jiantou-copy member-bottom-left"></view>
@@ -231,8 +231,8 @@
 					}
 				})
 			},
-			toDetail(e){
-				this.global.utils.jump(1,e)
+			toDetail(e,f){
+				this.global.utils.jump(e,f)
 			}
 		},
 		onLoad() {

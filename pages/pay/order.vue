@@ -3,30 +3,34 @@
 		<view class="">
 			<cateflex :cateList="cateList" :cateid="cateid" @seleId="seleId"></cateflex>
 		</view>
-
 		<block v-for="(item,index) in list" :key="index">
 			<view class="list1" v-if="item.order_status==0">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>爱美世家(未支付)
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（未支付）
 					</view>
-					<view class="right">
+					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
 				<view class="con">
 					<view class="left">
-						<image src="" mode="widthFix"></image>
+						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<text>服务名称：</text><text>芳香精油乳腺疏通</text>
+							<block v-if="item.good_cate==0">
+								<text>服务名称：</text><text>{{item.goods_name}}</text>
+							</block>
+							<block v-if="item.good_cate==1">
+								<text>商品名称：</text><text>{{item.goods_name}}</text>
+							</block>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>12596325879632</text>
+							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">398.00元</text>
+							<text>需付金额：</text><text class="red">{{item.total_price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-naozhong red"></text>尚未支付
@@ -35,40 +39,45 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<view class="btn">
-							删除订单
-						</view>
+						<btn font="删除订单" @save="save()" :btnsize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<view class="btn active">
-							确认付款
-						</view>
+						<btn font="确认付款" @save="save()" :btnsize="sm" :select="1"></btn>
 					</view>
 
 				</view>
 			</view>
+
+
+
+
 			<view class="list2" v-if="item.order_status==1">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>爱美世家（支付成功）
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（支付成功）
 					</view>
-					<view class="right">
+					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
 				<view class="con">
 					<view class="left">
-						<image src="" mode="widthFix"></image>
+						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<text>服务名称：</text><text>芳香精油乳腺疏通</text>
+							<block v-if="item.good_cate==0">
+								<text>服务名称：</text><text>{{item.goods_name}}</text>
+							</block>
+							<block v-if="item.good_cate==1">
+								<text>商品名称：</text><text>{{item.goods_name}}</text>
+							</block>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>12596325879632</text>
+							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">398.00元</text>
+							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-chenggong red"></text>支付成功，尚未预约
@@ -77,39 +86,42 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<view class="btn">
-							申请退款
-						</view>
+						<btn font="申请退款" @save="save()" :btnsize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<view class="btn active">
-							立即预约
-						</view>
+						<btn font="立即预约" @save="save()" :btnsize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
-			<view class="list3" v-if="item.order_status==3">
+
+
+			<view class="list3" v-if="item.order_status==2">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>爱美世家（预约成功）
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（预约成功）
 					</view>
-					<view class="right">
+					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
 				<view class="con">
 					<view class="left">
-						<image src="" mode="widthFix"></image>
+						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<text>服务名称：</text><text>芳香精油乳腺疏通</text>
+							<block v-if="item.good_cate==0">
+								<text>服务名称：</text><text>{{item.goods_name}}</text>
+							</block>
+							<block v-if="item.good_cate==1">
+								<text>商品名称：</text><text>{{item.goods_name}}</text>
+							</block>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>12596325879632</text>
+							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">398.00元</text>
+							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
 						</view>
 						<view class="li">
 							<text class="icon iconfont icon-daifahuob"></text>预约成功，尚未服务
@@ -118,36 +130,41 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<view class="btn active">
-							申请退款
-						</view>
+						<btn font="申请退款" @save="save()" :btnsize="sm" :select="1"></btn>
 					</view>
 
 				</view>
 			</view>
 
-			<view class="list4" v-if="item.order_status==4">
+
+
+			<view class="list4" v-if="item.order_status==3">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>爱美世家（待评价）
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（待评价）
 					</view>
-					<view class="right">
+					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
 				<view class="con">
 					<view class="left">
-						<image src="" mode="widthFix"></image>
+						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<text>服务名称：</text><text>芳香精油乳腺疏通</text>
+							<block v-if="item.good_cate==0">
+								<text>服务名称：</text><text>{{item.goods_name}}</text>
+							</block>
+							<block v-if="item.good_cate==1">
+								<text>商品名称：</text><text>{{item.goods_name}}</text>
+							</block>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>12596325879632</text>
+							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">398.00元</text>
+							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
 						</view>
 						<view class="li">
 							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
@@ -156,20 +173,15 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<view class="btn">
-							申请退款
-						</view>
+						<btn font="申请退款" @save="save()" :btnsize="sm" :select="1"></btn>
 					</view>
 					<view class="btn-box">
-						<view class="btn active" @click="assess()">
-							评价服务
-						</view>
+						<btn font="评价服务" @save="assess()" :btnsize="sm" :select="1"></btn>
 					</view>
 
 				</view>
 			</view>
 		</block>
-
 
 		<sunblind v-if="sunblind"></sunblind>
 	</view>
@@ -190,113 +202,132 @@
 			return {
 				cateList: [{
 						name: "综合",
-						id: 1
+						id: 99
 					},
 					{
 						name: "待付款",
-						id: 2
+						id: 0
 					},
 					{
 						name: "待预约",
-						id: 3
+						id: 1
 					},
 					{
 						name: "预约中",
-						id: 4
+						id: 2
 					},
 					{
 						name: "待评价",
-						id: 5
+						id: 3
 					},
 				],
-				cateid: 1,
+				cateid: 99,
 				sunblind: false,
 				options: {},
-				list: []
+				list: [],
+				page: 1,
+				picUrl:""
 			}
 		},
 		methods: {
 			seleId(e) {
 				this.cateid = e;
+				this.page = 1;
+				this.list = [];
+				this.init()
+			},
+			phone(e){
+				console.log(e)
+				uni.makePhoneCall({
+					phoneNumber: e,
+					success(res) {
+				
+					}
+				})
 			},
 			//去评价
 			assess() {
 				this.sunblind = true;
 				let url = "/pages/pay/assess"
 				this.global.utils.jump(1, url);
+			},
+			init() {
+				this.sunblind = false;
+				let data = {};
+				data.good_cate = this.options.good_cate;
+				data.order_status = this.cateid;
+				data.page = this.page;
+				this.global.request.post({
+					url: this.global.demao.api.open_order_list,
+					method: "GET",
+					data: data,
+					success: (res) => {
+						console.log(res)
+						if (res.data.data.length) {
+							this.list = this.list.concat(res.data.data);
+							this.page = this.page + 1;
+						}
+					}
+				})
 			}
 		},
 		onLoad(options) {
 			this.options = options;
-			console.log(options)
+			this.cateid=options.cateid;
+			this.picUrl=this.global.demao.domain.videoUrl;
 			if (options.good_cate == 0) {
 				this.cateList = [{
 						name: "综合",
-						id: 1
+						id: 99
 					},
 					{
 						name: "待付款",
-						id: 2
+						id: 0
 					},
 					{
 						name: "待预约",
-						id: 3
+						id: 1
 					},
 					{
 						name: "预约中",
-						id: 4
+						id: 2
 					},
 					{
 						name: "待评价",
-						id: 5
+						id: 3
 					},
 				]
 			} else {
 				this.cateList = [{
 						name: "综合",
-						id: 1
+						id: 99
 					},
 					{
 						name: "待付款",
-						id: 2
+						id: 0
 					},
 					{
 						name: "待发货",
-						id: 3
+						id: 1
 					},
 					{
 						name: "待收货",
-						id: 4
+						id: 2
 					},
 					{
 						name: "待评价",
-						id: 5
+						id: 3
 					},
 				]
 			}
 		},
 		onShow() {
-			this.sunblind = false;
-			let data = {};
-			data.good_cate = this.options.good_cate;
-			this.global.request.post({
-				url: this.global.demao.api.open_order_list,
-				method: "GET",
-				data: data,
-				success: (res) => {
-					this.list = res.data;
-					// console.log()
-					// if(res.code==0){
-					// 	this.global.utils.showToast_my("支付成功")
-					// 	setTimeout(()=>{
-					// 		this.global.utils.jump(1,"/pages/pay/pay_success")
-					// 	},2000)
-					// }else{
-
-					// }
-				}
-			})
-		}
+			this.init();
+		},
+		onReachBottom() {
+			console.log('上拉加载')
+			this.init();
+		},
 	}
 </script>
 
@@ -361,7 +392,7 @@
 
 		image {
 			width: 100%;
-			height: 200rpx;
+			height: 100%;
 		}
 
 		.right {

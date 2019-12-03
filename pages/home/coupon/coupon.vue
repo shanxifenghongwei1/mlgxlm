@@ -6,17 +6,19 @@
 				<view class="advert"></view>
 				<view class="shop-card">
 					<view class="card-con">
-						<view class="card-name">
-							<view class="">
+						<view class="card-pic">
+							<view style="text-align: center;" class="base">优惠券名称</view>
+						<!-- 	<image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image> -->
+						</view>
+						<view class="card-name" style="text-align: center;">
+							<view class="" >
 								{{item.shop_name}}<text class="font-padd">|</text><text class="card">{{item.coupon_type?"折扣劵":"满减劵"}}</text>
 							</view>
 						</view>
 
-						<view class="card-pic">
-							<image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image>
-						</view>
 
-						<view class="card-time">
+
+						<view class="card-time" style="text-align: center;">
 							使用时间{{item.create_time|time}}--{{item.expiration|time}}
 						</view>
 					</view>
@@ -32,12 +34,14 @@
 						<view class="manJian" v-if="!item.coupon_type">
 							满{{item.coupon_redouction}}元使用
 						</view>
+						
 						<view class="draw" v-if="item.coupon_draw==4" @click="getCard(item.coupon_id)">
 							点击领取
 						</view>
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
 							去使用
 						</view>
+						
 					</view>
 				</view>
 			</block>
@@ -45,17 +49,21 @@
 
 				<view class="shop-card">
 					<view class="card-con">
-						<view class="card-name">
-							<view class="">
+
+						<view class="card-pic">
+							<!-- <image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image> -->
+							<view style="text-align: center;" class="base">优惠券名称</view>
+						</view>
+						
+						<view class="card-name" style="text-align: center;">
+							<view class="" >
 								{{item.shop_name}}<text class="font-padd">|</text><text class="card">{{item.coupon_type?"折扣劵":"满减劵"}}</text>
 							</view>
 						</view>
 
-						<view class="card-pic">
-							<image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image>
-						</view>
 
-						<view class="card-time">
+
+						<view class="card-time" style="text-align: center;">
 							使用时间{{item.create_time|time}}--{{item.expiration|time}}
 						</view>
 					</view>
@@ -71,7 +79,7 @@
 						<view class="manJian" v-if="!item.coupon_type">
 							满{{item.coupon_redouction}}元使用
 						</view>
-						<view class="draw" v-if="item.coupon_draw==4" @click="getCard(item.coupon_id)">
+						<view class="draw" v-if="item.coupon_draw" @click="getCard(item.coupon_id)">
 							点击领取
 						</view>
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
@@ -109,7 +117,7 @@
 							this.global.utils.showToast_my("领取优惠卷成功，快去使用吧!")
 							this.list.forEach((v)=>{
 								if(v.coupon_id==e){
-									v.coupon_draw=3
+									v.coupon_draw = false
 								}
 							})
 						}
@@ -127,38 +135,36 @@
 			this.picUrl = this.global.demao.domain.picUrl
 		},
 		onShow() {
-			if(this.options.shop_id){
-				let data={};
-				data.shop_id=this.options.shop_id;
-				this.global.request.post({
-					url: this.global.demao.api.couponlist,
-					method: "GET",
-					data: data,
-					success: (res) => {
-						res.couponInfo.forEach((v) => {
-							v.picture = v.picture.split(",")
-						})
-						this.list = res.couponInfo;
-					}
-				})
-			}else{
+			// if(this.options.shop_id){
+			// 	let data={};
+			// 	data.shop_id=this.options.shop_id;
+			// 	this.global.request.post({
+			// 		url: this.global.demao.api.couponlist,
+			// 		method: "GET",
+			// 		data: data,
+			// 		success: (res) => {
+			// 			res.couponInfo.forEach((v) => {
+			// 				v.picture = v.picture.split(",")
+			// 			})
+			// 			this.list = res.couponInfo;
+			// 		}
+			// 	})
+			// }else{
 				this.global.request.post({
 					url: this.global.demao.api.index_coupon,
 					method: "GET",
 					data: {},
-					success: (res) => {
-						res.couponInfo.forEach((v) => {
-							v.picture = v.picture.split(",")
-						})
+					success: (res) => {			
 						this.list = res.couponInfo;
 					}
 				})
-			}
+			// }
 		}
 	}
 </script>
 
 <style lang="scss">
+	
 	.font-padd {
 		padding: 0 10rpx;
 		color: $any-col;
@@ -183,9 +189,11 @@
 
 			.card-con {
 				width: 500rpx;
-				height: 100%;
+				// height: 100%;
+				height: 170rpx;
 				@extend .any-flex;
 				justify-content: space-between;
+				
 				flex-direction: column;
 				align-items: flex-start;
 			}
@@ -196,9 +204,8 @@
 			}
 
 			.card-name view {
-				font-size: $uni-font-size-lg;
+				font-size: $uni-font-size-base;
 				display: inline;
-				font-weight: bold;
 				word-break: break-all;
 			}
 
@@ -208,8 +215,14 @@
 
 			.card-pic {
 				width: 100%;
-				height: 110rpx;
+				// height: 110rpx;
 				background: #ffffff;
+				.base{
+					font-size: $uni-font-size-lg;
+					@include multi-row-apostrophe(1);
+						font-weight: bold;
+					width: 80%;
+				}
 			}
 
 			.card-pic image {
