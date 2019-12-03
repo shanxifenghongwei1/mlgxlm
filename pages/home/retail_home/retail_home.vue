@@ -15,7 +15,7 @@
 		<view class="emit">
 			
 		</view>
-		<view class="shop_box" @click="toDetail()" v-for="(item,index) in list" :key='index'>
+		<view class="shop_box" @click="toDetail(item.shop_id)" v-for="(item,index) in list" :key='index'>
 			<view class="shop">
 				<view class="top">
 					<view class="pic">
@@ -65,8 +65,8 @@
 			}
 		},
 		methods: {
-			toDetail(){
-				this.global.utils.jump(1,"/pages/home/retail_home/shop_detail")
+			toDetail(e){
+				this.global.utils.jump(1,"/pages/home/retail_home/shop_detail?shop_id=" + e)
 			},
 			opec(e){
 				this.global.utils.jump(1,"/pages/home/retail/threeBtn?opec="+e)
@@ -76,7 +76,6 @@
 				return Array.from(new Set(arr))
 			},
 			init(){
-
 				this.global.request.post({
 					url:'index_rellerList',
 					success:res=>{
@@ -225,15 +224,15 @@
 	}
 
 	.pic-box {
-		width: 140rpx;
-		height: 150rpx;
+		width: 155rpx;
+		height: 155rpx;
 		background: pink;
 		position: relative;
-		margin-left: 20rpx;
+		margin-right: 14rpx;
 		border-radius:10rpx;
 		image {
-			width: 140rpx;
-			height: 150rpx;
+			width: 155rpx;
+			height: 155rpx;
 			// background: blue;
 		}
 
@@ -247,5 +246,8 @@
 			color: #ffffff;
 			font-size: $uni-font-size-base;
 		}
+	}
+	.pic-box:last-child{
+		margin-right: 0;
 	}
 </style>

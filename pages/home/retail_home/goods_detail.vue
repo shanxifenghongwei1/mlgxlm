@@ -2,31 +2,31 @@
 	<!-- 分销商品详情页面 -->
 	<view class="">
 		<view class="banner">
-			<mySwiper></mySwiper>
+			<mySwiper :bannerlist="detail.re_goodsShopInfo.re_goods_planting_picture"></mySwiper>
 		</view>
 		<view class="goods-detail any-flex">
 			<view class="info-list big">
-				￥3999.99
+				￥{{detail.re_goodsShopInfo.re_goods_price}}
 			</view>
 			<view class="info-list base">
-				<text class="tag">可分销购买</text>YIAN伊岸 紧致焕颜冻干粉 {专业美颜防护}
+				<text class="tag" v-if="detail.re_goodsShopInfo.is_distribution">可分销购买</text>{{detail.re_goodsShopInfo.re_goods_name}}
 			</view>
 			<view class="info-list base any-flex">
 				<text>规格类型：正常规格</text>
-				<text>月销：666</text>
-				<text>库存剩余：1000</text>
+				<text>月销：{{detail.re_goodsShopInfo.re_goods_volume}}</text>
+				<text>库存剩余：{{detail.re_goodsShopInfo.re_goods_stock}}</text>
 			</view>
 			<view class="info-list base mul">
-				商品生产时间：2019年11月30日
+				商品生产时间：{{detail.re_goodsShopInfo.re_production_time*1000|time()}}
 			</view>
 			<view class="info-list base mul">
-				商品到期时间：2019年11月30日
+				商品到期时间：{{detail.re_goodsShopInfo.re_expiration_time*1000|time()}}
 			</view>
 			<view class="info-list base mul">
-				商品功效：有效欢颜肌肤，改善肌肤光泽度，增强肌肤饱和...
+				商品功效：{{detail.re_goodsShopInfo.re_goods_introduction}}
 			</view>
 			<view class="info-list base mul">
-				商品地址：山西省太原市小店区天鑫花园
+				商品地址：{{detail.re_goodsShopInfo.shop_address_provice+detail.re_goodsShopInfo.shop_address_city+detail.re_goodsShopInfo.shop_address_area}}
 			</view>
 		</view>
 		<view class="big-detail">
@@ -36,10 +36,10 @@
 				</view>
 				<view class="goShop-name">
 					<view class="">
-						这是一个黑店
+						{{detail.re_goodsShopInfo.shop_name}}
 					</view>
 					<view class="">
-						<uniRate value="3.5" size="15"></uniRate>
+						<uniRate value="detail.re_goodsShopInfo.shop_score" size="15"></uniRate>
 					</view>
 				</view>
 				<view class="goShop-where" @click="toshop">
@@ -53,16 +53,15 @@
 					图文详情
 				</view>
 				<view :class="state?'pic-image':'pic-image-lg'  ">
+<!-- 					<image src="/static/logo.png" mode="widthFix"></image>
 					<image src="/static/logo.png" mode="widthFix"></image>
 					<image src="/static/logo.png" mode="widthFix"></image>
 					<image src="/static/logo.png" mode="widthFix"></image>
 					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<!-- <block v-for="(item,index) in good_detail.goodsInfo.goods_picture_detail" :key="index">
+					<image src="/static/logo.png" mode="widthFix"></image> -->
+					<block v-for="(item,index) in detail.re_goodsShopInfo.re_goods_picture_detail" :key="index">
 						<image :src="picUrl+item" mode="widthFix"></image>
-						
-					</block> -->
+					</block>
 				</view>
 				<view class="lg-state" @click="trans">
 					<view class="">
@@ -76,10 +75,23 @@
 
 		<view class="eval">
 			<view class="title lg">
-				<text class="title-con wei">全部商品（99）</text>
+				<text class="title-con wei">全部商品（{{detail.re_evaluateInfo_count}}）</text>
 			</view>
 			
-			<view class="li">
+			<view class="li" v-for="(item,index) in detail.re_evaluateInfo" :key="index">
+				<view class="top">
+				
+					<image class="canve" :src="item.wx_headimg" mode=""></image>
+				
+					<view class="name">
+						{{item.wx_name}}
+					</view>
+				</view>
+				<view class="con">
+					{{item.comment}}
+				</view>
+			</view>
+		<!-- 	<view class="li">
 				<view class="top">
 				
 					<image class="canve" src="/static/image/other/person_nav.png" mode=""></image>
@@ -91,26 +103,13 @@
 				<view class="con">
 					总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕
 				</view>
-			</view>
-			<view class="li">
-				<view class="top">
-				
-					<image class="canve" src="/static/image/other/person_nav.png" mode=""></image>
-				
-					<view class="name">
-						刁民
-					</view>
-				</view>
-				<view class="con">
-					总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕
-				</view>
-			</view>
-			<view class="lg-state">
+			</view> -->
+			<!-- <view class="lg-state">
 				<view class="">
 					查看更多评论
 				</view>
 				<image src="/static/image/other/icon-xiala.png" mode="widthFix" :class="state?'tea_arrowDown':'tea_arrowUp'"></image>
-			</view>
+			</view> -->
 		</view>
 		
 		<view class="good_shop">
@@ -142,6 +141,7 @@
 			return {
 				state: true,
 				goods_list:[1,2,3,4],
+				options:{},
 				options_nav: [{
 					icon: '/static/image/home.png',
 					text: '首页'
@@ -158,7 +158,9 @@
 						backgroundColor: '#ff0000',
 						color: '#fff'
 					}
-				]
+				],
+				detail:{},
+				picUrl:""
 			}
 		},
 		methods: {
@@ -184,26 +186,46 @@
 			},
 			butt(e) {
 				this.global.utils.jump(1,"/pages/home/retail_home/make_order")
-			// 	if (e.index === 0) {
-			// 		console.log("加入购物车")
-			// 		let data = {};
-			// 		data.goods_id = this.options.goods_id;
-			// 		data.buy_num = 1;
-			// 		this.global.request.post({
-			// 			url: this.global.demao.api.add_cart,
-			// 			method: "GET",
-			// 			data: data,
-			// 			success: (res) => {
-			// 				this.global.utils.showToast_my(res.msg)
-			// 				this.findCar()
-			// 			}
-			// 		})
-			
-			// 	} else {
-			// 		console.log("立即购买")
-			// 		this.global.utils.jump(1,"/pages/pay/pay")
-			// 	}
+				// 	if (e.index === 0) {
+				// 		console.log("加入购物车")
+				// 		let data = {};
+				// 		data.goods_id = this.options.goods_id;
+				// 		data.buy_num = 1;
+				// 		this.global.request.post({
+				// 			url: this.global.demao.api.add_cart,
+				// 			method: "GET",
+				// 			data: data,
+				// 			success: (res) => {
+				// 				this.global.utils.showToast_my(res.msg)
+				// 				this.findCar()
+				// 			}
+				// 		})
+				
+				// 	} else {
+				// 		console.log("立即购买")
+				// 		this.global.utils.jump(1,"/pages/pay/pay")
+				// 	}
 			},
+			init(){
+				let data={};
+				data.re_goods_id=this.options.re_goods_id;
+				this.global.request.post({
+					url:'index_reseller_goodsDetail',
+					data:data,
+					success:res=>{
+						res.re_goodsShopInfo.re_goods_planting_picture=res.re_goodsShopInfo.re_goods_planting_picture.substr(0, res.re_goodsShopInfo.re_goods_planting_picture.length - 1).split(",");
+						res.re_goodsShopInfo.re_goods_picture_detail=res.re_goodsShopInfo.re_goods_picture_detail.substr(0, res.re_goodsShopInfo.re_goods_picture_detail.length - 1).split(",");
+						console.log(res)
+						this.detail=res;
+					}
+				})
+			}
+		},
+		onLoad(options){
+			console.log(options)
+			this.options=options;
+			this.picUrl=this.global.demao.domain.videoUrl;
+			this.init();
 		}
 	}
 </script>
@@ -406,7 +428,7 @@
 				width: 100%;
 			}
 		}
-
+		
 		.pic-image-lg {
 			width: 100%;
 			margin-top: 10rpx;
@@ -434,7 +456,6 @@
 	}
 	.eval{
 		width: 100%;
-		height: 500rpx;
 		background: #ffffff;
 		margin-top: 20rpx;
 		box-shadow: 0rpx 0rpx 10rpx #cccccc;

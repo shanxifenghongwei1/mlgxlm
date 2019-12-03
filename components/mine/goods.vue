@@ -87,13 +87,15 @@
 			</block>
 		</view> -->
 		
-		<view class="goods-li" @click="toDetail(2)" v-for="(item,index) in titCon" :key="index">
-			<view class="goods-pic">
-				<image src="/static/image/banner/1.jpg" mode=""></image>
-			</view>
+		<view class="goods-li" v-for="(item,index) in titCon" :key="index">
+
 			
 			<!-- 正常 -->
 			<block v-if="place===1">
+				<view @click="toDetail()">
+				<view class="goods-pic">
+					<image src="/static/image/banner/1.jpg" mode=""></image>
+				</view>
 				<view class="goods-tit">
 					￥{{item.goods_name}}
 				</view>
@@ -109,6 +111,7 @@
 				
 				<!-- 不参与任何活动 -->
 				<view class="goods-price" v-if="item.promotion_type==0">
+					
 					<view class="goods-price-left">
 						<view class="goods-NewPrice">
 							{{item.price}}
@@ -157,10 +160,16 @@
 						限时抢
 					</view>
 				</view>
+				
+			</view>	
 			</block>
 			
 			<!-- 置换 -->
-			<block v-if="place===2">
+			<block v-if="place===2" >
+				<view @click="toDetail()">
+				<view class="goods-pic">
+					<image src="/static/image/banner/1.jpg" mode=""></image>
+				</view>
 				<view class="place place-title">
 					{{item.goods_name}}
 				</view>
@@ -190,10 +199,16 @@
 				<view class="place place-time">
 					2019-10-16 10:03发布
 				</view>
+				</view>
 			</block>
 			
 			<!-- 收藏 -->
 			<block v-if="place===3">
+				<view @click="toDetail()">
+				
+				<view class="goods-pic">
+					<image src="/static/image/banner/1.jpg" mode=""></image>
+				</view>
 				<view class="ware">
 					<view class="left title">
 						{{item.shop_name}}
@@ -257,28 +272,41 @@
 						限时抢
 					</view>
 				</view>
+				</view>
 			</block>
 			
 			
 			<!-- 分销 -->
 			<block v-if="place===5">
+				<view @click="toDetail(item.re_goods_id)">
+				<view class="goods-pic">
+					<image :src="imageurl + item.re_goods_picture" mode=""></image>
+				</view>
 				<view class="place place-address">			
-					专业美颜防护
+					{{item.re_goods_introduction}}
 				</view>
 				<view class="place place-name red">
-					YIAN伊岸冻干粉修复去
+					{{ item.re_goods_name}}
 				</view>
 				<view class="place place-price flex">
-					<view>￥199.9</view><text class="block sm">可分销购买</text>
+					<view>￥{{item.re_goods_price}}</view>
+					<!-- <text class="block sm">可分销购买</text> -->
 				</view>
 				<view class="hasbuy">
 					<view class="hasbuy-box">
-						已售1000件
+						已售{{item.re_goods_volume}}件
 					</view>
 				</view>
+				</view>
 			</block>
+			
+			
 			<!-- 积分 -->
-			<block v-if="place===6">
+			<block v-if="place===6" >
+				<view @click="toDetail()">
+				<view class="goods-pic">
+					<image src="/static/image/banner/1.jpg" mode=""></image>
+				</view>
 				<view class="place place-address">			
 					专业美颜防护
 				</view>
@@ -293,6 +321,7 @@
 						已售1000件
 					</view>
 				</view>
+				</view>
 			</block>
 		</view>
 
@@ -306,7 +335,7 @@
 	export default {
 		data() {
 			return {
- 
+				imageurl:this.global.demao.domain.videoUrl
 			}
 		},
 		props: {
@@ -317,6 +346,7 @@
 				type: Boolean, //是否显示加载更多
 				default: true
 			},
+
 			place: {
 				type: Number, //1正常商品false    2置换商品true   3收藏商品   5分销
 				default: 1
@@ -324,14 +354,13 @@
 		},
 		methods: {
 			toDetail(e) {
-				console.log(this.place)
 				if(this.place==5){
 					uni.navigateTo({
-						url: "/pages/home/retail_home/goods_detail" 
+						url: "/pages/home/retail_home/goods_detail?re_goods_id=" + e
 					})
 				}else{
 					uni.navigateTo({
-						url: "/pages/home/goods-detail/goods-detail?id=" + e
+						url: "/pages/home/goods-detail/goods-detail?goods_id=" + e
 					})
 				}
 				
