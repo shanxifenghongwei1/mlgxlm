@@ -87,10 +87,10 @@
 			<view class="li" v-for="(item,index) in messages.commentinfo.anymessage" :key='index'>
 				<view class="top">
 				
-					<image class="canve" src="/static/image/other/person_nav.png" mode=""></image>
+					<image class="canve" :src="item.wx_headimg" mode=""></image>
 				
 					<view class="name">
-						刁民
+						{{item.wx_name}}
 					</view>
 				</view>
 				<view class="con">
@@ -98,12 +98,13 @@
 				</view>
 			</view>
 
-			<view class="lg-state" @click="addmorecommint">
+			<view class="lg-state" @click="addmorecommint" v-if="messages.commentinfo.anymessage.length >= 4">
 				<view class="">
 					查看更多评论
 				</view>
 				<image src="/static/image/other/icon-xiala.png" mode="widthFix" :class="state?'tea_arrowDown':'tea_arrowUp'"></image>
 			</view>
+			<view class="lg-state base" v-if='messages.commentinfo.anymessage.length == 0'> 还没有人评论，快去抢个沙发吧 ~ </view>
 		</view>
 		<view class="emit">
 			
