@@ -31,8 +31,7 @@
 			}
 		},
 		created(){
-			console.log(this.global.demao.domain.picUrl)
-			this.picUrl=this.global.demao.domain.picUrl
+			this.picUrl=this.global.demao.domain.videoUrl
 		}
 	}
 </script>

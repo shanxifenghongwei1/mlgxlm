@@ -17,9 +17,7 @@
 				</view>
 			</view>
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
-				<view v-for="(item,index) in buttonGroup" :key="index" :style="{backgroundColor:item.backgroundColor,color:item.color}" class="flex uni-tab__cart-button-right" @click="buttonClick(index,item)">{{ item.text }}</view>
-
-				<!-- <view class="flex uni-tab__cart-button-right uni-tab__color-y ">立即购买</view> -->
+				<view v-for="(item,index) in buttonGroup" :key="index" :style="{backgroundColor:item.backgroundColor,color:item.color}" class="flex uni-tab__cart-button-right" @click="buttonClick(item.id)">{{ item.text }}</view>
 			</view>
 		</view>
 	</view>
@@ -69,14 +67,8 @@
 					content: item
 				})
 			},
-			buttonClick(index, item) {
-				if (uni.report) {
-					uni.report(item.text, item.text)
-				}
-				this.$emit('butt', {
-					index,
-					content: item
-				})
+			buttonClick(index) {
+				this.$emit('butt', index)
 			}
 		}
 	}

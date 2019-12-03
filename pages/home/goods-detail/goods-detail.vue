@@ -69,12 +69,15 @@
 		</view>
 
 		<!-- 拼团 -->
-		<view class="goods-team" v-if="good_detail.goodsInfo.promotion_type==1">
+		<view class="goods-team" v-if="good_detail.goodsInfo.promotion_type==1 && num" @click="toPt_list()">
 			<view class="title">
-				{{good_detail.seller[0].promotion_prople+11}}人在拼团，可直接参与
+				<text>
+					{{pt_num_all}}人在拼团，可直接参与
+				</text>
+				<text class="more">查看更多</text>
 			</view>
 			<view class="team-list">
-				<view class="list-li" v-for="(item,index) in good_detail.seller" :key="index">
+				<view class="list-li" v-for="(item,index) in good_detail.seller" :key="index" v-if="index<2">
 					<view class="u-team">
 						<image :src="item.wx_headimg" mode=""></image>
 						<view class="">
@@ -85,7 +88,7 @@
 						<view class="">
 							还差
 							<view style="display: inline-block;background: $any-col;">
-								{{item.promotion_prople - item.prople}}人
+								{{good_detail.goodsInfo.promotion_prople - item.pt_sum}}人
 							</view>
 							拼团
 						</view>
@@ -107,7 +110,7 @@
 
 		<view class="goShop">
 			<view class="goShop-pic">
-				<image :src="picUrl+good_detail.shop_set[0].shop_logo" mode=""></image>
+				<image :src="picUrl+good_detail.goodsInfo.shop_logo+''" mode=""></image>
 			</view>
 			<view class="goShop-name">
 				<view class="">
@@ -271,11 +274,11 @@
 		<view class="topay">
 			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay" @butt="butt"></goodsNav>
 		</view>
-		
-		<uni-popup class="uni-popup" ref="popup" type="center">
+
+		<!-- 	<uni-popup class="uni-popup" ref="popup" type="center">
 			<view @click="son1(pay_method[0].id)" class="son1">{{pay_method[0].amsg}} </view>
 			<view @click="son2(pay_method[1].id)" class="son2">{{pay_method[1].amsg}} </view>
-		</uni-popup>
+		</uni-popup> -->
 
 	</view>
 
@@ -292,8 +295,6 @@
 	import goodsNav from "@/components/uni-goods-nav/uni-goods-nav.vue"
 	import uniCountdown from "@/components/uni-countdown/uni-countdown.vue"
 	import coll from "@/components/mine/collect.vue"
-	//弹窗
-	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	export default {
 		components: {
 			mySwiper,
@@ -303,8 +304,7 @@
 			goodsList,
 			goodsNav,
 			uniCountdown,
-			coll,
-			uniPopup
+			coll
 		},
 		data() {
 			return {
@@ -312,7 +312,7 @@
 				good_detail: {},
 				picUrl: "",
 				time: {},
-				collect_state: false, 
+				collect_state: false,
 				bannerlist: [
 					'/static/image/banner/1.jpg', '/static/image/banner/2.jpg', '/static/image/banner/3.jpg',
 					'/static/image/banner/4.jpg'
@@ -349,68 +349,14 @@
 						color: '#fff'
 					}
 				],
-				carlist:[],
-				pay_method:[
-				],
+				carlist: [],
+				pt_num_all:0
 			}
 		},
 		methods: {
-			// 支付上面的按钮
-			son1(e){
-				if(e==2){
-					//拼团
-					let price=this.good_detail.goodsInfo.promotion_price
-					// this.global.utils.jump(1,"/pages/pay/pay?method=2&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+ price)
-					let a=[];
-					a.push(this.good_detail.goodsInfo.goods_id)
-					let data={};
-					data.goods_id=a.join(',');
-					data.buy_num=1;
-					data.is_cart=0;
-					data.total_price=this.good_detail.goodsInfo.price;
-					this.global.request.post({								
-						url: this.global.demao.api.add_order,
-						method: "GET",
-						data: data,
-						isLoading: true,
-						success: (res) => {
-							if(res.order_id){
-								this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
-							}
-						}
-					})
-				}else if(e==3){
-					//优惠
-					this.global.utils.jump(1,"/pages/pay/pay?method=3&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+this.good_detail.goodsInfo.price)
-				}else if(e==4){
-					//限时抢
-					let price=this.good_detail.goodsInfo.limited_price
-					this.global.utils.jump(1,"/pages/pay/pay?method=4&&goods_id="+this.good_detail.goodsInfo.goods_id+"&&price="+price)
-				}
-			},
-			//支付下面的按钮
-			son2(e){
-				
-				let a=[1,2,3];
-				a.push(this.good_detail.goodsInfo.goods_id)
-				let data={};
-				data.is_cart=0;
-				data.goods_id=a.join(',');
-				data.buy_num=1;
-				data.total_price=this.good_detail.goodsInfo.price;
-				this.global.request.post({								
-					url: this.global.demao.api.add_order,
-					method: "GET",
-					data: data,
-					isLoading: true,
-					success: (res) => {
-						if(res.order_id){
-							this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
-						}
-					}
-				})
-			},
-			
+			//0为普通购买，1.拼团购买，2.优惠券购买，3限时抢购买，4积分购买，5分销购买     
+
+
 			// 跳转至店铺详情页面
 			toshop() {
 				this.global.utils.jump(1, "/pages/home/shop-detial/shop-detial?shop_id=" + this.good_detail.goodsInfo.shop_id +
@@ -435,18 +381,18 @@
 				})
 			},
 			//关注与取消
-			select_or_delect(){
-				let that=this;
+			select_or_delect() {
+				let that = this;
 				let data = {};
 				data.goods_id = this.options.goods_id;
 				this.global.request.post({
 					url: this.collect_state ? this.global.demao.api.collectiondele : this.global.demao.api.add_collection,
 					method: "GET",
 					data: data,
-					success(res){
+					success(res) {
 						console.log("执行这儿了")
 						that.global.utils.showToast_my(res.msg)
-						that.collect_state=!that.collect_state;
+						that.collect_state = !that.collect_state;
 					}
 				})
 			},
@@ -461,7 +407,7 @@
 						console.log("购物车数量")
 						console.log(res.cartInfo)
 						this.options_nav[2].info = res.cartInfo.length;
-						this.carlist=res.cartInfo;
+						this.carlist = res.cartInfo;
 					}
 				})
 			},
@@ -495,25 +441,72 @@
 						let e = d - c;
 						let f = this.formatDuring(d - c);
 						this.time = f;
-
-						this.good_detail = res;
 						
-						if(this.good_detail.goodsInfo.promotion_type==0){
-							console.log("没有参加任何活动")
-						}else if(this.good_detail.goodsInfo.promotion_type==1){
-							this.pay_method=[
-								{id:2,amsg:'拼团购买'},
-								{id:1,amsg:'正常购买'},
+						let num=0;
+						let g=res.seller;
+						console.log("这个是列表")
+						g.forEach((v)=>{
+							num=num+v.pt_sum
+						})
+						console.log(num)
+						this.good_detail = res;
+
+						this.pt_num_all=num;
+						if (this.good_detail.goodsInfo.promotion_type == 0) {
+							this.buttonGroup = [{
+									id: 99,
+									text: '加入购物车',
+									backgroundColor: '#ff0000',
+									color: '#fff'
+								},
+								{
+									id: 0,
+									text: '立即购买',
+									backgroundColor: '#ffa200',
+									color: '#fff'
+								}
 							]
-						}else if(this.good_detail.goodsInfo.promotion_type==2){
-							this.pay_method=[
-								{id:3,amsg:'优惠券购买'},
-								{id:1,amsg:'正常购买'},
+						} else if (this.good_detail.goodsInfo.promotion_type == 1) {
+							this.buttonGroup = [{
+									id: 1,
+									text: '拼团购买',
+									backgroundColor: '#ff0000',
+									color: '#fff'
+								},
+								{
+									id: 0,
+									text: '立即购买',
+									backgroundColor: '#ffa200',
+									color: '#fff'
+								}
 							]
-						}else if(this.good_detail.goodsInfo.promotion_type==4){
-							this.pay_method=[
-								{id:4,amsg:'优惠券购买'},
-								{id:1,amsg:'正常购买'},
+						} else if (this.good_detail.goodsInfo.promotion_type == 2) {
+							this.buttonGroup = [{
+									id: 2,
+									text: '优惠券购买',
+									backgroundColor: '#ff0000',
+									color: '#fff'
+								},
+								{
+									id: 0,
+									text: '立即购买',
+									backgroundColor: '#ffa200',
+									color: '#fff'
+								}
+							]
+						} else if (this.good_detail.goodsInfo.promotion_type == 4) {
+							this.buttonGroup = [{
+									id: 3,
+									text: '限时抢购买',
+									backgroundColor: '#ff0000',
+									color: '#fff'
+								},
+								{
+									id: 0,
+									text: '立即购买',
+									backgroundColor: '#ffa200',
+									color: '#fff'
+								}
 							]
 						}
 					}
@@ -522,7 +515,7 @@
 			trans() {
 				this.state = this.state ? false : true
 			},
-			
+
 			pay(e) {
 				console.log(e)
 				if (e.index === 0) {
@@ -540,52 +533,113 @@
 
 			},
 			butt(e) {
-				if (e.index === 0) {
+				console.log(e)
+				if (e == 99) {
 					console.log("加入购物车")
-					let a=this.carlist.filter((v)=>{
-						v.goods_id==this.options.goods_id
+					let a = this.carlist.filter((v) => {
+						return v.goods_id == parseInt(this.options.goods_id)
 					})
 					console.log(a.length)
+					if (a.length) {
+						this.global.utils.showToast_my("该服务已经在您的购物车中，快去看看吧")
+					} else {
+						let data = {};
+						data.goods_id = this.options.goods_id;
+						data.buy_num = 1;
+						this.global.request.post({
+							url: this.global.demao.api.add_cart,
+							method: "GET",
+							data: data,
+							success: (res) => {
+								console.log(res.msg)
+								this.global.utils.showToast_my(res.msg)
+								this.findCar()
+							}
+						})
+					}
+				} else if (e == 0) {
+					let a = [];
+					a.push(this.good_detail.goodsInfo.goods_id)
 					let data = {};
-					data.goods_id = this.options.goods_id;
+					data.goods_id = a.join(',');
 					data.buy_num = 1;
+					data.is_cart = 0;
+					data.total_price = this.good_detail.goodsInfo.price;
 					this.global.request.post({
-						url: this.global.demao.api.add_cart,
+						url: this.global.demao.api.add_order,
 						method: "GET",
 						data: data,
+						isLoading: true,
 						success: (res) => {
-							this.global.utils.showToast_my(res.msg)
-							this.findCar()
+							if (res.order_id) {
+								this.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
+							}
 						}
 					})
-
-				} else {
-					if(this.pay_method.length){
-						this.$refs.popup.open()
+				}else if(e == 1){
+					let that=this;
+					if(that.num>0){
+						uni.showModal({
+						    title: '提示',
+						    content: '是否参加别人的团队，这样可以更快哦',
+						    success(res) {
+						        if (res.confirm) {
+						            console.log('用户点击确定');
+									that.global.utils.jump(1,"/pages/home/assemble/assem_list")
+						        } else if (res.cancel) {
+						            let a = [];
+						            a.push(that.good_detail.goodsInfo.goods_id)
+						            let data = {};
+						            data.goods_id = a.join(',');
+						            data.shop_id = that.good_detail.goodsInfo.shop_id;
+						            data.buy_num = 1;
+						            data.good_cate= 0;
+						            data.total_price = that.good_detail.goodsInfo.promotion_price;
+						            data.pt_id="";
+						            that.global.request.post({
+						            	url: that.global.demao.api.pt_add,
+						            	method: "GET",
+						            	data: data,
+						            	isLoading: true,
+						            	success: (res) => {
+						            		console.log(res)
+											if(res.code==0){
+												that.global.utils.showToast_my("下单成功")
+												setTimeout(function() {
+													that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
+												}, 10);
+											}
+						            	}
+						            })
+						        }
+						    }
+						});
 					}else{
-						let a=[];
-						a.push(this.good_detail.goodsInfo.goods_id)
-						let data={};
-						data.goods_id=a.join(',');
-						data.buy_num=1;
-						data.is_cart=0;
-						data.total_price=this.good_detail.goodsInfo.price;
-						this.global.request.post({								
-							url: this.global.demao.api.add_order,
+						let a = [];
+						a.push(that.good_detail.goodsInfo.goods_id)
+						let data = {};
+						data.goods_id = a.join(',');
+						data.shop_id = that.good_detail.goodsInfo.shop_id;
+						data.buy_num = 1;
+						data.good_cate= 0;
+						data.total_price = that.good_detail.goodsInfo.promotion_price;
+						data.pt_id="";
+						that.global.request.post({
+							url: that.global.demao.api.pt_add,
 							method: "GET",
 							data: data,
 							isLoading: true,
 							success: (res) => {
-								if(res.order_id){
-									this.global.utils.jump(1,"/pages/pay/pay?order_id="+res.order_id)
+								console.log(res)
+								if(res.code==0){
+									that.global.utils.showToast_my("下单成功")
+									setTimeout(function() {
+										that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
+									}, 10);
 								}
 							}
 						})
 					}
-					
-					console.log("立即购买")
-					
-					
 				}
 			},
 			formatDuring(mss) {
@@ -600,8 +654,8 @@
 					seconds: seconds
 				}
 			},
-			collect(){
-				let that=this;
+			collect() {
+				let that = this;
 				if (this.collect_state) {
 					wx.showModal({
 						title: '提示',
@@ -617,22 +671,22 @@
 				} else {
 					that.select_or_delect()
 				}
-				
+
 			},
 			share() {
 				console.log("点击分享了")
+			},
+			toPt_list(){
+				this.global.utils.jump(1,"/pages/home/assemble/assem_list")
 			}
 		},
 		onLoad(options) {
 			this.options = options;
 			this.global.utils.sethead(options.head)
-			this.picUrl = this.global.demao.domain.picUrl;
+			this.picUrl = this.global.demao.domain.videoUrl;
 			this.finddetail();
 			this.findCar();
 			this.findSellect();
-		},
-		onShow(){
-			this.$refs.popup.close()
 		},
 		onShareAppMessage(res) {
 			if (res.from === 'button') { // 来自页面内分享按钮
@@ -647,13 +701,22 @@
 </script>
 
 <style lang="scss">
-	.uni-popup{
+	.uni-popup {
 		font-size: $uni-font-size-lg;
-		.son1{
-			 width: 500rpx;height: 80rpx; line-height: 80rpx; text-align: center; border-bottom:1rpx solid #cccccc;
+
+		.son1 {
+			width: 500rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			text-align: center;
+			border-bottom: 1rpx solid #cccccc;
 		}
-		.son2{
-			 width: 500rpx;height: 80rpx; line-height: 80rpx; text-align: center; 
+
+		.son2 {
+			width: 500rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			text-align: center;
 		}
 	}
 </style>

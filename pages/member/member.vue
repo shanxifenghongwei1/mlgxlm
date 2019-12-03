@@ -60,7 +60,7 @@
 		</view>
 		<!-- 订单 -->
 		<view class="member-order member-assets">
-			<navigator url="/pages/pay/order" class="member-order-top">
+			<navigator url="/pages/pay/order?good_cate=0" class="member-order-top">
 				<view class="member-order-my">服务订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
 			</navigator>
@@ -85,7 +85,7 @@
 		</view>
 		
 		<view class="member-order member-assets">
-			<navigator url="/pages/pay/order" class="member-order-top">
+			<navigator url="/pages/pay/order?good_cate=1" class="member-order-top">
 				<view class="member-order-my">商品订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
 			</navigator>

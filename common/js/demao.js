@@ -67,9 +67,11 @@ module.exports={
 		is_shop_settled:"is_shop_settled"					,//判断商家是否入驻
 		
 		add_order:"add_order"								,//下订单
+		pt_add:"pt_add"										,//拼团下订单
+		pt_add_list:"pt_add_list"							,//拼团列表
 		order_detail:"order_detail"							,//订单详情
 		moneybuy:"moneybuy"									,//支付
-		
+		open_order_list:"open_order_list"					,//订单列表     0服务,1商品  
 		
 		
 	}

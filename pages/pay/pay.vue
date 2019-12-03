@@ -17,7 +17,7 @@
 						<text>订单编号：</text><text>{{order_detail.order_no}}</text>
 					</view>
 					<view class="con-box">
-						<text>总计金额：</text><text>{{order_detail.price}}</text>
+						<text>总计金额：</text><text>{{order_detail.total_price}}</text>
 					</view>
 				</view>
 			</view>
@@ -42,7 +42,7 @@
 		</view>
 		<view class="pay">
 			<!-- <button type="warn">确认支付220元</button> -->
-			<btn :font="'确认支付'+ order_detail.price +'元'" @save="save()"></btn>
+			<btn :font="'确认支付'+ order_detail.total_price +'元'" @save="save()"></btn>
 		</view>
 	
 	</view>
@@ -76,10 +76,10 @@
 			},
 			save(){
 				if(this.meth==0){
-					if(this.userInfo[0].money>this.order_detail.price){
+					if(this.userInfo[0].money>this.order_detail.total_price){
 						// console.log("分享币支付")
 						let data={};
-						data.price=this.order_detail.price;
+						data.price=this.order_detail.total_price;
 						data.order_id=this.order_detail.order_id;
 						this.global.request.post({
 							url: this.global.demao.api.moneybuy,

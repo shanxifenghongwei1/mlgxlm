@@ -17,7 +17,7 @@
 			<view class="header-nav">
 				
 			</view>
-			<view class="head-run"><image :src="shop_detail.shopInfo.shop_logo" mode=""></image></view>
+			<view class="head-run"><image :src="picUrl+shop_detail.shopInfo.shop_logo" mode=""></image></view>
 		
 			<view class="shop-name">{{shop_detail.shopInfo.shop_name}}</view>
 			<view class="any-flex">
@@ -67,18 +67,15 @@
 			<view class="bac-img">
 				<image src="/static/image/other/shoping-jingxuan.png" mode="widthFix" class="bac-imgs"></image>
 			</view>
-			<!-- <view class="" style="margin-top: 40rpx;">
-				<cateMore :menulist="menuList" @cateid="getCateId" ></cateMore>
-			</view> -->
 			<view class="">
-				<goods :more="false" :titCon="shop_detail.goods_list" :place="3"></goods>
+				<goods :more="false" :titCon="shop_detail.goods_shop.data" :place="3"></goods>
 			</view>
 		</view>
 		
 		<!-- 成功案例 -->
 		<view class="case-succ">
 			<topTitle :titCon="titCon"></topTitle>
-			<caseSucc :caseList="caseList_1"></caseSucc>
+			<caseSucc :caseList="caseList_0"></caseSucc>
 		</view>
 		
 		
@@ -107,7 +104,6 @@
 			topTitle,
 			evaluate,
 			coll
-			
 		},
 		data() {
 			return {
@@ -116,7 +112,7 @@
 				collect_state: false,
 				coupon_list:{},
 				caseList_0:[],
-				caseList_1:[],
+				picUrl:"",
 				// banner图
 				bannerlist: [
 					'../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg',
@@ -170,16 +166,7 @@
 					method: "GET",
 					data: data,
 					success(res){
-						console.log("1111111")
-						console.log(res.caseInfo)
-						console.log("1111111")
 						that.caseList_0=res.caseInfo;
-						if(res.caseInfo[1]){
-							that.caseList_1[1]=res.caseInfo[1]
-						}
-						if(res.caseInfo[0]){
-							that.caseList_1[0]=res.caseInfo[0]
-						}
 						let a=that.titCon;
 						a.link="/pages/home/shop-detial/case?shop_id="+that.options.shop_id;
 						a.name="成功案例 ("+ res.caseInfo.length +")" 
@@ -191,6 +178,8 @@
 			coupon(){
 				this.global.utils.jump(1,"/pages/home/coupon/coupon?shop_id="+this.options.shop_id)
 			},
+			
+			
 			//请求优惠券列表
 			couponlist(){
 				let that=this;
@@ -230,6 +219,7 @@
 					method: "GET",
 					data: data,
 					success: (res) => {
+						console.log(res);
 						if(res.shopInfo.shop_service){
 							res.shopInfo.shop_service=res.shopInfo.shop_service.split(",")
 						}
@@ -298,10 +288,11 @@
 			console.log(options)
 			this.options=options;
 			this.global.utils.sethead(options.head)
-			this.finddetail()
-			this.findSellect()
-			this.couponlist()
-			this.caselist()
+				this.picUrl = this.global.demao.domain.videoUrl;
+			this.finddetail()				//店铺详情
+			this.findSellect()				//店铺是否被收藏
+			this.couponlist()				//优惠券
+			this.caselist()					//店铺案列
 		},
 		onShareAppMessage(res) {
 			if (res.from === 'button') { // 来自页面内分享按钮

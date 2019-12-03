@@ -102,6 +102,14 @@
 	.title{
 		font-size: $uni-font-size-base;
 		font-weight: bold;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		.more{
+			font-size: $uni-font-size-base;
+			color: #898989;
+			font-weight:normal;
+		}
 	}
 	.team-list{
 		margin-top: 20rpx;
@@ -176,7 +184,6 @@
 	.goShop-pic{
 		width: 90rpx;
 		height: 90rpx;
-		background: yellow;
 		image{
 			width: 90rpx;
 			height: 90rpx;

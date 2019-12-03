@@ -26,9 +26,9 @@
 
 					</text>
 					<text class="red base mar">{{item.promotion_price}}</text>
-					<text>{{item.description}}</text>
+					<text>{{item.goods_effect}}</text>
 					<view class="has">
-						已拼<text class="red">{{item.prople}}</text>位
+						已拼<text class="red">{{item.pt_num_all}}</text>位
 					</view>
 				</view>
 			</view>

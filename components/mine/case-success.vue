@@ -1,7 +1,7 @@
 <!-- 成功案例列表 -->
 <template>
 	<view class="case-con">
-		<view class="case-con-box" v-for="(item,index) in caseList">
+		<view class="case-con-box" v-for="(item,index) in caseList" :key="index">
 			<!-- 图片展示 -->
 			<view class="picture">
 				<view class="picture-box">
@@ -44,7 +44,7 @@
 			}
 		},
 		created(){
-			this.picUrl=this.global.demao.domain.picUrl
+			this.picUrl=this.global.demao.domain.videoUrl
 		}
 	}
 </script>
@@ -63,7 +63,6 @@
 	.picture-box image{
 		width: 345rpx;
 		height: 274rpx;
-		background: yellow;
 	}
 	.picture-time{
 		display:inline-block;

@@ -132,6 +132,10 @@
             "path" : "pages/home/assemble/assemble",
             "style" : {}
         } 
+		,{
+		    "path" : "pages/home/assemble/assem_list",
+		    "style" : {}
+		} 
         ,{
             "path" : "pages/member/signIn/signIn",
             "style" : {}
