@@ -4,7 +4,7 @@
 		<view class="search">
 			<view hover-class='none' url="/pages/home/search/search" class="sear">
 				<view class="sear-text"></view>
-				<input type="number" value="" placeholder="您可以输入您想找的团队ID" class="base" @input="input"/>
+				<input type="number" value="" placeholder="您可以输入您想找的团队ID" class="base" @input="input" />
 				<view class="sear-logo">
 					<view class="icon-fathre">
 						<view class="sear-icon iconfont icon-sousuo"></view>
@@ -12,46 +12,50 @@
 				</view>
 			</view>
 		</view>
-		
+
 
 		<view class="pt_list">
 			<scroll-view scroll-y="true" class="li-box">
-				<view class="list-li" v-for="(item,index) in list" :key="index">
+				<view v-for="(item,index) in list" :key="index" class="everyfontclass">
 					<view class="pt_id">
 						<view class="">
-							团队id：
+							团队id：{{item.pt_id}}
 						</view>
-						<view class="">
-							{{item.pt_id}}
-						</view>
+					</view>
+					<view class="list-li">
 
-					</view>
-					<view class="u-team">
-						<image :src="item.wx_headimg" mode=""></image>
-						<view class="">
-							{{item.wx_name}}
-						</view>
-					</view>
-					<view class="u-info">
-						<view class="">
-							还差
-							<view style="display: inline-block;background: $any-col;">
-								{{item.promotion_prople - item.pt_sum}}人
+						<view class="u-team">
+							<image :src="item.wx_headimg" mode=""></image>
+							<view class="">
+								{{item.wx_name}}
 							</view>
-							拼团
+						</view>
+						<view class="u-info">
+							<view class="">
+								还差
+								<view style="display: inline-block;background: $any-col;">
+									{{item.promotion_prople - item.pt_sum}}人
+								</view>
+								拼团
+							</view>
+						</view>
+						<view class="u-btn" @click="select(item.pt_id)">
+							去拼团
 						</view>
 					</view>
-					<view class="u-btn" @click="select(item.pt_id)">
-						去拼团
-					</view>
-				</view>
 
+				</view>
+				
+				
+				
+
+				
 			</scroll-view>
 		</view>
 
 
 		<view class="bottom-box">
-			<view class="tip base wei">
+			<!-- <view class="tip base wei">
 				商品详情
 			</view>
 			<view class="goods">
@@ -60,19 +64,18 @@
 					<text class="big red">￥123元</text>
 					<text class="base wei">芳香精油乳腺疏通</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="tip base wei" v-if="select_item.pt_id">
 				所选团队
 			</view>
-			<view class="list-li active" v-if="select_item.pt_id">
-				<view class="pt_id">
-					<view class="">
-						团队id：
-					</view>
-					<view class="">
-						{{select_item.pt_id}}
-					</view>
+			
+			<view class="everyfontclass" v-if="select_item.pt_id">
+			<view class="pt_id">
+				<view class="">
+					团队id：{{select_item.pt_id}}
 				</view>
+			</view>
+			<view class="list-li active" >
 				<view class="u-team">
 					<image :src="select_item.wx_headimg" mode="" class="pic"></image>
 					<view class="">
@@ -89,6 +92,9 @@
 					</view>
 				</view>
 			</view>
+			</view>
+			
+			
 		</view>
 
 		<view class="save" v-if="select_item.pt_id">
@@ -186,19 +192,19 @@
 					}
 				})
 			},
-			input(e){
-				let a=this.all_list;
-				if(e.detail.value.trim()){
-					let b=a.filter((v)=>{
-						return v.pt_id==e.detail.value.trim()
+			input(e) {
+				let a = this.all_list;
+				if (e.detail.value.trim()) {
+					let b = a.filter((v) => {
+						return v.pt_id == e.detail.value.trim()
 					})
-					if(b.length){
-						this.list=b;
-					}else{
-						this.list=this.all_list;
+					if (b.length) {
+						this.list = b;
+					} else {
+						this.list = this.all_list;
 					}
-				}else{
-					this.list=this.all_list;
+				} else {
+					this.list = this.all_list;
 				}
 			}
 		}
@@ -206,6 +212,16 @@
 </script>
 
 <style lang="scss">
+	.everyfontclass{
+		margin:10rpx 0 ;
+		border-bottom: 1rpx solid #ccc;
+		overflow: hidden;
+		.pt_id {
+			margin-top: 5rpx;
+			// width: 80rpx;
+			font-size: $uni-font-size-sm;
+		}
+	}
 	.red {
 		color: $any-col;
 	}
@@ -258,12 +274,14 @@
 		padding: 0 3%;
 		box-sizing: border-box;
 	}
-	input{
+
+	input {
 		width: 90%;
 		height: 100%;
-		padding:0 20rpx;
+		padding: 0 20rpx;
 		box-sizing: border-box;
 	}
+
 	.sear {
 		width: 100%;
 		height: 60rpx;
@@ -282,6 +300,7 @@
 
 		.sear-logo {
 			padding: 20rpx 0 20rpx 20rpx;
+
 			.icon-fathre {
 				width: 20rpx;
 				height: 20rpx;
@@ -369,9 +388,11 @@
 		@extend .any-flex;
 		justify-content: space-between;
 		align-items: center;
-
+		overflow: hidden;
+		
 		.pt_id {
-			width: 80rpx;
+			margin-top: 5rpx;
+			// width: 80rpx;
 			font-size: $uni-font-size-sm;
 		}
 

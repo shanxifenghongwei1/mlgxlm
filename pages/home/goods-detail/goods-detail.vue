@@ -303,15 +303,17 @@
 		},
 		data() {
 			return {
+				//前面页面数据 goods_id / goods_name
 				options: {},
+				// goods详情
 				good_detail: {},
-				picUrl: "",
+				// 图片地址
+				picUrl: this.global.demao.domain.videoUrl,
+				//限时抢的倒计时
 				time: {},
+				//是否收藏
 				collect_state: false,
-				bannerlist: [
-					'/static/image/banner/1.jpg', '/static/image/banner/2.jpg', '/static/image/banner/3.jpg',
-					'/static/image/banner/4.jpg'
-				],
+				// 评价 组件数据
 				titCon: {
 					name: "商品评价（99）",
 					more: "更多评价",
@@ -319,9 +321,9 @@
 					method: "navigateTo"
 				},
 
+				// 展开收起图文详情
 				state: true,
-
-				//nav参数
+				// 最下面组件 左侧的显示 nav参数  
 				options_nav: [{
 					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/kefu.png',
 					text: '客服'
@@ -333,32 +335,32 @@
 					text: '购物车',
 					info: 0
 				}],
-				buttonGroup: [{
-						text: '加入购物车',
-						backgroundColor: '#ff0000',
-						color: '#fff'
-					},
-					{
-						text: '立即购买',
-						backgroundColor: '#ffa200',
-						color: '#fff'
-					}
-				],
+				
+				// 最下面右侧组件参数
+				buttonGroup: [],
+				// 购物车数据
 				carlist: [],
+				// 拼团总人数
 				pt_num_all:0,
+				
+				// 优惠券状态 0 未领取 1 优惠券可以使用 2 不可使用
 				cumpadd:0,
-				coupon:[]
+				
+				// 优惠券列表
+				coupon:[],
+				
 			}
 		},
 		methods: {
 			//0为普通购买，1.拼团购买，2.优惠券购买，3限时抢购买，4积分购买，5分销购买     
 
 
-			// 跳转至店铺详情页面
+			// 点击进店看看 跳转至店铺详情页面
 			toshop() {
 				this.global.utils.jump(1, "/pages/home/shop-detial/shop-detial?shop_id=" + this.good_detail.goodsInfo.shop_id +
 					"&&head=" + this.good_detail.goodsInfo.shop_name)
 			},
+			
 			//查询商品是否被收藏
 			findSellect() {
 				let data = {};
@@ -377,7 +379,7 @@
 					}
 				})
 			},
-			//关注与取消
+			//点击关注按钮  关注与取消
 			select_or_delect() {
 				let that = this;
 				let data = {};
@@ -393,7 +395,8 @@
 					}
 				})
 			},
-			//查询购物车的数量
+			// 购物车所有商品的数量    
+			
 			findCar() {
 				let data = {};
 				this.global.request.post({
@@ -408,6 +411,9 @@
 					}
 				})
 			},
+			
+			
+			
 			//查询商品详情
 			finddetail() {
 				var that=this;
@@ -442,28 +448,37 @@
 						
 						let num=0;
 						let g=res.seller;
-						console.log("这个是列表")
+
 						g.forEach((v)=>{
 							num=num+v.pt_sum
 						})
-						console.log(num)
 						this.good_detail = res;
-
-						this.pt_num_all=num;
 						
+							//总拼团人数
+						this.pt_num_all = num;
 						
-
+						this.com = {
+							goods_id: res.goodsInfo.goods_id,
+							shop_id: res.goodsInfo.shop_id,
+							num:1,
+							is_cart: 0,
+							good_cate:0
+						}
+						
+						// 参加了优惠券活动
 						if(this.good_detail.goodsInfo.promotion_type == 2){
 							
 							let data={};
 							data.goods_id=that.good_detail.goodsInfo.goods_id;
+							
 							that.global.request.post({
 								url: that.global.demao.api.coupon_list_all,
 								method: "GET",
 								data: data,
 								success: (res) => {
+									// 是否有领取
 									if(res.data.length){
-										this.cumpadd = res.data[0].is_use==0?1:2
+										this.cumpadd = res.data[0].is_use==0?1:2 //是否可以使用
 										this.coupon=res.data
 									}else{
 										this.cumpadd = 0
@@ -472,7 +487,10 @@
 							})
 							
 						}
+						
+						
 						if (this.good_detail.goodsInfo.promotion_type == 0) {
+							
 							this.buttonGroup = [{
 									id: 99,
 									text: '加入购物车',
@@ -532,10 +550,12 @@
 					}
 				})
 			},
+			
+			// 图文详情
 			trans() {
 				this.state = this.state ? false : true
 			},
-
+			// 打电话/店铺详情/商品详情
 			pay(e) {
 				console.log(e)
 				if (e.index === 0) {
@@ -552,21 +572,15 @@
 				}
 
 			},
+			
+			// 点击右侧 两个购买按钮
 			butt(e) {
+				console.log(e)
 				let that=this;
-				let m_data={
-					goods_id:that.good_detail.goodsInfo.goods_id,
-					shop_id:that.good_detail.goodsInfo.shop_id,
-					buy_num : 1,
-					is_cart : 0,
-				}
+				let m_data={}
 				
-				let common=function(){
-					
-				}	
-
 				if (e == 99) {
-					console.log("加入购物车")
+					console.log("点击了 加入购物车")
 					let a = this.carlist.filter((v) => {
 						return v.goods_id == parseInt(this.options.goods_id)
 					})
@@ -586,41 +600,51 @@
 						})
 					}
 				} else if (e == 0) {
+					console.log("点击立即购买")
+					//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+					
 					m_data.total_price = that.good_detail.goodsInfo.price;
-					console.log(m_data)
-					this.global.order.make_order(m_data,that.global.demao.api.add_order).then(
-						(res)=>{
-							if (res.order_id) {
-								that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
-							}
-						}
-					)	
+					
+					this.com.method_type = 1
+					
+					this.global.order.make_order(m_data,this.com)
+						
 				}else if(e == 1){
-					if(that.pt_num_all>0){
+					console.log("点击拼团购买")
+					if(that.pt_num_all > 0){
+			
 						uni.showModal({
 						    title: '提示',
 						    content: '是否参加别人的团队，这样可以更快哦',
+							confirmText:'参加团队',
+							cancelText:'发起拼团',
 						    success(res) {
 						        if (res.confirm) {
-						            console.log('用户点击确定');
-									that.global.utils.jump(1,"/pages/home/assemble/assem_list")
+									
+						            console.log('用户点击确定参加别人团队了');
+									that.global.utils.jump(1,"/pages/home/assemble/assem_list?goods_id=" + that.good_detail.goodsInfo.goods_id)
+									
+									
 						        } else if (res.cancel) {
+									console.log("用户选择了自己成团")
+									//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+									
 									m_data.total_price = that.good_detail.goodsInfo.promotion_price;
-									m_data.pt_id="";
-									this.global.order.make_order(m_data,that.global.demao.api.pt_add).then(
-										(res)=>{
-											if(res.code==0){
-												that.global.utils.showToast_my("下单成功")
-												setTimeout(function() {
-													that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-												}, 2000);
-											}
-										}
-									)	
+									that.com.method_type = 2
+									that.com.pt_id = ''
+									console.log(that.com)
+									that.global.order.make_order(m_data,that.com)
+									
+									
+									
+							
+									
+										
 						        }
 						    }
 						});
 					}else{
+						console.log("没团队列表用户自己成团")
 						m_data.total_price = that.good_detail.goodsInfo.promotion_price;
 						m_data.pt_id="";
 						this.global.order.make_order(m_data,that.global.demao.api.pt_add).then(
@@ -635,7 +659,11 @@
 						)
 					}
 				}else if(e == 2){
+					
+					console.log("点击了优惠券购买.")
+					
 					if(this.cumpadd==0){
+						console.log("没得优惠券，跳转去领取页面了.")
 						uni.showModal({
 						    title: '提示',
 						    content: '您当前还没有该商品的优惠券哦，快去领取吧',
@@ -649,6 +677,7 @@
 							}
 						})
 					}else if(this.cumpadd==1){
+						console.log("有优惠券.直接下订单了~")
 						let price=0;
 						if(that.coupon[0].coupon_type==0){
 							price = that.good_detail.goodsInfo.price-that.coupon[0].coupon_price;
@@ -665,6 +694,9 @@
 							}
 						)	
 					}else if(this.cumpadd==2){
+						
+						console.log("有优惠券  但是 过期了 /  另一个订单用了 或者过期了")
+						
 						uni.showModal({
 						    title: '提示',
 						    content: '您的优惠券可能已使用或过期，是否切换为原价购买',
@@ -684,6 +716,7 @@
 								}
 							}
 						})
+						
 					}
 				}
 			},
@@ -728,7 +761,7 @@
 		onLoad(options) {
 			this.options = options;
 			this.global.utils.sethead(options.head)
-			this.picUrl = this.global.demao.domain.videoUrl;
+			
 			this.finddetail();
 			this.findCar();
 			this.findSellect();
