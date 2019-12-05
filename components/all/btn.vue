@@ -1,12 +1,10 @@
 <template>
-	<!-- <btn font="提交按钮" @save="save()"></btn> -->
 	<view class="">
 		<form report-submit="true" @submit="formSubmit">
-			<button :class="type=='circle'?'active':''" form-type="submit" v-if="size=='base'">{{font}}</button>
+			<button :class="type=='circle'?'active':''" form-type="submit" v-if="btnSize=='base'">{{font}}</button>
 			<button class="sm_btn" :class="select==1?'btn_sel':''" form-type="submit" v-else>{{font}}</button>
 		</form>
 	</view> 
-
 </template>
 
 <script>
@@ -25,7 +23,7 @@
 				type: String,
 				default: "提交"
 			},
-			btnsize: {
+			btnSize: {
 				type: String,
 				default: "base"
 			},
@@ -40,8 +38,12 @@
 				this.$emit("save",true)
 			},
 		},
-		created(){
-			console.log(this.btnsize)
+		// created(){
+		// 	console.log(this.btnsize)
+		// }
+		mounted(){
+			console.log(this)
+			console.log(this.btnSize)
 		}
 	}
 </script>
@@ -49,12 +51,12 @@
 <style lang="scss">
 	button {
 		width: 480rpx;
-		height: 90rpx;
+		height: 80rpx;
 		background: $any-col;
-		line-height: 90rpx;
+		line-height: 80rpx;
 		color: #ffffff;
 		letter-spacing: 3rpx;
-		font-size: 37rpx;
+		font-size: 30rpx;
 	}
 	.active {
 		border-radius: 45rpx;

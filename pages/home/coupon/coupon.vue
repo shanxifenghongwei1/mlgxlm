@@ -7,8 +7,7 @@
 				<view class="shop-card">
 					<view class="card-con">
 						<view class="card-pic">
-							<view style="text-align: center;" class="base">优惠券名称</view>
-						<!-- 	<image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image> -->
+							<view style="text-align: center;" class="base">{{item.goods_name}}</view>
 						</view>
 						<view class="card-name" style="text-align: center;">
 							<view class="" >
@@ -19,7 +18,7 @@
 
 
 						<view class="card-time" style="text-align: center;">
-							使用时间{{item.create_time|time}}--{{item.expiration|time}}
+							使用时间{{item.coupon_start_time*1000|time}}--{{item.expiration*1000|time}}
 						</view>
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
@@ -35,7 +34,7 @@
 							满{{item.coupon_redouction}}元使用
 						</view>
 						
-						<view class="draw" v-if="item.coupon_draw==4" @click="getCard(item.coupon_id)">
+						<view class="draw" v-if="!item.has" @click="getCard(item.goods_id)">
 							点击领取
 						</view>
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
@@ -52,7 +51,7 @@
 
 						<view class="card-pic">
 							<!-- <image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image> -->
-							<view style="text-align: center;" class="base">优惠券名称</view>
+							<view style="text-align: center;" class="base">{{item.goods_name}}</view>
 						</view>
 						
 						<view class="card-name" style="text-align: center;">
@@ -64,7 +63,7 @@
 
 
 						<view class="card-time" style="text-align: center;">
-							使用时间{{item.create_time|time}}--{{item.expiration|time}}
+							使用时间{{item.coupon_start_time*1000|time}}--{{item.expiration*1000|time}}
 						</view>
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
@@ -79,7 +78,7 @@
 						<view class="manJian" v-if="!item.coupon_type">
 							满{{item.coupon_redouction}}元使用
 						</view>
-						<view class="draw" v-if="item.coupon_draw" @click="getCard(item.coupon_id)">
+						<view class="draw" v-if="!item.has" @click="getCard(item.goods_id)">
 							点击领取
 						</view>
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
@@ -106,26 +105,88 @@
 			getCard(e){
 				console.log(e)
 				let data={};
-				data.coupon_id=e
+				data.goods_id=e
 				this.global.request.post({
-					url: this.global.demao.api.couponadd,
+					url:"coupon_receive",
+					// url: this.global.demao.api.couponadd,
 					method: "GET",
 					data: data,
 					success: (res) => {
 						console.log(res)
-						if(res.msg=="领取优惠卷成功，快去使用吧!"){
+						if(res.code==0){
 							this.global.utils.showToast_my("领取优惠卷成功，快去使用吧!")
-							this.list.forEach((v)=>{
-								if(v.coupon_id==e){
-									v.coupon_draw = false
-								}
-							})
+							this.findList();
 						}
+						
 					}
 				})
 			},
 			toDetail(e,f){
 				this.global.utils.jump(1,"/pages/home/goods-detail/goods-detail?goods_id="+e+"&&head="+f)
+			},
+			findList(){
+				let that=this;
+				if(this.options.shop_id){
+					let data={};
+					data.shop_id=this.options.shop_id;
+					this.global.request.post({
+						url: this.global.demao.api.couponlist,
+						method: "GET",
+						data: data,
+						success: (res) => {
+							res.couponInfo.forEach((v) => {
+								v.picture = v.picture.split(",")
+							})
+							this.list = res.couponInfo;
+						}
+					})
+				}else{
+					that.global.request.post({
+						url: that.global.demao.api.index_coupon,
+						method: "GET",
+						data: {},
+						success: (res) => {			
+							// that.list = res.couponInfo;
+							let a=res.couponInfo;
+							console.log(a)
+							that.global.request.post({
+								url:that.global.demao.api.user_coupon,
+								method:"GET",
+								data:{},
+								success:(res)=>{
+									
+									let b=res;
+									
+									a.forEach((v)=>{
+										let num=b.coupon.filter((x)=>{
+											return v.goods_id==x.goods_id
+										})
+										if(num.length){
+											v.has=true;
+										}else{
+											v.has=false;
+										}
+									})
+									
+									b.coupon1.forEach((x)=>{
+										a=a.filter((v)=>{
+											return v.goods_id!=x.goods_id
+										})
+									})
+
+									b.coupon2.forEach((x)=>{
+										a=a.filter((v)=>{
+											return v.goods_id!=x.goods_id
+										})
+									})
+				
+									this.list=a;
+								}
+							})
+							
+						}
+					})
+				}
 			}
 		},
 		onLoad(options) {
@@ -135,30 +196,7 @@
 			this.picUrl = this.global.demao.domain.picUrl
 		},
 		onShow() {
-			// if(this.options.shop_id){
-			// 	let data={};
-			// 	data.shop_id=this.options.shop_id;
-			// 	this.global.request.post({
-			// 		url: this.global.demao.api.couponlist,
-			// 		method: "GET",
-			// 		data: data,
-			// 		success: (res) => {
-			// 			res.couponInfo.forEach((v) => {
-			// 				v.picture = v.picture.split(",")
-			// 			})
-			// 			this.list = res.couponInfo;
-			// 		}
-			// 	})
-			// }else{
-				this.global.request.post({
-					url: this.global.demao.api.index_coupon,
-					method: "GET",
-					data: {},
-					success: (res) => {			
-						this.list = res.couponInfo;
-					}
-				})
-			// }
+			this.findList();
 		}
 	}
 </script>
@@ -222,6 +260,7 @@
 					@include multi-row-apostrophe(1);
 						font-weight: bold;
 					width: 80%;
+					margin: 0 auto;
 				}
 			}
 
@@ -280,6 +319,7 @@
 				padding: 4rpx 10rpx;
 				border: 1rpx solid $any-col;
 				font-size: $uni-font-size-sm;
+				border-radius: 20rpx;
 			}
 
 			.draw {

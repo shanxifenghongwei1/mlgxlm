@@ -7,6 +7,7 @@ import utils from "./common/js/utils"
 import status from "./common/js/status"
 import card_info from "./common/js/card_info.js"
 import bmap from "./common/js/bmap-wx.js"
+import order from "./common/js/order.js"
 
 import sunblinds from "./components/all/sunblind.vue"
 import btn from "./components/all/btn.vue"
@@ -22,6 +23,7 @@ Vue.prototype.global = {
 	utils: utils,
 	status: status,
 	card_info: card_info,
+	order,
 	demao,
 	bmap,
 	city: "",

@@ -40,9 +40,10 @@
 				<image src="/static/image/other/icon-select-cir-out.png"  class="right-pic"  mode="" v-show="meth==1"></image>
 			</view>
 		</view>
+		
+
 		<view class="pay">
-			<!-- <button type="warn">确认支付220元</button> -->
-			<btn :font="'确认支付'+ order_detail.total_price +'元'" @save="save()"></btn>
+			<btn :font="'确认支付'+ order_detail.total_price +'元'" btnSize="base" @save="save()"></btn>
 		</view>
 	
 	</view>
@@ -70,9 +71,13 @@
 				this.meth=e; 
 			},
 			pay(){
-				uni.navigateTo({
-					url:"/pages/pay/pay_success"
-				})
+				// uni.navigateTo({
+				// 	url:"/pages/pay/pay_success"
+				// })
+				// this.global.order.make_order().then(){
+				// 	console.log("执行到这儿了")
+				// }
+				
 			},
 			save(){
 				if(this.meth==0){

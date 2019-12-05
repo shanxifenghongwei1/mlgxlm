@@ -39,10 +39,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="删除订单" @save="save()" :btnsize="sm" :select="0"></btn>
+						<btn font="删除订单" @save="save()" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认付款" @save="save()" :btnsize="sm" :select="1"></btn>
+						<btn font="确认付款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -86,10 +86,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="save()" :btnsize="sm" :select="0"></btn>
+						<btn font="申请退款" @save="save()" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="立即预约" @save="save()" :btnsize="sm" :select="1"></btn>
+						<btn font="立即预约" @save="save()" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
@@ -130,7 +130,7 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="save()" :btnsize="sm" :select="1"></btn>
+						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -173,10 +173,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="save()" :btnsize="sm" :select="1"></btn>
+						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="评价服务" @save="assess()" :btnsize="sm" :select="1"></btn>
+						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>

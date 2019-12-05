@@ -275,11 +275,6 @@
 			<goodsNav :fill="true" :options="options_nav" :button-group="buttonGroup" @click="pay"  @butt="butt"></goodsNav>
 		</view>
 
-		<!-- 	<uni-popup class="uni-popup" ref="popup" type="center">
-			<view @click="son1(pay_method[0].id)" class="son1">{{pay_method[0].amsg}} </view>
-			<view @click="son2(pay_method[1].id)" class="son2">{{pay_method[1].amsg}} </view>
-		</uni-popup> -->
-
 	</view>
 
 
@@ -351,7 +346,8 @@
 				],
 				carlist: [],
 				pt_num_all:0,
-				cumpadd:false,
+				cumpadd:0,
+				coupon:[]
 			}
 		},
 		methods: {
@@ -414,6 +410,7 @@
 			},
 			//查询商品详情
 			finddetail() {
+				var that=this;
 				let data = {};
 				data.goods_id = this.options.goods_id
 				console.log(data)
@@ -455,9 +452,26 @@
 						this.pt_num_all=num;
 						
 						
-						this.cumpadd = res.goodsInfo.conput_add
-						
-						
+
+						if(this.good_detail.goodsInfo.promotion_type == 2){
+							
+							let data={};
+							data.goods_id=that.good_detail.goodsInfo.goods_id;
+							that.global.request.post({
+								url: that.global.demao.api.coupon_list_all,
+								method: "GET",
+								data: data,
+								success: (res) => {
+									if(res.data.length){
+										this.cumpadd = res.data[0].is_use==0?1:2
+										this.coupon=res.data
+									}else{
+										this.cumpadd = 0
+									}
+								}
+							})
+							
+						}
 						if (this.good_detail.goodsInfo.promotion_type == 0) {
 							this.buttonGroup = [{
 									id: 99,
@@ -486,7 +500,7 @@
 									color: '#fff'
 								}
 							]
-						} else if (this.good_detail.goodsInfo.promotion_type == 2) {
+						} else if (this.good_detail.goodsInfo.promotion_type == 2) {								
 							this.buttonGroup = [{
 									id: 2,
 									text: '优惠券购买',
@@ -539,8 +553,18 @@
 
 			},
 			butt(e) {
-				console.log(e)
+				let that=this;
+				let m_data={
+					goods_id:that.good_detail.goodsInfo.goods_id,
+					shop_id:that.good_detail.goodsInfo.shop_id,
+					buy_num : 1,
+					is_cart : 0,
+				}
 				
+				let common=function(){
+					
+				}	
+
 				if (e == 99) {
 					console.log("加入购物车")
 					let a = this.carlist.filter((v) => {
@@ -550,13 +574,10 @@
 					if (a.length) {
 						this.global.utils.showToast_my("该服务已经在您的购物车中，快去看看吧")
 					} else {
-						let data = {};
-						data.goods_id = this.options.goods_id;
-						data.buy_num = 1;
 						this.global.request.post({
 							url: this.global.demao.api.add_cart,
 							method: "GET",
-							data: data,
+							data: m_data,
 							success: (res) => {
 								console.log(res.msg)
 								this.global.utils.showToast_my(res.msg)
@@ -565,27 +586,17 @@
 						})
 					}
 				} else if (e == 0) {
-					let a = [];
-					a.push(this.good_detail.goodsInfo.goods_id)
-					let data = {};
-					data.goods_id = a.join(',');
-					data.buy_num = 1;
-					data.is_cart = 0;
-					data.total_price = this.good_detail.goodsInfo.price;
-					this.global.request.post({
-						url: this.global.demao.api.add_order,
-						method: "GET",
-						data: data,
-						isLoading: true,
-						success: (res) => {
+					m_data.total_price = that.good_detail.goodsInfo.price;
+					console.log(m_data)
+					this.global.order.make_order(m_data,that.global.demao.api.add_order).then(
+						(res)=>{
 							if (res.order_id) {
-								this.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
+								that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
 							}
 						}
-					})
+					)	
 				}else if(e == 1){
-					let that=this;
-					if(that.num>0){
+					if(that.pt_num_all>0){
 						uni.showModal({
 						    title: '提示',
 						    content: '是否参加别人的团队，这样可以更快哦',
@@ -594,65 +605,85 @@
 						            console.log('用户点击确定');
 									that.global.utils.jump(1,"/pages/home/assemble/assem_list")
 						        } else if (res.cancel) {
-						            let a = [];
-						            a.push(that.good_detail.goodsInfo.goods_id)
-						            let data = {};
-						            data.goods_id = a.join(',');
-						            data.shop_id = that.good_detail.goodsInfo.shop_id;
-						            data.buy_num = 1;
-						            data.good_cate= 0;
-						            data.total_price = that.good_detail.goodsInfo.promotion_price;
-						            data.pt_id="";
-						            that.global.request.post({
-						            	url: that.global.demao.api.pt_add,
-						            	method: "GET",
-						            	data: data,
-						            	isLoading: true,
-						            	success: (res) => {
-						            		console.log(res)
+									m_data.total_price = that.good_detail.goodsInfo.promotion_price;
+									m_data.pt_id="";
+									this.global.order.make_order(m_data,that.global.demao.api.pt_add).then(
+										(res)=>{
 											if(res.code==0){
 												that.global.utils.showToast_my("下单成功")
 												setTimeout(function() {
 													that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-												}, 10);
+												}, 2000);
 											}
-						            	}
-						            })
+										}
+									)	
 						        }
 						    }
 						});
 					}else{
-						let a = [];
-						a.push(that.good_detail.goodsInfo.goods_id)
-						let data = {};
-						data.goods_id = a.join(',');
-						data.shop_id = that.good_detail.goodsInfo.shop_id;
-						data.buy_num = 1;
-						data.good_cate= 0;
-						data.total_price = that.good_detail.goodsInfo.promotion_price;
-						data.pt_id="";
-						that.global.request.post({
-							url: that.global.demao.api.pt_add,
-							method: "GET",
-							data: data,
-							isLoading: true,
-							success: (res) => {
-								console.log(res)
+						m_data.total_price = that.good_detail.goodsInfo.promotion_price;
+						m_data.pt_id="";
+						this.global.order.make_order(m_data,that.global.demao.api.pt_add).then(
+							(res)=>{
 								if(res.code==0){
 									that.global.utils.showToast_my("下单成功")
 									setTimeout(function() {
 										that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-									}, 10);
+									}, 2000);
+								}
+							}
+						)
+					}
+				}else if(e == 2){
+					if(this.cumpadd==0){
+						uni.showModal({
+						    title: '提示',
+						    content: '您当前还没有该商品的优惠券哦，快去领取吧',
+						    success(res) {
+						        if (res.confirm) {
+						          
+									that.global.utils.jump(1,"/pages/home/coupon/coupon")
+						        } else if (res.cancel) {
+									
 								}
 							}
 						})
-					}
-				}else if(e == 2){
-					
-					if(this.cumpadd){
-						console.log('搜狗输入法真傻')
-					}else{
-						console.log('没有优惠券的丫子真可爱')
+					}else if(this.cumpadd==1){
+						let price=0;
+						if(that.coupon[0].coupon_type==0){
+							price = that.good_detail.goodsInfo.price-that.coupon[0].coupon_price;
+						}else{
+							price = that.good_detail.goodsInfo.price*0.1*that.coupon[0].discount;
+						}
+						m_data.coupon_type=that.coupon[0].coupon_type;
+						m_data.total_price = price;
+						this.global.order.make_order(m_data,that.global.demao.api.conput_add).then(
+							(res)=>{
+								if (res.data.order_id) {
+									utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
+								}
+							}
+						)	
+					}else if(this.cumpadd==2){
+						uni.showModal({
+						    title: '提示',
+						    content: '您的优惠券可能已使用或过期，是否切换为原价购买',
+						    success(res) {
+						        if (res.confirm) {
+									m_data.total_price = that.good_detail.goodsInfo.price;
+									console.log(m_data)
+									this.global.order.make_order(m_data,that.global.demao.api.add_order).then(
+										(res)=>{
+											if (res.order_id) {
+												that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
+											}
+										}
+									)	
+						        } else if (res.cancel) {
+
+								}
+							}
+						})
 					}
 				}
 			},

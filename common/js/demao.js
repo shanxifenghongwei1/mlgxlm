@@ -24,6 +24,8 @@ module.exports={
 		
 		index:"index"										,//首页
 		index_coupon:"index_coupon"							,//优惠券
+		user_coupon:"user_coupon"							,//我的优惠券
+		coupon_list_all:"coupon_list_all"					,//判断当前用户是否有该商品的优惠券    如果有,得到状态
 		assemble:"assemble"									,//拼团
 		limited_time:"limited_time"							,//限时抢
 		
@@ -66,9 +68,9 @@ module.exports={
 
 		is_shop_settled:"is_shop_settled"					,//判断商家是否入驻
 		
-		add_order:"add_order"								,//下订单
+		add_order:"add_order"								,//普通下订单
 		pt_add:"pt_add"										,//拼团下订单
-		conput_add:"conput_add"								,//优惠券
+		conput_add:"conput_add"								,//优惠券下订单
 		pt_add_list:"pt_add_list"							,//拼团列表
 		order_detail:"order_detail"							,//订单详情
 		moneybuy:"moneybuy"									,//支付
