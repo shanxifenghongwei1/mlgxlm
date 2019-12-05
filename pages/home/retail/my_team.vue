@@ -4,23 +4,23 @@
 		<view class="top">
 			<view class="box">
 				<view class="user-info any-flex">
-					<image src="/static/image/other/pay_wx.png" mode=""></image>
+					<image :src="parent.wx_headimg" mode=""></image>
 					<view class="info-con any-flex">
 						<view class="name lg">
-							冯宏伟
+							{{parent.wx_name}}
 						</view>
-						<view class="code base">
+<!-- 						<view class="code base">
 							123456
-						</view>
+						</view> -->
 					</view>
 				</view>
 				<view class="num-box any-flex">
 					<view class="nun any-flex">
-						<text class="big">10人</text>
+						<text class="big">100人</text>
 						<view class="num-con base any-flex">
 							<view class="icon iconfont icon-xinzengrenshu"></view>
 							<view class="">
-								今日新增
+								我的团队
 							</view>
 						</view>
 					</view>
@@ -37,56 +37,51 @@
 			</view>
 		</view>
 		<view class="list">
-			<view class="list-box any-flex">
-				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
+			
+			<view class="list-box any-flex" v-for="(item,index) in son_list" :key="index">
+				<image :src="item.wx_headimg" mode="" class="left"></image>
 				<view class="center base">
-					我是冯宏伟
+					{{item.wx_name}}
 				</view>
 				<view class="right base">
-					+2888.00元
+					<!-- +2888.00元 -->
 				</view>
 			</view>
-			<view class="list-box any-flex">
-				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
-				<view class="center base">
-					我是冯宏伟
-				</view>
-				<view class="right base">
-					+2888.00元
-				</view>
-			</view>
-			<view class="list-box any-flex">
-				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
-				<view class="center base">
-					我是冯宏伟
-				</view>
-				<view class="right base">
-					+2888.00元
-				</view>
-			</view>
-			<view class="list-box any-flex">
-				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
-				<view class="center base">
-					我是冯宏伟
-				</view>
-				<view class="right base">
-					+2888.00元
-				</view>
-			</view>
-			<view class="list-box any-flex">
-				<image src="/static/image/other/pay_wx.png" mode="" class="left"></image>
-				<view class="center base">
-					我是冯宏伟
-				</view>
-				<view class="right base">
-					+2888.00元
-				</view>
-			</view>
+			
 		</view>	
 	</view>
 </template>
 
 <script>
+	export default{
+		data(){
+			return{
+				parent:{},
+				total_num:0,
+				son_list:[],
+			
+			}
+		},
+		methods:{
+			init(){
+				this.global.request.post({
+					url:'my_team',
+					success:res=>{
+						console.log({
+							a:'获取到的数据',
+							res:res
+						})
+						this.parent = res.parent[0]
+						this.son_list = res.son
+						this.total_num = res.total_num
+					}
+				})
+			}
+		},
+		onLoad() {
+			this.init()
+		}
+	}
 </script>
 
 <style lang="scss">

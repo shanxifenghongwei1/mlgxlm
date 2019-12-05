@@ -32,7 +32,7 @@
 		<view class="big-detail">
 			<view class="goShop">
 				<view class="goShop-pic">
-					<image src="/static/image/other/wx.png" mode=""></image>
+					<image :src="picUrl + detail.re_goodsShopInfo.shop_img" mode=""></image>
 				</view>
 				<view class="goShop-name">
 					<view class="">
@@ -53,12 +53,6 @@
 					图文详情
 				</view>
 				<view :class="state?'pic-image':'pic-image-lg'  ">
-<!-- 					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image>
-					<image src="/static/logo.png" mode="widthFix"></image> -->
 					<block v-for="(item,index) in detail.re_goodsShopInfo.re_goods_picture_detail" :key="index">
 						<image :src="picUrl+item" mode="widthFix"></image>
 					</block>
@@ -160,7 +154,7 @@
 					}
 				],
 				detail:{},
-				picUrl:""
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods: {
@@ -224,7 +218,7 @@
 		onLoad(options){
 			console.log(options)
 			this.options=options;
-			this.picUrl=this.global.demao.domain.videoUrl;
+			
 			this.init();
 		}
 	}
@@ -376,7 +370,7 @@
 			width: 90rpx;
 			height: 90rpx;
 			background: yellow;
-
+border-radius: 50%;
 			image {
 				width: 90rpx;
 				height: 90rpx;
