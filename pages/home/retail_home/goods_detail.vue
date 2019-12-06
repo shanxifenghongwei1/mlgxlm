@@ -207,8 +207,8 @@
 					url:'index_reseller_goodsDetail',
 					data:data,
 					success:res=>{
-						res.re_goodsShopInfo.re_goods_planting_picture=res.re_goodsShopInfo.re_goods_planting_picture.substr(0, res.re_goodsShopInfo.re_goods_planting_picture.length - 1).split(",");
-						res.re_goodsShopInfo.re_goods_picture_detail=res.re_goodsShopInfo.re_goods_picture_detail.substr(0, res.re_goodsShopInfo.re_goods_picture_detail.length - 1).split(",");
+						res.re_goodsShopInfo.re_goods_planting_picture=res.re_goodsShopInfo.re_goods_planting_picture?res.re_goodsShopInfo.re_goods_planting_picture.substr(0, res.re_goodsShopInfo.re_goods_planting_picture.length - 1).split(","):[];
+						res.re_goodsShopInfo.re_goods_picture_detail=res.re_goodsShopInfo.re_goods_picture_detail?res.re_goodsShopInfo.re_goods_picture_detail.substr(0, res.re_goodsShopInfo.re_goods_picture_detail.length - 1).split(","):[];
 						console.log(res)
 						this.detail=res;
 					}

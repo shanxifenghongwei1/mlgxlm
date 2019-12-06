@@ -4,10 +4,10 @@
 		<view class="top">
 			<view class="box">
 				<view class="user-info any-flex">
-					<image :src="parent.wx_headimg" mode=""></image>
+					<image :src="userInfo.wx_headimg" mode=""></image>
 					<view class="info-con any-flex">
 						<view class="name lg">
-							{{parent.wx_name}}
+							{{userInfo.wx_name}}
 						</view>
 <!-- 						<view class="code base">
 							123456
@@ -16,7 +16,7 @@
 				</view>
 				<view class="num-box any-flex">
 					<view class="nun any-flex">
-						<text class="big">100人</text>
+						<text class="big">{{total_num}}人</text>
 						<view class="num-con base any-flex">
 							<view class="icon iconfont icon-xinzengrenshu"></view>
 							<view class="">
@@ -25,7 +25,7 @@
 						</view>
 					</view>
 					<view class="nun any-flex">
-						<text class="big">10人</text>
+						<text class="big">{{today_new_num}}人</text>
 						<view class="num-con base any-flex">
 							<view class="icon iconfont icon-zongrenshu"></view>
 							<view class="">
@@ -43,8 +43,8 @@
 				<view class="center base">
 					{{item.wx_name}}
 				</view>
-				<view class="right base">
-					<!-- +2888.00元 -->
+				<view class="right base red">
+					+{{item.my_p_profit}}元
 				</view>
 			</view>
 			
@@ -59,7 +59,8 @@
 				parent:{},
 				total_num:0,
 				son_list:[],
-			
+				today_new_num:0,
+				userInfo:{}
 			}
 		},
 		methods:{
@@ -71,9 +72,11 @@
 							a:'获取到的数据',
 							res:res
 						})
-						this.parent = res.parent[0]
-						this.son_list = res.son
-						this.total_num = res.total_num
+						this.parent = res.parent[0];
+						this.son_list = res.son;
+						this.total_num = res.total_num;
+						this.today_new_num=res.today_new_num;
+						this.userInfo=res.uInfo;
 					}
 				})
 			}
@@ -85,6 +88,9 @@
 </script>
 
 <style lang="scss">
+	.red{
+		color: $any-col;
+	}
 	.big {
 		font-size: 40rpx;
 	}

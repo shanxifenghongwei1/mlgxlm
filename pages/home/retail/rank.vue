@@ -15,81 +15,15 @@
 						贡献佣金(元)
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-for="(item,index) in my_Profit" :key="index">
 					<view class="left">
-						NO.1
+						NO.{{index+1}}
 					</view>
 					<view class="center">
-						111 **** **** 111
+						{{item.wx_name}}
 					</view>
 					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						NO.1
-					</view>
-					<view class="center">
-						111 **** **** 111
-					</view>
-					<view class="right">
-						2240.00
+						{{item.my_p_profit}}元
 					</view>
 				</view>
 			</view>
@@ -98,6 +32,38 @@
 </template>
 
 <script>
+	
+	export default {
+		data(){
+			return{
+				my_Profit:[]
+			}
+		},
+		methods:{
+			
+		},
+		onLoad() {
+			
+		},
+		onShow() {
+			this.global.login_state.login_state().then((res) => {
+				if (res) {
+					this.global.request.post({
+						url: 'reseller_my_Profit',
+						success: res => {
+							console.log(res)
+							if(res.code==0){
+								this.my_Profit=res.my_Profit;
+							}else{
+								this.global.utils.showToast_my(res.msg)
+							}
+						}
+					})
+				}
+			})
+		}
+	}
+	
 </script>
 
 <style lang="scss">

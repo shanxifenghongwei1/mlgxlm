@@ -118,10 +118,14 @@
 					<view class="icon iconfont member-tool-content1 icon-xingzhuanggongnengtubiao-" style="color: #25aa7d;"></view>
 					<view class="member-tool-text">商品收藏</view>
 				</navigator>
-				<navigator url="/pages/home/retail/retail" class="member-tool-content-w25">
+				<navigator url="/pages/home/retail/retail" class="member-tool-content-w25" v-if="identity==2">
 					<view class="icon iconfont member-tool-content1 icon-fenxiao" style="color: #feb640;"></view>
 					<view class="member-tool-text">分销中心</view>
 				</navigator>
+				<view class="member-tool-content-w25" v-if="identity==1">
+					<view class="icon iconfont member-tool-content1 icon-fenxiao" style="color: #feb640;"></view>
+					<view class="member-tool-text">推广二维码</view>
+				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
 					<view class="member-tool-text">拼团订单</view>
@@ -214,11 +218,13 @@
 					'../../static/image/banner/4.jpg'
 				],
 				userInfo:{},
-				coupon_num:0
+				coupon_num:0,
+				identity:0,			//用户身份
 			}
 		},
 		methods: {
 			findList() {
+				let that=this;
 				this.global.request.post({
 					url: "user_center",
 					method: "GET",
@@ -228,6 +234,16 @@
 					success: (res) => {
 						this.userInfo=res.userInfo;
 						this.coupon_num=res.coupon_num
+						if(res.userInfo[0].mt_reseller==1){     ///0普通用户   1.参与分销
+							if(res.userInfo[0].p_id==0){		////0分销商    else  分销员
+								that.identity=1;
+							}else{
+								that.identity=2;
+							}
+						}else{
+							
+							that.identity=0;
+						}
 					}
 				})
 			},

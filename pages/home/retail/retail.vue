@@ -4,14 +4,15 @@
 		<!-- 个人信息 -->
 		<view class="header">
 			<view class="header-box">
-				<image src="https://wx.qlogo.cn/mmopen/vi_32/cFtcpjRVvcnovLu2icBOoHwvLxQzicOxcGqO7uFuptibX39e2bcm45kqY14RYDs0oX01NhHExKibnqLGbVHIrHSllg/132"
+				<image :src="userInfo.wx_headimg"
 				 mode="widthFix"></image>
 				<view class="con">
 					<view class="">
-						冯红伟的家12345678
+						{{userInfo.wx_name}}
 					</view>
 					<view class="">
 						邀请码
+						{{userInfo.shop_random_str}}
 					</view>
 				</view>
 			</view>
@@ -25,7 +26,7 @@
 					可提现佣金
 				</view>
 				<view class="">
-					1024.05元
+					{{userInfo.withdrawable_money}}元
 				</view>
 			</view>
 			<view class="right" @click="toCash()">
@@ -40,7 +41,7 @@
 					已提现佣金
 				</view>
 				<view class="">
-					1900元
+					{{userInfo.withdrawals_money}}元
 				</view>
 			</view>
 			<view class="">
@@ -48,7 +49,7 @@
 					未结算佣金
 				</view>
 				<view class="">
-					1900元
+					{{userInfo.not_acquired_money}}元
 				</view>
 			</view>
 		</view>
@@ -65,7 +66,7 @@
 			</view>
 		</view>
 
-		<view class="banner">
+		<!-- <view class="banner">
 			<mySwiper :bannerlist="bannerlist"></mySwiper>
 		</view>
 
@@ -76,7 +77,7 @@
 			<view class="">
 				<goods :titCon="titCon" :more="false"></goods>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -122,7 +123,8 @@
 						name: "邀请二维码",
 						img: "/static/image/other/retail_code.png"
 					}
-				]
+				],
+				userInfo:{}
 			}
 		},
 		methods: {
@@ -139,6 +141,24 @@
 		},
 		onLoad(options) {
 			this.global.utils.sethead("分销")
+		
+		},
+		onShow() {
+			this.global.login_state.login_state().then((res) => {
+				if (res) {
+					this.global.request.post({
+						url: 'user_reseller_List',
+						success: res => {
+							console.log(res)
+							if(res.code==0){
+								this.userInfo=res.userInfo
+							}else{
+								this.global.utils.showToast_my(res.msg)
+							}
+						}
+					})
+				}
+			})
 		}
 	}
 </script>

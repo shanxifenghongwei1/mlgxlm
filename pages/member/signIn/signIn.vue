@@ -1,5 +1,5 @@
-<!-- 签到页面 -->
 <template>
+	<!-- 签到页面 -->
 	<view>
 		<view class="signIn-box">
 			<view class="num">
@@ -31,6 +31,7 @@
 							</view>
 						</view>
 					</view>
+					
 					<view class="week">
 						{{item.name}}
 					</view>
@@ -151,8 +152,11 @@
 								}
 							})
 						})
+						
 						this.week=list;
+						
 						this.issign=res.is_issign;
+						
 						this.integral=res.integral[0].integral
 					}
 				
