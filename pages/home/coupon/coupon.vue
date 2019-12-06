@@ -10,9 +10,15 @@
 							<view style="text-align: center;" class="base">{{item.goods_name}}</view>
 						</view>
 						<view class="card-name" style="text-align: center;">
-							<view class="" >
-								{{item.shop_name}}<text class="font-padd">|</text><text class="card">{{item.coupon_type?"折扣劵":"满减劵"}}</text>
+							
+							<view v-if="item.coupon_type == 1">
+								{{item.shop_name}}<text class="font-padd">|</text><text class="card">折扣券</text>
 							</view>
+							<view class=""  v-if="item.coupon_type == 0">
+								{{item.shop_name}}<text class="font-padd">|</text><text class="card">满减劵</text>
+							</view>
+							
+							
 						</view>
 
 
@@ -23,16 +29,27 @@
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
 					<view class="card-size">
-						<view class="price" v-if="!item.coupon_type">
-							￥{{item.coupon_price}}
-						</view>
-						<view class="price" v-else>
-							{{item.discount?item.discount:0}}
-							<image src="/static/image/other/coupon_1.png" mode=""></image>
-						</view>
-						<view class="manJian" v-if="!item.coupon_type">
-							满{{item.coupon_redouction}}元使用
-						</view>
+						
+
+						
+						
+						
+							
+							<view class="price" v-if="item.coupon_type == 0">
+								￥{{item.coupon_price}}
+							</view>
+							
+							<view class="price" v-if="item.coupon_type == 1">
+								{{item.is_member_discount}}
+								<image src="/static/image/other/coupon_1.png" mode=""></image>
+							</view>
+							
+							<view class="manJian" v-if="item.coupon_type == 0">
+								满{{item.coupon_redouction}}元使用
+							</view>
+							
+						
+						
 						
 						<view class="draw" v-if="!item.has" @click="getCard(item.goods_id)">
 							点击领取
@@ -40,6 +57,7 @@
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
 							去使用
 						</view>
+						
 						
 					</view>
 				</view>
@@ -55,9 +73,15 @@
 						</view>
 						
 						<view class="card-name" style="text-align: center;">
-							<view class="" >
-								{{item.shop_name}}<text class="font-padd">|</text><text class="card">{{item.coupon_type?"折扣劵":"满减劵"}}</text>
+							
+							<view v-if="item.coupon_type == 1">
+								{{item.shop_name}}<text class="font-padd">|</text><text class="card">折扣券</text>
 							</view>
+							<view class=""  v-if="item.coupon_type == 0">
+								{{item.shop_name}}<text class="font-padd">|</text><text class="card">满减劵</text>
+							</view>
+							
+							
 						</view>
 
 
@@ -68,23 +92,36 @@
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
 					<view class="card-size">
-						<view class="price" v-if="!item.coupon_type">
-							￥{{item.coupon_price}}
-						</view>
-						<view class="price" v-else>
-							{{item.discount?item.discount:0}}
-							<image src="/static/image/other/coupon_1.png" mode=""></image>
-						</view>
-						<view class="manJian" v-if="!item.coupon_type">
-							满{{item.coupon_redouction}}元使用
-						</view>
+						
+					
+						
+						
+						
+							
+							<view class="price" v-if="item.coupon_type == 0">
+								￥{{item.coupon_price}}
+							</view>
+							
+							<view class="price" v-if="item.coupon_type == 1">
+								
+								{{item.is_member_discount}}
+								<image src="/static/image/other/coupon_1.png" mode=""></image>
+							</view>
+							
+							<view class="manJian" v-if="item.coupon_type == 0">
+								满{{item.coupon_redouction}}元使用
+							</view>
+							
+						
+						
+						
 						<view class="draw" v-if="!item.has" @click="getCard(item.goods_id)">
 							点击领取
 						</view>
 						<view class="use" v-else @click="toDetail(item.goods_id,item.goods_name)">
 							去使用
 						</view>
-					</view>
+					</view>	
 				</view>
 			</block>
 		</block>

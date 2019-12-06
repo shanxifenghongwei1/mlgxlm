@@ -3,7 +3,7 @@
 		<view  class="shop-father" v-for="(item,index) in flashList" :key="index">
 			<view class="shop">
 				<view class="shop-img">
-					<image :src="picUrl+ item.picture" mode=""></image>
+					<image :src="picUrl+ item.picture" mode=""></image> 
 				</view>
 				<view class="shop-message">
 					<view class="shop-message-left">
@@ -99,7 +99,7 @@
 		},
 		data(){
 			return{
-				picUrl:""
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		props:{
@@ -129,7 +129,7 @@
 			}
 		},
 		created(){
-			this.picUrl=this.global.demao.domain.picUrl
+			
 		}
 	}
 </script>
