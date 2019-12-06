@@ -8,6 +8,7 @@ import status from "./common/js/status"
 import card_info from "./common/js/card_info.js"
 import bmap from "./common/js/bmap-wx.js"
 import order from "./common/js/order.js"
+import login_state from "./common/js/login.js"
 
 import sunblinds from "./components/all/sunblind.vue"
 import btn from "./components/all/btn.vue"
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 
 
 Vue.prototype.global = {
+	login_state,
 	request: request,
 	utils: utils,
 	status: status,

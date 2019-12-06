@@ -76,5 +76,7 @@
 	.btn_sel{
 		border: 2rpx solid #FE0000;
 		color: #FE0000;
+		background: #FE0000;
+		color: #ffffff;
 	}
 </style>

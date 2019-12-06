@@ -74,101 +74,33 @@
 
 		<!-- 销量 -->
 		<view class="goods" v-if="cateid==3" v-for="(item,index) in goodslist.salesInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
-			<block v-if="item.promotion_type==1">
-				<view class="pic-box">
-					<image :src="picUrl +item.picture" mode=""></image>
+			<view class="pic-box">
+				<image :src="picUrl +item.picture" mode=""></image>
+			</view>
+			<view class="con">
+				<view class="title">
+					<text>{{item.goods_name}}</text><text>{{"("+item.shop_name+")"}}</text>
 				</view>
-				<view class="con">
-					<view class="title">
-						<text>{{item.goods_name}}</text><text>{{"("+item.shop_name+")"}}</text>
-					</view>
-					<view class="star">
-						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.star" color="#7f7f7f" active-color="#ffb540" />
-						<view class="go">
-							去拼团
-						</view>
-					</view>
-					<view class="contex">
-						<text class="icon iconfont icon-xiangmu">
-
-						</text>
-						{{item.t_name}}
-					</view>
-					<view class="address">
-						<text class="icon iconfont icon-tuan lg">
-
-						</text>
-						<text class="red base mar">{{item.promotion_price}}</text>
-						<text>{{item.description}}</text>
-						<view class="has">
-							已拼<text class="red">{{item.prople}}</text>位
-						</view>
+				<view class="star">
+					<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.star" color="#7f7f7f" active-color="#ffb540" />
+				</view>
+				<view class="contex">
+					<text class="icon iconfont icon-xiangmu">
+			
+					</text>
+					{{item.t_name}}
+				</view>
+				<view class="address">
+					<text class="icon iconfont icon-tuan lg">
+			
+					</text>
+					<text class="red base mar">{{item.price}}元</text>
+					<text>{{item.description}}</text>
+					<view class="has">
+						已售<text class="red">{{item.prople}}</text>位
 					</view>
 				</view>
-			</block>
-			<block v-if="item.promotion_type==2">
-				<view class="pic-box">
-					<image :src="picUrl +item.picture" mode=""></image>
-				</view>
-				<view class="con">
-					<view class="title">
-						<text>{{item.goods_name}}</text><text>{{"("+item.shop_name+")"}}</text>
-					</view>
-
-					<view class="star">
-						<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.star" color="#7f7f7f" active-color="#ffb540" />
-						<view class="go">
-							去看看
-						</view>
-					</view>
-
-					<view class="contex">
-						<text class="">原价</text> <text class="red mar2">{{item.price}}</text> <text class="mar red">满{{item.coupon_redouction}}减{{item.coupon_price}}</text>
-					</view>
-					<view class="contex">
-						<text class="icon iconfont icon-xiangmu">
-
-						</text>
-						{{item.t_name}}
-					</view>
-					<view class="address">
-						<text class="icon iconfont icon-hui">
-
-						</text>
-						{{item.introduction}}
-						<text class="has">
-							已售<text class="red">{{item.goods_gd_num}}</text>位
-						</text>
-					</view>
-				</view>
-			</block>
-			<block v-if="item.promotion_type==4">
-				<view class="pic-box">
-					<image src="" mode=""></image>
-				</view>
-				<view class="con">
-					<view class="title">
-						{{item.goods_name}}
-					</view>
-				
-					<view class="star">
-						<text class="suo">{{item.shop_name}}</text>
-						<view class="go">
-							马上抢
-						</view>
-					</view>
-					<view class="con-cmd">
-						<cmdRrogress :percent="limited_ready_prople/item.limited_prople" custom>
-							<view class="sm">
-								已抢<text>{{item.limited_ready_prople}}</text>位
-							</view>
-						</cmdRrogress>
-					</view>
-					<view class="context1">
-						<text class="base red mar">￥{{item.limited_price}}</text><text class="sm ccc through">￥{{item.price}}</text>
-					</view>
-				</view>
-			</block>
+			</view>
 		</view>
 
 
