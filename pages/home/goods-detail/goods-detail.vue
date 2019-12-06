@@ -41,17 +41,46 @@
 				| 需预约
 			</view>
 		</view>
-		<view class="goods-price" v-if="good_detail.goodsInfo.promotion_type==2">
-			<!-- 当么商品正在参加满减-->
-			<view class="NewPrice">
-				￥{{good_detail.goodsInfo.price|isN(Number)}}
+		<view v-if="good_detail.goodsInfo.promotion_type==2">
+			
+			<view v-if='good_detail.goodsInfo.coupon_type == 0'  class="goods-price">
+			 
+				<!-- 当么商品正在参加满减-->
+				<view class="NewPrice">
+					￥{{good_detail.goodsInfo.price|isN(Number)}}
+				</view>
+				<view class="manJian">
+					满{{good_detail.goodsInfo.coupon_redouction|isN(Number)}}减{{good_detail.goodsInfo.coupon_price|isN(Number)}}
+				</view>
+				<view class="yuyue">
+					| 需预约
+				</view>
+			 
 			</view>
-			<view class="manJian">
-				满{{good_detail.goodsInfo.coupon_redouction|isN(Number)}}减{{good_detail.goodsInfo.coupon_price|isN(Number)}}
+			
+			
+			<view v-if='good_detail.goodsInfo.coupon_type == 1'  class="goods-price">
+			
+				<!-- 当么商品正在参加满减-->
+				<view class="NewPrice">
+					￥{{good_detail.goodsInfo.price|isN(Number)}}
+				</view>
+				<view class="manJian">
+					{{good_detail.goodsInfo.is_member_discount}} 折
+				</view>
+				<view class="yuyue">
+					| 需预约
+				</view>	
+			
+			
+			
+			
 			</view>
-			<view class="yuyue">
-				| 需预约
-			</view>
+			
+			
+
+			
+			
 		</view>
 		<view class="goods-price" v-if="good_detail.goodsInfo.promotion_type==4">
 			<!-- 当么商品正在参加限时抢-->
@@ -349,6 +378,9 @@
 				// 优惠券列表
 				coupon:[],
 				
+				// 这是发请求头部
+				com:''
+				
 			}
 		},
 		methods: {
@@ -441,17 +473,21 @@
 						res.goodsInfo.goods_picture_detail = b;
 
 						let c = new Date().getTime();
+						
 						let d = res.goodsInfo.limited_stop_time ? res.goodsInfo.limited_stop_time : c + 100000000;
-						let e = d - c;
-						let f = this.formatDuring(d - c);
+						
+						let f = this.formatDuring(d * 1000 - c);
+						
 						this.time = f;
 						
 						let num=0;
-						let g=res.seller;
+						
+						let g = res.seller;
 
 						g.forEach((v)=>{
-							num=num+v.pt_sum
+							num += v.pt_sum
 						})
+						
 						this.good_detail = res;
 						
 							//总拼团人数
@@ -632,7 +668,6 @@
 									m_data.total_price = that.good_detail.goodsInfo.promotion_price;
 									that.com.method_type = 2
 									that.com.pt_id = ''
-									console.log(that.com)
 									that.global.order.make_order(m_data,that.com)
 									
 									
@@ -644,19 +679,16 @@
 						    }
 						});
 					}else{
-						console.log("没团队列表用户自己成团")
+						console.log("没团队列表用户自己成团")						
+						//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+						
 						m_data.total_price = that.good_detail.goodsInfo.promotion_price;
-						m_data.pt_id="";
-						this.global.order.make_order(m_data,that.global.demao.api.pt_add).then(
-							(res)=>{
-								if(res.code==0){
-									that.global.utils.showToast_my("下单成功")
-									setTimeout(function() {
-										that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-									}, 2000);
-								}
-							}
-						)
+						that.com.method_type = 2
+						that.com.pt_id = ''
+						that.global.order.make_order(m_data,that.com)
+						
+						
+						
 					}
 				}else if(e == 2){
 					
@@ -669,7 +701,7 @@
 						    content: '您当前还没有该商品的优惠券哦，快去领取吧',
 						    success(res) {
 						        if (res.confirm) {
-						          
+
 									that.global.utils.jump(1,"/pages/home/coupon/coupon")
 						        } else if (res.cancel) {
 									
@@ -677,22 +709,21 @@
 							}
 						})
 					}else if(this.cumpadd==1){
-						console.log("有优惠券.直接下订单了~")
-						let price=0;
-						if(that.coupon[0].coupon_type==0){
-							price = that.good_detail.goodsInfo.price-that.coupon[0].coupon_price;
-						}else{
-							price = that.good_detail.goodsInfo.price*0.1*that.coupon[0].discount;
-						}
-						m_data.coupon_type=that.coupon[0].coupon_type;
-						m_data.total_price = price;
-						this.global.order.make_order(m_data,that.global.demao.api.conput_add).then(
-							(res)=>{
-								if (res.data.order_id) {
-									utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-								}
-							}
-						)	
+					console.log("有优惠券.直接下订单了~")
+
+					//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+					
+					m_data.total_price = that.good_detail.goodsInfo.price;
+					
+					this.com.method_type = 3
+					
+					this.global.order.make_order(m_data,this.com)
+					
+					
+						// m_data.coupon_type=that.coupon[0].coupon_type;
+						// m_data.total_price = price;
+						
+						
 					}else if(this.cumpadd==2){
 						
 						console.log("有优惠券  但是 过期了 /  另一个订单用了 或者过期了")
@@ -702,15 +733,13 @@
 						    content: '您的优惠券可能已使用或过期，是否切换为原价购买',
 						    success(res) {
 						        if (res.confirm) {
-									m_data.total_price = that.good_detail.goodsInfo.price;
-									console.log(m_data)
-									this.global.order.make_order(m_data,that.global.demao.api.add_order).then(
-										(res)=>{
-											if (res.order_id) {
-												that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.order_id)
-											}
-										}
-									)	
+													//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4						 
+									 m_data.total_price = that.good_detail.goodsInfo.price;
+									 
+									 this.com.method_type = 1
+									 
+									 this.global.order.make_order(m_data,this.com)
+									 
 						        } else if (res.cancel) {
 
 								}
@@ -718,7 +747,25 @@
 						})
 						
 					}
+				}else if(e == 3){
+					console.log('限时抢支付')
+					
+					//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+					
+					m_data.total_price = that.good_detail.goodsInfo.price;
+					
+					this.com.method_type = 4
+					
+					this.global.order.make_order(m_data,this.com)
+					
 				}
+				
+				
+				
+				
+				
+				
+				
 			},
 			formatDuring(mss) {
 				let days = parseInt(mss / (1000 * 60 * 60 * 24));

@@ -5,11 +5,11 @@
 			<view hover-class='none' url="/pages/home/search/search" class="sear">
 				<view class="sear-text"></view>
 				<input type="number" value="" placeholder="您可以输入您想找的团队ID" class="base" @input="input" />
-				<view class="sear-logo">
+<!-- 				<view class="sear-logo">
 					<view class="icon-fathre">
 						<view class="sear-icon iconfont icon-sousuo"></view>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 
@@ -118,7 +118,8 @@
 				list: [],
 				good_detail: {},
 				picUrl: "",
-				select_item: {}
+				select_item: {},
+				com:{}
 			}
 		},
 		onLoad(options) {
@@ -139,6 +140,10 @@
 					this.good_detail = res.goodsInfo;
 				}
 			})
+			
+			
+
+			
 		},
 		onShow() {
 			let data = {
@@ -147,6 +152,7 @@
 			this.global.request.post({
 				url: this.global.demao.api.pt_add_list,
 				method: "GET",
+				isLoading:true,
 				data: data,
 				success: (res) => {
 					console.log("这是列表数据")
@@ -169,28 +175,34 @@
 				let that = this;
 				let a = [];
 				a.push(that.options.goods_id)
-				let data = {};
-				data.goods_id = a.join(',');
-				data.shop_id = that.good_detail.shop_id;
-				data.buy_num = 1;
-				data.good_cate = 0;
-				data.total_price = that.good_detail.promotion_price;
-				data.pt_id = that.select_item.pt_id;
-				that.global.request.post({
-					url: that.global.demao.api.pt_add,
-					method: "GET",
-					data: data,
-					isLoading: true,
-					success: (res) => {
-						console.log(res)
-						if (res.code == 0) {
-							that.global.utils.showToast_my("下单成功")
-							setTimeout(function() {
-								that.global.utils.jump(1, "/pages/pay/pay?order_id=" + res.data.order_id)
-							}, 10);
-						}
-					}
-				})
+				let m_data = {};
+	
+	
+				this.com = {
+					goods_id: a.join(','),
+					shop_id: that.good_detail.shop_id,
+					num:1,
+					is_cart: 0,
+					good_cate:0
+				}
+				
+				
+			
+				
+				//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
+				console.log( '用户选择了与团队ID为' + that.select_item.pt_id + '的团队成团'  )
+				
+				m_data.total_price = that.good_detail.promotion_price; 
+				
+				that.com.method_type = 2
+				
+				that.com.pt_id = that.select_item.pt_id;
+				
+				console.log(that.com)
+				
+				that.global.order.make_order(m_data,that.com)
+				
+				
 			},
 			input(e) {
 				let a = this.all_list;
@@ -201,7 +213,7 @@
 					if (b.length) {
 						this.list = b;
 					} else {
-						this.list = this.all_list;
+						this.list = [];
 					}
 				} else {
 					this.list = this.all_list;

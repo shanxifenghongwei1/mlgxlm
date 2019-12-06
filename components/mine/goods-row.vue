@@ -52,7 +52,7 @@
 				</view>
 
 				<view class="contex">
-					<text class="">原价</text> <text class="red mar2">{{item.price}}</text> <text class="mar red">满{{item.coupon_redouction}}减{{item.coupon_price}}</text>
+					<text class="">原价</text> <text class="red mar2">{{item.price}}</text> 
 				</view>
 				<view class="contex">
 					<text class="icon iconfont icon-xiangmu">
@@ -97,7 +97,7 @@
 					<text class="red base mar">{{item.price}}元</text>
 					<text>{{item.description}}</text>
 					<view class="has">
-						已售<text class="red">{{item.prople}}</text>位
+						已售<text class="red">{{item.goods_gd_num}}</text>位
 					</view>
 				</view>
 			</view>
@@ -106,7 +106,7 @@
 
 		<view class="goods" v-if="cateid==4" v-for="(item,index) in goodslist.limitedInfo" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<view class="pic-box">
-				<image src="" mode=""></image>
+				<image :src=" picUrl +item.picture " mode=""></image>
 			</view>
 			<view class="con">
 				<view class="title">
@@ -164,7 +164,6 @@
 		},
 		methods: {
 			toDetail(e, f) {
-				console.log("我打印出了-------------------------------------------哈哈哈哈哈哈哈哈哈哈或或或")
 				uni.navigateTo({
 					url: "/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
 				})

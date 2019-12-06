@@ -10,7 +10,7 @@
 
 			<view class="con">
 				<view class="box" v-for="(item,index) in assemble_detail.seller" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
-					<image class="box-pic" src="/static/image/shop/shop-1.jpg" mode="widthFix"></image>
+					<image class="box-pic" :src="imgurl + item.picture" mode="widthFix"></image>
 					<view class="box-tit">
 						{{item.goods_name}}
 					</view>
@@ -115,6 +115,7 @@
 		data() {
 			return {
 				options: {},
+				imgurl:this.global.demao.domain.videoUrl,
 				list: [{
 					id: 1,
 					name: "距离最近"
