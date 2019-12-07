@@ -179,26 +179,12 @@
 			
 			},
 			butt(e) {
-				this.global.utils.jump(1,"/pages/home/retail_home/make_order")
-				// 	if (e.index === 0) {
-				// 		console.log("加入购物车")
-				// 		let data = {};
-				// 		data.goods_id = this.options.goods_id;
-				// 		data.buy_num = 1;
-				// 		this.global.request.post({
-				// 			url: this.global.demao.api.add_cart,
-				// 			method: "GET",
-				// 			data: data,
-				// 			success: (res) => {
-				// 				this.global.utils.showToast_my(res.msg)
-				// 				this.findCar()
-				// 			}
-				// 		})
-				
-				// 	} else {
-				// 		console.log("立即购买")
-				// 		this.global.utils.jump(1,"/pages/pay/pay")
-				// 	}
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						console.log(this.options.re_goods_id)
+						this.global.utils.jump(1,"/pages/home/retail_home/make_order?re_goods_id="+this.options.re_goods_id)
+					}
+				})
 			},
 			init(){
 				let data={};

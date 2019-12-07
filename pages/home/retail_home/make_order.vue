@@ -1,41 +1,33 @@
 <template>
 	<!-- 分销下订单页面 -->
 	<view class="">
-		<view class="address base any-flex">
+		<navigator url="/pages/member/tool/address/address?fromPage=order" class="address base any-flex">
 			<view class="">
-				<text class="icon iconfont icon--location lg mar"></text>山西省太原市小店区平阳路高新街口45号
+				<text class="icon iconfont icon--location lg mar"></text>{{address}}
 			</view>
 			<text class="icon iconfont icon-jiantou-copy lg wei"></text>
-		</view>
+		</navigator>
 		
 		<view class="good">
 			<view class="store lg">
-				<image src="/static/image/other/person_nav.png" mode=""></image>
-				爱美世家
+				<image :src="picUrl + detail.re_goodsShopInfo.re_goods_picture" mode=""></image>
+				{{detail.re_goodsShopInfo.shop_name}}
 			</view>
 			<view class="con">
 				<image src="/static/image/shop/shop-1.jpg" mode=""></image>
 				<view class="goods-info">
 					<view class="name">
-						商品名称
+						{{detail.re_goodsShopInfo.re_goods_name}}
 					</view>
 					<view class="price">
-						￥100元
+						￥{{detail.re_goodsShopInfo.re_goods_price}}元
 					</view>
 					<view class="dtl">
-						这是描述
+						{{detail.re_goodsShopInfo.re_goods_introduction}}
 					</view>
 				</view>
 				<view class="opection">
-					<numbox :Number="1" :min="1" :max="1" :step="1"></numbox>
-					<view class="opection-box">
-						<view class="icon iconfont icon-shanchu-copy-copy">
-				
-						</view>
-						<view class="icon iconfont icon-star">
-				
-						</view>
-					</view>
+					<numbox :Number="1" :min="1" :max="detail.re_goodsShopInfo.re_goods_stock" :step="1"></numbox>
 				</view>
 			</view>
 		</view>
@@ -53,14 +45,49 @@
 		},
 		data(){
 			return{
-				
+				address:"点击选择收货地址",
+				options:{},
+				detail:{},
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods:{
 			save(){
 				this.global.utils.jump(1,"/pages/pay/pay")
 			}
+		},
+		onShow(){
+			if(uni.getStorageSync("address")){
+				this.address=uni.getStorageSync("address");
+			}
+		},
+		onLoad(options){
+			console.log("这是这个页面的数据")
+			console.log(options)
+			this.options=this.options;
+
+			this.global.request.post({
+				url: "reseller_user_address",
+				method: "POST",
+				data: {},
+				success: (res) => {
+					this.address=res.user_addressInfo.address_provice+res.user_addressInfo.address_city+res.user_addressInfo.address_area+res.user_addressInfo.address_detail;
+				}
+			});
+			let data={};
+			data.re_goods_id=options.re_goods_id;
+			this.global.request.post({
+				url:'index_reseller_goodsDetail',
+				data:data,
+				success:res=>{
+					this.detail=res;
+				}
+			})
+		},
+		onUnload() {
+			uni.setStorageSync("address","")
 		}
+		
 	}
 </script>
 
@@ -157,7 +184,6 @@
 			width: 140rpx;
 			height: 150rpx;
 			margin-right: 20rpx;
-			background: red;
 		}
 		
 		.goods-info {

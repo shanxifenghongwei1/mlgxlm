@@ -1,8 +1,21 @@
 <template>
 	<view class="page" >
 		<block v-if="addressList.length">
-			<view class="address-box" v-for="(item,index) in addressList" :key="index">
-				<view class="box-top">
+			<view class="address-box" v-for="(item,index) in addressList" :key="index" >
+				<view class="box-top" v-if="fromPage!='index'" @click="save(item.address_provice+item.address_city+item.address_area+item.address_detail)">
+					<view class="name">
+						<view class="">
+							收货人:{{item.name}}
+						</view>
+						<view class="">
+							{{item.tel}}
+						</view>
+					</view>
+					<view class="address">
+						{{item.address_provice+item.address_city+item.address_area+item.address_detail}}
+					</view>
+				</view>
+				<view class="box-top" v-else>
 					<view class="name">
 						<view class="">
 							收货人:{{item.name}}
@@ -62,7 +75,8 @@
 	export default {
 		data() {
 			return {
-				addressList: []
+				addressList: [],
+				fromPage:"index"
 			}
 		},
 		methods: {
@@ -71,7 +85,7 @@
 					title: e,
 					duration: 2000,
 					icon: "none",
-					mask: "true"
+					mask: "true",
 				});
 			},
 			//设为默认
@@ -159,6 +173,16 @@
 						this.addressList=res.user_addressInfo
 					}
 				})
+			},
+			save(e){
+				console.log(e)
+				uni.setStorageSync("address",e)
+				this.global.utils.jump(5)
+			}
+		},
+		onLoad(options){
+			if(options.fromPage){
+				this.fromPage=options.fromPage;
 			}
 		},
 		onShow() {
