@@ -3,7 +3,7 @@
 		<view class="tip">
 			<uniNoticeBar show-icon="true" scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uniNoticeBar>
 		</view>
-		
+	
 		<view class="detail">
 			<view class="detail-box">
 				<view class="title">
@@ -101,7 +101,7 @@
 									
 								}
 							}
-						})
+						}) 
 					}else{
 						// console.log("充值")
 						uni.showModal({

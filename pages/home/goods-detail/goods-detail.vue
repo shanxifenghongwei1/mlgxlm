@@ -660,21 +660,13 @@
 						            console.log('用户点击确定参加别人团队了');
 									that.global.utils.jump(1,"/pages/home/assemble/assem_list?goods_id=" + that.good_detail.goodsInfo.goods_id)
 									
-									
 						        } else if (res.cancel) {
 									console.log("用户选择了自己成团")
 									//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
-									
 									m_data.total_price = that.good_detail.goodsInfo.promotion_price;
 									that.com.method_type = 2
 									that.com.pt_id = ''
-									that.global.order.make_order(m_data,that.com)
-									
-									
-									
-							
-									
-										
+									that.global.order.make_order(m_data,that.com)		
 						        }
 						    }
 						});

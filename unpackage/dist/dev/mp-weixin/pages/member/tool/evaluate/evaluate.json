@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "evaluate": "/components/mine/evaluate"
+  }
+}

@@ -1,0 +1,1 @@
+<view class="page"><view class="con"><image src="/static/image/other/cash_success.png" mode></image><view class="title">提现申请以提交，等待人工审核</view><view class="time">2019.09.20 00:00</view><view class="time1">预计到账时间2019.09.21</view></view><view data-event-opts="{{[['tap',[['over',['$event']]]]]}}" class="bottom" bindtap="__e"><button type="primary">完成</button></view></view>
