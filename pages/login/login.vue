@@ -57,21 +57,6 @@
 								if (that.p_id) {
 									data.openid_d = that.p_id;
 								}
-								// console.log("这是请求数据")
-								// console.log(data)
-								// that.global.request.post({
-								// 	url: 'weChat',
-								// 	method:"GET",
-								// 	data: data,
-								// 	isLoading: true,
-								// 	success: (res) => {
-								// 		that.global.status.state.login=1;
-								// 		uni.setStorageSync("session",res);
-								// 		uni.navigateBack({
-								// 			delta:1
-								// 		})
-								// 	}
-								// })
 
 								that.global.request.post({
 									url: that.global.demao.api.weChat,
@@ -81,9 +66,33 @@
 									success: (res) => {
 										that.global.status.state.login = 1;
 										uni.setStorageSync("session", res);
-										uni.navigateBack({
-											delta: 1
-										})
+
+										if(that.p_id){
+											that.global.request.post({
+												url: 'invite_friend',
+												data:{
+													openid2:that.p_id,
+													openid1:res.data.openid
+												},
+												success: res => {
+													console.log("邀请新人了")
+													if (res.code == 0) {
+														that.global.utils.showToast_my("加入团队成功")
+													} else {
+														that.global.utils.showToast_my(res.msg)
+													}
+													uni.removeStorageSync("p_id")
+													uni.removeStorageSync("p_id")
+												}
+											})
+										}
+										that.global.utils.showToast_my("登录成功")
+										setTimeout(()=>{
+											uni.navigateBack({
+												delta: 1
+											})
+										},2000)
+										
 									}
 								})
 							}

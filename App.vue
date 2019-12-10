@@ -2,9 +2,6 @@
 	import demo from "@/common/js/demao.js"
 	export default {
 		onLaunch: function(e) {
-			if(e.query.p_id){
-				uni.setStorageSync("p_id",e.query.p_id)
-			}
 			
 		},
 		onShow: function() {
@@ -14,20 +11,20 @@
 					//1:登录  0：未登录
 					if (res.errMsg !== "checkSession:ok") {
 						this.global.status.state.login = 0;
-						uni.clearStorageSync()
+						uni.removeStorageSync("session")
 					} else {
 						// this.global.status.state.login = 1;
 						if(uni.getStorageSync("session")){
 							this.global.status.state.login = 1;
 						}else{
 							this.global.status.state.login = 0;
-							uni.clearStorageSync()
+							uni.removeStorageSync("session")
 						}
 					}
 				},
 				fail: (res) => {
 					this.global.status.state.login = 0;
-					uni.clearStorageSync()
+					uni.removeStorageSync("session")
 				}
 			})
 		},

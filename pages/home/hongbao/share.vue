@@ -5,16 +5,27 @@
 			<view class="person-box">
 
 				<view class="list" v-for="(item,index) in num" :key="index">
+
+					<image :src="item.wx_headimg" mode="" class="pic"></image>
+
+				</view>
+				<view class="list" v-for="i in number" :key="i">
 					<view class="li">
 
 					</view>
 				</view>
 			</view>
-			<button open-type="share" class="share">
+
+			<button open-type="share" class="share" v-if="num.length !=6">
 				邀请好友拆红包
 			</button>
+
+			<button class="share" v-else @click="open()">
+				点击拆红包
+			</button>
+
 			<view class="tip">
-				还差4人即可瓜分100元红包,快邀请好友来拆吧
+				还差{{number}}人即可瓜分100元红包,快邀请好友来拆吧
 			</view>
 		</view>
 	</view>
@@ -24,23 +35,64 @@
 	export default {
 		data() {
 			return {
-				open_id:"",
-				join_id:"",
-				num: [1, 2, 3, 4, 5, 6]
+				open_id: "",
+				join_id: "",
+				num: [],
+				number: 6
 			}
 		},
 		methods: {
-	
+			open() {
+				let a = uni.getStorageSync("session").data.openid;
+				let b = this.num[0].openid;
+				if (a == b) {
+
+				} else {
+					this.global.utils.showToast_my("只有队长才能够拆红包哦，快去提醒他吧")
+				}
+			}
 		},
-		onLoad(e){
-			console.log("分享页面数据")
-			console.log(e)
-			let a=uni.getStorageSync("session");
-			console.log(a)
-			this.open_id=a.data.openid
-			// console.log(e);
-			// this.join_id=e.open_id;
-			// this.open_id=uni.getStorageSync("open_id")
+		onLoad(e) {
+			console.log(e.p_id)
+			if (e.p_id) {
+				uni.setStorageSync("p_id", e.p_id)
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						this.global.request.post({
+							url: 'invite_friend',
+							data: {
+								openid2: e.p_id,
+								openid1: uni.getStorageSync("session").data.openid
+							},
+							success: res => {
+								console.log(res)
+								if (res.code == 0) {
+									this.global.utils.showToast_my("加入团队成功")
+								} else {
+									this.global.utils.showToast_my(res.msg)
+								}
+								uni.removeStorageSync("p_id")
+							}
+						})
+					}
+				})
+				console.log(uni.getStorageSync("p_id"))
+			};
+
+
+			let a = uni.getStorageSync("session");
+			this.open_id = a.data.openid;
+
+
+		},
+		onShow() {
+			this.global.request.post({
+				url: 'invite_userInfo',
+				success: res => {
+					this.num = res.arrayInfo;
+					this.number = 6 - this.num.length;
+				}
+			})
 		},
 		onShareAppMessage(res) {
 			if (res.from === 'button') { // 来自页面内分享按钮
@@ -48,7 +100,7 @@
 			}
 			return {
 				title: '自定义分享标题',
-				path: '/pages/home/share/share?p_id='+this.open_id
+				path: '/pages/home/share/share?p_id=' + this.open_id
 			}
 		}
 	}
@@ -86,6 +138,12 @@
 		width: 70rpx;
 		height: 70rpx;
 		background: red;
+		border-radius: 50%;
+	}
+
+	.pic {
+		width: 70rpx;
+		height: 70rpx;
 		border-radius: 50%;
 	}
 
