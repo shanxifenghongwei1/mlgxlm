@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "search-any": "/components/my-search/my-search",
-    "shoplist": "/components/shoplist/shoplist"
-  }
-}

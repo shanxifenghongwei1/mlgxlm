@@ -1,1 +1,0 @@
-<view><view class="con"><image class="back" src="/static/image/other/share_1.png" mode></image><view class="person-box"><block wx:for="{{num}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="list"><view class="li"></view></view></block></view><button class="share" open-type="share">邀请好友拆红包</button><view class="tip">还差4人即可瓜分100元红包,快邀请好友来拆吧</view></view></view>

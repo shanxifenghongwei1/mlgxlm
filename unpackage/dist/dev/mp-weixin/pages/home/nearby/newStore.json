@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "本周新店",
-  "usingComponents": {
-    "shoplist": "/components/mine/shop-list",
-    "search": "/components/my-search/my-search"
-  }
-}

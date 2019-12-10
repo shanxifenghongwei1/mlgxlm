@@ -4,19 +4,19 @@
 		<view class="header">
 			<image src="/static/image/other/pay_success.png" mode=""></image>
 			<view class="name">
-				订单支付成功 ￥220元
+				订单支付成功 ￥{{monerys}}元
 			</view>
 			<view class="edition">
-				恭喜您此次支付获得<text>50积分</text>
+				请您提前两小时与商家联系并预约此次服务。
 			</view>
 		</view>
 		<view class="con">
 			<view class="" @click="toDetail()">
 				查看订单
 			</view>
-			<view class="" @click="appointment()">
+			<!-- <view class="" @click="appointment()">
 				立即预约
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -25,7 +25,7 @@
 	export default{
 		data(){
 			return{
-				
+				monerys:''
 			}
 		},
 		methods:{
@@ -34,11 +34,14 @@
 					url:"/pages/pay/order"
 				})
 			},
-			appointment(){
-				uni.navigateTo({
-					url:"/pages/pay/appointment"
-				})
-			}
+			// appointment(){
+			// 	uni.navigateTo({
+			// 		url:"/pages/pay/appointment"
+			// 	})
+			// }
+		},
+		onLoad(options) {
+			this.monerys = options.money
 		}
 	}
 </script>
@@ -74,7 +77,7 @@
 		padding: 0 5%;
 		box-sizing: border-box;
 		@extend .any-flex;
-		justify-content: space-between;
+		justify-content: center;
 		view{
 			width: 300rpx;
 			height: 78rpx;

@@ -287,12 +287,12 @@
 			</view>
 		</view>
 
-		<view class="">
+<!-- 		<view class="">
 			<view class="bac-img">
 				<image src="/static/image/other/shoping-remen.png" mode="widthFix" class="bac-imgs"></image>
 			</view>
 			<goodsList :more="false" :titCon="good_detail.recommend_shop" :place="3"></goodsList>
-		</view>
+		</view> -->
 		<coll @collect="collect" @share="share" :collect_state="collect_state"></coll>
 		<!-- 空白 -->
 		<view class="emit">
@@ -525,7 +525,7 @@
 						}
 						
 						
-						if (this.good_detail.goodsInfo.promotion_type == 0) {
+						if (this.good_detail.goodsInfo.promotion_type == 0 ) {
 							
 							this.buttonGroup = [{
 									id: 99,
@@ -622,12 +622,16 @@
 					})
 					console.log(a.length)
 					if (a.length) {
-						this.global.utils.showToast_my("该服务已经在您的购物车中，快去看看吧")
+						this.global.utils.showToast_my("该服务已经在您的购物车中，快去看看吧") 
 					} else {
 						this.global.request.post({
 							url: this.global.demao.api.add_cart,
 							method: "GET",
-							data: m_data,
+							data: {
+								goods_id:this.com.goods_id,
+								shop_id:this.com.shop_id,
+								buy_num:1
+							},
 							success: (res) => {
 								console.log(res.msg)
 								this.global.utils.showToast_my(res.msg)
@@ -647,41 +651,13 @@
 						
 				}else if(e == 1){
 					console.log("点击拼团购买")
-					if(that.pt_num_all > 0){
-			
-						uni.showModal({
-						    title: '提示',
-						    content: '是否参加别人的团队，这样可以更快哦',
-							confirmText:'参加团队',
-							cancelText:'发起拼团',
-						    success(res) {
-						        if (res.confirm) {
-									
-						            console.log('用户点击确定参加别人团队了');
-									that.global.utils.jump(1,"/pages/home/assemble/assem_list?goods_id=" + that.good_detail.goodsInfo.goods_id)
-									
-						        } else if (res.cancel) {
-									console.log("用户选择了自己成团")
-									//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
-									m_data.total_price = that.good_detail.goodsInfo.promotion_price;
-									that.com.method_type = 2
-									that.com.pt_id = ''
-									that.global.order.make_order(m_data,that.com)		
-						        }
-						    }
-						});
-					}else{
-						console.log("没团队列表用户自己成团")						
+											
 						//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
-						
-						m_data.total_price = that.good_detail.goodsInfo.promotion_price;
+						m_data.total_price = that.good_detail.goodsInfo.price;
 						that.com.method_type = 2
 						that.com.pt_id = ''
 						that.global.order.make_order(m_data,that.com)
-						
-						
-						
-					}
+
 				}else if(e == 2){
 					
 					console.log("点击了优惠券购买.")

@@ -1,1 +1,0 @@
-<view><navigator class="sear" hover-class="none" url="/pages/home/search/search"><view class="sear-text">搜索您想要的</view><view class="sear-logo"><view class="icon-fathre"><view class="sear-icon iconfont icon-sousuo"></view></view></view></navigator></view>

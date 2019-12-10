@@ -11,7 +11,7 @@
 				<view class="con" v-for="(i,t) in item.child" :key="t">
 					<text class="icon iconfont icon-weixuanzhong" v-show="!i.checked" @click="oneCheck(i.goods_id,item.id)"></text>
 					<text class="icon iconfont icon-chongzhichenggong" v-show="i.checked" @click="oneCheck(i.goods_id,item.id)"></text>
-					<image src="" mode=""></image>
+					<image :src="imageurl + i.picture" mode=""></image>
 					<view class="goods-info">
 						<view class="name">
 							{{i.goods_name}}
@@ -20,7 +20,7 @@
 							￥{{i.price}}元
 						</view>
 						<view class="dtl">
-							{{item.introduction}}
+							{{i.goods_effect}}
 						</view>
 					</view>
 					<view class="opection">
@@ -38,15 +38,14 @@
 			</view>
 		</view>
 
-		<view class="bac-img">
+<!-- 		<view class="bac-img">
 			<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
 		</view>
 		<view>
 			<goods :titCon="titCon" :more="false" place="1"></goods>
-		</view>
-		<view class="emit-view">
-
-		</view>
+		</view> -->
+		<!-- 定位容器 -->
+		<view class="emit-view"></view>
 		<view class="bottom">
 			<view class="ccc">
 				<text class="icon iconfont icon-weixuanzhong" v-show="!checked" @click="chec()"></text>
@@ -75,7 +74,8 @@
 			return {
 				list: [],
 				titCon: [1, 2, 3, 3],
-				checked:false
+				checked:false,
+				imageurl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods: {
