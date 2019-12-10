@@ -57,10 +57,14 @@ let requestPost = ajaxJson => {
 					});
 				}
 			}else { //未知错误
-				uni.showToast({
-					"title": result.data.data.msg,
-					"icon": "none",
-				});
+				if (typeof ajaxJson.success === "function") {
+					ajaxJson.success(result.data.data);
+				} else {
+					uni.showToast({
+						"title": result.data.data.msg,
+						"icon": "success",
+					});
+				}
 			}
 		},
 		complete: (res) => {
