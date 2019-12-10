@@ -46,7 +46,22 @@
 				let a = uni.getStorageSync("session").data.openid;
 				let b = this.num[0].openid;
 				if (a == b) {
-
+					this.global.login_state.login_state().then((res) => {
+						if (res) {
+							this.global.request.post({
+								url: 'open_red_packet',
+								success: res => {
+									console.log(res)
+									if (res.code == 0) {
+										this.global.utils.showToast_my("加入团队成功")
+									} else {
+										this.global.utils.showToast_my(res.msg)
+									}
+									uni.removeStorageSync("p_id")
+								}
+							})
+						}
+					})
 				} else {
 					this.global.utils.showToast_my("只有队长才能够拆红包哦，快去提醒他吧")
 				}
