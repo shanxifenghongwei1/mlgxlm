@@ -111,7 +111,7 @@
 			};
 		},
 		onLoad(options) {
-	
+			options.order
 		},
 		methods: {
 			toDetail(e,f) {

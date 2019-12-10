@@ -4,6 +4,8 @@
 			<cateflex :cateList="cateList" :cateid="cateid" @seleId="seleId"></cateflex>
 		</view>
 		<block v-for="(item,index) in list" :key="index">
+			
+			<!-- 待付款 -->
 			<view class="list1" v-if="item.order_status==0">
 				<view class="title">
 					<view class="left">
@@ -39,18 +41,16 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="删除订单" @save="save()" btnSize="sm" :select="0"></btn>
+						<btn font="删除订单" @save="del_order(item.order_id,index)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认付款" @save="save()" btnSize="sm" :select="1"></btn>
+						<btn font="确认付款" @save="yesorder(item.order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
 			</view>
 
-
-
-
+			<!-- 待确认 -->
 			<view class="list2" v-if="item.order_status==1">
 				<view class="title">
 					<view class="left">
@@ -80,22 +80,22 @@
 							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
 						</view>
 						<view class="li red">
-							<text class="icon iconfont icon-chenggong red"></text>支付成功，尚未预约
+							<text class="icon iconfont icon-chenggong red"></text>支付成功，等待服务
 						</view>
 					</view>
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="save()" btnSize="sm" :select="0"></btn>
+						<btn font="申请退款" @save="refund()" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="立即预约" @save="save()" btnSize="sm" :select="1"></btn>
+						<btn font="确认收货" @save="mygoods_add(item.order_id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
 
-
-			<view class="list3" v-if="item.order_status==2">
+			
+<!-- 			<view class="list3" v-if="item.order_status==2">
 				<view class="title">
 					<view class="left">
 						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（预约成功）
@@ -134,14 +134,55 @@
 					</view>
 
 				</view>
-			</view>
-
-
-
+			</view> -->
+			
+			<!-- 待评价 -->
 			<view class="list4" v-if="item.order_status==3">
 				<view class="title">
 					<view class="left">
 						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（待评价）
+					</view>
+					<view class="right" @click="phone(item.shop_phone)">
+						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
+					</view>
+				</view>
+				<view class="con">
+					<view class="left">
+						<image :src="picUrl+item.picture" mode=""></image>
+					</view>
+					<view class="right">
+						<view class="li">
+							<block v-if="item.good_cate==0">
+								<text>服务名称：</text><text>{{item.goods_name}}</text>
+							</block>
+							<block v-if="item.good_cate==1">
+								<text>商品名称：</text><text>{{item.goods_name}}</text>
+							</block>
+						</view>
+						<view class="li">
+							<text>订单编号：</text><text>{{item.order_no}}</text>
+						</view>
+						<view class="li">
+							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
+						</view>
+						<view class="li">
+							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
+						</view>
+					</view>
+				</view>
+				<view class="opection"> 
+					<view class="btn-box">
+						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
+					</view>
+
+				</view>
+			</view>
+			
+			<!-- 已完成 -->
+			<view class="list4" v-if="item.order_status==4">
+				<view class="title">
+					<view class="left">
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（已完成）
 					</view>
 					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
@@ -178,9 +219,11 @@
 					<view class="btn-box">
 						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
 					</view>
-
+			
 				</view>
 			</view>
+			
+			
 		</block>
 
 		<sunblind v-if="sunblind"></sunblind>
@@ -230,12 +273,64 @@
 			}
 		},
 		methods: {
+			//确认收货
+			mygoods_add(e,a){
+				console.log({mes:'点击确认收货',index:a})
+				this.global.request.post({
+					url:'up_status_add',
+					data:{
+						order_id:e
+					},
+					success:res=>{
+						this.list.splice(a,1)
+					}
+				})
+			},
+			// 删除订单
+			del_order(e,a){
+				console.log({mes:'点击删除订单',res:e,index:a})
+				
+				var that = this
+				uni.showModal({
+					title: '提示',
+					content: '是否确认删除该订单？',
+					success: (ras)=> {
+						if (ras.confirm) {
+								that.global.request.post({
+									url:'update_static_del', 
+									method:'GET',
+									data:{
+										order_id:e
+									},
+									success:res=>{
+										this.list.splice(a,1)
+									}
+								})
+						} else if (ras.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+				
+				
+				
+				
+			},
+			//确认付款
+			yesorder(e){
+				console.log({mes:'点击确认订单',res:e})
+				this.global.utils.jump(1,"/pages/pay/pay?order_id=" + e)
+				
+				
+			},
+			// 点击切换头部文字选择,并传id
 			seleId(e) {
 				this.cateid = e;
 				this.page = 1;
 				this.list = [];
 				this.init()
 			},
+			// 联系卖家
 			phone(e){
 				console.log(e)
 				uni.makePhoneCall({
@@ -245,19 +340,25 @@
 					}
 				})
 			},
-			//去评价
+			//点击去评价
 			assess() {
 				this.sunblind = true;
 				let url = "/pages/pay/assess"
 				this.global.utils.jump(1, url);
 			},
+			// 发请求获得订单数据
 			init() {
+				// 防止重复点击
 				this.sunblind = false;
+				
 				let data = {};
+				// 服务还是商品
 				data.good_cate = this.options.good_cate;
+				// 订单的类型
 				data.order_status = this.cateid;
 				data.page = this.page;
 				this.global.request.post({
+					//open_order_list 订单列表
 					url: this.global.demao.api.open_order_list,
 					method: "GET",
 					data: data,
@@ -276,6 +377,7 @@
 			this.cateid=options.cateid;
 			this.picUrl=this.global.demao.domain.videoUrl;
 			if (options.good_cate == 0) {
+				// 服务订单
 				this.cateList = [{
 						name: "综合",
 						id: 99
@@ -285,19 +387,22 @@
 						id: 0
 					},
 					{
-						name: "待预约",
+						name: "待确认",
 						id: 1
 					},
 					{
-						name: "预约中",
-						id: 2
+						name: "待评价",
+						id: 3 
 					},
 					{
-						name: "待评价",
-						id: 3
+						name: "已完成",
+						id: 4
 					},
+					
+					
 				]
 			} else {
+				// 商品订单
 				this.cateList = [{
 						name: "综合",
 						id: 99
