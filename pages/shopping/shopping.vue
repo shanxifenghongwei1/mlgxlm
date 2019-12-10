@@ -46,17 +46,17 @@
 		</view> -->
 		<!-- 定位容器 -->
 		<view class="emit-view"></view>
-		<view class="bottom">
+		<view class="bottom" v-if="array.length">
 			<view class="ccc">
 				<text class="icon iconfont icon-weixuanzhong" v-show="!checked" @click="chec()"></text>
 				<text class="icon iconfont icon-chongzhichenggong" v-show="checked" @click="chec()"></text>
 				<text class="all">全选</text>
 			</view>
 			<view class="all-price">
-				<text class="ccc">合计:</text><text class="ccc">￥200.00</text>
+				<text class="ccc">合计:</text><text class="ccc">￥{{sum}}</text>
 			</view>
 			<view class="pay" @click="pageTo">
-				去结算（1）
+				去结算（{{array.length}}）
 			</view>
 		</view>
 	</view>
@@ -75,15 +75,30 @@
 				list: [],
 				titCon: [1, 2, 3, 3],
 				checked:false,
-				imageurl:this.global.demao.domain.videoUrl
+				imageurl:this.global.demao.domain.videoUrl,
+				array:[],
+				sum:0.00
 			}
 		},
 		methods: {
 			//去支付
 			pageTo: function() {
-				uni.navigateTo({
-					url: "/pages/pay/pay"
-				})
+				
+				let m_data={
+					total_price:this.sum,
+					goods_cate:0
+				}
+				let com={
+					goods_id : this.array.toString(),
+					shop_id : [],
+					buy_num : 1,
+					method_type : 1,
+					is_cart : 1 ,//0 没通过购物车  1 购物车购买
+				}
+				this.global.order.make_order(m_data,com)
+				// uni.navigateTo({
+				// 	url: "/pages/pay/pay"
+				// })
 			},
 			//查询购物车
 			findCar() {
@@ -137,6 +152,7 @@
 				}else{
 					this.checked=false;
 				}
+				this.calc()
 			},
 			//监听该店铺的商品是否被全选
 			dx(f){
@@ -155,6 +171,7 @@
 					}
 				})
 				this.allCheck() 
+				this.calc()
 			},
 			// 点击单选
 			oneCheck(e,f){
@@ -171,6 +188,7 @@
 					}
 				})
 				this.dx(f)
+				this.calc()
 			},
 			
 			// 点击全选反选该店铺的商品
@@ -186,20 +204,37 @@
 					}
 				})
 				this.allCheck()
+				this.calc()
 			},
 			chec(e){
 				this.checked=!this.checked;
 				let a=this.list;
 				a.forEach((v)=>{
-					this.allShopCheck(v.id)
-					if(v.id==e){
-						let s=v.checked
-						v.checked=!s;
-						v.child.forEach((h)=>{
-							return h.checked=!s;
-						})
-					}
+					// this.allShopCheck(v.id)
+					v.checked=this.checked;
+					v.child.forEach((x)=>{
+						x.checked=this.checked;
+					})
 				})
+				this.calc()
+			},
+			calc(){
+				let a=this.list;
+				let array=[];
+				let sum=0;
+				a.forEach((v)=>{
+					v.child.forEach((x)=>{
+						if(x.checked){
+							array.push(x.goods_id);
+							sum+=x.price;
+						}
+						
+					})
+				})
+				console.log(array);
+				console.log(sum);
+				this.array=array;
+				this.sum=sum;
 			}
 		},
 		onShow() {

@@ -484,9 +484,12 @@
 						
 						let g = res.seller;
 
-						g.forEach((v)=>{
-							num += v.pt_sum
-						})
+						if(g){
+							g.forEach((v)=>{
+								num += v.pt_sum
+							})
+						}
+						
 						
 						this.good_detail = res;
 						
@@ -776,7 +779,8 @@
 		onLoad(options) {
 			this.options = options;
 			this.global.utils.sethead(options.head)
-			
+		},
+		onShow(){
 			this.finddetail();
 			this.findCar();
 			this.findSellect();
