@@ -4,29 +4,21 @@
 			<view class="title">
 				退款原因
 			</view>
-			<view class="li">
-				<view class="left">
-					服务问题
+			
+			<view v-for="(item,index) in cause">
+				<view class="li" @click="exchang(item.id)">
+					<view class="left">
+						{{item.title}}
+					</view>
+					<text class='icon iconfont' :class="active == item.id ? 'icon-xuanzhong1':'icon-weixuanzhong' "></text>
 				</view>
-				<text class='icon iconfont icon-xuanzhong1'></text>
 			</view>
-			<view class="li">
-				<view class="left">
-					不想要了 <text class="ccc">（到店未服务可退款）</text>
-				</view>
-				<text class='icon iconfont icon-weixuanzhong'></text>
-			</view>
-			<view class="li">
-				<view class="left">
-					其他原因
-				</view>
-				<text class='icon iconfont icon-weixuanzhong'></text>
-			</view>
-			<textarea value="" class="left" placeholder="描述要退货的详细原因" />
+
+			<textarea v-model="msg" class="left" placeholder="描述要退货的详细原因" />
 			</view>
 		
 		
-		<view class="cause">
+		<!-- <view class="cause">
 			<view class="title">
 				上传附件
 			</view>
@@ -44,7 +36,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		
 		<view class="save">
 			<view class="save_btn" @click="save()">
@@ -58,65 +50,95 @@
 	export default{
 		data(){
 			return{
-				pic_list:[],
-				pic_list1:["../../static/logo.png","../../static/image/1.jpg"]
+				active:1,
+				cause:[
+					{id:1,title:'位置太远'},
+					{id:2,title:'多拍/拍错'},
+					{id:3,title:'未预约成功'},
+					{id:4,title:'不想要了'},
+					{id:5,title:'其他原因'}
+					],
+				order_id:'',
+				msg:''
+				// pic_list:[],
+				// pic_list1:["../../static/logo.png","../../static/image/1.jpg"]
 			}
 		},
 		methods:{
-			add(){
-				uni.chooseImage({
-				    count: 6,
-				    sizeType: ['original', 'compressed'],
-				    sourceType: ['album'],
-				    success: (res)=> {
-						console.log(res.tempFilePaths)
-						uni.uploadFile({
-							url: "http://mt.mlgxlm.com/upload",
-							filePath: res.tempFilePaths[0],
-							name: 'file',
-							success: (uploadFileRes) => {
-								let a = JSON.parse(uploadFileRes.data)
-								this.pic_list.push(a.data.path)
-							}
-						})
-				    }
-				});
+			exchang(e){
+				this.active = e
 			},
-			prev(e){
-				uni.previewImage({
-					current:e,
-				    urls: this.pic_list,
-				    longPressActions: {
-				        itemList: ['发送给朋友', '保存图片', '收藏'],
-				        success: function(data) {
-				            console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
-				        },
-				        fail: function(err) {
-				            console.log(err.errMsg);
-				        }
-				    }
-				});
-			},
-			del(e){
-				uni.showModal({
-					title: '提示',
-					content: '确认删除这张图片吗',
-					success: (res)=> {
-					    if (res.confirm) {
-					       this.pic_list.splice(e,1)
-						   this.global.utils.showToast_my("删除成功")
-					    } else if (res.cancel) {
-					        
-					    }
+			// 提交
+			save(){
+				
+					
+				
+				// this.global.utils.jump(1,"/pages/pay/refund_success?money=250") 
+				this.global.request.post({
+					url:'refund_add',
+					method:'GET',
+					data:{
+						refund_text_id:this.active,
+						id:this.order_id,
+						refund_msg:this.msg
+					},
+					success:res=>{
+						this.global.utils.jump(1,"/pages/pay/refund_success?money=" + res.data) 
 					}
 				})
-				
-			},
-			save(){
-				uni.navigateTo({
-					url:"/pages/pay/refund_success"
-				})
 			}
+			// add(){
+			// 	uni.chooseImage({
+			// 	    count: 6,
+			// 	    sizeType: ['original', 'compressed'],
+			// 	    sourceType: ['album'],
+			// 	    success: (res)=> {
+			// 			console.log(res.tempFilePaths)
+			// 			uni.uploadFile({
+			// 				url: "http://mt.mlgxlm.com/upload",
+			// 				filePath: res.tempFilePaths[0],
+			// 				name: 'file',
+			// 				success: (uploadFileRes) => {
+			// 					let a = JSON.parse(uploadFileRes.data)
+			// 					this.pic_list.push(a.data.path)
+			// 				}
+			// 			})
+			// 	    }
+			// 	});
+			// },
+			// prev(e){
+			// 	uni.previewImage({
+			// 		current:e,
+			// 	    urls: this.pic_list,
+			// 	    longPressActions: {
+			// 	        itemList: ['发送给朋友', '保存图片', '收藏'],
+			// 	        success: function(data) {
+			// 	            console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+			// 	        },
+			// 	        fail: function(err) {
+			// 	            console.log(err.errMsg);
+			// 	        }
+			// 	    }
+			// 	});
+			// },
+			// del(e){
+			// 	uni.showModal({
+			// 		title: '提示',
+			// 		content: '确认删除这张图片吗',
+			// 		success: (res)=> {
+			// 		    if (res.confirm) {
+			// 		       this.pic_list.splice(e,1)
+			// 			   this.global.utils.showToast_my("删除成功")
+			// 		    } else if (res.cancel) {
+					        
+			// 		    }
+			// 		}
+			// 	})
+			// },
+
+		},
+		onLoad(options) {
+			this.order_id = options.order_id
 		}
 	}
 </script>

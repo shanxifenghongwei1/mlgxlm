@@ -31,7 +31,7 @@
 		methods:{
 			toDetail(){
 				uni.navigateTo({
-					url:"/pages/pay/order"
+					url:"/pages/pay/order?good_cate=0"
 				})
 			},
 			// appointment(){

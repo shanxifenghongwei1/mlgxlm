@@ -86,10 +86,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="refund()" btnSize="sm" :select="0"></btn>
+						<btn font="申请退款" @save="refund(item.id)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认收货" @save="mygoods_add(item.order_id,index)" btnSize="sm" :select="1"></btn>
+						<btn font="确认收货" @save="mygoods_add(item.id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
@@ -213,9 +213,9 @@
 					</view>
 				</view>
 				<view class="opection">
-					<view class="btn-box">
+<!-- 					<view class="btn-box">
 						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
-					</view>
+					</view> -->
 					<view class="btn-box">
 						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
 					</view>
@@ -273,6 +273,13 @@
 			}
 		},
 		methods: {
+			//申请退款
+			refund(e){
+				this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e) 
+				console.log({mes:'点击申请退款',res:e})
+				
+			},
+			
 			//确认收货
 			mygoods_add(e,a){
 				console.log({mes:'点击确认收货',index:a})
@@ -289,7 +296,6 @@
 			// 删除订单
 			del_order(e,a){
 				console.log({mes:'点击删除订单',res:e,index:a})
-				
 				var that = this
 				uni.showModal({
 					title: '提示',
@@ -320,7 +326,6 @@
 			yesorder(e){
 				console.log({mes:'点击确认订单',res:e})
 				this.global.utils.jump(1,"/pages/pay/pay?order_id=" + e)
-				
 				
 			},
 			// 点击切换头部文字选择,并传id

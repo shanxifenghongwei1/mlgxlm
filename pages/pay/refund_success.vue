@@ -4,10 +4,10 @@
 		<view class="header">
 			<image src="/static/image/other/refund_success.png" mode=""></image>
 			<view class="name">
-				<text class="red">99</text><text class="">元</text><text class="left">退款成功</text>
+				<text class="red">{{money}}</text><text class="">元</text><text class="left">退款申请成功</text>
 			</view>
 			<view class="edition">
-				预计0-3个工作日原路退回
+				预计0-3个工作日审核通过
 			</view>
 		</view>
 		<view class="save">
@@ -23,7 +23,8 @@
 		data(){
 			return{
 				pic_list:[],
-				pic_list1:["../../static/logo.png","../../static/image/1.jpg"]
+				pic_list1:["../../static/logo.png","../../static/image/1.jpg"],
+				money:''
 			}
 		},
 		methods:{
@@ -32,6 +33,9 @@
 					url:"/pages/member/member"
 				})
 			}
+		},
+		onLoad(options) {
+			this.money = options.money
 		}
 	}
 </script>

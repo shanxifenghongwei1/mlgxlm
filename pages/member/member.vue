@@ -128,7 +128,7 @@
 				</view>
 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
-					<view class="member-tool-text">拼团订单</view>
+					<view class="member-tool-text">退款/售后</view>
 				</view>
 			</view>
 			<view class="member-tool-content1">

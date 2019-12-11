@@ -34,7 +34,7 @@
 		},
 		methods: {
 			formSubmit: function(e) {
-				console.log(e.detail.formId)
+				// console.log(e.detail.formId)
 				this.$emit("save",true)
 			},
 		},
@@ -42,8 +42,8 @@
 		// 	console.log(this.btnsize)
 		// }
 		mounted(){
-			console.log(this)
-			console.log(this.btnSize)
+			// console.log(this)
+			// console.log(this.btnSize)
 		}
 	}
 </script>
