@@ -1,14 +1,8 @@
 <template>
 	<!-- 我的足迹 -->
 	<view>
-		<view class="cate">
-			<cate :cateList="cateList" :cateid="cateid" @seleId="sele"></cate>
-		</view>
-		<view class="con" v-show="cateid===1">
-			<store></store>
-		</view>
-		<view class="con" v-show="cateid===2">
-			<goods :titCon="titCon" :more="false" place="3"></goods>
+		<view class="con">
+			<goods :titCon="list" :more="false" place="6"></goods>
 		</view>
 	</view>
 </template>
@@ -23,19 +17,30 @@
 		},
 		data() {
 			return {
-				cateList:[{name:"店铺",id:1},{name:"商品",id:2}],
-				cateid:1,
-				shoplists:[1,2,2],
-				titCon:[1,2,3]
+				list:[]
 			}
 		},
 		methods: {
 			sele:function(e){
 				this.cateid=e
+			},
+			findList(){
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						this.global.request.post({
+							url: 'user_history',
+							method:'GET',
+							success: res => {
+								this.list=res.historyInfo;
+							}
+						})
+					}
+				})
 			}
 		},
 		onLoad() {
 			this.global.utils.sethead("我的足迹")
+			this.findList();
 		}
 	}
 </script>

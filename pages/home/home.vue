@@ -10,7 +10,6 @@
 					<view class="icon iconfont" :class="item.icon"></view>
 					<view class="text font-weig">{{item.name}}</view>
 				</view>
-
 			</view>
 		</view>
 		<!-- 主要功能 -->

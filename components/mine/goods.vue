@@ -303,7 +303,7 @@
 			
 			<!-- 积分 -->
 			<block v-if="place===6" >
-				<view @click="toDetail()">
+				<!-- <view @click="toDetail()">
 				<view class="goods-pic">
 					<image src="/static/image/banner/1.jpg" mode=""></image>
 				</view>
@@ -320,6 +320,22 @@
 					<view class="hasbuy-box">
 						已售1000件
 					</view>
+				</view>
+				</view> -->
+				
+				
+				<view @click="toDetail()">
+				<view class="goods-pic">
+					<image :src="imageurl + item.picture" mode=""></image>
+				</view>
+				<view class="place place-address">			
+					{{item.goods_effect}}
+				</view>
+				<view class="place place-name red">
+					{{item.goods_name}}
+				</view>
+				<view class="place place-name flex red">
+					<view>{{item.price}}</view><text class="block sm">已售{{item.goods_gd_num}}件</text>
 				</view>
 				</view>
 			</block>

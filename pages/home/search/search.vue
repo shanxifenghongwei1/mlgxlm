@@ -2,7 +2,7 @@
 
 <template>
 	<view>
-			<zy-search :is-focus="false" :is-block="false" :show-want="true"></zy-search>
+		<zy-search :is-focus="false" :is-block="false" :show-want="true"></zy-search>
 	</view>
 </template>
 

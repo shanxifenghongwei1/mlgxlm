@@ -3,6 +3,17 @@
 		<view class="fathers">
 
 			<view class="search">
+				<view class="search_cate">
+					<view class="search_cate_box" @click="open_cate(0)">
+						{{cate==1?'服务':'店铺'}}
+					</view>
+					<view class="search_cate_box" v-if="is_open" @click="close_cate(2)">
+						店铺
+					</view>
+					<view class="search_cate_box" v-if="is_open" @click="close_cate(1)">
+						服务
+					</view>
+				</view>
 				<template v-if="isFocus">
 					<input maxlength="20" focus type="text" value="" confirm-type="search" @confirm="searchStart()" placeholder="请输入关键词搜索"
 					 v-model.trim="searchText" />
@@ -13,7 +24,7 @@
 				</template>
 				<image src="../../static/image/zy-search/search.png" mode="aspectFit" @click="searchStart()" class="search-icon"></image>
 			</view>
-		</view> 
+		</view>
 
 		<template v-if="isBlock">
 			<view v-if="mydiv">
@@ -38,50 +49,57 @@
 			<view v-else>
 				<view></view>
 				<shoplist myid="0" :shoplists="shoplists"></shoplist>
-				
+
 			</view>
-			
-			
+
+
 		</template>
 
 		<template v-else>
 			<view v-if="mydiv">
-			<view class='father-borde'>
+				<view class='father-borde'>
 
 
-				<view class="s-circle" v-if="hList.length > 0">
-					<view class="header">
-						<text class="iconfont icon-lishijilu"> <text class="font">历史记录</text></text>
-						<image src="../../static/image/zy-search/delete.png" mode="aspectFit" @click="delhistory"></image>
+					<view class="s-circle" v-if="hList.length > 0">
+						<view class="header">
+							<text class="iconfont icon-lishijilu"> <text class="font">历史记录</text></text>
+							<image src="../../static/image/zy-search/delete.png" mode="aspectFit" @click="delhistory"></image>
+						</view>
+						<view class="list">
+							<view v-for="(item,index) in hList" :key="index" @click="keywordsClick(item)">{{item}}</view>
+						</view>
 					</view>
-					<view class="list">
-						<view v-for="(item,index) in hList" :key="index" @click="keywordsClick(item)">{{item}}</view>
+					<view class="wanted-circle" v-if="showWant">
+						<view class="header"><text class="iconfont icon-remenbiaoqian icon-col"> </text> <text class="font">热门搜索</text>
+						</view>
+						<view class="list">
+							<view v-for="(item,index) in wantList" :key="index" @click="keywordsClick(item)">{{item}}</view>
+						</view>
 					</view>
 				</view>
-				<view class="wanted-circle" v-if="showWant">
-					<view class="header"> <text class="iconfont icon-remenbiaoqian icon-col"> </text> <text class="font">热门搜索</text>
-					</view>
-					<view class="list">
-						<view v-for="(item,index) in wantList" :key="index" @click="keywordsClick(item)">{{item}}</view>
-					</view>
-				</view>
-			</view>
 			</view>
 			<view v-else>
-				<shoplist myid='0' :shoplists="shoplists"></shoplist>
-				
+				<!-- this.cate==1 -->
+				<!-- <shoplist myid='0' :shoplists="shoplists"></shoplist> -->
+				<view v-if="cate==1">
+					<goodlist cateid="3" :goodslist="list"></goodlist>
+				</view>
+				<view v-else>
+					<store :store="list.salesInfo"></store>
+				</view>
 			</view>
-			
 		</template>
 
 	</view>
 </template>
 
 <script>
-	import shoplist from '@/components/shoplist/shoplist.vue'
+	// import shoplist from '@/components/shoplist/shoplist.vue';
+	import goodlist from '@/components/mine/goods-row.vue';
+	import store from "@/components/mine/store.vue"
 	export default {
 		components: {
-			shoplist
+			goodlist,store
 		},
 		name: "zy-search",
 		props: {
@@ -102,87 +120,73 @@
 		data() {
 			return {
 				searchText: '', //搜索关键词
-				shoplists:[],
+				shoplists: [],
 				mydiv: true,
 				hList: uni.getStorageSync('search_cache'), //历史记录
-				wantList: ['栏目1', '栏目2', '栏目3', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4'] //初始化推荐列表
+				wantList: ['栏目1', '栏目2', '栏目3', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4'] ,//初始化推荐列表
+				is_open:false,
+				cate:1,
+				list:{}
 			};
 		},
 		methods: {
 			searchtexts(e) {
-				console.log(e)
-				if (e.detail.value == '') {
-					this.mydiv = true
-				} else {
-					this.mydiv = false
-				}
-			},
-			searchStart: function() { //触发搜索
 				let _this = this;
 				if (_this.searchText == '') {
-					uni.showToast({
-						title: '请输入关键字',
-						icon: 'none',
-						duration: 1000
-					});
-					return false;
+					this.mydiv = true;
 				} else {
 					console.log('shoplist go?')
-					this.shoplists = [{
-					prople: '2000',
-					image: '../../static/image/shop/shop-1.jpg',
-					shopname: '艾美世界家',
-					address: '山西大医院',
-					start: '3.5',
-					labels: '便签',
-					goodssprice: '998',
-					newgoodssprice: '398',
-					goodsname: '芳香精油乳腺疏通',
-					othergoods: '酒槽鼻修护套餐',
-					othergoodsprices: "100",
-				}]
-					
-					
-					uni.getStorage({
-						key: 'search_cache',
-						success(res) {
-							let list = res.data;
-							console.log(list);
-							if (list.length > 5) {
-								for (let item of list) {
-									if (item == _this.searchText) {
-										return false;
-									}
-								}
-								list.pop();
-								list.unshift(_this.searchText);
-							} else {
-								for (let item of list) {
-									if (item == _this.searchText) {
-										return false;
-									}
-								}
-								list.unshift(_this.searchText);
-							}
-							_this.hList = list;
-							uni.setStorage({
-								key: 'search_cache',
-								data: _this.hList
-							});
+					this.global.request.post({
+						url: this.cate==1?"search_goods":"search_shop",
+						method: "GET",
+						data: {
+							keyword:_this.searchText
 						},
-						fail() {
-							_this.hList = [];
-							_this.hList.push(_this.searchText);
-							uni.setStorage({
-								key: 'search_cache',
-								data: _this.hList
-							});
+						success: (res) => {
+							console.log(res)
+							// this.mydiv = false;
+							if(res.salesInfo.length){
+								this.list=res
+								this.mydiv = false;
+							}else{
+								this.list=res
+							}
 						}
 					})
 				}
+				this.is_open=false;
+			},
+			searchStart: function() { //触发搜索
+				this.is_open=false;
+				let _this = this;
+				if (_this.searchText == '') {
+				
+				} else {
+					console.log('shoplist go?')
+					this.global.request.post({
+						url: this.cate==1?"search_goods":"search_shop",
+						method: "GET",
+						data: {
+							keyword:_this.searchText
+						},
+						success: (res) => {
+							console.log(res)
+							// this.mydiv = false;
+							if(res.salesInfo.length){
+								this.list=res
+								this.mydiv = false;
+							}else{
+								this.list=res
+							}
+						}
+					})
+				}
+
+				this.mydiv = false;
 			},
 			keywordsClick(item) { //推荐搜索
 				this.searchText = item;
+				this.is_open=false;
 			},
 			delhistory() { //清空历史记录
 				this.hList = [];
@@ -190,8 +194,61 @@
 					key: 'search_cache',
 					data: []
 				});
+				this.is_open=false;
 			},
-
+			open_cate(){
+				this.is_open=true;
+			},
+			close_cate(e){
+				if(e){
+					if(e!=this.cate){
+						this.cate=e;
+						this.searchStart()
+					}else{
+						
+					}
+				}
+				this.is_open=false;
+			}
+		},
+		created(){
+			let _this = this;
+			uni.getStorage({
+				key: 'search_cache',
+				success(res) {
+					let list = res.data;
+					console.log(list);
+					if (list.length > 5) {
+						for (let item of list) {
+							if (item == _this.searchText) {
+								return false;
+							}
+						}
+						list.pop();
+						list.unshift(_this.searchText);
+					} else {
+						for (let item of list) {
+							if (item == _this.searchText) {
+								return false;
+							}
+						}
+						list.unshift(_this.searchText);
+					}
+					_this.hList = list;
+					uni.setStorage({
+						key: 'search_cache',
+						data: _this.hList
+					});
+				},
+				fail() {
+					_this.hList = [];
+					_this.hList.push(_this.searchText);
+					uni.setStorage({
+						key: 'search_cache',
+						data: _this.hList
+					});
+				}
+			})
 		}
 	}
 </script>
@@ -201,9 +258,6 @@
 		width: 100%;
 		height: 150upx;
 		background-image: linear-gradient(#FE0000, #f49797);
-		;
-		overflow: hidden;
-
 	}
 
 	.father-borde {
@@ -214,17 +268,35 @@
 		box-shadow: 0 0 10px #f07676;
 		border-radius: 10px;
 	}
+	.search_cate{
+		width: 80rpx;
+		position: absolute;
+		left: 24rpx;
+		top: 0;
+		text-align: center;
+		z-index: 999;
+		margin-top: 30rpx;
+		font-size: 24rpx;
+		background: #F7F7F7;
+		.search_cate_box{
+			width: 100%;
+			height: calc(1.4rem + 16rpx);
+			text-align: center;
+			line-height: calc(1.4rem + 16rpx);
+		}
 
+	}
 	.search {
 		width: 700upx;
-		margin: 30upx auto 0;
+		margin: 0 auto;
 		position: relative;
-
+		padding-top: 30rpx;
 		input {
 			background-color: #F7F7F7;
 			padding: 8upx 34upx;
 			font-size: 28upx;
 			border-radius: 50upx;
+			padding-left: 120rpx;
 		}
 
 		.search-icon {
@@ -232,8 +304,8 @@
 			height: 36upx;
 			padding: 16upx 20upx 16upx 0;
 			position: absolute;
-			right: 0;
-			top: 4upx;
+			right: 10rpx;
+			top: 24upx;
 			z-index: 10;
 		}
 	}
