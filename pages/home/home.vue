@@ -70,13 +70,20 @@
 
 			<!-- banner图 -->
 			<view class="banner">
+				
+<!-- rotation_id	:	1	
+		rotation_img	:	/images/15761421874.jpg	
+		rotation_rou	:	/pages/pay/pay	
+		rotation_net_id	:	12 -->
+
 				<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
 					<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
-						<view class="swiper-item">
-							<image :src="item" mode="widthFix"></image>
+						<view class="swiper-item" @click="gosomepage(item.rotation_rou,item.rotation_net_id)">
+							<image :src="item.rotation_img" mode="widthFix"></image>
 						</view>
 					</swiper-item>
 				</swiper>
+
 			</view>
 
 
@@ -130,7 +137,7 @@
 						<view class="goods-one" v-for="(item,index) in indexData.recommend" :key='index' @click="toGoods(item.goods_id,item.goods_name)">
 							<view class="goodsname">{{item.goods_name}}</view>
 							<view class="goodsprice"> <text>{{item.price}}</text> RMB </view>
-							<image class="goodsimg" src="../../static/image/other/goods.jpg" mode="widthFix"></image>
+							<image class="goodsimg" :src="picUrl + item.picture" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -393,6 +400,9 @@
 
 		},
 		methods: {
+			gosomepage(rol,id){
+				this.global.utils.jump(1, rol + id);
+			},
 			openSetting(e){
 				console.log(e)
 			},
@@ -486,6 +496,10 @@
 							v.shop_label = v.shop_label ? v.shop_label.split(",") : []
 						})
 						result.data.data.goodsInfo = list1;
+
+					
+						this.bannerlist = result.data.data.datainfos.data
+
 
 
 						this.indexData = result.data.data

@@ -70,10 +70,6 @@
 			},
 			// 提交
 			save(){
-				
-					
-				
-				// this.global.utils.jump(1,"/pages/pay/refund_success?money=250") 
 				this.global.request.post({
 					url:'refund_add',
 					method:'GET',

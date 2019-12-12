@@ -1,8 +1,9 @@
 <template>
 	<view class="">
-		<view class="">
+		<view class="feitian">
 			<cateflex :cateList="cateList" :cateid="cateid" @seleId="seleId"></cateflex>
 		</view>
+		<view style="height: 70rpx;"></view>
 		<block v-for="(item,index) in list" :key="index">
 			
 			<!-- 待付款 -->
@@ -89,52 +90,10 @@
 						<btn font="申请退款" @save="refund(item.id)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认收货" @save="mygoods_add(item.id,index)" btnSize="sm" :select="1"></btn>
+						<btn font="确认收货" @save="mygoods_add(item.id,item.order_id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
-
-			
-<!-- 			<view class="list3" v-if="item.order_status==2">
-				<view class="title">
-					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（预约成功）
-					</view>
-					<view class="right" @click="phone(item.shop_phone)">
-						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
-					</view>
-				</view>
-				<view class="con">
-					<view class="left">
-						<image :src="picUrl+item.picture" mode=""></image>
-					</view>
-					<view class="right">
-						<view class="li">
-							<block v-if="item.good_cate==0">
-								<text>服务名称：</text><text>{{item.goods_name}}</text>
-							</block>
-							<block v-if="item.good_cate==1">
-								<text>商品名称：</text><text>{{item.goods_name}}</text>
-							</block>
-						</view>
-						<view class="li">
-							<text>订单编号：</text><text>{{item.order_no}}</text>
-						</view>
-						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
-						</view>
-						<view class="li">
-							<text class="icon iconfont icon-daifahuob"></text>预约成功，尚未服务
-						</view>
-					</view>
-				</view>
-				<view class="opection">
-					<view class="btn-box">
-						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
-					</view>
-
-				</view>
-			</view> -->
 			
 			<!-- 待评价 -->
 			<view class="list4" v-if="item.order_status==3">
@@ -172,7 +131,7 @@
 				</view>
 				<view class="opection"> 
 					<view class="btn-box">
-						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
+						<btn font="评价服务" @save="assess(item.id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -217,7 +176,7 @@
 						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view> -->
 					<view class="btn-box">
-						<btn font="评价服务" @save="assess()" btnSize="sm" :select="1"></btn>
+						<btn font="评价服务" @save="assess(item.id)" btnSize="sm" :select="1"></btn>
 					</view>
 			
 				</view>
@@ -275,21 +234,54 @@
 		methods: {
 			//申请退款
 			refund(e){
-				this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e) 
-				console.log({mes:'点击申请退款',res:e})
+				this.global.request.post({
+					url:'re_refund_add',
+					method:'GET',
+					data:{
+						id:e
+					},
+					success:res=>{
+						console.log({mes:'点击申请退款',res:res})
+						if(res.data.status_refund == 0){
+							this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e)
+							console.log({mes:'点击申请退款',res:e})
+						}else if(res.data.status_refund == 1){
+							this.global.utils.showToast_my('您已经申请过啦！')
+						}else if(res.data.status_refund == 2){
+							this.global.utils.showToast_my('您的申请已经在审核中！')
+						}else if(res.data.status_refund == 3){
+							this.global.utils.showToast_my('您的退款已成功！')
+						}else if(res.data.status_refund == 4){
+							this.global.utils.showToast_my('退款未通过审核')
+						}
+					}
+				})
+				
+				
 				
 			},
 			
 			//确认收货
-			mygoods_add(e,a){
-				console.log({mes:'点击确认收货',index:a})
+			mygoods_add(e,q,a){
+				console.log({mes:'点击确认收货',index:a,q:q})
 				this.global.request.post({
 					url:'up_status_add',
 					data:{
-						order_id:e
+						id:e,
+						order_id:q
 					},
 					success:res=>{
-						this.list.splice(a,1)
+						console.log({mes:'确认收货成功或者失败',res:res})
+						
+						if(res.data.data == 1){
+							this.list.splice(a,1)
+							this.global.utils.showToast_my('已成功确认')
+						}else if(res.data.data == 2){
+							this.global.utils.showToast_my('退款中不能确认收货')
+						}else if(res.data.data == 3){
+							this.global.utils.showToast_my('确认收货有误')
+						}
+						
 					}
 				})
 			},
@@ -318,9 +310,6 @@
 					}
 				});
 				
-				
-				
-				
 			},
 			//确认付款
 			yesorder(e){
@@ -346,9 +335,9 @@
 				})
 			},
 			//点击去评价
-			assess() {
+			assess(e) {
 				this.sunblind = true;
-				let url = "/pages/pay/assess"
+				let url = "/pages/pay/assess?id=" + e
 				this.global.utils.jump(1, url);
 			},
 			// 发请求获得订单数据
@@ -442,6 +431,14 @@
 </script>
 
 <style lang="scss">
+	.feitian{
+		width: 100%;
+		z-index: 100;
+		position:fixed;
+		top: -17rpx;
+		left: 0rpx;
+	}
+	
 	.red {
 		color: $any-col;
 	}

@@ -107,11 +107,12 @@
 			return {
 				dataUrl: "",
 				picUrl: "",
-				pic_list:[1,2,3,4]
+				pic_list:[1,2,3,4],
+				id:''
 			};
 		},
 		onLoad(options) {
-			options.order
+			this.id = options.id
 		},
 		methods: {
 			toDetail(e,f) {
