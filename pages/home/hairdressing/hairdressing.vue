@@ -9,21 +9,21 @@
 					<image :src="item.picture" mode="widthFix" @click="menuDetail()"></image>
 				</view>
 			</view>
-			<view class="newshop-head" v-if="options.runid!=3">
+			<!-- <view class="newshop-head" v-if="options.runid!=3">
 				<view class="icons">
 					<view class="iconsss"></view>
 					<view>热门项目</view>
 				</view>
 				<view class="more">更多</view>
-			</view>
+			</view> -->
 			<!-- 热门项目 -->
-			<view class="device" v-if="options.runid!=3">
+<!-- 			<view class="device" v-if="options.runid!=3">
 				<view v-for="(item,index) in gnlistmore" :key='index' class="device-son">
 					<image :src="item.picture" mode="widthFix"></image>
 				</view>
-			</view>
+			</view> -->
 			<!-- 轮播 -->
-			<view class="banner">
+<!-- 			<view class="banner">
 				<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
 					<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
 						<view class="swiper-item">
@@ -31,7 +31,7 @@
 						</view>
 					</swiper-item>
 				</swiper>
-			</view>
+			</view> -->
 			<!-- 栏目 -->
 			<view class='shoplist' v-if="options.runid!=3">
 				<view v-for="(item,index) in headlist" :key='index' class="list" :class="item.id== ids? 'active' : '' " @click="exchanges(item.id)">{{ item.name }}</view>

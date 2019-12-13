@@ -70,16 +70,11 @@
 
 			<!-- banner图 -->
 			<view class="banner">
-				
-<!-- rotation_id	:	1	
-		rotation_img	:	/images/15761421874.jpg	
-		rotation_rou	:	/pages/pay/pay	
-		rotation_net_id	:	12 -->
 
 				<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
 					<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
-						<view class="swiper-item" @click="gosomepage(item.rotation_rou,item.rotation_net_id)">
-							<image :src="item.rotation_img" mode="widthFix"></image>
+						<view class="swiper-item">
+							<image  @click="gosomepage(item.rotation_rou,item.rotation_net_id)" :src="picUrl + item.rotation_img" mode="widthFix"></image>
 						</view>
 					</swiper-item>
 				</swiper>
@@ -543,10 +538,9 @@
 					data: {},
 					isLoading: true,
 					success: (res) => {
-						let a = new Date();
-						a = a.getTime();
-						if (a - res.data[0].wx_user_login * 1000 > 60 * 60 * 24 * 1000 * 3) {
-							console.log("不是新人了")
+						console.log("判断是否为新人")
+						console.log(res)
+						if(res.code==1){
 							this.one_cate = [{
 									name: "优惠券",
 									url: "/pages/home/coupon/coupon",
@@ -574,8 +568,7 @@
 									icon: "icon-fenxiao"
 								}
 							]
-						} else {
-							console.log("是新人")
+						}else{
 							this.one_cate = [{
 									name: "优惠券",
 									url: "/pages/home/coupon/coupon",
