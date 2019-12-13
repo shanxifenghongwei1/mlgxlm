@@ -89,6 +89,7 @@
 		},
 		created() {
 			this.valueSync = this.value
+			console.log(this.value)
 		},
 		methods: {
 			_onClick(index) {
@@ -99,6 +100,11 @@
 				this.$emit('change', {
 					value: this.valueSync
 				})
+			}
+		},
+		watch:{
+			value(e){
+				this.valueSync=e;
 			}
 		}
 	}

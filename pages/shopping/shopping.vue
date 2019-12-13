@@ -37,13 +37,10 @@
 				</view>
 			</view>
 		</view>
-
-<!-- 		<view class="bac-img">
-			<image src="../../static/image/other/shopimg.jpg" mode="widthFix" class="bac-imgs"></image>
-		</view>
-		<view>
-			<goods :titCon="titCon" :more="false" place="1"></goods>
+<!-- 		<view>
+			<u-parse :content="article" @preview="preview" @navigate="navigate"></u-parse>
 		</view> -->
+
 		<!-- 定位容器 -->
 		<view class="emit-view"></view>
 		<view class="bottom" v-if="array.length">
@@ -64,41 +61,41 @@
 
 <script>
 	import numbox from "@/components/uni-number-box/uni-number-box.vue"
-	import goods from "@/components/mine/goods.vue"
+	import goods from "@/components/mine/goods.vue";
+	// import uParse from '@/components/u-parse/u-parse.vue'
 	export default {
 		components: {
 			numbox,
-			goods
+			goods,
+			// uParse
 		},
 		data() {
 			return {
 				list: [],
 				titCon: [1, 2, 3, 3],
-				checked:false,
-				imageurl:this.global.demao.domain.videoUrl,
-				array:[],
-				sum:0.00
+				checked: false,
+				imageurl: this.global.demao.domain.videoUrl,
+				array: [],
+				sum: 0.00,
+				// article: ''
 			}
 		},
 		methods: {
 			//去支付
 			pageTo: function() {
-				
-				let m_data={
-					total_price:this.sum,
-					goods_cate:0
+
+				let m_data = {
+					total_price: this.sum,
+					goods_cate: 0
 				}
-				let com={
-					goods_id : this.array.toString(),
-					shop_id : [],
-					buy_num : 1,
-					method_type : 1,
-					is_cart : 1 ,//0 没通过购物车  1 购物车购买
+				let com = {
+					goods_id: this.array.toString(),
+					shop_id: [],
+					buy_num: 1,
+					method_type: 1,
+					is_cart: 1, //0 没通过购物车  1 购物车购买
 				}
-				this.global.order.make_order(m_data,com)
-				// uni.navigateTo({
-				// 	url: "/pages/pay/pay"
-				// })
+				this.global.order.make_order(m_data, com)
 			},
 			//查询购物车
 			findCar() {
@@ -139,50 +136,50 @@
 			unique(arr) {
 				return Array.from(new Set(arr))
 			},
-			
+
 			//监听是否所有的商品被选中或反选
-			allCheck(){
-				let a=this.list;
-				let b=a.filter((v)=>{
-					return v.checked==true;
+			allCheck() {
+				let a = this.list;
+				let b = a.filter((v) => {
+					return v.checked == true;
 				})
 				console.log(b)
-				if(b.length==a.length){
-					this.checked=true;
-				}else{
-					this.checked=false;
+				if (b.length == a.length) {
+					this.checked = true;
+				} else {
+					this.checked = false;
 				}
 				this.calc()
 			},
 			//监听该店铺的商品是否被全选
-			dx(f){
-				let a=this.list;
-				a.forEach((v)=>{
-					if(v.id==f){
-						let b=v.child.filter((h)=>{
-							return h.checked==true;
+			dx(f) {
+				let a = this.list;
+				a.forEach((v) => {
+					if (v.id == f) {
+						let b = v.child.filter((h) => {
+							return h.checked == true;
 						})
-						console.log(b.length,v.child.length)
-						if(b.length==v.child.length){
-							v.checked=true;
-						}else{
-							v.checked=false;
+						console.log(b.length, v.child.length)
+						if (b.length == v.child.length) {
+							v.checked = true;
+						} else {
+							v.checked = false;
 						}
 					}
 				})
-				this.allCheck() 
+				this.allCheck()
 				this.calc()
 			},
 			// 点击单选
-			oneCheck(e,f){
-				console.log(e,f)
-				let a=this.list;
-				a.forEach((v)=>{
-					if(v.id==f){
-						v.child.forEach((h)=>{
-							console.log(h.goods_id,e)
-							if(h.goods_id==e){
-								h.checked=!h.checked;
+			oneCheck(e, f) {
+				console.log(e, f)
+				let a = this.list;
+				a.forEach((v) => {
+					if (v.id == f) {
+						v.child.forEach((h) => {
+							console.log(h.goods_id, e)
+							if (h.goods_id == e) {
+								h.checked = !h.checked;
 							}
 						})
 					}
@@ -190,57 +187,57 @@
 				this.dx(f)
 				this.calc()
 			},
-			
+
 			// 点击全选反选该店铺的商品
-			allShopCheck(e){
-				let a=this.list;
-				a.forEach((v)=>{
-					if(v.id==e){
-						let s=v.checked
-						v.checked=!s;
-						v.child.forEach((h)=>{
-							return h.checked=!s;
+			allShopCheck(e) {
+				let a = this.list;
+				a.forEach((v) => {
+					if (v.id == e) {
+						let s = v.checked
+						v.checked = !s;
+						v.child.forEach((h) => {
+							return h.checked = !s;
 						})
 					}
 				})
 				this.allCheck()
 				this.calc()
 			},
-			chec(e){
-				this.checked=!this.checked;
-				let a=this.list;
-				a.forEach((v)=>{
+			chec(e) {
+				this.checked = !this.checked;
+				let a = this.list;
+				a.forEach((v) => {
 					// this.allShopCheck(v.id)
-					v.checked=this.checked;
-					v.child.forEach((x)=>{
-						x.checked=this.checked;
+					v.checked = this.checked;
+					v.child.forEach((x) => {
+						x.checked = this.checked;
 					})
 				})
 				this.calc()
 			},
-			calc(){
-				let a=this.list;
-				let array=[];
-				let sum=0;
-				a.forEach((v)=>{
-					v.child.forEach((x)=>{
-						if(x.checked){
+			calc() {
+				let a = this.list;
+				let array = [];
+				let sum = 0;
+				a.forEach((v) => {
+					v.child.forEach((x) => {
+						if (x.checked) {
 							array.push(x.goods_id);
-							sum+=x.price;
+							sum += x.price;
 						}
-						
+
 					})
 				})
 				console.log(array);
 				console.log(sum);
-				this.array=array;
-				this.sum=sum;
+				this.array = array;
+				this.sum = sum;
 			}
 		},
 		onShow() {
 			console.log(this.global.demao.api.user_Address_list)
 			this.findCar();
-		
+
 			// let data={};
 			// data.goods_id=3172;
 			// data.buy_num=1;

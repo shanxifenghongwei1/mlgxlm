@@ -2,15 +2,15 @@
 	<!-- 我要评价页面 -->
 	<view class="">
 		<view class="order-detail">
-			<image src="" mode=""></image>
+			<image :src="picUrl+goods_detail.picture" mode=""></image>
 			<view class="right">
 				<view class="tit">
-					商品名称：<text>芳香精油乳腺疏通12</text>
+					商品名称：<text>{{goods_detail.goods_name}}</text>
 				</view>
 				<view class="star">
-					<text class="star-tit">商品名称：</text>
+					<text class="star-tit">商品评星：</text>
 					<view class="star-con">
-						<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#7f7f7f" active-color="#ffb540" />
+						<uni-rate disabled margin='2' size="13" max='5' :value="star" color="#7f7f7f" active-color="#ffb540" />   
 					</view>
 				</view>
 			</view>
@@ -32,34 +32,34 @@
 			<view class="star-list">
 				<text class="star-tit">服务效果</text>
 				<view class="star-con">
-					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" active-color="#ffb540" />
+					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" @change="star1()" active-color="#ffb540" />
 				</view>
 			</view>
 			<view class="star-list">
 				<text class="star-tit">服务技术</text>
 				<view class="star-con">
-					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" active-color="#ffb540" />
+					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" @change="star2()" active-color="#ffb540" />
 				</view>
 			</view>
 			<view class="star-list">
 				<text class="star-tit">服务态度</text>
 				<view class="star-con">
-					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" active-color="#ffb540" />
+					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" @change="star3()" active-color="#ffb540" />
 				</view>
 			</view>
 			<view class="star-list">
 				<text class="star-tit">店铺环境</text>
 				<view class="star-con">
-					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" active-color="#ffb540" />
+					<uni-rate :disabled='false' margin='2' size="13" max='5' :value="3" color="#575757" @change="star4()" active-color="#ffb540" />
 				</view>
 			</view>
 		</view>
 		<view class="content">
-			<textarea value="" placeholder="输入您对本次服务的评价" maxlength="500" auto-height />
+			<textarea value="" placeholder="输入您对本次服务的评价" maxlength="500" v-model="evaluate_text" auto-height />
 			</view>
 		<view class="pic-video">
 			<view class="title">
-				添加视频/图片
+				图片
 			</view>
 	
 				<view class="pic-box">
@@ -76,12 +76,7 @@
 							<text class="zi">添加照片</text>
 						</view>
 					</view>
-					<view class="pic active" @click="add_video">
-						<view class="addBtn ccc">
-							<text class="icon iconfont icon-shipin"></text>
-							<text class="zi">添加视频</text>
-						</view>
-					</view>
+
 				</view>
 		
 		</view>
@@ -105,60 +100,65 @@
 		
 		data() {
 			return {
+				star:0,
+				goods_detail:{},
 				dataUrl: "",
-				picUrl: "",
-				pic_list:[1,2,3,4],
-				id:''
+				picUrl: this.global.demao.domain.videoUrl,
+				pic_list:[],
+				pic_list1:[],
+				id:'',
+				
+				effect_start:1,
+				skill_start:1,
+				attitude_start:1,
+				ambient:1,
+				evaluate_text:""
 			};
 		},
 		onLoad(options) {
-			this.id = options.id
+			this.id = options.id;
+			this.global.login_state.login_state().then((res) => {
+				if (res) {
+					this.global.request.post({
+						url: 'goods_list_evaluate',
+						method:"GET",
+						data:{
+							id:options.id
+						},
+						success: res => {
+							this.goods_detail=res.data;
+							this.star=res.data.star;
+						}
+					})
+				}
+			})
 		},
 		methods: {
-			toDetail(e,f) {
-				console.log("我打印出了-------------------------------------------哈哈哈哈哈哈哈哈哈哈或或或")
-				uni.navigateTo({
-					url: "/pages/home/goods-detail/goods-detail?goods_id=" + e+"&&head="+f
-				})
-			},
 			add(){
+				let that=this;
 				uni.chooseImage({
-				    count: 6,
-				    sizeType: ['original', 'compressed'],
-				    sourceType: ['album'],
-				    success: (res)=> {
-						console.log(res.tempFilePaths)
-						uni.uploadFile({
-							url: "http://mt.mlgxlm.com/upload",
-							filePath: res.tempFilePaths[0],
-							name: 'file',
-							success: (uploadFileRes) => {
-								let a = JSON.parse(uploadFileRes.data)
-								this.pic_list.push(a.data.path)
-							}
-						})
-				    }
-				});
-			},
-			add_video(){
-				uni.chooseVideo({
-					count: 1,
-					sourceType: ['camera', 'album'],
-					success: function (res) {
-						console.log()
-						
-						uni.uploadFile({
-							url: "http://mt.mlgxlm.com/update_video",
-							filePath: res.tempFilePath,
-							name: 'file',
-							success: (uploadFileRes) => {
-								console.log(res)
-								// let a = JSON.parse(uploadFileRes.data)
-								// this.pic_list.push(a.data.path)
-							}
+					count: 6,
+					sizeType: ['original', 'compressed'],
+					sourceType: ['album'],
+					success: (res) => {
+						that.pic_list=this.pic_list.concat(res.tempFilePaths)
+						let pic_box = []
+						res.tempFilePaths.forEach((v, index) => {
+							uni.uploadFile({
+								url: this.global.demao.domain.request + this.global.demao.api.upload,
+								filePath: v,
+								name: 'file',
+								success: (uploadFileRes) => {
+									let a = JSON.parse(uploadFileRes.data)
+									pic_box.push(a.data.path)
+									if (index + 1 == res.tempFilePaths.length) {
+										that.pic_list1 = that.pic_list1.concat(pic_box) 
+									}
+								}
+							})
 						})
 					}
-				})
+				});
 			},
 			prev(e){
 				uni.previewImage({
@@ -189,6 +189,41 @@
 					}
 				})
 				
+			},
+			star1(e){
+				this.effect_start=e.value;
+			},
+			star2(e){
+				this.skill_start=e.value;
+			},
+			star3(e){
+				this.attitude_start=e.value;
+			},
+			star4(e){
+				this.ambient=e.value;
+			},
+			save(){
+				let data={
+					id:this.id,
+					effect_start:this.effect_start,
+					skill_start:this.skill_start,
+					attitude_start:this.attitude_start,
+					ambient:this.ambient,
+					evaluate_text:this.evaluate_text,
+					goods_evaluate_img:this.pic_list1.toString()
+				};
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						this.global.request.post({
+							url: 'goods_evaluate',
+							data:data,
+							method:"GET",
+							success: res => {
+								console.log(res)
+							}
+						})
+					}
+				})
 			}
 		}
 	}

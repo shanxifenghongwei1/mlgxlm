@@ -6,7 +6,7 @@
 			<view class="num">
 				30
 			</view>
-			<view class="draw">
+			<view class="draw" @click="save()">
 				立即领取
 			</view>
 		</view>
@@ -21,7 +21,18 @@
 			}
 		},
 		methods: {
-	
+			save(){
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						this.global.request.post({
+							url: 'draw_package',
+							success: res => {
+								this.global.utils.showToast_my(res.msg)
+							}
+						})
+					}
+				})
+			}
 		},
 		onLoad(e){
 			

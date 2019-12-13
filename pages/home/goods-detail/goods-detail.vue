@@ -98,7 +98,7 @@
 		</view>
 
 		<!-- 拼团 -->
-		<view class="goods-team" v-if="good_detail.goodsInfo.promotion_type==1 && num" @click="toPt_list()">
+<!-- 		<view class="goods-team" v-if="good_detail.goodsInfo.promotion_type==1 && num" @click="toPt_list()">
 			<view class="title">
 				<text>
 					{{pt_num_all}}人在拼团，可直接参与
@@ -127,7 +127,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 		<!-- 评价 -->
 		<view class="eval" v-if="good_detail.assesslist.length">
