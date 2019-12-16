@@ -5,6 +5,7 @@
 		margin-top: 20rpx;
 		@extend .any-flex;
 		flex-wrap: wrap;
+		justify-content: space-between;
 		.device-son{
 			width:100rpx;
 			height: 100rpx;
