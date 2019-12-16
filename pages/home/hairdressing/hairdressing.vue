@@ -44,7 +44,7 @@
 				</scroll-view>
 			</view> -->
 			
-			<view class="newbox any-flex" style="align-items: flex-start;" v-if="options.runid!=3">
+			<view class="newbox any-flex" style="align-items: flex-start;">
 				<scroll-view :scroll-into-view='ids' :class="menue == true ? 'menu' : 'menu1' " scroll-x>
 					<view class="scroll-list">
 						<view @click="exchanges(item.id)" :id=" 'a'+ item.id " v-for="(item,index) in headlist" :key='index' :class=" 'a'+ item.id == ids ? 'active' : '' "
@@ -56,28 +56,91 @@
 			
 		</view>
 
-		<shoplist myid="7" :shoplists="shoplists"></shoplist>
-<!-- goods_id: 8
-goods_name: "æ¼å¢æ¯ä»æµè¯"
-juli: 11.013498746941801
-market_price: "0.00"
-picture: "/images/1575703348840952892.gif"
-promotion_price: "10.00"
-prople: 0
-shop_id: 1
-shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
+		<!-- <goodlist :cateid="ids" :goodslist="indexData"></goodlist> -->
+		
+		<view class="goods" v-for="(item,index) in distance" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
+			<!-- 商品图片 -->
+			<view class="pic-box">
+				<image :src="imageurl +item.picture" mode=""></image>
+			</view>
+			
+			<view class="con">
+				<!-- 店铺名字 -->
+				<view class="title">
+					<text>{{item.shop_name}}</text>
+				</view>
+				<!-- 星级 -->
+				<view class="star">
+					<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.star" color="#7f7f7f" active-color="#ffb540" />
+				</view>
+				<!-- 商品名字 -->
+				<view class="contex">
+					<text class="icon iconfont icon-xiangmu"></text>
+					{{item.goods_name}}
+				</view>
+				<!-- 拼团 -->
+				<view class="address" v-if='item.promotion_type == 1'>
+					<text class="icon iconfont icon-tuan lg"></text>
+					<text class="red base mar">{{item.promotion_price}}</text> 
+				</view>
+				<!-- 优惠 -->
+				<view class="address" v-if='item.promotion_type == 2'>
+					<text class="icon iconfont icon-hui"></text>
+					{{item.introduction}}
+				</view>
+				<!-- 销量  正常 -->
+				<view class="address" v-if='item.promotion_type == 3'>
+					<text class="icon iconfont icon-tuan lg">
+								
+					</text>
+					<text class="red base mar">{{item.price}}元</text>
+				</view>
+				<!-- 限时抢 -->
+				<view class="con-cmd" v-if='item.promotion_type == 4'>
+					<cmdRrogress :percent="item.limited_ready_prople/item.limited_prople" custom>
+						<view class="sm">
+							已抢<text>{{item.limited_ready_prople}}</text>位
+						</view>
+					</cmdRrogress>
+				</view>
+				
+			</view>
+		</view>
+
+<!--
+shop_id	:	1	
+shop_name	:	冯宏伟的测试店铺美
+goods_id	:	8	
+goods_name	:	拼团支付测试
+market_price	:	0.00	
+picture	:	/images/1575703348840952892.gif
+prople	:	0	
+promotion_price	:	10.00	
+promotion_type	:	1	
+introduction	:		
+star	:	6	
+price	:	100	
+limited_price	:	0.00	
+coupon_redouction	:	null	
+coupon_price	:	null	
+is_member_discount	:	0		
+juli	:	11.013498746941801
+-->
 
 	</view>
 </template>
 
 <script>
+	// import goodlist from '@/components/mine/goods-row.vue'
 	import './hairdressing.scss'
-	import shoplist from '@/components/shoplist/shoplist.vue'
+	import uniRate from '@/components/uni-rate/uni-rate.vue'
+	import cmdRrogress from "@/components/cmd-progress/cmd-progress.vue"
 	import searchAny from '@/components/my-search/my-search.vue'
 	export default {
 		components: {
 			searchAny,
-			shoplist
+			uniRate,
+			cmdRrogress
 		},
 		data() {
 			return {
@@ -143,24 +206,11 @@ shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
 				],
 				// 高亮id
 				ids: 'a999',
+				
+				options:Object,
 				// 指示点颜色
 				colors: '#e01818',
-				headlist: [{
-					id: 6,
-					name: '精选'
-				}, {
-					id: 7,
-					name: '除皱'
-				}, {
-					id: 8,
-					name: '补水'
-				}, {
-					id: 9,
-					name: '塑形'
-				}, {
-					id: 10,
-					name: '美白'
-				}],
+				headlist: [],
 				shoplists: [{
 					prople: '2000',
 					image: '../../static/image/shop/shop-1.jpg',
@@ -180,12 +230,21 @@ shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
 			};
 		},
 		methods: {
+			// 跳转商品详情
+			toDetail(e, f) {
+				uni.navigateTo({
+					url: "/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
+				})
+			},
+			
+			
 			// 高亮id
 			exchanges(e) {
 				this.ids = 'a' + e
 				if (this.menue == false) {
 					this.menue = true
 				}
+				this.init(e)
 			},
 			
 			menushow() {
@@ -196,33 +255,38 @@ shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
 					url: "/pages/home/menu-details/menu-details"
 				})
 			},
-			init(lat, lng, runid) {
-
+			init(e) {
 				this.global.request.post({
 					url: 'mt_sort',
 					method: 'GET',
 					data: {
-						t_id: runid,
-						lat1: lat,
-						lng1: lng
+						t_id: e,
+						lat1: this.options.lat,
+						lng1: this.options.lng
 					},
 					success: res => {
 						console.log({
 							a: "大分类详情",
 							res: res
 						})
-						this.detail = res.data1
-						let a = [{
-							id: 999,
-							name: '精选'
-						}]
-						res.data1.forEach((item, index) => {
-							a.push({
-								name: item.t_name,
-								id: item.t_id
+						
+						if(e == this.options.runid){
+							this.detail = res.data1
+							let a = [{
+								id: this.options.runid,
+								name: '精选'
+							}]
+							res.data1.forEach((item, index) => {
+								a.push({
+									name: item.t_name,
+									id: item.t_id
+								})
 							})
-						})
-						this.headlist = a
+							this.headlist = a
+							this.ids = 'a' + this.options.runid
+						}
+						
+						
 						this.distance = res.distance
 					}
 				})
@@ -230,10 +294,11 @@ shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
 
 		},
 		onLoad(options) {
-			// console.log(options.lat,options.lng)
-			this.init(options.lat, options.lng, options.runid)
 			this.options = options;
 			this.global.utils.sethead(options.head)
+			this.init(options.runid)
+			
+			
 		}
 	}
 </script>
@@ -302,6 +367,145 @@ shop_name: "å¯å®ä¼çæµè¯åºéºç¾" -->
 			width: 80%;
 			height: 8rpx;
 			background: $any-col;
+		}
+	}
+	
+	
+	// 商品列表
+	.goods {
+		width: 100%;
+		height: 200rpx;
+		border-radius: 20rpx;
+		border: 2rpx solid $any-zol;
+		border-bottom: 4rpx solid $any-col;
+		margin-top: 20rpx;
+		padding: 15rpx 0;
+		box-sizing: border-box;
+		@extend .any-flex;
+		justify-content: space-between;
+	
+		.pic-box {
+			padding: 0 20rpx;
+		}
+	
+		image {
+			width: 160rpx;
+			height: 160rpx;
+			background: red;
+		}
+	
+		.con {
+			flex-grow: 1;
+			height: 100%;
+			@extend .any-flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			padding-right: 10%;
+			box-sizing: border-box;
+			position: relative;
+	
+			.title {
+				width: 100%;
+				font-size: $uni-font-size-base;
+				color: $any-col;
+				font-weight: bold;
+				@include multi-row-apostrophe(1);
+				padding-right: 25%;
+				box-sizing: border-box;
+			}
+	
+			.star {
+				width: 100%;
+				position: relative;
+				font-size: $uni-font-size-base;
+	
+			}
+	
+			.contex {
+				font-size: $uni-font-size-sm;
+				@include multi-row-apostrophe(1);
+			}
+	
+			.address {
+				width: 100%;
+				font-size: $uni-font-size-sm;
+				@include multi-row-apostrophe(1);
+				position: relative;
+				padding-right: 25%;
+				box-sizing: border-box;
+			}
+	
+			.iconfont {
+				font-size: 26rpx;
+				margin-right: 20rpx;
+				color: $any-col;
+			}
+	
+			.context1 {
+				@extend .any-flex;
+				align-items: flex-end;
+			}
+		}
+	
+		.ccc {
+			color: #868686;
+		}
+	
+		.red {
+			color: $any-col;
+		}
+	
+		.mar {
+			margin-right: 20rpx;
+		}
+	
+		.mar2 {
+			margin-right: 30rpx;
+		}
+	
+		.go {
+			background: $any-col;
+			color: #ffffff;
+			padding: 3rpx 10rpx;
+			border-radius: 20rpx;
+			font-size: $uni-font-size-base;
+			position: absolute;
+			right: 0%;
+			top: -10rpx;
+		}
+	
+		.has {
+			font-size: $uni-font-size-base;
+			color: #000000;
+			position: absolute;
+			right: 0%;
+			top: -5rpx;
+		}
+	
+		.con-cmd {
+			width: 60%;
+		}
+	
+		.sm {
+			font-size: $uni-font-size-sm;
+		}
+	
+		.base {
+			font-size: $uni-font-size-base;
+		}
+	
+		.lg {
+			font-size: $uni-font-size-lg !important;
+		}
+	
+		.through {
+			text-decoration: line-through;
+		}
+	
+		.suo {
+			width: 70%;
+			@include multi-row-apostrophe(1);
 		}
 	}
 </style>

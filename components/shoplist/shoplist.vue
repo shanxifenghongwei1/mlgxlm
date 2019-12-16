@@ -43,7 +43,7 @@
 					<text v-if="myid == 2 || myid == 3 || myid == 5" class="gobuy">进店 </text>
 					<text v-if="myid == 4" class="gobuy" @click="go">马上抢 </text>
 					<text v-if="myid == 1" class="gobuy">去拼团 </text>
-					<text v-if="myid == 6" class="gobuy">更多团购 </text>
+					<!-- <text v-if="myid == 6" class="gobuy">更多团购 </text> -->
 					<view v-if="myid == 6" class="havepeople"> 已售 <text>{{item.prople}}</text> 位 </view>
 					<view v-if="myid == 1" class="havepeople"> 已拼 <text>{{item.prople}}</text> 位 </view>
 					

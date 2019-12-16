@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "goods": "/components/mine/goods",
-    "cateflex": "/components/mine/cate-flex"
-  }
-}
