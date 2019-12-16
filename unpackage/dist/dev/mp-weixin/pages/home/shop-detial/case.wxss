@@ -1,0 +1,8 @@
+
+.case-succ{
+	width: 100%;
+	padding: 20rpx 3% 20rpx;
+	box-sizing: border-box;
+	box-shadow: $any-zol 0px 0px 10rpx;
+}
+

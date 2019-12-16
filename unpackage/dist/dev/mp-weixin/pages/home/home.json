@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "美丽共享联盟",
+  "usingComponents": {
+    "goodlist": "/components/mine/goods-row",
+    "search-any": "/components/my-search/my-search"
+  }
+}

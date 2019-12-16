@@ -78,7 +78,7 @@
 							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-chenggong red"></text>支付成功，等待服务
@@ -122,7 +122,7 @@
 							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
 						</view>
 						<view class="li">
 							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
@@ -164,10 +164,10 @@
 							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.total_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
 						</view>
 						<view class="li">
-							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
+							<text class="icon iconfont icon-pingjia1"></text>服务已完成。
 						</view>
 					</view>
 				</view>
@@ -175,10 +175,10 @@
 <!-- 					<view class="btn-box">
 						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view> -->
-					<view class="btn-box">
+<!-- 					<view class="btn-box">
 						<btn font="评价服务" @save="assess(item.id)" btnSize="sm" :select="1"></btn>
 					</view>
-			
+			 -->
 				</view>
 			</view>
 			

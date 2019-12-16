@@ -11,7 +11,7 @@
 		<view>
 			<store :store="cateid==1?store:store1" :store_cate="cateid"></store>
 		</view>
-	</view>
+	</view>	
 </template>
 
 <script>

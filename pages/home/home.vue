@@ -154,6 +154,7 @@
 		},
 		data() {
 			return {
+				latnng:{},
 				hasLocation:false,
 				city: "",
 				sunblind: false,
@@ -416,8 +417,10 @@
 			// 美容美发/身体护理/问题皮肤/瑜伽健身 四个功能的跳转
 			runHairdressing(e, f) {
 				this.sunblind = true;
-				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f
-				this.global.utils.jump(1, url);
+				let lat = this.latnng.latitude
+				let lng = this.latnng.longitude
+				this.global.utils.jump(1, "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng);
+
 			},
 			//跳转附近店铺
 			goNear() {
@@ -522,6 +525,7 @@
 				type: 'wgs84',
 				success(res) {
 					console.log(res)
+					that.latnng = res
 					if(res.latitude){
 						that.hasLocation=true;
 					}else{
