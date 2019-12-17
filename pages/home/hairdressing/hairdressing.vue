@@ -67,7 +67,7 @@
 			<view class="con">
 				<!-- 店铺名字 -->
 				<view class="title">
-					<text>{{item.shop_name}}</text>
+					<text>{{item.goods_name}}</text><text>{{"("+item.shop_name+")"}}</text>
 				</view>
 				<!-- 星级 -->
 				<view class="star">
@@ -78,10 +78,14 @@
 					<text class="icon iconfont icon-xiangmu"></text>
 					{{item.goods_name}}
 				</view>
+				<view class="contex">
+					<!-- <text class="icon iconfont icon-xiangmu"></text> -->
+					距您:{{item.juli | fixed }}km
+				</view>
 				<!-- 拼团 -->
 				<view class="address" v-if='item.promotion_type == 1'>
 					<text class="icon iconfont icon-tuan lg"></text>
-					<text class="red base mar">{{item.promotion_price}}</text> 
+					<text class="red base mar">团购价 {{item.promotion_price}}</text> 
 				</view>
 				<!-- 优惠 -->
 				<view class="address" v-if='item.promotion_type == 2'>
@@ -89,11 +93,9 @@
 					{{item.introduction}}
 				</view>
 				<!-- 销量  正常 -->
-				<view class="address" v-if='item.promotion_type == 3'>
-					<text class="icon iconfont icon-tuan lg">
-								
-					</text>
-					<text class="red base mar">{{item.price}}元</text>
+				<view class="address" v-if='item.promotion_type == 3 || item.promotion_type == 0'>
+					<!-- <text class="icon iconfont icon-tuan lg"></text> -->
+					<text class="red base mar">价格 {{item.price}}元</text>
 				</view>
 				<!-- 限时抢 -->
 				<view class="con-cmd" v-if='item.promotion_type == 4'>
@@ -229,6 +231,11 @@ juli	:	11.013498746941801
 				imageurl: this.global.demao.domain.videoUrl
 			};
 		},
+		filters: {
+			fixed:function(e){
+				return Number(e).toFixed(2)
+			}
+		},
 		methods: {
 			// 跳转商品详情
 			toDetail(e, f) {
@@ -271,12 +278,12 @@ juli	:	11.013498746941801
 						})
 						
 						if(e == this.options.runid){
-							this.detail = res.data1
+							this.detail = res.data2
 							let a = [{
 								id: this.options.runid,
 								name: '精选'
 							}]
-							res.data1.forEach((item, index) => {
+							res.data2.forEach((item, index) => {
 								a.push({
 									name: item.t_name,
 									id: item.t_id
@@ -287,7 +294,7 @@ juli	:	11.013498746941801
 						}
 						
 						
-						this.distance = res.distance
+						this.distance = res.data1
 					}
 				})
 			}

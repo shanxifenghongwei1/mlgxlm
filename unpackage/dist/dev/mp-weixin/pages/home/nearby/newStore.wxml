@@ -1,0 +1,1 @@
+<view><view class="search-box"><search vue-id="1" bind:__l="__l"></search></view><view class="shoplist-box"><shoplist vue-id="2" shoplists="{{datalist}}" myid="{{ids}}" num="{{num}}" bind:__l="__l"></shoplist></view></view>

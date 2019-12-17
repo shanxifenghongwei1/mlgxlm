@@ -1,0 +1,1 @@
+<view><view class="con"><image class="back" src="/static/image/other/share_2.png" mode></image><view class="num">30</view><view data-event-opts="{{[['tap',[['save']]]]}}" class="draw" bindtap="__e">立即领取</view></view></view>
