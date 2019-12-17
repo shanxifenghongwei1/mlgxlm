@@ -33,7 +33,7 @@
 							<text>订单编号：</text><text>{{item.order_no}}</text>
 						</view>
 						<view class="li">
-							<text>需付金额：</text><text class="red">{{item.total_price}}元</text>
+							<text>需付金额：</text><text class="red">{{item.price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-naozhong red"></text>尚未支付
@@ -42,10 +42,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="删除订单" @save="del_order(item.order_id,index)" btnSize="sm" :select="0"></btn>
+						<btn font="删除订单" @save="del_order(item.id,index)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认付款" @save="yesorder(item.order_id)" btnSize="sm" :select="1"></btn>
+						<btn font="确认付款" @save="yesorder(item.id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -298,7 +298,7 @@
 									url:'update_static_del', 
 									method:'GET',
 									data:{
-										order_id:e
+										id:e
 									},
 									success:res=>{
 										this.list.splice(a,1)

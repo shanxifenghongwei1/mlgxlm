@@ -95,7 +95,7 @@
 			
 					</text>
 					<text class="red base mar">{{item.price}}元</text>
-					<text>{{item.description}}</text>
+					<text>{{item.goods_effect}}</text>
 					<view class="has">
 						已售<text class="red">{{item.goods_gd_num}}</text>位
 					</view>

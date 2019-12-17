@@ -5,19 +5,19 @@
 		</view>
 	
 		<view class="detail">
-			<view class="detail-box">
+			<view class="detail-box" v-for="(item,index) in order_detail" :key="index">
 				<view class="title">
 					产品详情
 				</view>
 				<view class="con">
-					<view class="con-box">
-						<text>产品名称：</text><text>{{order_detail.goods_name}}</text>
+					<view class="con-box" >
+						<text>产品名称：</text><text>{{item.goods_name}}</text>
 					</view>
 					<view class="con-box">
-						<text>订单编号：</text><text>{{order_detail.order_no}}</text>
+						<text>订单编号：</text><text>{{item.order_no}}</text>
 					</view>
 					<view class="con-box"> 
-						<text>总计金额：</text><text>{{order_detail.total_price}}</text>
+						<text>总计金额：</text><text>{{item.price}}</text>
 					</view>
 				</view>
 			</view>
@@ -43,7 +43,7 @@
 		
 
 		<view class="pay">
-			<btn :font="'确认支付'+ order_detail.total_price +'元'" btnSize="base" @save="save()"></btn>
+			<btn :font="'确认支付'+ order_detail[0].total_price +'元'" btnSize="base" @save="save()"></btn>
 		</view>
 	
 	</view>
@@ -60,7 +60,8 @@
 				meth:0,
 				options:{},
 				order_detail:{},
-				userInfo:{}
+				userInfo:{},
+				is_big:1			
 			}
 		},
 		onLoad(options) {
@@ -77,15 +78,14 @@
 				// this.global.order.make_order().then(){
 				// 	console.log("执行到这儿了")
 				// }
-				
 			},
 			save(){
 				if(this.meth==0){
-					if(this.userInfo[0].money>this.order_detail.total_price){
+					if(this.userInfo[0].money>this.order_detail[0].total_price){
 						// console.log("分享币支付")
 						let data={};
-						data.price=this.order_detail.total_price;
-						data.order_id=this.order_detail.order_id;
+						data.price=this.order_detail[0].total_price;
+						data.order_id=this.order_detail[0].order_id;
 						this.global.request.post({
 							url: this.global.demao.api.moneybuy,
 							method: "GET",
@@ -95,7 +95,7 @@
 								if(res.code==0){
 									this.global.utils.showToast_my("支付成功")
 									setTimeout(()=>{
-										this.global.utils.jump(1,"/pages/pay/pay_success?money=" + this.order_detail.total_price)
+										this.global.utils.jump(3,"/pages/pay/pay_success?money=" + this.order_detail.total_price)
 									},2000)
 								}else{
 									
@@ -123,17 +123,23 @@
 		},
 		onLoad(options){
 			console.log(options)
+			
+			//1大订单
+			
+			if(options.is_min){
+				is_big:0
+			}else{
+				is_big:1
+			}
 			let data={};
-			data.order_id=options.order_id;
+			data.id=options.order_id;
+			data.is_big=this.is_big;
 			this.global.request.post({
 				url: "user_center",
 				method: "GET",
 				data: {},
 				success: (res) => {
-					console.log("这是个人中心数据")
-					console.log(res.userInfo)
 					this.userInfo=res.userInfo;
-					
 				}
 			})
 			this.global.request.post({
@@ -142,7 +148,7 @@
 				data: data,
 				isLoading: true,
 				success: (res) => {
-					this.order_detail=res.data[0]
+					this.order_detail=res.data
 				}
 			})
 		}
@@ -158,7 +164,6 @@
 	}
 	.detail{
 		width: 100%;
-		height: 292rpx;
 		padding: 0 3%;
 		box-sizing: border-box;
 		margin-top: 30rpx;
@@ -169,6 +174,7 @@
 			background-size: cover;
 			padding: 0 30rpx;
 			box-sizing: border-box;
+			margin-top: 20rpx;
 			.title{
 				width: 100%;
 				height: 106rpx;
@@ -252,8 +258,7 @@
 		width: 100%;
 		padding: 0 5%;
 		box-sizing: border-box;
-		position: fixed;
-		left: 0;
-		bottom: 50rpx;
+		margin-top: 60rpx;
+		position: relative;
 	}
 </style>
