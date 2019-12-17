@@ -34,6 +34,18 @@
 			}
 		},
 		{
+			"path": "pages/home/retail_home/retail_pay",
+			"style": {
+				"navigationBarTitleText": "在线支付"
+			} 
+		},
+		{
+			"path": "pages/home/retail_home/retail_pay_success",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			} 
+		},
+		{
 			"path": "pages/pay/refund",
 			"style": {
 				"navigationBarTitleText": "申请退款"

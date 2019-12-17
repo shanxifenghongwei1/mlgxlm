@@ -48,7 +48,7 @@
 			</view>
 			<view v-else>
 				<view></view>
-				<shoplist myid="0" :shoplists="shoplists"></shoplist>
+				<!-- 		<shoplist myid="0" :shoplists="shoplists"></shoplist> -->
 
 			</view>
 
@@ -99,7 +99,8 @@
 	import store from "@/components/mine/store.vue"
 	export default {
 		components: {
-			goodlist,store
+			goodlist,
+			store
 		},
 		name: "zy-search",
 		props: {
@@ -122,61 +123,71 @@
 				searchText: '', //搜索关键词
 				shoplists: [],
 				mydiv: true,
-				hList: uni.getStorageSync('search_cache'), //历史记录
-				wantList: ['栏目1', '栏目2', '栏目3', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4'] ,//初始化推荐列表
-				is_open:false,
-				cate:1,
-				list:{}
+				hList: [], //历史记录
+				wantList: ['栏目1', '栏目2', '栏目3', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4', '栏目4'], //初始化推荐列表
+				is_open: false,
+				cate: 1,
+				list: {}
 			};
 		},
 		methods: {
 			searchtexts(e) {
 				let _this = this;
+				_this.hList = uni.getStorageSync('search_cache');
 				if (_this.searchText == '') {
 					this.mydiv = true;
 				} else {
-					console.log('shoplist go?')
 					this.global.request.post({
-						url: this.cate==1?"search_goods":"search_shop",
+						url: this.cate == 1 ? "search_goods" : "search_shop",
 						method: "GET",
 						data: {
-							keyword:_this.searchText
+							keyword: _this.searchText
 						},
 						success: (res) => {
 							console.log(res)
 							// this.mydiv = false;
-							if(res.salesInfo.length){
-								this.list=res
+							if (res.salesInfo.length) {
+								this.list = res
 								this.mydiv = false;
-							}else{
-								this.list=res
+							} else {
+								this.list = res
 							}
 						}
 					})
 				}
-				this.is_open=false;
+				this.is_open = false;
 			},
 			searchStart: function() { //触发搜索
-				this.is_open=false;
+				this.is_open = false;
 				let _this = this;
 				if (_this.searchText == '') {
-				
+
 				} else {
-					console.log('shoplist go?')
 					this.global.request.post({
-						url: this.cate==1?"search_goods":"search_shop",
+						url: this.cate == 1 ? "search_goods" : "search_shop",
 						method: "GET",
 						data: {
-							keyword:_this.searchText
+							keyword: _this.searchText
 						},
 						success: (res) => {
 							console.log(res)
 							// this.mydiv = false;
-							if(res.salesInfo.length){
-								this.list=res
+							if (res.salesInfo.length) {
+								this.list = res
 								this.mydiv = false;
-							}else{
-								this.list=res
+								let has_item = _this.hList.filter((v) => {
+									return v == _this.searchText.trim()
+								})
+								if (has_item.length) {} else {
+									console.log(false)
+									_this.hList.push(_this.searchText.trim())
+									uni.setStorage({
+										key: 'search_cache',
+										data: _this.hList
+									});
+								}
+							} else {
+								this.list = res
 							}
 						}
 					})
@@ -186,7 +197,8 @@
 			},
 			keywordsClick(item) { //推荐搜索
 				this.searchText = item;
-				this.is_open=false;
+				this.searchStart()
+				this.is_open = false;
 			},
 			delhistory() { //清空历史记录
 				this.hList = [];
@@ -194,61 +206,26 @@
 					key: 'search_cache',
 					data: []
 				});
-				this.is_open=false;
+				this.is_open = false;
 			},
-			open_cate(){
-				this.is_open=true;
+			open_cate() {
+				this.is_open = true;
 			},
-			close_cate(e){
-				if(e){
-					if(e!=this.cate){
-						this.cate=e;
+			close_cate(e) {
+				if (e) {
+					if (e != this.cate) {
+						this.cate = e;
 						this.searchStart()
-					}else{
-						
+					} else {
+
 					}
 				}
-				this.is_open=false;
+				this.is_open = false;
 			}
 		},
-		created(){
+		created() {
 			let _this = this;
-			uni.getStorage({
-				key: 'search_cache',
-				success(res) {
-					let list = res.data;
-					console.log(list);
-					if (list.length > 5) {
-						for (let item of list) {
-							if (item == _this.searchText) {
-								return false;
-							}
-						}
-						list.pop();
-						list.unshift(_this.searchText);
-					} else {
-						for (let item of list) {
-							if (item == _this.searchText) {
-								return false;
-							}
-						}
-						list.unshift(_this.searchText);
-					}
-					_this.hList = list;
-					uni.setStorage({
-						key: 'search_cache',
-						data: _this.hList
-					});
-				},
-				fail() {
-					_this.hList = [];
-					_this.hList.push(_this.searchText);
-					uni.setStorage({
-						key: 'search_cache',
-						data: _this.hList
-					});
-				}
-			})
+			_this.hList = uni.getStorageSync('search_cache');
 		}
 	}
 </script>
@@ -268,7 +245,8 @@
 		box-shadow: 0 0 10px #f07676;
 		border-radius: 10px;
 	}
-	.search_cate{
+
+	.search_cate {
 		width: 80rpx;
 		position: absolute;
 		left: 24rpx;
@@ -278,7 +256,8 @@
 		margin-top: 30rpx;
 		font-size: 24rpx;
 		background: #F7F7F7;
-		.search_cate_box{
+
+		.search_cate_box {
 			width: 100%;
 			height: calc(1.4rem + 16rpx);
 			text-align: center;
@@ -286,11 +265,13 @@
 		}
 
 	}
+
 	.search {
 		width: 700upx;
 		margin: 0 auto;
 		position: relative;
 		padding-top: 30rpx;
+
 		input {
 			background-color: #F7F7F7;
 			padding: 8upx 34upx;

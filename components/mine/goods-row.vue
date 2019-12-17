@@ -91,7 +91,7 @@
 					{{item.t_name}}
 				</view>
 				<view class="address">
-					<text class="icon iconfont icon-tuan lg">
+					<text class="icon iconfont icon-iconkuozhan_yuepre lg">
 			
 					</text>
 					<text class="red base mar">{{item.price}}元</text>

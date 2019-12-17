@@ -89,7 +89,6 @@
 		},
 		created() {
 			this.valueSync = this.value
-			console.log(this.value)
 		},
 		methods: {
 			_onClick(index) {

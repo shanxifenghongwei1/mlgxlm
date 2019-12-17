@@ -39,7 +39,7 @@
 						{{detail.re_goodsShopInfo.shop_name}}
 					</view>
 					<view class="">
-						<uniRate value="detail.re_goodsShopInfo.shop_score" size="15"></uniRate>
+						<uniRate :value="detail.re_goodsShopInfo.shop_star" size="15"></uniRate>
 					</view>
 				</view>
 				<view class="goShop-where" @click="toshop">
@@ -48,31 +48,28 @@
 					</view>
 				</view>
 			</view>
-			<view class="shop-pic-detail">
-				<view class="shop-detail-title lg wei">
-					图文详情
-				</view>
-				<view :class="state?'pic-image':'pic-image-lg'  ">
-					<block v-for="(item,index) in detail.re_goodsShopInfo.re_goods_picture_detail" :key="index">
-						<image :src="picUrl+item" mode="widthFix"></image>
-					</block>
-				</view>
-				<view class="lg-state" @click="trans">
-					<view class="">
-						查看更多图文详情
-					</view>
-					<image src="/static/image/other/icon-xiala.png" mode="widthFix" :class="state?'tea_arrowDown':'tea_arrowUp'"></image>
-				</view>
+		</view>
+		
+		
+		
+		<view class="shop-pic-detail">
+			<view class="shop-detail-title lg wei" style="margin: 20rpx 0;">
+				图文详情
+			</view>
+			<view class="pic-image-lg">
+				<block v-for="(item,index) in detail.re_goodsShopInfo.re_goods_picture_detail" :key="index">
+					<image :src="picUrl+item" mode="widthFix"></image>
+				</block>
 			</view>
 		</view>
 		
 
-		<view class="eval">
+		<view class="eval" v-if="detail.re_evaluateInfo_count>0">
 			<view class="title lg">
-				<text class="title-con wei">全部商品（{{detail.re_evaluateInfo_count}}）</text>
+				<text class="title-con wei">全部评价（{{detail.re_evaluateInfo_count}}）</text>
 			</view>
 			
-			<view class="li" v-for="(item,index) in detail.re_evaluateInfo" :key="index">
+			<view class="li" v-for="(item,index) in detail.re_evaluateInfo" :key="index" v-if="index<3">
 				<view class="top">
 				
 					<image class="canve" :src="item.wx_headimg" mode=""></image>
@@ -85,33 +82,6 @@
 					{{item.comment}}
 				</view>
 			</view>
-		<!-- 	<view class="li">
-				<view class="top">
-				
-					<image class="canve" src="/static/image/other/person_nav.png" mode=""></image>
-				
-					<view class="name">
-						刁民
-					</view>
-				</view>
-				<view class="con">
-					总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕总有刁民想杀朕
-				</view>
-			</view> -->
-			<!-- <view class="lg-state">
-				<view class="">
-					查看更多评论
-				</view>
-				<image src="/static/image/other/icon-xiala.png" mode="widthFix" :class="state?'tea_arrowDown':'tea_arrowUp'"></image>
-			</view> -->
-		</view>
-		
-		<view class="good_shop">
-			<image src="/static/image/shop/shop_image_show.png" mode="widthFix"></image>
-		</view>
-		
-		<view class="recommend">
-			<goods :titCon="goods_list" :more="false" :place="5"></goods> 
 		</view>
 		<view class="emit">
 			
@@ -158,25 +128,26 @@
 			}
 		},
 		methods: {
+			toshop(){
+				this.global.utils.jump(5)
+			},
 			trans() {
 				this.state = this.state ? false : true
 			},
 			pay(e) {
 				console.log(e)
-			// 	if (e.index === 0) {
-			// 		uni.makePhoneCall({
-			// 			phoneNumber: "18435105990",
-			// 			success(res) {
-			
-			// 			}
-			// 		})
-			// 	} else if (e.index === 1) {
-			// 		this.toshop()
-			// 	} else {
-			
-			// 		this.global.utils.jump(2, "/pages/shopping/shopping")
-			// 	}
-			
+				if (e.index === 0) {
+					this.global.utils.jump(2,'/pages/home/home')
+				} else if (e.index === 1) {
+					uni.makePhoneCall({
+						phoneNumber: this.detail.re_goodsShopInfo.shop_phone,
+						success(res) {
+								
+						}
+					})
+				} else {
+					this.global.utils.jump(5)
+				}
 			},
 			butt(e) {
 				this.global.login_state.login_state().then((res) => {
@@ -187,6 +158,8 @@
 				})
 			},
 			init(){
+				
+				// 获取商品详细信息
 				let data={};
 				data.re_goods_id=this.options.re_goods_id;
 				this.global.request.post({
@@ -204,73 +177,17 @@
 		onLoad(options){
 			console.log(options)
 			this.options=options;
-			
 			this.init();
 		}
 	}
 </script>
 
 <style lang="scss">
-	@keyframes tea_arrow {
-		0% {
-			transform: rotate(180deg);
-		}
-
-		25% {
-			transform: rotate(135deg);
-		}
-
-		50% {
-			transform: rotate(90deg);
-		}
-
-		75% {
-			transform: rotate(45deg);
-		}
-
-		100% {
-			transform: rotate(0deg);
-		}
-	}
-
-	@keyframes tea_arrow1 {
-		0% {
-			transform: rotateZ(0deg);
-		}
-
-		25% {
-			transform: rotateZ(45deg);
-		}
-
-		50% {
-			transform: rotateZ(90deg);
-		}
-
-		75% {
-			transform: rotateZ(135deg);
-		}
-
-		100% {
-			transform: rotateZ(180deg);
-		}
-	}
 
 	.c {
 		width: 100rpx;
 		height: 100rpx;
 		background: red;
-	}
-
-	.tea_arrowDown {
-		animation: tea_arrow 0.3s linear;
-		transform-origin: center center;
-		transform: rotate(0deg);
-	}
-
-	.tea_arrowUp {
-		animation: tea_arrow1 0.3s linear;
-		transform-origin: center center;
-		transform: rotate(180deg);
 	}
 
 	.red {
@@ -333,7 +250,7 @@
 		}
 	}
 	.big-detail{
-		padding-top: 20rpx;
+		padding: 20rpx 0;
 		box-shadow: 0rpx 0rpx 10rpx #cccccc;
 		margin-top: 20rpx;
 	}
@@ -367,10 +284,10 @@ border-radius: 50%;
 		.goShop-name {
 			width: 450rpx;
 			height: 90rpx;
-			padding: 0 20rpx;
+			padding: 10rpx 0rpx 10rpx 30rpx;
 			@extend .any-flex;
 			flex-direction: column;
-			justify-content: center;
+			justify-content: space-between;
 			align-items: flex-start;
 			font-size: $uni-font-size-base;
 			box-sizing: border-box;

@@ -2,7 +2,7 @@
 	<view class="page" >
 		<block v-if="addressList.length">
 			<view class="address-box" v-for="(item,index) in addressList" :key="index" >
-				<view class="box-top" v-if="fromPage!='index'" @click="save(item.address_provice+item.address_city+item.address_area+item.address_detail)">
+				<view class="box-top" v-if="fromPage!='index'" @click="save(item.id)">
 					<view class="name">
 						<view class="">
 							收货人:{{item.name}}
