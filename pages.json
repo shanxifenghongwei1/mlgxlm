@@ -46,6 +46,18 @@
 			} 
 		},
 		{
+			"path": "pages/home/retail_order/order_list",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			} 
+		},
+		{
+			"path": "pages/home/retail_order/order_detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			} 
+		},
+		{
 			"path": "pages/pay/refund",
 			"style": {
 				"navigationBarTitleText": "申请退款"

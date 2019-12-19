@@ -7,7 +7,7 @@
 				订单支付成功 ￥{{monerys}}元
 			</view>
 			<view class="edition">
-				请您提前两小时与商家联系并预约此次服务。
+				我们会尽快安排发货哦。
 			</view>
 		</view>
 		<view class="con">
@@ -34,7 +34,7 @@
 				uni.navigateTo({
 					url:""
 				})
-				this.global.utils.jump(4,'/pages/pay/order?good_cate=1')
+				this.global.utils.jump(4,'/pages/home/retail_order/order_detail')
 			},
 			home(){
 				this.global.utils.jump(2,'/pages/home/home')

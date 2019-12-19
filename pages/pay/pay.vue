@@ -85,7 +85,8 @@
 						// console.log("分享币支付")
 						let data={};
 						data.price=this.order_detail[0].total_price;
-						data.order_id=this.order_detail[0].order_id;
+						data.order_id=this.options.order_id;
+						data.is_big=this.is_big;
 						this.global.request.post({
 							url: this.global.demao.api.moneybuy,
 							method: "GET",
@@ -122,8 +123,8 @@
 			}
 		},
 		onLoad(options){
-			console.log(options)
-			
+			console.log(options.order_id)
+			this.options=options;
 			//1大订单
 			
 			if(options.is_min){

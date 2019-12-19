@@ -67,7 +67,7 @@
 			<view class="member-order-content">
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=0')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>
-					<view class="member-order-text">代付款</view>
+					<view class="member-order-text">待付款</view>
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=1')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
@@ -85,24 +85,24 @@
 		</view>
 		
 		<view class="member-order member-assets">
-			<view @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=99')" class="member-order-top">
-				<view class="member-order-my">商品订单</view>
+			<view @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=99')" class="member-order-top">
+				<view class="member-order-my">分销订单</view>
 				<view class="icon iconfont member-order-left icon-jiantou-copy"></view>
 			</view>
 			<view class="member-order-content">
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=0')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=0')">
 					<view class="icon iconfont member-order-content1 icon-ziyuan1"></view>
-					<view class="member-order-text">代付款</view>
+					<view class="member-order-text">待付款</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=1')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=1')">
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
 					<view class="member-order-text">待发货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=2')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=2')">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
 					<view class="member-order-text">待收货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/pay/order?good_cate=1&cateid=3')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=3')">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">待评价</view>
 				</view>

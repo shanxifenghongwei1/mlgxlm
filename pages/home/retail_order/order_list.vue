@@ -18,22 +18,18 @@
 				</view>
 				<view class="con">
 					<view class="left">
-						<image :src="picUrl+item.picture" mode=""></image>
+						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<block v-if="item.good_cate==0">
-								<text>服务名称：</text><text>{{item.goods_name}}</text>
-							</block>
-							<block v-if="item.good_cate==1">
-								<text>商品名称：</text><text>{{item.goods_name}}</text>
-							</block>
+							
+							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>{{item.order_no}}</text>
+							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>需付金额：</text><text class="red">{{item.price}}元</text>
+							<text>需付金额：</text><text class="red">{{item.re_goods_price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-naozhong red"></text>尚未支付
@@ -42,10 +38,10 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="删除订单" @save="del_order(item.id,index)" btnSize="sm" :select="0"></btn>
+						<btn font="删除订单" @save="del_order(item.re_order_id,index)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认付款" @save="yesorder(item.id)" btnSize="sm" :select="1"></btn>
+						<btn font="确认付款" @save="yesorder(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -63,34 +59,30 @@
 				</view>
 				<view class="con">
 					<view class="left">
-						<image :src="picUrl+item.picture" mode=""></image>
+						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<block v-if="item.good_cate==0">
-								<text>服务名称：</text><text>{{item.goods_name}}</text>
-							</block>
-							<block v-if="item.good_cate==1">
-								<text>商品名称：</text><text>{{item.goods_name}}</text>
-							</block>
+							
+							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>{{item.order_no}}</text>
+							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
 						</view>
 						<view class="li red">
-							<text class="icon iconfont icon-chenggong red"></text>支付成功，等待服务
+							<text class="icon iconfont icon-chenggong red"></text>支付成功，等待发货
 						</view>
 					</view>
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="refund(item.id)" btnSize="sm" :select="0"></btn>
+						<btn font="申请退款" @save="refund(item.re_order_id)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
-						<btn font="确认收货" @save="mygoods_add(item.id,item.order_id,index)" btnSize="sm" :select="1"></btn>
+						<btn font="确认收货" @save="mygoods_add(item.re_order_id,item.order_id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
@@ -107,22 +99,18 @@
 				</view>
 				<view class="con">
 					<view class="left">
-						<image :src="picUrl+item.picture" mode=""></image>
+						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<block v-if="item.good_cate==0">
-								<text>服务名称：</text><text>{{item.goods_name}}</text>
-							</block>
-							<block v-if="item.good_cate==1">
-								<text>商品名称：</text><text>{{item.goods_name}}</text>
-							</block>
+							
+							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>{{item.order_no}}</text>
+							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
 						</view>
 						<view class="li">
 							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
@@ -131,7 +119,7 @@
 				</view>
 				<view class="opection"> 
 					<view class="btn-box">
-						<btn font="评价服务" @save="assess(item.id)" btnSize="sm" :select="1"></btn>
+						<btn font="评价服务" @save="assess(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
@@ -149,22 +137,18 @@
 				</view>
 				<view class="con">
 					<view class="left">
-						<image :src="picUrl+item.picture" mode=""></image>
+						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
 					<view class="right">
 						<view class="li">
-							<block v-if="item.good_cate==0">
-								<text>服务名称：</text><text>{{item.goods_name}}</text>
-							</block>
-							<block v-if="item.good_cate==1">
-								<text>商品名称：</text><text>{{item.goods_name}}</text>
-							</block>
+							
+							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">
-							<text>订单编号：</text><text>{{item.order_no}}</text>
+							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
 						</view>
 						<view class="li">
 							<text class="icon iconfont icon-pingjia1"></text>服务已完成。
@@ -176,7 +160,7 @@
 						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
 					</view> -->
 <!-- 					<view class="btn-box">
-						<btn font="评价服务" @save="assess(item.id)" btnSize="sm" :select="1"></btn>
+						<btn font="评价服务" @save="assess(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 			 -->
 				</view>
@@ -192,11 +176,7 @@
 <script>
 	import cateflex from "@/components/mine/cate-flex.vue"
 	export default {
-		// 订单状态 0->未支付，1->已付款 待发货，2->已发货，3->确认收货,4->已完成,5->已关闭6->链上处理中
-		//0	 待付款  
-		//1  待预约   待发货
-		//2	 待收货   待服务
-		//3	 待评价
+		// 订单状态 0->未支付，1->已付款 待发货，2->已发货 待收货，3->已收货 待评价，4->订单完成  不再显示	99->查询所有订单
 		components: {
 			cateflex
 		},
@@ -211,11 +191,11 @@
 						id: 0
 					},
 					{
-						name: "待预约",
+						name: "待发货",
 						id: 1
 					},
 					{
-						name: "预约中",
+						name: "待收货",
 						id: 2
 					},
 					{
@@ -227,8 +207,7 @@
 				sunblind: false,
 				options: {},
 				list: [],
-				page: 1,
-				picUrl:""
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods: {
@@ -314,13 +293,11 @@
 			//确认付款
 			yesorder(e){
 				console.log({mes:'点击确认订单',res:e})
-				this.global.utils.jump(1,"/pages/pay/pay?order_id=" + e)
-				
+				this.global.utils.jump(1,"/pages/home/retail_home/retail_pay?re_order_id=" + e)
 			},
 			// 点击切换头部文字选择,并传id
 			seleId(e) {
 				this.cateid = e;
-				this.page = 1;
 				this.list = [];
 				this.init()
 			},
@@ -347,20 +324,14 @@
 				
 				let data = {};
 				// 服务还是商品
-				data.good_cate = this.options.good_cate;
-				// 订单的类型
 				data.order_status = this.cateid;
-				data.page = this.page;
 				this.global.request.post({
-					//open_order_list 订单列表
-					url: this.global.demao.api.open_order_list,
-					method: "GET",
+					url: "index_reseller_orderList",
 					data: data,
 					success: (res) => {
 						console.log(res)
-						if (res.data.data.length) {
-							this.list = this.list.concat(res.data.data);
-							this.page = this.page + 1;
+						if (res.data.length) {
+							this.list = this.list.concat(res.data);
 						}
 					}
 				})
@@ -369,62 +340,8 @@
 		onLoad(options) {
 			this.options = options;
 			this.cateid=options.cateid;
-			this.picUrl=this.global.demao.domain.videoUrl;
-			if (options.good_cate == 0) {
-				// 服务订单
-				this.cateList = [{
-						name: "综合",
-						id: 99
-					},
-					{
-						name: "待付款",
-						id: 0
-					},
-					{
-						name: "待确认",
-						id: 1
-					},
-					{
-						name: "待评价",
-						id: 3 
-					},
-					{
-						name: "已完成",
-						id: 4
-					},
-					
-					
-				]
-			} else {
-				// 商品订单
-				this.cateList = [{
-						name: "综合",
-						id: 99
-					},
-					{
-						name: "待付款",
-						id: 0
-					},
-					{
-						name: "待发货",
-						id: 1
-					},
-					{
-						name: "待收货",
-						id: 2
-					},
-					{
-						name: "待评价",
-						id: 3
-					},
-				]
-			}
 		},
 		onShow() {
-			this.init();
-		},
-		onReachBottom() {
-			console.log('上拉加载')
 			this.init();
 		},
 	}
@@ -447,16 +364,6 @@
 	.list2,
 	.list3,
 	.list4 {
-		// width: 100%;
-		// margin-top: 20rpx;
-		// padding: 0 3%;
-		// box-sizing: border-box;
-		// @extend .any-flex;
-		// flex-direction: column;
-		// align-items: flex-end;
-		// box-shadow: 0rpx 0rpx 10rpx #bfbdbd;
-		
-		
 		width: calc(100% - 48rpx);
 		margin-top: 20rpx;
 		padding: 0 3%;
