@@ -5,7 +5,7 @@
 				{{item.t_name}}
 			</view>
 			<view class="con">
-				<view @click="menuDetail(v.t_id,v.t_name)"   v-for="(v,i) in item.child" :key="i" class="list-one">
+				<view @click="menuDetail(v.t_id,v.t_name)" v-for="(v,i) in item.child" :key="i" class="list-one">
 					<image mode="aspectFit" :src="picUrl+v.t_img" class="icon"></image>
 					<view class="text">{{v.t_name}}</view>
 				</view>
@@ -37,16 +37,17 @@
 	export default {
 		data() {
 			return {
-				s_type1: [
-				],
-				picUrl: ""
+				s_type1: [],
+				picUrl: this.global.demao.domain.videoUrl,
+				options:{}
 			}
 		},
 		methods: {
 
 		},
-		onLoad(){
-			this.picUrl=this.global.demao.domain.videoUrl;
+		onLoad(options){
+			this.options = options 
+
 			this.global.request.post({
 				url: this.global.demao.api.type_lists,
 				method: "GET",

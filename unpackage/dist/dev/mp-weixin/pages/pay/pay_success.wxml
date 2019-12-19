@@ -1,1 +1,0 @@
-<view class="page"><view class="header"><image src="/static/image/other/pay_success.png" mode></image><view class="name">{{'订单支付成功 ￥'+monerys+'元'}}</view><view class="edition">请您提前两小时与商家联系并预约此次服务。</view></view><view class="con"><view data-event-opts="{{[['tap',[['toDetail']]]]}}" bindtap="__e">查看订单</view></view></view>

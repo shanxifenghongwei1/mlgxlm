@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "cate-flex": "/components/mine/cate-flex",
-    "datejs": "/components/mine/datejs"
-  }
-}

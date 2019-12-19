@@ -442,7 +442,9 @@
 			//跳转二级分类详情页面
 			menuDetail(e, f) {
 				this.sunblind = true;
-				let url = "/pages/home/menu-details/menu-details?head=" + f + "&&goods_id=" + e
+				let lat = this.latnng.latitude
+				let lng = this.latnng.longitude
+				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng
 				this.global.utils.jump(1, url);
 			},
 			//跳转商品详情页面
@@ -460,7 +462,10 @@
 			},
 			// 跳转至更多分类
 			toCatePage() {
-				this.global.utils.jump(1, "/pages/cate/cate");
+				let lat = this.latnng.latitude
+				let lng = this.latnng.longitude
+				let url = "/pages/home/hairdressing/hairdressing?lat=" + lat + '&&lng=' + lng
+				this.global.utils.jump(1 , url);
 			},
 			// 高亮id
 			exchanges(id) {

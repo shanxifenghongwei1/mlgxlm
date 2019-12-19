@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "分销商品详情",
-  "usingComponents": {
-    "my-swiper": "/components/mine/my-swiper",
-    "uni-rate": "/components/uni-rate/uni-rate",
-    "goods": "/components/mine/goods",
-    "goods-nav": "/components/uni-goods-nav/uni-goods-nav"
-  }
-}

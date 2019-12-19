@@ -90,7 +90,7 @@
 				<!-- 优惠 -->
 				<view class="address" v-if='item.promotion_type == 2'>
 					<text class="icon iconfont icon-hui"></text>
-					{{item.introduction}}
+					{{item.coupon_names}}
 				</view>
 				<!-- 销量  正常 -->
 				<view class="address" v-if='item.promotion_type == 3 || item.promotion_type == 0'>
@@ -106,28 +106,11 @@
 					</cmdRrogress>
 				</view>
 				
+				
 			</view>
 		</view>
 
-<!--
-shop_id	:	1	
-shop_name	:	冯宏伟的测试店铺美
-goods_id	:	8	
-goods_name	:	拼团支付测试
-market_price	:	0.00	
-picture	:	/images/1575703348840952892.gif
-prople	:	0	
-promotion_price	:	10.00	
-promotion_type	:	1	
-introduction	:		
-star	:	6	
-price	:	100	
-limited_price	:	0.00	
-coupon_redouction	:	null	
-coupon_price	:	null	
-is_member_discount	:	0		
-juli	:	11.013498746941801
--->
+
 
 	</view>
 </template>
@@ -148,63 +131,12 @@ juli	:	11.013498746941801
 			return {
 				menue: true,
 				// 一级功能列表
-				gnlist: [{
-						id: 1,
-						text: '面部护理',
-						picture: '../../../static/image/other/mianbu.png'
-					},
-					{
-						id: 2,
-						text: '抗衰除皱',
-						picture: '../../../static/image/other/kangsui.png'
-					},
-					{
-						id: 3,
-						text: '塑性焕肤',
-						picture: '../../../static/image/other/shuxing.png'
-					},
-					{
-						id: 4,
-						text: '美发美甲',
-						picture: '../../../static/image/other/meifa.png'
-					},
-					{
-						id: 5,
-						text: '深度清洁',
-						picture: '../../../static/image/other/shendu.png'
-					},
-				],
+				gnlist: [],
 				// 一级功能列表更多
-				gnlistmore: [{
-						id: 1,
-						text: '美白凝眸',
-						picture: '../../../static/image/other/meibai.png'
-					},
-					{
-						id: 2,
-						text: '激光除皱',
-						picture: '../../../static/image/other/jiguang.png'
-					},
-					{
-						id: 3,
-						text: '冰川补水',
-						picture: '../../../static/image/other/bingchuan.png'
-					},
-					{
-						id: 4,
-						text: '韩式美甲',
-						picture: '../../../static/image/other/meijia.png'
-					},
-					{
-						id: 5,
-						text: '磨砂气泡',
-						picture: '../../../static/image/other/mosha.png'
-					},
-				],
+				gnlistmore: [],
 				// 热门项目
 				bannerlist: [
-					'../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg',
-					'../../../static/image/banner/4.jpg'
+
 				],
 				// 高亮id
 				ids: 'a999',
@@ -292,8 +224,6 @@ juli	:	11.013498746941801
 							this.headlist = a
 							this.ids = 'a' + this.options.runid
 						}
-						
-						
 						this.distance = res.data1
 					}
 				})

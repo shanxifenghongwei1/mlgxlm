@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cate": "/components/mine/cate-flex",
-    "goods": "/components/mine/goods",
-    "store": "/components/mine/store"
-  }
-}

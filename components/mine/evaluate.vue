@@ -13,7 +13,7 @@
 			<view class="con">
 				{{item.assess_text}}
 			</view>
-
+			<slot></slot>
 		</view>
 
 	</view>

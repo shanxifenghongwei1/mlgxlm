@@ -1,1 +1,0 @@
-<view><form report-submit="true" data-event-opts="{{[['submit',[['formSubmit',['$event']]]]]}}" bindsubmit="__e"><block wx:if="{{btnSize=='base'}}"><button class="{{[type=='circle'?'active':'']}}" form-type="submit">{{font}}</button></block><block wx:else><button class="{{['sm_btn',select==1?'btn_sel':'']}}" form-type="submit">{{font}}</button></block></form></view>

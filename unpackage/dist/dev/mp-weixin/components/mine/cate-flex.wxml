@@ -1,1 +1,0 @@
-<view class="cate"><block wx:for="{{cateList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['selCate',['$0'],[[['cateList','',index,'id']]]]]]]}}" class="cate-item" bindtap="__e"><view class="{{[cateid==item.id?'active':'']}}">{{''+item.name+''}}</view></view></block></view>
