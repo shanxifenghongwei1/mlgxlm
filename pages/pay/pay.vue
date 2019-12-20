@@ -43,8 +43,9 @@
 		
 
 		<view class="pay">
-			<btn :font="'确认支付'+ order_detail[0].total_price +'元'" btnSize="base" @save="save()"></btn>
+			<btn :font="'确认支付'+ num +'元'" btnSize="base" @save="save()"></btn>
 		</view>
+		
 	
 	</view>
 </template>
@@ -61,30 +62,20 @@
 				options:{},
 				order_detail:{},
 				userInfo:{},
-				is_big:1			
+				is_big:1,
+				num:0
 			}
-		},
-		onLoad(options) {
-			this.options=options;
 		},
 		methods: {
 			selectMethod(e){
 				this.meth=e; 
 			},
-			pay(){
-				// uni.navigateTo({
-				// 	url:"/pages/pay/pay_success"
-				// })
-				// this.global.order.make_order().then(){
-				// 	console.log("执行到这儿了")
-				// }
-			},
 			save(){
 				if(this.meth==0){
-					if(this.userInfo[0].money>this.order_detail[0].total_price){
+					if(this.userInfo[0].money>this.num){
 						// console.log("分享币支付")
 						let data={};
-						data.price=this.order_detail[0].total_price;
+						data.price=this.num;
 						data.order_id=this.options.order_id;
 						data.is_big=this.is_big;
 						this.global.request.post({
@@ -96,7 +87,7 @@
 								if(res.code==0){
 									this.global.utils.showToast_my("支付成功")
 									setTimeout(()=>{
-										this.global.utils.jump(3,"/pages/pay/pay_success?money=" + this.order_detail.total_price)
+										this.global.utils.jump(3,"/pages/pay/pay_success?money=" + this.num)
 									},2000)
 								}else{
 									
@@ -104,7 +95,6 @@
 							}
 						}) 
 					}else{
-						// console.log("充值")
 						uni.showModal({
 						    title: '提示',
 						    content: '分享币不足，是否切换为微信支付',
@@ -128,9 +118,9 @@
 			//1大订单
 			
 			if(options.is_min){
-				is_big:0
+				this.is_big=0
 			}else{
-				is_big:1
+				this.is_big=1
 			}
 			let data={};
 			data.id=options.order_id;
@@ -144,12 +134,18 @@
 				}
 			})
 			this.global.request.post({
-				url: this.global.demao.api.order_detail,
+				url: this.global.demao.api.order_detail, 
 				method: "GET",
 				data: data,
 				isLoading: true,
 				success: (res) => {
 					this.order_detail=res.data
+					let num=0;
+					res.data.forEach((v)=>{
+						console.log(v.price) 
+						num=num + Number(v.price)
+					})
+					this.num=num;
 				}
 			})
 		}

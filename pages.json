@@ -58,6 +58,12 @@
 			} 
 		},
 		{
+			"path": "pages/home/retail_order/re_eval",
+			"style": {
+				"navigationBarTitleText": "发表评价"
+			} 
+		},
+		{
 			"path": "pages/pay/refund",
 			"style": {
 				"navigationBarTitleText": "申请退款"

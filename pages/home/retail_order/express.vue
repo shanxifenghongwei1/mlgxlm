@@ -10,6 +10,9 @@
 					{{info.log_phone}}
 				</view>
 			</view>
+			<view class="state" :class="state==4?'red':'green'">
+				{{state==2?'运输中...':state==3?'已签收':state==4?'问题件':''}}
+			</view>
 		</view>
 		<view class="express_top">
 			<uni-steps :options="list" direction="column" :active="0"></uni-steps>
@@ -27,7 +30,8 @@
 			return {
 				options: {},
 				list: [],
-				info:{}
+				info:{},
+				state:0,
 			}
 		},
 		methods: {
@@ -46,7 +50,8 @@
 				},
 				success: (res) => {
 					console.log(res)
-
+					console.log(JSON.parse(res.data))
+					this.state=JSON.parse(res.data).State;
 					let list=JSON.parse(res.data).Traces;
 					let array=[];
 					list.forEach((v)=>{
@@ -128,7 +133,7 @@
 
 	.express_top {
 		width: 702rpx;
-		// height: 200rpx;
+		position: relative;
 		background: #ffffff;
 		margin: 20rpx auto 0;
 		border-radius: 15rpx;
@@ -142,5 +147,14 @@
 			height: 90rpx;
 			margin-right: 25rpx;
 		}
+	}
+	.state{
+		position: absolute;
+		right: 30rpx;
+		top: 30%;
+		font-size: 30rpx;
+	}
+	.green{
+		color: #1aad19;
 	}
 </style>

@@ -680,20 +680,20 @@
 							}
 						})
 					}else if(this.cumpadd==1){
-					console.log("有优惠券.直接下订单了~")
+						console.log("有优惠券.直接下订单了~")
 
-					//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
-					
-					m_data.total_price = that.good_detail.goodsInfo.price;
-					
-					this.com.method_type = 3
-					
-					this.global.order.make_order(m_data,this.com)
-					
-					
-						// m_data.coupon_type=that.coupon[0].coupon_type;
-						// m_data.total_price = price;
+						//接收 普通订单为1  拼团订单为2  优惠卷订单为3   限时抢订单为4
 						
+						m_data.total_price = that.good_detail.goodsInfo.price;
+						
+						this.com.method_type = 3
+						
+						this.global.order.make_order(m_data,this.com)
+						
+						
+							// m_data.coupon_type=that.coupon[0].coupon_type;
+							// m_data.total_price = price;
+							
 						
 					}else if(this.cumpadd==2){
 						

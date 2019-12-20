@@ -14,9 +14,9 @@
 			<view class="" @click="toDetail()">
 				查看订单
 			</view>
-			<!-- <view class="" @click="appointment()">
-				立即预约
-			</view> -->
+			<view class="" @click="home()" style="margin-left: 50rpx;">
+				返回首页
+			</view>
 		</view>
 	</view>
 </template>
@@ -30,15 +30,11 @@
 		},
 		methods:{
 			toDetail(){
-				uni.navigateTo({
-					url:"/pages/pay/order?good_cate=0"
-				})
+				this.global.utils.jump(4,"/pages/pay/order?good_cate=0&cateid=1")
 			},
-			// appointment(){
-			// 	uni.navigateTo({
-			// 		url:"/pages/pay/appointment"
-			// 	})
-			// }
+			home(){
+				this.global.utils.jump(2,"/pages/home/home")
+			}
 		},
 		onLoad(options) {
 			this.monerys = options.money

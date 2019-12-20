@@ -314,7 +314,7 @@
 			//确认付款
 			yesorder(e){
 				console.log({mes:'点击确认订单',res:e})
-				this.global.utils.jump(1,"/pages/pay/pay?order_id=" + e)
+				this.global.utils.jump(1,"/pages/pay/pay?is_min=1&order_id=" + e)
 				
 			},
 			// 点击切换头部文字选择,并传id

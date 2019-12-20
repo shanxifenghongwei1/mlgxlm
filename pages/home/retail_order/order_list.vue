@@ -212,7 +212,6 @@
 		methods: {
 			//订单详情
 			toDetail(e){
-				console.log(e)
 				this.global.utils.jump(1,'/pages/home/retail_order/order_detail?re_order_id='+e)
 			},
 			//删除、取消订单
@@ -271,84 +270,92 @@
 					}
 				})
 			},
-			
-			
-			//申请退款
-			refund(e){
-				this.global.request.post({
-					url:'re_refund_add',
-					method:'GET',
-					data:{
-						id:e
-					},
-					success:res=>{
-						console.log({mes:'点击申请退款',res:res})
-						if(res.data.status_refund == 0){
-							this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e)
-							console.log({mes:'点击申请退款',res:e})
-						}else if(res.data.status_refund == 1){
-							this.global.utils.showToast_my('您已经申请过啦！')
-						}else if(res.data.status_refund == 2){
-							this.global.utils.showToast_my('您的申请已经在审核中！')
-						}else if(res.data.status_refund == 3){
-							this.global.utils.showToast_my('您的退款已成功！')
-						}else if(res.data.status_refund == 4){
-							this.global.utils.showToast_my('退款未通过审核')
-						}
-					}
-				})
+			//点击去评价
+			assess(e) {
+				this.sunblind = true;
+				let url = "/pages/home/retail_order/re_eval?re_order_id=" + e
+				this.global.utils.jump(1, url);
 			},
 			
-			//确认收货
-			mygoods_add(e,q,a){
-				console.log({mes:'点击确认收货',index:a,q:q})
-				this.global.request.post({
-					url:'up_status_add',
-					data:{
-						id:e,
-						order_id:q
-					},
-					success:res=>{
-						console.log({mes:'确认收货成功或者失败',res:res})
+			
+			
+			
+			// //申请退款
+			// refund(e){
+			// 	this.global.request.post({
+			// 		url:'re_refund_add',
+			// 		method:'GET',
+			// 		data:{
+			// 			id:e
+			// 		},
+			// 		success:res=>{
+			// 			console.log({mes:'点击申请退款',res:res})
+			// 			if(res.data.status_refund == 0){
+			// 				this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e)
+			// 				console.log({mes:'点击申请退款',res:e})
+			// 			}else if(res.data.status_refund == 1){
+			// 				this.global.utils.showToast_my('您已经申请过啦！')
+			// 			}else if(res.data.status_refund == 2){
+			// 				this.global.utils.showToast_my('您的申请已经在审核中！')
+			// 			}else if(res.data.status_refund == 3){
+			// 				this.global.utils.showToast_my('您的退款已成功！')
+			// 			}else if(res.data.status_refund == 4){
+			// 				this.global.utils.showToast_my('退款未通过审核')
+			// 			}
+			// 		}
+			// 	})
+			// },
+			
+			// //确认收货
+			// mygoods_add(e,q,a){
+			// 	console.log({mes:'点击确认收货',index:a,q:q})
+			// 	this.global.request.post({
+			// 		url:'up_status_add',
+			// 		data:{
+			// 			id:e,
+			// 			order_id:q
+			// 		},
+			// 		success:res=>{
+			// 			console.log({mes:'确认收货成功或者失败',res:res})
 						
-						if(res.data.data == 1){
-							this.list.splice(a,1)
-							this.global.utils.showToast_my('已成功确认')
-						}else if(res.data.data == 2){
-							this.global.utils.showToast_my('退款中不能确认收货')
-						}else if(res.data.data == 3){
-							this.global.utils.showToast_my('确认收货有误')
-						}
+			// 			if(res.data.data == 1){
+			// 				this.list.splice(a,1)
+			// 				this.global.utils.showToast_my('已成功确认')
+			// 			}else if(res.data.data == 2){
+			// 				this.global.utils.showToast_my('退款中不能确认收货')
+			// 			}else if(res.data.data == 3){
+			// 				this.global.utils.showToast_my('确认收货有误')
+			// 			}
 						
-					}
-				})
-			},
-			// 删除订单
-			del_order(e,a){
-				console.log({mes:'点击删除订单',res:e,index:a})
-				var that = this
-				uni.showModal({
-					title: '提示',
-					content: '是否确认删除该订单？',
-					success: (ras)=> {
-						if (ras.confirm) {
-								that.global.request.post({
-									url:'update_static_del', 
-									method:'GET',
-									data:{
-										id:e
-									},
-									success:res=>{
-										this.list.splice(a,1)
-									}
-								})
-						} else if (ras.cancel) {
-							console.log('用户点击取消');
-						}
-					}
-				});
+			// 		}
+			// 	})
+			// },
+			// // 删除订单
+			// del_order(e,a){
+			// 	console.log({mes:'点击删除订单',res:e,index:a})
+			// 	var that = this
+			// 	uni.showModal({
+			// 		title: '提示',
+			// 		content: '是否确认删除该订单？',
+			// 		success: (ras)=> {
+			// 			if (ras.confirm) {
+			// 					that.global.request.post({
+			// 						url:'update_static_del', 
+			// 						method:'GET',
+			// 						data:{
+			// 							id:e
+			// 						},
+			// 						success:res=>{
+			// 							this.list.splice(a,1)
+			// 						}
+			// 					})
+			// 			} else if (ras.cancel) {
+			// 				console.log('用户点击取消');
+			// 			}
+			// 		}
+			// 	});
 				
-			},
+			// },
 			//确认付款
 			yesorder(e){
 				this.global.utils.jump(1,"/pages/home/retail_home/retail_pay?re_order_id=" + e)
@@ -365,15 +372,9 @@
 				uni.makePhoneCall({
 					phoneNumber: e,
 					success(res) {
-				
+						
 					}
 				})
-			},
-			//点击去评价
-			assess(e) {
-				this.sunblind = true;
-				let url = "/pages/pay/assess?id=" + e
-				this.global.utils.jump(1, url);
 			},
 			// 发请求获得订单数据
 			init() {
