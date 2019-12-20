@@ -106,16 +106,18 @@
 					<view @click="new_store()" class="more">更多</view>
 				</view>
 
-				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index" @click="jump(item.shop_id,item.shop_name)">
+				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index" @click="jump(item.shop_info.shop_id,item.shop_info.shop_name)">
 					<view class="shop-col-img">
-						<image src="../../static/image/other/shopimg2.jpg" mode="widthFix"></image>
+						<image :src="picUrl + item.shop_info.shop_img" mode=""></image>
 					</view>
 					<view class="shop-col-message">
-						<view class="shopname">{{item.shop_name}} <text>{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text>
+						<view class="shopname">{{item.shop_info.shop_name}} <text>{{item.shop_info.shop_address_provice+item.shop_info.shop_address_city+item.shop_info.shop_address_area}}</text>
 						</view>
-						<view class="shopnameng" v-if="item.shop_Ename">{{item.shop_Ename}}</view>
-						<view class="gooods" v-for="(item,index) in item.shop_label" :key='index'> <text class="iconfont icon-icon-up"></text>
-							{{item}} </view>
+						
+						<view class="gooods" v-for="(item,index) in item.goods_list" :key='index'>
+							<text class="iconfont icon-icon-up"></text>
+							{{item.goods_name}}
+						</view>
 						<view class="buy">Buy</view>
 					</view>
 				</view>
@@ -358,7 +360,7 @@
 				list: [1, 2, 3, 4],
 
 				dataUrl: "",
-				picUrl: demo.domain.videoUrl,
+				picUrl: this.global.demao.domain.videoUrl,
 
 				// 搜索栏样式
 				iconType: ['search'],
@@ -444,7 +446,7 @@
 				this.sunblind = true;
 				let lat = this.latnng.latitude
 				let lng = this.latnng.longitude
-				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng
+				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng+ '&&min=' + 1
 				this.global.utils.jump(1, url);
 			},
 			//跳转商品详情页面
@@ -487,23 +489,27 @@
 						'X-TOKEN-PETMALL': '',
 					},
 					success: (result) => {
-						let list = result.data.data.week_newshop;
-						list.forEach((v) => {
-							v.shop_label = v.shop_label ? v.shop_label.split(",") : []
-						})
-						result.data.data.week_newshop = list;
+						
+						// let list = result.data.data.week_newshop;
+						// let shop_goods = []
+						// list.forEach((v) => {
+						// 	{shop_info:item.shop_info}
+						// 	v.shop_label = v.shop_label ? v.shop_label.split(",") : []
+						// })
+						// result.data.data.week_newshop = list;
+
+
 
 
 						let list1 = result.data.data.goodsInfo;
+						
 						list1.forEach((v) => {
 							v.shop_label = v.shop_label ? v.shop_label.split(",") : []
 						})
+						
 						result.data.data.goodsInfo = list1;
-
 					
 						this.bannerlist = result.data.data.datainfos.data
-
-
 
 						this.indexData = result.data.data
 					},
@@ -753,10 +759,11 @@
 
 			.shop-col-img {
 				width: 35%;
-				height: 100%;
-				margin-left: 4rpx;
-
+				height: 80%;
+				margin: 4rpx;
+				margin-left: 8rpx;
 				image {
+					border-radius: 10rpx;
 					width: 100%;
 					height: 100%;
 				}

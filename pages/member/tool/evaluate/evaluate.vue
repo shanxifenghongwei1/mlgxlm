@@ -1,15 +1,19 @@
 <template>
 	<view>
-		<evaluate :mine="true" :evallist="evallist">
+		<view v-for="(item,index) in evallist">
+			
+		<evaluate :mine="true" :evallist="item.father">
+			
 			<view class="images-father">
-
-
-				<view class='images-son' v-for='(item,index) in evallist'>
-					<image style="width: 100%;height: 100%;" src="../../../../static/image/other/about_us.png" mode=""></image>
+				<view class='images-son' v-for='(items,indexs) in item.child' :key='indexs'>
+					<image @click="yulan(index)" style="width: 100%;height: 100%;"  :src="items" mode=""></image>
 				</view>
 
 			</view>
 		</evaluate>
+		
+		</view>
+		
 	</view>
 </template>
 
@@ -21,16 +25,45 @@
 		},
 		data() {
 			return {
-				evallist: [1, 2, 3, 4, 5]
+				imgurl:this.global.demao.domain.videoUrl,
+				evallist: [],
 			}
 		},
 		methods: {
+			yulan(e){
+				console.log('选中了第几个了？？ ' + e)
+				uni.previewImage({
+					urls:this.evallist[e].child
+				})
+			},
 			init(){
-				
+				this.global.request.post({
+					url:'my_evaluate_list',
+					success:res=>{
+						let p = []
+						let comper = { father:[] , child:[] }
+						let a = res.data
+						a.forEach((item,index)=>{
+							comper.father=[item]
+							comper.child = this.funarray( item.goods_evaluate_img ) 
+							p.push(comper)
+						})
+						this.evallist = p
+					}
+				})
+			},
+			// 将字符串处理为数组
+			funarray(msg){
+				let a =	msg.split(",") 
+					for(let i = 0 ; i< a.length; i++){
+						console.log(i)
+						a[i] = this.imgurl + a[i]
+					}
+				return a ;
 			}
 		},
 		onLoad() {
-			
+			this.init()
 		}
 	}
 </script>
@@ -42,13 +75,13 @@
 		// height: 175rpx;
 		padding: 10rpx;
 		box-sizing: border-box;
-		background: #007AFF;
+		// background: #007AFF;
 		@extend .any-flex;
 		flex-wrap: wrap;
 	}
 
 	.images-son {
-		background: red;
+		// background: red;
 		width: 140rpx;
 		height: 140rpx;
 		margin: 10rpx;

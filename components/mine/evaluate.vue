@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="con">
-				{{item.assess_text}}
+				{{item.evaluate_text}}
 			</view>
 			<slot></slot>
 		</view>

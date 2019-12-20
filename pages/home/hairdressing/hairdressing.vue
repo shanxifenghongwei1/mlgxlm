@@ -35,7 +35,7 @@
 				</swiper>
 			</view> -->
 			<!-- 栏目 -->
-<!-- 			<view class="newbox any-flex" style="align-items: flex-start;" v-if="options.runid!=3">
+			<!-- 			<view class="newbox any-flex" style="align-items: flex-start;" v-if="options.runid!=3">
 				<scroll-view :scroll-into-view='ids' :class="menu" scroll-x>
 					<view class='scroll-list'>
 						<view v-for="(item,index) in headlist" :key='index' class="menu-list" :class=" 'a'+ item.id == ids ? 'active' : ''"
@@ -43,7 +43,7 @@
 					</view>
 				</scroll-view>
 			</view> -->
-			
+
 			<view class="newbox any-flex" style="align-items: flex-start;">
 				<scroll-view :scroll-into-view='ids' :class="menue == true ? 'menu' : 'menu1' " scroll-x>
 					<view class="scroll-list">
@@ -53,17 +53,17 @@
 				</scroll-view>
 				<view class="down iconfont icon-icon-up" @click="menushow"></view>
 			</view>
-			
+
 		</view>
 
 		<!-- <goodlist :cateid="ids" :goodslist="indexData"></goodlist> -->
-		
+
 		<view class="goods" v-for="(item,index) in distance" :key="index" @click="toDetail(item.goods_id,item.goods_name)">
 			<!-- 商品图片 -->
 			<view class="pic-box">
 				<image :src="imageurl +item.picture" mode=""></image>
 			</view>
-			
+
 			<view class="con">
 				<!-- 店铺名字 -->
 				<view class="title">
@@ -85,7 +85,7 @@
 				<!-- 拼团 -->
 				<view class="address" v-if='item.promotion_type == 1'>
 					<text class="icon iconfont icon-tuan lg"></text>
-					<text class="red base mar">团购价 {{item.promotion_price}}</text> 
+					<text class="red base mar">团购价 {{item.promotion_price}}</text>
 				</view>
 				<!-- 优惠 -->
 				<view class="address" v-if='item.promotion_type == 2'>
@@ -105,8 +105,8 @@
 						</view>
 					</cmdRrogress>
 				</view>
-				
-				
+
+
 			</view>
 		</view>
 
@@ -139,9 +139,9 @@
 
 				],
 				// 高亮id
-				ids: 'a999',
-				
-				options:Object,
+				ids: 'a99999999',
+
+				options: Object,
 				// 指示点颜色
 				colors: '#e01818',
 				headlist: [],
@@ -164,7 +164,7 @@
 			};
 		},
 		filters: {
-			fixed:function(e){
+			fixed: function(e) {
 				return Number(e).toFixed(2)
 			}
 		},
@@ -175,8 +175,8 @@
 					url: "/pages/home/goods-detail/goods-detail?goods_id=" + e + "&&head=" + f
 				})
 			},
-			
-			
+
+
 			// 高亮id
 			exchanges(e) {
 				this.ids = 'a' + e
@@ -185,7 +185,7 @@
 				}
 				this.init(e)
 			},
-			
+
 			menushow() {
 				this.menue == true ? this.menue = false : this.menue = true;
 			},
@@ -199,7 +199,7 @@
 					url: 'mt_sort',
 					method: 'GET',
 					data: {
-						t_id: e,
+						t_id: e==99999999 ? "" : e,
 						lat1: this.options.lat,
 						lng1: this.options.lng
 					},
@@ -208,22 +208,22 @@
 							a: "大分类详情",
 							res: res
 						})
-						
-						if(e == this.options.runid){
-							this.detail = res.data2
-							let a = [{
-								id: this.options.runid,
-								name: '精选'
-							}]
-							res.data2.forEach((item, index) => {
-								a.push({
-									name: item.t_name,
-									id: item.t_id
-								})
+ 
+
+						this.detail = res.data2
+						let a = [{
+							id: 99999999,
+							name: '精选'
+						}]
+						res.data2.forEach((item, index) => {
+							a.push({
+								name: item.t_name,
+								id: item.t_id
 							})
-							this.headlist = a
-							this.ids = 'a' + this.options.runid
-						}
+						})
+						this.headlist = a
+						// this.ids = 'a' + this.options.runid  
+
 						this.distance = res.data1
 					}
 				})
@@ -234,8 +234,9 @@
 			this.options = options;
 			this.global.utils.sethead(options.head)
 			this.init(options.runid)
-			
-			
+			if(options.min){
+				this.ids="a"+options.runid;
+			}
 		}
 	}
 </script>
@@ -244,7 +245,7 @@
 	.newbox {
 		margin-top: 20rpx;
 		overflow: hidden;
-	
+
 		.down {
 			height: 64rpx;
 			background: #FFFFFF;
@@ -252,17 +253,17 @@
 			text-align: center;
 			line-height: 64rpx;
 		}
-	
+
 		.menu {
 			overflow: hidden;
 			white-space: nowrap;
 			border-bottom: 1rpx solid $any-zol;
 			width: 95%;
 			margin: 0 0 0 20rpx;
-	
+
 			.scroll-list {
 				width: 100%;
-	
+
 				.menu-list {
 					display: inline-block;
 					padding: 10rpx 20rpx;
@@ -271,16 +272,16 @@
 				}
 			}
 		}
-	
+
 		.menu1 {
 			overflow: hidden;
 			border-bottom: 1rpx solid $any-zol;
 			width: 95%;
 			margin: 0 0 0 20rpx;
-	
+
 			.scroll-list {
 				width: 100%;
-	
+
 				.menu-list {
 					display: inline-block;
 					padding: 10rpx 20rpx;
@@ -289,12 +290,12 @@
 				}
 			}
 		}
-	
+
 		.active {
 			color: $any-col;
 			position: relative;
 		}
-	
+
 		.active:after {
 			content: '';
 			display: block;
@@ -306,8 +307,8 @@
 			background: $any-col;
 		}
 	}
-	
-	
+
+
 	// 商品列表
 	.goods {
 		width: 100%;
@@ -320,17 +321,17 @@
 		box-sizing: border-box;
 		@extend .any-flex;
 		justify-content: space-between;
-	
+
 		.pic-box {
 			padding: 0 20rpx;
 		}
-	
+
 		image {
 			width: 160rpx;
 			height: 160rpx;
 			background: red;
 		}
-	
+
 		.con {
 			flex-grow: 1;
 			height: 100%;
@@ -341,7 +342,7 @@
 			padding-right: 10%;
 			box-sizing: border-box;
 			position: relative;
-	
+
 			.title {
 				width: 100%;
 				font-size: $uni-font-size-base;
@@ -351,19 +352,19 @@
 				padding-right: 25%;
 				box-sizing: border-box;
 			}
-	
+
 			.star {
 				width: 100%;
 				position: relative;
 				font-size: $uni-font-size-base;
-	
+
 			}
-	
+
 			.contex {
 				font-size: $uni-font-size-sm;
 				@include multi-row-apostrophe(1);
 			}
-	
+
 			.address {
 				width: 100%;
 				font-size: $uni-font-size-sm;
@@ -372,35 +373,35 @@
 				padding-right: 25%;
 				box-sizing: border-box;
 			}
-	
+
 			.iconfont {
 				font-size: 26rpx;
 				margin-right: 20rpx;
 				color: $any-col;
 			}
-	
+
 			.context1 {
 				@extend .any-flex;
 				align-items: flex-end;
 			}
 		}
-	
+
 		.ccc {
 			color: #868686;
 		}
-	
+
 		.red {
 			color: $any-col;
 		}
-	
+
 		.mar {
 			margin-right: 20rpx;
 		}
-	
+
 		.mar2 {
 			margin-right: 30rpx;
 		}
-	
+
 		.go {
 			background: $any-col;
 			color: #ffffff;
@@ -411,7 +412,7 @@
 			right: 0%;
 			top: -10rpx;
 		}
-	
+
 		.has {
 			font-size: $uni-font-size-base;
 			color: #000000;
@@ -419,27 +420,27 @@
 			right: 0%;
 			top: -5rpx;
 		}
-	
+
 		.con-cmd {
 			width: 60%;
 		}
-	
+
 		.sm {
 			font-size: $uni-font-size-sm;
 		}
-	
+
 		.base {
 			font-size: $uni-font-size-base;
 		}
-	
+
 		.lg {
 			font-size: $uni-font-size-lg !important;
 		}
-	
+
 		.through {
 			text-decoration: line-through;
 		}
-	
+
 		.suo {
 			width: 70%;
 			@include multi-row-apostrophe(1);
