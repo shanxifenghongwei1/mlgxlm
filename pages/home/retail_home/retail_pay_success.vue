@@ -31,10 +31,7 @@
 		},
 		methods:{
 			toDetail(){
-				uni.navigateTo({
-					url:""
-				})
-				this.global.utils.jump(4,'/pages/home/retail_order/order_detail')
+				this.global.utils.jump(3,'/pages/home/retail_order/order_detail?re_order_id='+ this.options.re_order_id)
 			},
 			home(){
 				this.global.utils.jump(2,'/pages/home/home')

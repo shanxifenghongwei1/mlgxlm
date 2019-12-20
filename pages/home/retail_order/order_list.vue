@@ -16,7 +16,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toDetail(item.re_order_id)">
 					<view class="left">
 						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
@@ -38,7 +38,7 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="删除订单" @save="del_order(item.re_order_id,index)" btnSize="sm" :select="0"></btn>
+						<btn font="取消订单" @save="cancel(item.re_order_id)" btnSize="sm" :select="0"></btn>
 					</view>
 					<view class="btn-box">
 						<btn font="确认付款" @save="yesorder(item.re_order_id)" btnSize="sm" :select="1"></btn>
@@ -51,13 +51,13 @@
 			<view class="list2" v-if="item.order_status==1">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（支付成功）
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（待发货）
 					</view>
 					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toDetail(item.re_order_id)">
 					<view class="left">
 						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
@@ -70,7 +70,7 @@
 							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
 						</view>
 						<view class="li red">
 							<text class="icon iconfont icon-chenggong red"></text>支付成功，等待发货
@@ -79,25 +79,22 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
-						<btn font="申请退款" @save="refund(item.re_order_id)" btnSize="sm" :select="0"></btn>
-					</view>
-					<view class="btn-box">
-						<btn font="确认收货" @save="mygoods_add(item.re_order_id,item.order_id,index)" btnSize="sm" :select="1"></btn>
+						<btn font="提醒收货" @save="mygoods_add(item.re_order_id,item.order_id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
 			</view>
 			
 			<!-- 待评价 -->
-			<view class="list4" v-if="item.order_status==3">
+			<view class="list4" v-if="item.order_status==2">
 				<view class="title">
 					<view class="left">
-						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（待评价）
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（待收货）
 					</view>
 					<view class="right" @click="phone(item.shop_phone)">
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toDetail(item.re_order_id)">
 					<view class="left">
 						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
@@ -110,23 +107,26 @@
 							<text>订单编号：</text><text>{{item.re_order_no}}</text>
 						</view>
 						<view class="li">
-							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
+							<text>实付金额：</text><text class="red">{{item.pay_price}}元</text>
 						</view>
-						<view class="li">
-							<text class="icon iconfont icon-pingjia1"></text>服务完成，我要评价
+						<view class="li red">
+							<text class="icon iconfont icon-chenggong red"></text>商品已发货，等待签收
 						</view>
 					</view>
 				</view>
 				<view class="opection"> 
 					<view class="btn-box">
-						<btn font="评价服务" @save="assess(item.re_order_id)" btnSize="sm" :select="1"></btn>
+						<btn font="查看物流" @save="express(item.re_order_id)" btnSize="sm" :select="0"></btn>
+					</view>
+					<view class="btn-box">
+						<btn font="确认收货" @save="make_sure(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 
 				</view>
 			</view>
 			
 			<!-- 已完成 -->
-			<view class="list4" v-if="item.order_status==4">
+			<view class="list4" v-if="item.order_status==3">
 				<view class="title">
 					<view class="left">
 						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（已完成）
@@ -135,7 +135,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toDetail(item.re_order_id)">
 					<view class="left">
 						<image :src="picUrl+item.re_goods_picture" mode=""></image>
 					</view>
@@ -151,18 +151,17 @@
 							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
 						</view>
 						<view class="li">
-							<text class="icon iconfont icon-pingjia1"></text>服务已完成。
+							<text class="icon iconfont icon-pingjia1"></text>签收完成，请对该商品进行评价。
 						</view>
 					</view>
 				</view>
 				<view class="opection">
-<!-- 					<view class="btn-box">
-						<btn font="申请退款" @save="save()" btnSize="sm" :select="1"></btn>
-					</view> -->
-<!-- 					<view class="btn-box">
+					<view class="btn-box">
+						<btn font="申请售后" @save="save()" btnSize="sm" :select="1"></btn>
+					</view>
+					<view class="btn-box">
 						<btn font="评价服务" @save="assess(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
-			 -->
 				</view>
 			</view>
 			
@@ -211,6 +210,69 @@
 			}
 		},
 		methods: {
+			//订单详情
+			toDetail(e){
+				console.log(e)
+				this.global.utils.jump(1,'/pages/home/retail_order/order_detail?re_order_id='+e)
+			},
+			//删除、取消订单
+			cancel(e){
+				var that = this
+	
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						
+						uni.showModal({
+							title: '提示',
+							content: '是否确认删除该订单？',
+							success: (ras)=> {
+								if (ras.confirm) {
+									//删除订单信息
+									that.global.request.post({
+										url: "reseller_order_delete",
+										data: {
+											re_order_id:e,
+										},
+										success: (res) => {
+											that.global.utils.showToast_my("订单删除成功")
+											that.init()
+										}
+									})
+								}
+							}
+						});
+						
+					}
+				})
+				
+			},
+			//查看物流
+			express(e){
+				console.log("跳转到物流页面")
+				console.log("携带参数re_order_id="+e)
+				this.global.utils.jump(1,'/pages/home/retail_order/express?re_order_id='+e)
+			},
+			//确认收货
+			make_sure(e){
+				this.global.login_state.login_state().then((res) => {
+					if (res) {
+						//删除订单信息
+						this.global.request.post({
+							url: "reseller_order_Confirm_receipt",
+							data: {
+								re_order_id:e,
+							},
+							success: (res) => {
+								console.log(res)
+								// this.global.utils.showToast_my("订单删除成功")
+								// this.init()
+							}
+						})
+					}
+				})
+			},
+			
+			
 			//申请退款
 			refund(e){
 				this.global.request.post({
@@ -235,9 +297,6 @@
 						}
 					}
 				})
-				
-				
-				
 			},
 			
 			//确认收货
@@ -292,7 +351,6 @@
 			},
 			//确认付款
 			yesorder(e){
-				console.log({mes:'点击确认订单',res:e})
 				this.global.utils.jump(1,"/pages/home/retail_home/retail_pay?re_order_id=" + e)
 			},
 			// 点击切换头部文字选择,并传id
@@ -329,10 +387,7 @@
 					url: "index_reseller_orderList",
 					data: data,
 					success: (res) => {
-						console.log(res)
-						if (res.data.length) {
-							this.list = this.list.concat(res.data);
-						}
+						this.list = res.data;
 					}
 				})
 			}

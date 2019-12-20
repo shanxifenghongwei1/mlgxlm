@@ -23,7 +23,7 @@
 							<text>产品数量：</text><text>x{{order_detail.buy_num}}</text>
 						</view>
 						<view class="con-box">
-							<text>合计金额：</text><text>{{order_detail.re_goods_price * order_detail.buy_num}}</text>
+							<text>合计金额：</text><text>￥{{order_detail.re_goods_price * order_detail.buy_num}}</text>
 						</view>
 					</view>
 					
@@ -100,7 +100,7 @@
 								if (res.code == 0) {
 									this.global.utils.showToast_my("支付成功")
 									setTimeout(() => {
-										this.global.utils.jump(3, "/pages/home/retail_home/retail_pay_success?money=" + this.order_detail.re_goods_price * this.order_detail.buy_num +"&order_id="+this.options.re_order_id )
+										this.global.utils.jump(3, "/pages/home/retail_home/retail_pay_success?money=" + this.order_detail.re_goods_price * this.order_detail.buy_num +"&re_order_id="+this.options.re_order_id )
 									}, 2000)
 								} else {
 

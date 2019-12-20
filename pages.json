@@ -354,6 +354,12 @@
 			"style":{
 				"navigationBarTitleText": "反馈成功"
 			}
+		},
+		{
+			"path":"pages/home/retail_order/express",
+			"style":{
+				"navigationBarTitleText": "物流信息"
+			}
 		}
     ],
 	

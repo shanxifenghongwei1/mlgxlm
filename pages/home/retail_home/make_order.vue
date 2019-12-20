@@ -59,7 +59,7 @@
 		
 		<!-- 下订单 -->
 		<view class="save" @click="save()">
-			<button type="warn">确认购买</button>
+			<button type="warn">提交订单</button>
 		</view>
 	</view>
 </template>

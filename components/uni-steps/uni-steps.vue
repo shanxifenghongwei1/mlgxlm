@@ -2,15 +2,15 @@
 	<view class="uni-steps">
 		<view :class="'uni-steps-' + direction" class="uni-steps-items">
 			<view v-for="(item, index) in options" :key="index" :class="{ 'uni-steps-process': index === active, 'uni-steps-finish': index < active }" class="uni-steps-item">
-				<view :style="{ color: index === active ? activeColor : '' }" class="uni-steps-item-title-container">
+				<view :style="{ color: index !== active ? activeColor : '' }" class="uni-steps-item-title-container">
 					<view class="uni-steps-item-title">{{ item.title }}</view>
 					<view v-if="item.desc" class="uni-steps-item-desc">{{ item.desc }}</view>
 				</view>
 				<view class="uni-steps-item-circle-container">
-					<view v-if="index !== active" :style="{ backgroundColor: index < active ? activeColor : '' }" class="uni-steps-item-circle" />
+					<view v-if="index !== active" :style="{ backgroundColor: index > active ? activeColor : '' }" class="uni-steps-item-circle" />
 					<uni-icons v-else :color="activeColor" type="checkbox-filled" size="14" />
 				</view>
-				<view v-if="index !== options.length - 1" :style="{ backgroundColor: index < active ? activeColor : '' }" class="uni-steps-item-line" />
+				<view v-if="index !== options.length - 1" :style="{ backgroundColor: index > active ? activeColor : '' }" class="uni-steps-item-line" />
 			</view>
 		</view>
 	</view>
@@ -115,7 +115,8 @@
 
 	.uni-steps-items.uni-steps-column .uni-steps-item-title {
 		text-overflow: ellipsis;
-		white-space: nowrap;
+	/* 	white-space: nowrap; */
+		font-size: 24rpx;
 		overflow: hidden
 	}
 
