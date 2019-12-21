@@ -17,7 +17,7 @@
 			"path": "pages/street/street",
 			"style": {
 				"navigationBarTitleText": "发现",
-				"enablePullDownRefresh":true,
+				// "enablePullDownRefresh":true,
 				"onReachBottomDistance":50
 			}
 		},

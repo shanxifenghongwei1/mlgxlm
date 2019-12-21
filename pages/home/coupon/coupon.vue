@@ -3,7 +3,7 @@
 	<view class="page">
 		<block v-for="(item,index) in list" :key="index">
 			<block v-if="index>3 && index%4==0">
-				<view class="advert"></view>
+				<!-- <view class="advert"></view> -->
 				<view class="shop-card">
 					<view class="card-con">
 						<view class="card-pic">
@@ -16,25 +16,14 @@
 							</view>
 							<view class=""  v-if="item.coupon_type == 0">
 								{{item.shop_name}}<text class="font-padd">|</text><text class="card">满减劵</text>
-							</view>
-							
-							
+							</view>	
 						</view>
-
-
-
 						<view class="card-time" style="text-align: center;">
-							使用时间{{item.coupon_start_time*1000|time}}--{{item.expiration*1000|time}}
+							使用时间{{ item.coupon_start_time*1000 | time }}--{{ item.expiration*1000 | time }}
 						</view>
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
 					<view class="card-size">
-						
-
-						
-						
-						
-							
 							<view class="price" v-if="item.coupon_type == 0">
 								￥{{item.coupon_price}}
 							</view>
@@ -63,58 +52,36 @@
 				</view>
 			</block>
 			<block v-else>
-
 				<view class="shop-card">
 					<view class="card-con">
-
 						<view class="card-pic">
 							<!-- <image :src="picUrl+i" mode="" v-for="(i,index) in item.picture" :key="index"></image> -->
 							<view style="text-align: center;" class="base">{{item.goods_name}}</view>
 						</view>
-						
 						<view class="card-name" style="text-align: center;">
-							
 							<view v-if="item.coupon_type == 1">
 								{{item.shop_name}}<text class="font-padd">|</text><text class="card">折扣券</text>
 							</view>
 							<view class=""  v-if="item.coupon_type == 0">
 								{{item.shop_name}}<text class="font-padd">|</text><text class="card">满减劵</text>
 							</view>
-							
-							
 						</view>
-
-
-
 						<view class="card-time" style="text-align: center;">
 							使用时间{{item.coupon_start_time*1000|time}}--{{item.expiration*1000|time}}
 						</view>
 					</view>
 					<image class="dit" src="/static/image/other/icon-dit.png" mode=""></image>
 					<view class="card-size">
-						
-					
-						
-						
-						
-							
 							<view class="price" v-if="item.coupon_type == 0">
 								￥{{item.coupon_price}}
 							</view>
-							
 							<view class="price" v-if="item.coupon_type == 1">
-								
 								{{item.is_member_discount}}
 								<image src="/static/image/other/coupon_1.png" mode=""></image>
 							</view>
-							
 							<view class="manJian" v-if="item.coupon_type == 0">
 								满{{item.coupon_redouction}}元使用
 							</view>
-							
-						
-						
-						
 						<view class="draw" v-if="!item.has" @click="getCard(item.goods_id)">
 							点击领取
 						</view>
@@ -168,7 +135,7 @@
 					data.shop_id=this.options.shop_id;
 					this.global.request.post({
 						url: this.global.demao.api.couponlist,
-						method: "GET",
+						// method: "GET",
 						data: data,
 						success: (res) => {
 							res.couponInfo.forEach((v) => {

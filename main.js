@@ -80,8 +80,9 @@ Vue.prototype.global = {
 	}
 }
 Vue.filter("time", (nS) => {
-	return new Date(parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/, ' ');
+	return new Date( parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/, ' ');
 })
+
 Vue.filter("isN", (e,f=String) => {
 	if(e){
 		return e

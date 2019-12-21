@@ -41,11 +41,12 @@
 					url:'my_evaluate_list',
 					success:res=>{
 						let p = []
-						let comper = { father:[] , child:[] }
+						
 						let a = res.data
 						a.forEach((item,index)=>{
-							comper.father=[item]
-							comper.child = this.funarray( item.goods_evaluate_img ) 
+							let comper = { father:[] , child:[] }
+							comper.father.push(item)
+							comper.child=this.funarray( item.goods_evaluate_img )
 							p.push(comper)
 						})
 						this.evallist = p

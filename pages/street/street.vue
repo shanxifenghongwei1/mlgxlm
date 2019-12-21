@@ -43,43 +43,43 @@
 			console.log('上拉加载')
 			this.init()
 		},
-		onPullDownRefresh(){
-			console.log('下拉刷新,你刷新个鸡er')
-			this.list = [] 
-			 this.key += 1 
-			this.global.request.post({
-				url: 'releaselist',
-				// data:{},
-				success: res => {	
-					if(res.info.data.length){
-					let a = []		
-					res.info.data.forEach((item, index) => {
-						a.push({
-							"id": item.mt_release_id,
-							"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
-							"isimage" : item.mt_move_url ? false : true,
-							"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
-							"content": item.mt_title,
-							"user": {
-								"name": item.wx_name,
-								"avatar": item.wx_headimg
-							}
-						})
-					})
-					this.page = 1
+		// onPullDownRefresh(){
+		// 	console.log('下拉刷新,你刷新个鸡er')
+		// 	this.list = [] 
+		// 	 this.key += 1 
+		// 	this.global.request.post({
+		// 		url: 'releaselist',
+		// 		// data:{},
+		// 		success: res => {	
+		// 			if(res.info.data.length){
+		// 			let a = []		
+		// 			res.info.data.forEach((item, index) => {
+		// 				a.push({
+		// 					"id": item.mt_release_id,
+		// 					"image": this.videoUrl + '' + (item.mt_pic_url ? item.mt_pic_url.split(',')[0] : ''  ),
+		// 					"isimage" : item.mt_move_url ? false : true,
+		// 					"vadve" :this.videoUrl + '' +(item.mt_move_url ? item.mt_move_url : '' )  ,
+		// 					"content": item.mt_title,
+		// 					"user": {
+		// 						"name": item.wx_name,
+		// 						"avatar": item.wx_headimg
+		// 					}
+		// 				})
+		// 			})
+		// 			this.page = 1
 					
-					this.list =a.reverse();
+		// 			this.list =a.reverse();
 
 						
-					}else{
-						this.global.utils.showToast_my('没有更多新资讯啦 ~')
+		// 			}else{
+		// 				this.global.utils.showToast_my('没有更多新资讯啦 ~')
 						
-					}
-					uni.stopPullDownRefresh()
-				}
+		// 			}
+		// 			uni.stopPullDownRefresh()
+		// 		}
 					
-			})
-		},
+		// 	})
+		// },
 		onLoad() {
 
 		},

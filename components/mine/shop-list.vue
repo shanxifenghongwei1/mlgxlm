@@ -29,7 +29,7 @@
 									{{item.introduction}} </view>
 							</view>
 						</view>
-						<view class="show-box">
+						<!-- <view class="show-box">
 							<view class="box">
 								<view class="pintuan">
 									拼团减40元
@@ -38,7 +38,7 @@
 									新用户立减60元
 								</view>
 							</view>
-						</view>
+						</view> -->
 					</view>
 				</view>
 				<view class="advert">
@@ -57,7 +57,7 @@
 								<text class="addres">{{item.shop_address_provice+item.shop_address_city+item.shop_address_area}}</text>
 							</view>
 							<view class="shop-start">
-								<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.shop_score" color="#7f7f7f" @change='onChange'
+								<uni-rate :disabled='false' margin='2' size="10" max='5' :value="item.shop_score" color="#7f7f7f"
 								 active-color="#ffb540" />
 							</view>
 							<view>
@@ -72,7 +72,7 @@
 									{{item.introduction}} </view>
 							</view>
 						</view>
-						<view class="show-box">
+						<!-- <view class="show-box">
 							<view class="box">
 								<view class="pintuan">
 									拼团减40元
@@ -81,7 +81,7 @@
 									新用户立减60元
 								</view>
 							</view>
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</block>

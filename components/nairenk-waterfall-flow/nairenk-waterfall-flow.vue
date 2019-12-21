@@ -57,26 +57,28 @@
 			// 数据
 			
 			list: function (newVal, oldVal) {	
-				this.block_style="0";
-				this.color="#ffffff"
-				if(oldVal.length>newVal.length){
-					this.mark=0;
-					this.boxHeight=[];
-					this.top=[];
-					this.left=[];
-				}else{
-					this.mark=oldVal.length;
-				}
-				// if (newVal != oldVal) {
+				// this.block_style="0";
+				// this.color="#ffffff"
+				// if(oldVal.length>newVal.length){
+				// 	this.mark=0;
+				// 	this.boxHeight=[];
+				// 	this.top=[];
+				// 	this.left=[];
+				// }else{
+				// 	this.mark=oldVal.length;
+				// }
+				this.mark=0;
+				this.mark=oldVal.length;
+				if (newVal != oldVal) {
 					this.newList = this.list;
 					this.$nextTick(function () {
 						setTimeout(() => {
 							this.block_style="1";
 							this.color="#ccc"
 							this.waterFall();
-						}, 500)
+						}, 300)
 					})
-				// }
+				}
 			}
 		},
 		methods: {

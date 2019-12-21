@@ -4,13 +4,13 @@
 	<view>
 		<!-- banner图 -->
 		<view class="banner">
-			<swiper :autoplay="true" :interval="2000" :duration="1000">
-				<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
-					<view class="swiper-item">
-						<image :src="item" mode="widthFix"></image>
-					</view>
-				</swiper-item>
-			</swiper>
+			<!-- <swiper :autoplay="true" :interval="2000" :duration="1000"> -->
+				<!-- <swiper-item v-for="(item ,index) in [shop_detail.shopInfo.shop_img]" :key='index' class="banner-item"> -->
+					<!-- <view class="swiper-item"> -->
+						<image style="width: 100%;height: 400rpx;" :src="picUrl + shop_detail.shopInfo.shop_img" mode=""></image>
+					<!-- </view> -->
+				<!-- </swiper-item> -->
+			<!-- </swiper> -->
 		</view>
 
 		<view class="shop-some-message">
@@ -41,7 +41,6 @@
 					<image src="/static/image/other/phone.png" mode=""></image>
 				</view>
 			</view>
-			
 		</view>
 
 		<!-- 优惠券的导航条 -->
@@ -49,8 +48,8 @@
 			<view class="coupon-left">
 				<image src="/static/image/other/icon-manjian.png" mode="" class="icon-manjian"></image>
 				<view class="" v-for="(item,index) in shop_detail.shop_coupon" :key="index">
-					<text v-if="item.coupon_type===0">满{{item.coupon_redouction}}减{{item.coupon_price}}</text>
-					<text v-if="item.coupon_type===1">{{item.discount}}折购买</text>
+					<text v-if="item.coupon_type===0">满{{item.coupon_redouction}}减{{item.coupon_price}}</text>			
+					<text v-if="item.coupon_type===1">{{item.is_member_discount}}折购买</text>
 				</view>
 			</view>
 			<view class="coupon-num">
@@ -115,38 +114,12 @@
 				picUrl:"",
 				// banner图
 				bannerlist: [
-					'../../../static/image/banner/1.jpg', '../../../static/image/banner/2.jpg', '../../../static/image/banner/3.jpg',
-					'../../../static/image/banner/4.jpg'
+					
 				],
 
 				cateid:1,
 				menuList:[
-					{
-							id: '1',
-							text: '精选'
-						}, {
-							id: '2',
-							text: '热玛吉'
-						}, {
-							id: '3',
-							text: '激光除皱'
-						},
-						{
-							id: '4',
-							text: '玻尿酸'
-						}, {
-							id: '5',
-							text: '热拉提'
-						}, {
-							id: '6',
-							text: '假数据'
-						}, {
-							id: '7',
-							text: '用来试验的'
-						}, {
-							id: '8',
-							text: '用来凑数'
-						}
+					
 				],
 				titCon:{
 					name:"成功案例 (99)",

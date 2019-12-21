@@ -11,14 +11,14 @@
 				<view class="member-VIP">LV1</view>
 			</view>
 			<view class="member-icon">
-				<view class="menber-edit">
+				<!-- <view class="menber-edit">
 					<view class="icon iconfont icon-icon_function_xiugai memder-icon-edit"></view>
 				</view>
 				<navigator url="./signIn/signIn" class="menber-Signin">
 					<image src="/static/image/other/icon-calendar.png" mode=""></image>
 					<view class="menber-Signin-text">签到</view>
 					<image src="/static/image/other/icon-right-red.png" mode=""></image>
-				</navigator>
+				</navigator> -->
 			</view>
 		</view>
 		<view class="member-portrait" v-else>
@@ -36,7 +36,7 @@
 				</navigator>
 				<navigator url="/pages/member/my-coupon/integral/integral" hover-class="none" class="member-assets-number">
 					<view class="member-assets-h6">{{userInfo[0].integral?userInfo[0].integral:0}}</view>
-					<view class="member-assets-content">积分</view>
+					<view class="member-assets-content">代金币</view>
 				</navigator>
 				<navigator hover-class="none" url="/pages/member/my-coupon/my-coupon" class="member-assets-number">
 					<view class="member-assets-h6">{{coupon_num?coupon_num:0}}</view>
@@ -49,7 +49,7 @@
 			</navigator>
 		</view>
 		<!-- 轮播 -->
-		<view class="banner">
+		<!-- <view class="banner">
 			<swiper :indicator-active-color='colors' :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000">
 				<swiper-item v-for="(item ,index) in bannerlist" :key='index' class="banner-item">
 					<view class="swiper-item">
@@ -57,7 +57,7 @@
 					</view>
 				</swiper-item>
 			</swiper>
-		</view>
+		</view> -->
 		<!-- 订单 -->
 		<view class="member-order member-assets">
 			<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=99')" class="member-order-top">
