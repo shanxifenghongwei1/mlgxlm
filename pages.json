@@ -70,6 +70,12 @@
 			}
 		},
 		{
+			"path": "pages/home/retail_order/retail_refund",
+			"style": {
+				"navigationBarTitleText": "申请退款"
+			}
+		},
+		{
 			"path": "pages/pay/refund_success",
 			"style": {
 				"navigationBarTitleText": "申请成功"

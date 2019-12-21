@@ -22,7 +22,6 @@
 					</view>
 					<view class="right">
 						<view class="li">
-							
 							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">
@@ -79,6 +78,9 @@
 				</view>
 				<view class="opection">
 					<view class="btn-box">
+						<btn font="申请退款" @save="refund(item.re_order_id)" btnSize="sm" :select="0"></btn>
+					</view>
+					<view class="btn-box">
 						<btn font="提醒收货" @save="mygoods_add(item.re_order_id,item.order_id,index)" btnSize="sm" :select="1"></btn>
 					</view>
 				</view>
@@ -117,6 +119,9 @@
 				<view class="opection"> 
 					<view class="btn-box">
 						<btn font="查看物流" @save="express(item.re_order_id)" btnSize="sm" :select="0"></btn>
+					</view>
+					<view class="btn-box">
+						<btn font="申请退款" @save="refund(item.re_order_id)" btnSize="sm" :select="1"></btn>
 					</view>
 					<view class="btn-box">
 						<btn font="确认收货" @save="make_sure(item.re_order_id)" btnSize="sm" :select="1"></btn>
@@ -277,7 +282,9 @@
 				this.global.utils.jump(1, url);
 			},
 			
-			
+			refund(e){
+				this.global.utils.jump(1,"/pages/home/retail_order/retail_refund?order_id=" + e)
+			},
 			
 			
 			// //申请退款

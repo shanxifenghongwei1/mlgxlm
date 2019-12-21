@@ -16,7 +16,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toOrderDetail(item.id)">
 					<view class="left">
 						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
@@ -61,7 +61,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toOrderDetail(item.id)">
 					<view class="left">
 						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
@@ -105,7 +105,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toOrderDetail(item.id)">
 					<view class="left">
 						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
@@ -147,7 +147,7 @@
 						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
 					</view>
 				</view>
-				<view class="con">
+				<view class="con" @click="toOrderDetail(item.id)">
 					<view class="left">
 						<image :src="picUrl+item.picture" mode=""></image>
 					</view>
@@ -202,27 +202,7 @@
 		},
 		data() {
 			return {
-				cateList: [{
-						name: "综合",
-						id: 99
-					},
-					{
-						name: "待付款",
-						id: 0
-					},
-					{
-						name: "待预约",
-						id: 1
-					},
-					{
-						name: "预约中",
-						id: 2
-					},
-					{
-						name: "待评价",
-						id: 3
-					},
-				],
+				cateList: [],
 				cateid: 99,
 				sunblind: false,
 				options: {},
@@ -232,6 +212,9 @@
 			}
 		},
 		methods: {
+			toOrderDetail(e){
+				this.global.utils.jump(1,"/pages/pay/order_detail?order_id="+e)
+			},
 			//申请退款
 			refund(e){
 				this.global.request.post({
@@ -315,7 +298,6 @@
 			yesorder(e){
 				console.log({mes:'点击确认订单',res:e})
 				this.global.utils.jump(1,"/pages/pay/pay?is_min=1&order_id=" + e)
-				
 			},
 			// 点击切换头部文字选择,并传id
 			seleId(e) {
@@ -394,29 +376,6 @@
 					},
 					
 					
-				]
-			} else {
-				// 商品订单
-				this.cateList = [{
-						name: "综合",
-						id: 99
-					},
-					{
-						name: "待付款",
-						id: 0
-					},
-					{
-						name: "待发货",
-						id: 1
-					},
-					{
-						name: "待收货",
-						id: 2
-					},
-					{
-						name: "待评价",
-						id: 3
-					},
 				]
 			}
 		},

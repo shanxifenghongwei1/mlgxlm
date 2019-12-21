@@ -222,7 +222,7 @@
 								console.log(res)
 								this.global.utils.showToast_my(res.msg)
 								setTimeout(()=>{
-									this.global.utils.jump(1,'/pages/pay/order?good_cate=0&cateid=4')
+									this.global.utils.jump(3,'/pages/pay/order?good_cate=0&cateid=4')
 								},2000)
 							}
 						})

@@ -71,15 +71,15 @@
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=1')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
-					<view class="member-order-text">待预约</view>
+					<view class="member-order-text">待确认</view>
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=2')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
-					<view class="member-order-text">待服务</view>
+					<view class="member-order-text">待评价</view>
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=3')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
-					<view class="member-order-text">待评价</view>
+					<view class="member-order-text">已完成</view>
 				</view>
 			</view>
 		</view>
@@ -98,11 +98,11 @@
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
 					<view class="member-order-text">待发货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=2')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=3')">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
 					<view class="member-order-text">待收货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=3')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=4')">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">待评价</view>
 				</view>
