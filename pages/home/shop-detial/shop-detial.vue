@@ -54,7 +54,7 @@
 			</view>
 			<view class="coupon-num">
 				<view class="">
-					{{coupon_list.couponInfo.length}}张
+					
 				</view>
 				<image class="icon-left" src="/static/image/other/icon-left.png" mode=""></image>
 			</view>

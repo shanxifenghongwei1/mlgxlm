@@ -94,7 +94,7 @@
 			<block v-if="place===1">
 				<view @click="toDetail()">
 				<view class="goods-pic">
-					<image src="/static/image/banner/1.jpg" mode=""></image>
+					<image :src="imageurl + item.prcture" mode=""></image>
 				</view>
 				<view class="goods-tit">
 					￥{{item.goods_name}}
@@ -207,7 +207,7 @@
 				<view @click="toDetail()">
 				
 				<view class="goods-pic">
-					<image src="/static/image/banner/1.jpg" mode=""></image>
+					<image :src="imageurl + item.picture" mode=""></image>
 				</view>
 				<view class="ware">
 					<view class="left title">

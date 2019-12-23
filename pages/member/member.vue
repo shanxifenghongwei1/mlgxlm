@@ -158,10 +158,10 @@
 					<view class="icon iconfont member-tool-content1 icon-tousujianyi" style="color: #d1c7c8;"></view>
 					<view class="member-tool-text">分享好礼</view>
 				</view>
-				<view class="member-tool-content-w25">
+<!-- 				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">我的预约</view>
-				</view>
+				</view> -->
 				<navigator url="/pages/member/tool/include/include" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">商家入驻</view> 
