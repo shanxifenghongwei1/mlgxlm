@@ -62,7 +62,6 @@
 					</view>
 					<view class="right">
 						<view class="li">
-							
 							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
 						</view>
 						<view class="li">

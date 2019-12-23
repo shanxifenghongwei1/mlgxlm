@@ -74,12 +74,16 @@
 					<view class="member-order-text">待确认</view>
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=2')" class="member-order-content-w20">
-					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
+					<view class="icon iconfont member-order-content1 icon-daipingjia1"></view>
 					<view class="member-order-text">待评价</view>
 				</view>
 				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=3')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
 					<view class="member-order-text">已完成</view>
+				</view>
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=3')" class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-tuikuan"></view>
+					<view class="member-order-text">退款/售后</view>
 				</view>
 			</view>
 		</view>
@@ -98,13 +102,17 @@
 					<view class="icon iconfont member-order-content1 icon-daifahuo"></view>
 					<view class="member-order-text">待发货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=3')">
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=2')">
 					<view class="icon iconfont member-order-content1 icon-wlcx"></view>
 					<view class="member-order-text">待收货</view>
 				</view>
-				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=4')">
-					<view class="icon iconfont member-order-content1 icon-daipingjia"></view>
+				<view class="member-order-content-w20" @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=3')">
+					<view class="icon iconfont member-order-content1 icon-daipingjia1"></view>
 					<view class="member-order-text">待评价</view>
+				</view>
+				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=5')" class="member-order-content-w20">
+					<view class="icon iconfont member-order-content1 icon-tuikuan"></view>
+					<view class="member-order-text">退款/售后</view>
 				</view>
 			</view>
 		</view>
@@ -125,10 +133,6 @@
 				<view class="member-tool-content-w25" v-if="identity==1">
 					<view class="icon iconfont member-tool-content1 icon-fenxiao" style="color: #feb640;"></view>
 					<view class="member-tool-text">推广二维码</view>
-				</view>
-				<view class="member-tool-content-w25">
-					<view class="icon iconfont member-tool-content1 icon-pintuan" style="color: #0090ff;"></view>
-					<view class="member-tool-text">退款/售后</view>
 				</view>
 			</view>
 			<view class="member-tool-content1">
@@ -158,10 +162,10 @@
 					<view class="icon iconfont member-tool-content1 icon-tousujianyi" style="color: #d1c7c8;"></view>
 					<view class="member-tool-text">分享好礼</view>
 				</view>
-<!-- 				<view class="member-tool-content-w25">
+				<view class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">我的预约</view>
-				</view> -->
+				</view>
 				<navigator url="/pages/member/tool/include/include" class="member-tool-content-w25">
 					<view class="icon iconfont member-tool-content1 icon-shangcheng" style="color: #ff7898;"></view>
 					<view class="member-tool-text">商家入驻</view> 
