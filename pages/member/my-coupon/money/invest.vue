@@ -6,20 +6,10 @@
 			<view class="num-box">
 				<view class="price">
 					<view class="bg-num">
-						1938.5
+						{{userInfo[0].money}}
 					</view>
 					<view class="tit">
 						￥分享币
-					</view>
-				</view>
-				<view class="opection">
-					<view class="">
-						<image src="/static/image/other/money-1.png" mode=""></image>
-						支付明细
-					</view>
-					<view class="">
-						<!-- <image src="/static/image/other/money-2.png" mode=""></image>
-						钱包充值 -->
 					</view>
 				</view>
 			</view>
@@ -35,7 +25,7 @@
 					<view class="">
 						金额（元）
 					</view>
-					<input type="number" value="" placeholder="请输入充值金额"/>
+					<input type="number" value="" placeholder="请输入充值金额" v-model="money" />
 				</view>
 			</view>
 		</view>
@@ -64,16 +54,80 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo:{},
+				coupon_num:0,
+				identity:0,
+				money:0
 			}
 		},
 		methods: {
-			save:()=>{
-				uni.redirectTo({
-					url:"/pages/member/my-coupon/money/invest_success"
+			save(){
+				
+				let data = {};
+				data.total_fee=this.money;
+				data.openid= uni.getStorageSync("session").data.openid;
+				uni.request({
+					url: this.global.demao.domain.request + "share_Currency_Recharge",
+					data: data,
+					dataType: "json",
+					method:"POST",
+					header: {
+						"Content-Type": 'application/x-www-form-urlencoded', // 默认值
+						'X-TOKEN-PETMALL': '',
+					},
+					success: (result) => {
+						
+						console.log(result.data)
+						uni.requestPayment({
+						    provider: 'wxpay',
+						    timeStamp: result.data.timeStamp,
+						    nonceStr: result.data.nonceStr,
+						    package: result.data.package,
+						    signType: result.data.signType,
+						    paySign: result.data.paySign,
+						    success: function (res) {
+						        console.log('success:' + JSON.stringify(res));
+						    },
+						    fail: function (err) {
+						        console.log('fail:' + JSON.stringify(err));
+						    }
+						});
+					},
 				})
 				
-			}
+				
+				
+				// uni.redirectTo({
+				// 	url:"/pages/member/my-coupon/money/invest_success"
+				// })
+			},
+			findInfo() {
+				let that=this;
+				this.global.request.post({
+					url: "user_center",
+					method: "GET",
+					data: {
+						openid:uni.getStorageSync("session").data.openid
+					},
+					success: (res) => {
+						this.userInfo=res.userInfo;
+						this.coupon_num=res.coupon_num
+						if(res.userInfo[0].mt_reseller==1){     ///0普通用户   1.参与分销
+							if(res.userInfo[0].p_id==0){		////0分销商    else  分销员
+								that.identity=1;
+							}else{
+								that.identity=2;
+							}
+						}else{
+							
+							that.identity=0;
+						}
+					}
+				})
+			},
+		},
+		onLoad() {
+			this.findInfo()
 		}
 	}
 </script>

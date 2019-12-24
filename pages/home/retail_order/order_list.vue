@@ -169,6 +169,42 @@
 				</view>
 			</view>
 			
+			<view class="list1" v-if="item.order_status==5">
+				<view class="title">
+					<view class="left">
+						<text class="icon iconfont icon-dianpu"></text>{{item.shop_name}}（退款审核中）
+					</view>
+					<view class="right" @click="phone(item.shop_phone)">
+						<text class="icon iconfont icon-lianxidaogou"></text>联系卖家
+					</view>
+				</view>
+				<view class="con" @click="toDetail(item.re_order_id)">
+					<view class="left">
+						<image :src="picUrl+item.re_goods_picture" mode=""></image>
+					</view>
+					<view class="right">
+						<view class="li">
+							<text>商品名称：</text><text>{{item.re_goods_name}}</text>
+						</view>
+						<view class="li">
+							<text>订单编号：</text><text>{{item.re_order_no}}</text>
+						</view>
+						<view class="li">
+							<text>实付金额：</text><text class="red">{{item.re_goods_price}}元</text>
+						</view>
+						<view class="li red">
+							<text class="icon iconfont icon-naozhong red"></text>退款审核中
+						</view>
+					</view>
+				</view>
+				<view class="opection">
+					<view class="btn-box">
+						<btn font="退款审核中" btnSize="sm" :select="1"></btn>
+					</view>
+			
+				</view>
+			</view>
+			
 			
 		</block>
 
@@ -204,6 +240,10 @@
 					{
 						name: "待评价",
 						id: 3
+					},
+					{
+						name: "退款/售后",
+						id: 5
 					},
 				],
 				cateid: 99,
@@ -286,82 +326,8 @@
 			},
 			
 			
-			// //申请退款
-			// refund(e){
-			// 	this.global.request.post({
-			// 		url:'re_refund_add',
-			// 		method:'GET',
-			// 		data:{
-			// 			id:e
-			// 		},
-			// 		success:res=>{
-			// 			console.log({mes:'点击申请退款',res:res})
-			// 			if(res.data.status_refund == 0){
-			// 				this.global.utils.jump(1,"/pages/pay/refund?order_id=" + e)
-			// 				console.log({mes:'点击申请退款',res:e})
-			// 			}else if(res.data.status_refund == 1){
-			// 				this.global.utils.showToast_my('您已经申请过啦！')
-			// 			}else if(res.data.status_refund == 2){
-			// 				this.global.utils.showToast_my('您的申请已经在审核中！')
-			// 			}else if(res.data.status_refund == 3){
-			// 				this.global.utils.showToast_my('您的退款已成功！')
-			// 			}else if(res.data.status_refund == 4){
-			// 				this.global.utils.showToast_my('退款未通过审核')
-			// 			}
-			// 		}
-			// 	})
-			// },
 			
-			// //确认收货
-			// mygoods_add(e,q,a){
-			// 	console.log({mes:'点击确认收货',index:a,q:q})
-			// 	this.global.request.post({
-			// 		url:'up_status_add',
-			// 		data:{
-			// 			id:e,
-			// 			order_id:q
-			// 		},
-			// 		success:res=>{
-			// 			console.log({mes:'确认收货成功或者失败',res:res})
-						
-			// 			if(res.data.data == 1){
-			// 				this.list.splice(a,1)
-			// 				this.global.utils.showToast_my('已成功确认')
-			// 			}else if(res.data.data == 2){
-			// 				this.global.utils.showToast_my('退款中不能确认收货')
-			// 			}else if(res.data.data == 3){
-			// 				this.global.utils.showToast_my('确认收货有误')
-			// 			}
-						
-			// 		}
-			// 	})
-			// },
-			// // 删除订单
-			// del_order(e,a){
-			// 	console.log({mes:'点击删除订单',res:e,index:a})
-			// 	var that = this
-			// 	uni.showModal({
-			// 		title: '提示',
-			// 		content: '是否确认删除该订单？',
-			// 		success: (ras)=> {
-			// 			if (ras.confirm) {
-			// 					that.global.request.post({
-			// 						url:'update_static_del', 
-			// 						method:'GET',
-			// 						data:{
-			// 							id:e
-			// 						},
-			// 						success:res=>{
-			// 							this.list.splice(a,1)
-			// 						}
-			// 					})
-			// 			} else if (ras.cancel) {
-			// 				console.log('用户点击取消');
-			// 			}
-			// 		}
-			// 	});
-				
-			// },
+			
 			//确认付款
 			yesorder(e){
 				this.global.utils.jump(1,"/pages/home/retail_home/retail_pay?re_order_id=" + e)

@@ -110,7 +110,7 @@
 					<view class="icon iconfont member-order-content1 icon-daipingjia1"></view>
 					<view class="member-order-text">待评价</view>
 				</view>
-				<view @click="toDetail(1,'/pages/pay/order?good_cate=0&cateid=5')" class="member-order-content-w20">
+				<view @click="toDetail(1,'/pages/home/retail_order/order_list?cateid=5')" class="member-order-content-w20">
 					<view class="icon iconfont member-order-content1 icon-tuikuan"></view>
 					<view class="member-order-text">退款/售后</view>
 				</view>

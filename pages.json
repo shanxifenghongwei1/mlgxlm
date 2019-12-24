@@ -224,11 +224,15 @@
 		}
         ,{
             "path" : "pages/member/my-coupon/money/money",
-            "style" : {}
+            "style" : {
+            	"navigationBarTitleText": "分享币中心"
+            }
         }
 		,{
 		    "path" : "pages/member/my-coupon/money/cash",
-		    "style" : {}
+		    "style" : {
+				"navigationBarTitleText": "体现"
+			}
 		},
 		{
 		    "path" : "pages/member/my-coupon/money/cash_success",
@@ -236,7 +240,9 @@
 		},
 		{
 		    "path" : "pages/member/my-coupon/money/invest",
-		    "style" : {}
+		    "style" : {
+		    	"navigationBarTitleText": "充值中心"
+		    }
 		},
 		{
 		    "path" : "pages/member/my-coupon/money/invest_success",

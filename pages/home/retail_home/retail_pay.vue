@@ -88,6 +88,7 @@
 				// }
 			},
 			save() {
+				let that=this;
 				if (this.meth == 0) {
 					if (this.userInfo[0].money > this.order_detail.re_goods_price * this.order_detail.buy_num) {
 						let data = {};
@@ -122,7 +123,44 @@
 						});
 					}
 				} else {
-					console.log("走微信支付")
+					
+					let data = {};
+					data.re_order_id=this.options.re_order_id;
+					data.openid= uni.getStorageSync("session").data.openid;
+					uni.request({
+						url: this.global.demao.domain.request + "re_wxpay",
+						data: data,
+						dataType: "json",
+						method:"POST",
+						header: {
+							"Content-Type": 'application/x-www-form-urlencoded', // 默认值
+							'X-TOKEN-PETMALL': '',
+						},
+						success: (result) => {
+							
+							console.log(result.data)
+							uni.requestPayment({
+							    provider: 'wxpay',
+							    timeStamp: result.data.timeStamp,
+							    nonceStr: result.data.nonceStr,
+							    package: result.data.package,
+							    signType: result.data.signType,
+							    paySign: result.data.paySign,
+							    success: function (res) {
+							        console.log('success:' + JSON.stringify(res));
+							    },
+							    fail: function (err) {
+							        console.log('fail:' + JSON.stringify(err));
+							    }
+							});
+						},
+					})
+					
+					
+					
+					
+					
+					
 				}
 			}
 		},
