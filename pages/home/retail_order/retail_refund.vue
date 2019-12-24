@@ -59,7 +59,7 @@
 				order_id:'',
 				msg:'',
 				pic_list:[],
-				pic_list1:["../../static/logo.png","../../static/image/1.jpg"]
+				pic_list1:[]
 			}
 		},
 		methods:{
@@ -68,16 +68,21 @@
 			},
 			// 提交
 			save(){
+				let text=this.cause.filter((v)=>{
+					return v.id==this.active 
+				})
+				let data={
+					refund_reason:text[0].title,
+					re_order_id:this.order_id,
+					refund_reason_detail:this.msg,
+					refund_img:this.pic_list1.toString()
+				}
+				console.log(data)
 				this.global.request.post({
 					url:'index_reseller_share_Apply_refund',
-					method:'GET',
-					data:{
-						refund_text_id:this.active,
-						id:this.order_id,
-						refund_msg:this.msg
-					},
+					data:data,
 					success:res=>{
-						this.global.utils.jump(1,"/pages/pay/refund_success?money=" + res.data) 
+						this.global.utils.jump(5)
 					}
 				})
 			},
@@ -129,7 +134,7 @@
 					content: '确认删除这张图片吗',
 					success: (res)=> {
 					    if (res.confirm) {
-					       this.pic_list.splice(e,1)
+					       this.pic_list=this.pic_list.splice(e,1)
 						   this.global.utils.showToast_my("删除成功")
 					    } else if (res.cancel) {
 					        

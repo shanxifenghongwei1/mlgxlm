@@ -6,7 +6,7 @@
 			<view class="num-box">
 				<view class="price">
 					<view class="bg-num">
-						1938.5
+						{{userInfo[0].money}}
 					</view>
 					<view class="tit">
 						￥分享币
@@ -101,7 +101,9 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo:{},
+				coupon_num:0,
+				identity:0
 			}
 		},
 		methods: {
@@ -114,7 +116,44 @@
 				uni.navigateTo({
 					url:"/pages/member/my-coupon/money/cash"
 				})
+			},
+			findInfo() {
+				let that=this;
+				this.global.request.post({
+					url: "user_center",
+					method: "GET",
+					data: {
+						openid:uni.getStorageSync("session").data.openid
+					},
+					success: (res) => {
+						this.userInfo=res.userInfo;
+						this.coupon_num=res.coupon_num
+						if(res.userInfo[0].mt_reseller==1){     ///0普通用户   1.参与分销
+							if(res.userInfo[0].p_id==0){		////0分销商    else  分销员
+								that.identity=1;
+							}else{
+								that.identity=2;
+							}
+						}else{
+							
+							that.identity=0;
+						}
+					}
+				})
+			},
+			findList(){
+				let that=this;
+				this.global.request.post({
+					url: "share_Currency_list",
+					success: (res) => {
+						console.log(res)
+					}
+				})
 			}
+		},
+		onLoad() {
+			this.findList()
+			this.findInfo()
 		}
 	}
 </script>

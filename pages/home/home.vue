@@ -490,17 +490,6 @@
 					},
 					success: (result) => {
 						
-						// let list = result.data.data.week_newshop;
-						// let shop_goods = []
-						// list.forEach((v) => {
-						// 	{shop_info:item.shop_info}
-						// 	v.shop_label = v.shop_label ? v.shop_label.split(",") : []
-						// })
-						// result.data.data.week_newshop = list;
-
-
-
-
 						let list1 = result.data.data.goodsInfo;
 						
 						list1.forEach((v) => {
