@@ -147,7 +147,10 @@
 							    signType: result.data.signType,
 							    paySign: result.data.paySign,
 							    success: function (res) {
-							        console.log('success:' + JSON.stringify(res));
+							        that.global.utils.showToast_my("支付成功")
+							        setTimeout(() => {
+							        	that.global.utils.jump(3, "/pages/home/retail_home/retail_pay_success?money=" + that.order_detail.re_goods_price * that.order_detail.buy_num +"&re_order_id="+that.options.re_order_id )
+							        }, 2000)
 							    },
 							    fail: function (err) {
 							        console.log('fail:' + JSON.stringify(err));
