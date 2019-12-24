@@ -33,61 +33,21 @@
 						账单明细
 					</view>
 					<view class="li">
-						<view class="li-box">
+						<view class="li-box" v-for="(item,index) in list" :key="index">
 							<view class="pic">
 								￥
 							</view>
 							<view class="con">
 								<view class="">
-									充值
+									<!-- 充值 -->
+									{{item.is_type==0?'充值':item.is_type==1?'分销':item.is_type==2?'体现':item.is_type==3?'购买商品':''}}
 								</view>
 								<view class="">
-									微信支付
-								</view>
-								<view class="">
-									2019.05.05
+									{{item.in_time*1000 |time}}
 								</view>
 							</view>
 							<view class="number">
-								+300
-							</view>
-						</view>
-						<view class="li-box">
-							<view class="pic">
-								￥
-							</view>
-							<view class="con">
-								<view class="">
-									充值
-								</view>
-								<view class="">
-									微信支付
-								</view>
-								<view class="">
-									2019.05.05
-								</view>
-							</view>
-							<view class="number">
-								+300
-							</view>
-						</view>
-						<view class="li-box">
-							<view class="pic">
-								￥
-							</view>
-							<view class="con">
-								<view class="">
-									充值
-								</view>
-								<view class="">
-									微信支付
-								</view>
-								<view class="">
-									2019.05.05
-								</view>
-							</view>
-							<view class="number">
-								+300
+								{{item.in_symbol==0?'+':'-'}}{{item.in_money}}
 							</view>
 						</view>
 					</view>	
@@ -103,7 +63,8 @@
 			return {
 				userInfo:{},
 				coupon_num:0,
-				identity:0
+				identity:0,
+				list:[]
 			}
 		},
 		methods: {
@@ -146,12 +107,13 @@
 				this.global.request.post({
 					url: "share_Currency_list",
 					success: (res) => {
-						console.log(res)
+						console.log(res.data)
+						this.list=res.data.reverse();
 					}
 				})
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.findList()
 			this.findInfo()
 		}

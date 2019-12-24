@@ -37,7 +37,7 @@
 				</view>
 			</view>
 		</view>
-<!-- 		<view>
+		<!-- 		<view>
 			<u-parse :content="article" @preview="preview" @navigate="navigate"></u-parse>
 		</view> -->
 
@@ -72,12 +72,10 @@
 		data() {
 			return {
 				list: [],
-				titCon: [1, 2, 3, 3],
 				checked: false,
 				imageurl: this.global.demao.domain.videoUrl,
 				array: [],
 				sum: 0.00,
-				// article: ''
 			}
 		},
 		methods: {
@@ -235,7 +233,11 @@
 			}
 		},
 		onShow() {
-			console.log(this.global.demao.api.user_Address_list)
+			this.list = [];
+			this.checked = false;
+
+			this.array = [];
+			this.sum = 0.00;
 			this.findCar();
 
 			// let data={};

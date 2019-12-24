@@ -86,20 +86,23 @@
 						    signType: result.data.signType,
 						    paySign: result.data.paySign,
 						    success: function (res) {
-						        console.log('success:' + JSON.stringify(res));
+								console.log(res)
+								if(res.errMsg=='requestPayment:ok'){
+									this.global.utils.showToast_my("充值成功")
+									setTimeout(function() {
+											this.global.utils.jump(5)
+									}, 2000);
+								}else{
+									console.log(222)
+								}
 						    },
 						    fail: function (err) {
-						        console.log('fail:' + JSON.stringify(err));
+						        this.global.utils.showToast_my(err.msg)
 						    }
 						});
 					},
 				})
 				
-				
-				
-				// uni.redirectTo({
-				// 	url:"/pages/member/my-coupon/money/invest_success"
-				// })
 			},
 			findInfo() {
 				let that=this;
