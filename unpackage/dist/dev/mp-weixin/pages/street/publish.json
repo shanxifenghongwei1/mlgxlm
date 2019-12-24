@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "发布",
-  "usingComponents": {
-    "uni-rate": "/components/uni-rate/uni-rate"
-  }
-}

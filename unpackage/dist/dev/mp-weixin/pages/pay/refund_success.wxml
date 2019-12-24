@@ -1,1 +1,0 @@
-<view><view class="header"><image src="/static/image/other/refund_success.png" mode></image><view class="name"><text class="red">{{money}}</text><text>元</text><text class="left">退款申请成功</text></view><view class="edition">预计0-3个工作日审核通过</view></view><view class="save"><view data-event-opts="{{[['tap',[['save']]]]}}" class="save_btn" bindtap="__e">完成</view></view></view>

@@ -37,28 +37,28 @@
 			<view class="son-father">
 				<view class="son">
 					<view class="butf">
-						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
+						<view @click="menuDetail(item.t_id,item.t_name,item.p_id)" v-for="(item , index) in indexData.s_type1" :key='index' class="list-one">
 							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 							<view class="text">{{item.t_name}}</view>
 						</view>
 					</view>
 					<view class="head">
-						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
+						<view @click="menuDetail(item.t_id,item.t_name,item.p_id)" v-for="(item , index) in indexData.s_type2" :key='index' class="list-one">
 							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 							<view class="text">{{item.t_name}}</view>
 						</view>
 					</view>
 					<view class="head">
-						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
+						<view @click="menuDetail(item.t_id,item.t_name,item.p_id)" v-for="(item , index) in indexData.s_type3" :key='index' class="list-one">
 							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 							<view class="text">{{item.t_name}}</view>
 						</view>
 					</view>
 					<view class="head">
-						<view @click="menuDetail(item.t_id,item.t_name)" v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
+						<view @click="menuDetail(item.t_id,item.t_name,item.p_id)" v-for="(item , index) in indexData.s_type4" :key='index' class="list-one">
 							<image mode="aspectFit" :src="picUrl+item.t_img" class="icon"></image>
 							<view class="text">{{item.t_name}}</view>
-						</view>
+						</view> 
 						<view class="list-one" @click="toCatePage()">
 							<image mode="aspectFit" src="../../static/image/homepage/quanbu.jpg" class="icon"></image>
 							<view class="text">更多</view>
@@ -442,11 +442,11 @@
 				this.global.utils.jump(1, url);
 			},
 			//跳转二级分类详情页面
-			menuDetail(e, f) {
+			menuDetail(e, f, g) {
 				this.sunblind = true;
 				let lat = this.latnng.latitude
 				let lng = this.latnng.longitude
-				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng+ '&&min=' + 1
+				let url = "/pages/home/hairdressing/hairdressing?runid=" + e + "&&head=" + f + '&&lat=' + lat + '&&lng=' + lng+ '&&min=' + 1 + "&&is_big=" + g
 				this.global.utils.jump(1, url);
 			},
 			//跳转商品详情页面

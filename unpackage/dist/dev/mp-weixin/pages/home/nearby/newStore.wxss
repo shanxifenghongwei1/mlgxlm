@@ -1,9 +1,0 @@
-
-.search-box{
-	width: 100%;
-	padding: 0 3%;
-	box-sizing: border-box;
-}
-.shoplist-box{
-}
-

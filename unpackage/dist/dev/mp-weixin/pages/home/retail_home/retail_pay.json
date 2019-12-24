@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "在线支付",
-  "usingComponents": {
-    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar"
-  }
-}

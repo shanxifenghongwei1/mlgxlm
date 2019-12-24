@@ -160,6 +160,7 @@
 				}],
 				detail: [],
 				distance: [],
+				is_big:'',
 				imageurl: this.global.demao.domain.videoUrl
 			};
 		},
@@ -199,7 +200,7 @@
 					url: 'mt_sort',
 					method: 'GET',
 					data: {
-						t_id: e==99999999 ? "" : e,
+						t_id: e==99999999 ? this.is_big : e,
 						lat1: this.options.lat,
 						lng1: this.options.lng
 					},
@@ -232,11 +233,16 @@
 		},
 		onLoad(options) {
 			this.options = options;
-			this.global.utils.sethead(options.head)
-			this.init(options.runid)
+			
 			if(options.min){
 				this.ids="a"+options.runid;
+				this.is_big = options.is_big
+			}else{
+				this.is_big = options.runid
 			}
+			this.global.utils.sethead(options.head)
+			this.init(options.runid)
+			
 		}
 	}
 </script>
