@@ -231,7 +231,7 @@
 		,{
 		    "path" : "pages/member/my-coupon/money/cash",
 		    "style" : {
-				"navigationBarTitleText": "体现"
+				"navigationBarTitleText": "提现"
 			}
 		},
 		{

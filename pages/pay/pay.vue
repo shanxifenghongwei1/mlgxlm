@@ -71,6 +71,7 @@
 				this.meth=e; 
 			},
 			save(){
+				let that=this;
 				if(this.meth==0){
 					if(this.userInfo[0].money>this.num){
 						// console.log("分享币支付")
@@ -100,7 +101,42 @@
 						    content: '分享币不足，是否切换为微信支付',
 						    success:(res)=> {
 						        if (res.confirm) {
-						            console.log('用户点击确定');
+									that.meth=1;
+						            let data = {};
+						            data.id=that.options.order_id;
+						            data.openid= uni.getStorageSync("session").data.openid;
+						            data.is_big=that.is_big;
+						            uni.request({
+						            	url: that.global.demao.domain.request + "test_pay",
+						            	data: data,
+						            	dataType: "json",
+						            	method:"POST",
+						            	header: {
+						            		"Content-Type": 'application/x-www-form-urlencoded', // 默认值
+						            		'X-TOKEN-PETMALL': '',
+						            	},
+						            	success: (result) => {
+						            		
+						            		console.log(result.data)
+						            		uni.requestPayment({
+						            		    provider: 'wxpay',
+						            		    timeStamp: result.data.timeStamp,
+						            		    nonceStr: result.data.nonceStr,
+						            		    package: result.data.package,
+						            		    signType: result.data.signType,
+						            		    paySign: result.data.paySign,
+						            		    success: function (res) {
+						            		        that.global.utils.showToast_my("支付成功")
+						            		        setTimeout(() => {
+						            					that.global.utils.jump(3,"/pages/pay/pay_success?money=" + that.num)
+						            		        }, 2000)
+						            		    },
+						            		    fail: function (err) {
+						            		        console.log('fail:' + JSON.stringify(err));
+						            		    }
+						            		});
+						            	},
+						            })
 						        } else if (res.cancel) {
 						           this.global.utils.showToast_my("支付失败")
 						        }
@@ -108,7 +144,42 @@
 						});
 					}
 				}else{
-					console.log("走微信支付")
+					
+					let data = {};
+					data.id=this.options.order_id;
+					data.openid= uni.getStorageSync("session").data.openid;
+					data.is_big=this.is_big;
+					uni.request({
+						url: this.global.demao.domain.request + "test_pay",
+						data: data,
+						dataType: "json",
+						method:"POST",
+						header: {
+							"Content-Type": 'application/x-www-form-urlencoded', // 默认值
+							'X-TOKEN-PETMALL': '',
+						},
+						success: (result) => {
+							
+							console.log(result.data)
+							uni.requestPayment({
+							    provider: 'wxpay',
+							    timeStamp: result.data.timeStamp,
+							    nonceStr: result.data.nonceStr,
+							    package: result.data.package,
+							    signType: result.data.signType,
+							    paySign: result.data.paySign,
+							    success: function (res) {
+							        that.global.utils.showToast_my("支付成功")
+							        setTimeout(() => {
+										that.global.utils.jump(3,"/pages/pay/pay_success?money=" + that.num)
+							        }, 2000)
+							    },
+							    fail: function (err) {
+							        console.log('fail:' + JSON.stringify(err));
+							    }
+							});
+						},
+					})
 				}
 			}
 		},

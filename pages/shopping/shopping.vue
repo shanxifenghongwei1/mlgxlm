@@ -240,19 +240,6 @@
 			this.sum = 0.00;
 			this.findCar();
 
-			// let data={};
-			// data.goods_id=3172;
-			// data.buy_num=1;
-			// data.total_price=123;
-			// this.global.request.post({
-			// 	url: this.global.demao.api.add_order,
-			// 	method: "GET",
-			// 	data: data,
-			// 	isLoading: true,
-			// 	success: (res) => {
-			// 		console.log(res)
-			// 	}
-			// })
 		}
 	}
 </script>

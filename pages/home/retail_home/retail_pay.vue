@@ -80,12 +80,7 @@
 				this.meth = e;
 			},
 			pay() {
-				// uni.navigateTo({
-				// 	url:"/pages/pay/pay_success"
-				// })
-				// this.global.order.make_order().then(){
-				// 	console.log("执行到这儿了")
-				// }
+
 			},
 			save() {
 				let that=this;
