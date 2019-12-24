@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "附近店铺",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "store": "/components/mine/store",
+    "search": "/components/my-search/my-search",
+    "cate-flex": "/components/mine/cate-flex"
+  }
+}

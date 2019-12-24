@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "search-any": "/components/my-search/my-search",
+    "uni-rate": "/components/uni-rate/uni-rate",
+    "cmd-rrogress": "/components/cmd-progress/cmd-progress"
+  }
+}

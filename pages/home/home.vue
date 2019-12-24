@@ -103,7 +103,8 @@
 						<view class="iconsss"></view>
 						<view>本周新店</view>
 					</view>
-					<view @click="new_store()" class="more">更多</view>
+					<view></view>
+					<!-- <view @click="new_store()" class="more">更多</view> -->
 				</view>
 
 				<view class="shop-col" v-for="(item,index) in indexData.week_newshop" :key="index" @click="jump(item.shop_info.shop_id,item.shop_info.shop_name)">

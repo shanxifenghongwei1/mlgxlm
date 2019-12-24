@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="con">
-			<image src="/static/image/other/share_1.png" mode="" class="back"></image>
+			<image :src="picUrl+'images/5dfc65b56776191.jpg'" mode="" class="back"></image>
 			<view class="person-box">
 
 				<view class="list" v-for="(item,index) in num" :key="index">
@@ -38,7 +38,8 @@
 				open_id: "",
 				join_id: "",
 				num: [],
-				number: 6
+				number: 6,
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods: {

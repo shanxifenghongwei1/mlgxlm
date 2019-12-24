@@ -1,0 +1,376 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/******段落省略号，默认两行******/
+.any-flex, .head-con .device, .head-con .newshop-head, .head-con .newshop-head .icons, .shoplist {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center; }
+.cons, .head-con {
+  overflow: hidden;
+  width: 94%;
+  padding: 0 3%; }
+.any-over, .head-con {
+  overflow: hidden; }
+.font-weig {
+  font-weight: 600; }
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden; }
+.head-con .device {
+  margin-top: 20rpx;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap; }
+.head-con .device .device-son {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 10rpx 20rpx; }
+.head-con .device .device-son image {
+      width: 100rpx;
+      height: 100rpx; }
+.head-con .newshop-head {
+  width: 100%;
+  height: 60rpx;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin: 16rpx 0rpx; }
+.head-con .newshop-head .icons {
+    font-size: 24rpx; }
+.head-con .newshop-head .icons .iconsss {
+      height: 40rpx;
+      width: 8rpx;
+      margin-right: 10rpx;
+      background: #FE0000;
+      font-size: 30rpx; }
+.head-con .newshop-head .more {
+    font-size: 24rpx;
+    width: 60rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    background: #FE0000;
+    color: #fff;
+    text-align: center;
+    border-radius: 10rpx; }
+.banner {
+  width: 100%;
+  height: 200rpx; }
+.banner swiper {
+    width: 100%;
+    height: 100%; }
+.banner swiper image {
+      width: 100%;
+      height: 100%; }
+.shoplist {
+  width: 100%;
+  height: 80rpx;
+  border-top: 2rpx solid #f0f0f0;
+  border-bottom: 2rpx solid #f0f0f0;
+  font-size: 30rpx;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between; }
+.shoplist .list {
+    width: 20%;
+    text-align: center;
+    line-height: 80rpx; }
+.shoplist .active {
+    color: #FE0000;
+    position: relative; }
+.shoplist .active:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 74rpx;
+    left: 10%;
+    width: 80%;
+    height: 8rpx;
+    background: #FE0000; }
+
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/******段落省略号，默认两行******/
+.any-flex, .goods, .goods .con, .goods .con .context1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.cons {
+  overflow: hidden;
+  width: 94%;
+  padding: 0 3%;
+}
+.any-over {
+  overflow: hidden;
+}
+.font-weig {
+  font-weight: 600;
+}
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background: #F0F0F0;
+  overflow: hidden;
+}
+.newbox {
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.newbox .down {
+    height: 64rpx;
+    background: #FFFFFF;
+    width: 60rpx;
+    text-align: center;
+    line-height: 64rpx;
+}
+.newbox .menu {
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1rpx solid #f0f0f0;
+    width: 95%;
+    margin: 0 0 0 20rpx;
+}
+.newbox .menu .scroll-list {
+      width: 100%;
+}
+.newbox .menu .scroll-list .menu-list {
+        display: inline-block;
+        padding: 10rpx 20rpx;
+        border-radius: 50rpx;
+        font-size: 30rpx;
+}
+.newbox .menu1 {
+    overflow: hidden;
+    border-bottom: 1rpx solid #f0f0f0;
+    width: 95%;
+    margin: 0 0 0 20rpx;
+}
+.newbox .menu1 .scroll-list {
+      width: 100%;
+}
+.newbox .menu1 .scroll-list .menu-list {
+        display: inline-block;
+        padding: 10rpx 20rpx;
+        border-radius: 50rpx;
+        font-size: 30rpx;
+}
+.newbox .active {
+    color: #FE0000;
+    position: relative;
+}
+.newbox .active:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 55rpx;
+    left: 10%;
+    width: 80%;
+    height: 8rpx;
+    background: #FE0000;
+}
+.goods {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 20rpx;
+  border: 2rpx solid #f0f0f0;
+  border-bottom: 4rpx solid #FE0000;
+  margin-top: 20rpx;
+  padding: 15rpx 0;
+  box-sizing: border-box;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.goods .pic-box {
+    padding: 0 20rpx;
+}
+.goods image {
+    width: 160rpx;
+    height: 160rpx;
+    background: red;
+}
+.goods .con {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+            flex-grow: 1;
+    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+            align-items: flex-start;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    padding-right: 10%;
+    box-sizing: border-box;
+    position: relative;
+}
+.goods .con .title {
+      width: 100%;
+      font-size: 24rpx;
+      color: #FE0000;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      autoprefixer: on;
+      padding-right: 25%;
+      box-sizing: border-box;
+}
+.goods .con .star {
+      width: 100%;
+      position: relative;
+      font-size: 24rpx;
+}
+.goods .con .contex {
+      font-size: 20rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      autoprefixer: on;
+}
+.goods .con .address {
+      width: 100%;
+      font-size: 20rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      autoprefixer: on;
+      position: relative;
+      padding-right: 25%;
+      box-sizing: border-box;
+}
+.goods .con .iconfont {
+      font-size: 26rpx;
+      margin-right: 20rpx;
+      color: #FE0000;
+}
+.goods .con .context1 {
+      -webkit-box-align: end;
+      -webkit-align-items: flex-end;
+              align-items: flex-end;
+}
+.goods .ccc {
+    color: #868686;
+}
+.goods .red {
+    color: #FE0000;
+}
+.goods .mar {
+    margin-right: 20rpx;
+}
+.goods .mar2 {
+    margin-right: 30rpx;
+}
+.goods .go {
+    background: #FE0000;
+    color: #ffffff;
+    padding: 3rpx 10rpx;
+    border-radius: 20rpx;
+    font-size: 24rpx;
+    position: absolute;
+    right: 0%;
+    top: -10rpx;
+}
+.goods .has {
+    font-size: 24rpx;
+    color: #000000;
+    position: absolute;
+    right: 0%;
+    top: -5rpx;
+}
+.goods .con-cmd {
+    width: 60%;
+}
+.goods .sm {
+    font-size: 20rpx;
+}
+.goods .base {
+    font-size: 24rpx;
+}
+.goods .lg {
+    font-size: 30rpx !important;
+}
+.goods .through {
+    text-decoration: line-through;
+}
+.goods .suo {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    autoprefixer: on;
+}
+

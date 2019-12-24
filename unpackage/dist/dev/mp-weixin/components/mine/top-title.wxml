@@ -1,0 +1,1 @@
+<view class="newshop-head"><view class="icons"><view class="iconsss"></view><view>{{titCon.name}}</view></view><block wx:if="{{right}}"><view data-event-opts="{{[['tap',[['linkPages',['$0'],['titCon.link']]]]]}}" class="more" bindtap="__e">{{titCon.more}}</view></block></view>

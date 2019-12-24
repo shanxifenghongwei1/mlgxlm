@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发现",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "waterfall-flow": "/components/nairenk-waterfall-flow/nairenk-waterfall-flow"
+  }
+}

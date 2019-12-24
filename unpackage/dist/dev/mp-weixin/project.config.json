@@ -1,0 +1,42 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"minified": false,
+		"postcss": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.9.2",
+	"appid": "wx66bfdbefbfb06ddb",
+	"projectname": "美丽共享联盟",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"list": [
+				{
+					"name": "抗谁除皱",
+					"query": "runid=1",
+					"id": 0,
+					"pathName": "pages/home/shop-detial/shop-detial"
+				}
+			]
+		}
+	}
+}

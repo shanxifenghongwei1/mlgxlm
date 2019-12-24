@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="con">
-			<image src="/static/image/other/share_2.png" mode="" class="back"></image>
+			<image :src="picUrl+'/images/5dfc65b57928d26.jpg'" mode="" class="back"></image>
 			
 			<view class="num">
 				30
@@ -17,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				
+				picUrl:this.global.demao.domain.videoUrl
 			}
 		},
 		methods: {
