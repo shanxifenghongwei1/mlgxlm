@@ -528,7 +528,7 @@
 						}
 						
 						
-						if (this.good_detail.goodsInfo.promotion_type == 0 ) {
+						if (this.good_detail.goodsInfo.promotion_type == 0 || this.good_detail.goodsInfo.promotion_type == 3) {
 							
 							this.buttonGroup = [{
 									id: 99,

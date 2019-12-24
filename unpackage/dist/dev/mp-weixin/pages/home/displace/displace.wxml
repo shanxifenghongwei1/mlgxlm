@@ -1,0 +1,1 @@
+<view><view class="head"><cateflex vue-id="1" cateList="{{cateList}}" cateid="{{cateid}}" data-event-opts="{{[['^seleId',[['sel']]]]}}" bind:seleId="__e" bind:__l="__l"></cateflex></view><view class="emit"></view><view><goods vue-id="2" titCon="{{titCon}}" more="{{false}}" place="{{2}}" bind:__l="__l"></goods></view></view>

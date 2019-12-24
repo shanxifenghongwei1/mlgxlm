@@ -92,7 +92,7 @@
 			
 			<!-- 正常 -->
 			<block v-if="place===1">
-				<view @click="toDetail()">
+				<view @click="toDetail(item.goods_id)">
 				<view class="goods-pic">
 					<image :src="imageurl + item.prcture" mode=""></image>
 				</view>
@@ -204,7 +204,7 @@
 			
 			<!-- 收藏 -->
 			<block v-if="place===3">
-				<view @click="toDetail()">
+				<view @click="toDetail(item.goods_id)">
 				
 				<view class="goods-pic">
 					<image :src="imageurl + item.picture" mode=""></image>
@@ -324,7 +324,7 @@
 				</view> -->
 				
 				
-				<view @click="toDetail()">
+				<view @click="toDetail(item.re_goods_id)">
 				<view class="goods-pic">
 					<image :src="imageurl + item.picture" mode=""></image>
 				</view>

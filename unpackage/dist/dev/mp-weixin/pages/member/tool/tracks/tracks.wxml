@@ -1,0 +1,1 @@
+<view><view class="con"><goods vue-id="1" titCon="{{list}}" more="{{false}}" place="6" bind:__l="__l"></goods></view></view>

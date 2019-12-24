@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "goodlist": "/components/mine/goods-row",
+    "store": "/components/mine/store"
+  },
+  "component": true
+}
